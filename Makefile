@@ -12,7 +12,7 @@
 
 NAME	=	minishell
 
-SRC		=
+SRC		=	srcs/main.c
 
 OBJS	=	$(SRC:.c=.o)
 
@@ -33,7 +33,7 @@ lib :
 			$(CC) $(CFLAGS) -c $< -o $@
 
 $(NAME) :	$(OBJS)
-			${CC} ${CFLAGS} -o ${NAME} ${OBJS} ${LIBFT}
+			${CC} ${CFLAGS} -o ${NAME} ${OBJS} ${LIBFT} -lreadline
 
 clean	:
 			${RM} ${OBJS}
