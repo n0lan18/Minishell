@@ -10,39 +10,38 @@
 #                                                                              #
 # **************************************************************************** #
 
-NAME				=			minishell
+NAME	=	minishell
 
-SRC				=		
-						
+SRC		=
 
-OBJS				=			$(SRC:.c=.o)
+OBJS	=	$(SRC:.c=.o)
 
-LIBFT				=			./libft/libft.a
-MLIBFT				=			$(MAKE) -C ./libft
+LIBFT	=	./libft/libft.a
+MLIBFT	=	$(MAKE) -C ./libft
 
-CC				=			gcc
-CFLAGS				=			-Wall -Werror -Wextra -g
-L				=			-fsanitize=address
-RM				=			rm -f
+CC		=	gcc
+CFLAGS	=	-Wall -Werror -Wextra -g
+L		=	-fsanitize=address
+RM		=	rm -f
 
-all :	lib $(NAME)
+all :		lib $(NAME)
 
 lib :
 			$(MLIBFT) all
 
-%.o :	%.c ./libft/libft.h Makefile header.h
-							$(CC) $(CFLAGS) -c $< -o $@
+%.o :		%.c ./libft/libft.h Makefile header.h
+			$(CC) $(CFLAGS) -c $< -o $@
 
 $(NAME) :	$(OBJS)
-							${CC} ${CFLAGS} -o ${NAME} ${OBJS} ${LIBFT}
+			${CC} ${CFLAGS} -o ${NAME} ${OBJS} ${LIBFT}
 
 clean	:
-							${RM} ${OBJS}
+			${RM} ${OBJS}
 
 fclean	:	clean
-							${RM} ${NAME}
-							cd libft && make fclean
+			${RM} ${NAME}
+			cd libft && make fclean
 
-re	:	fclean all
+re	:		fclean all
 
 .PHONY	:	all clean fclean
