@@ -29,7 +29,7 @@ all :		lib $(NAME)
 lib :
 			$(MLIBFT) all
 
-%.o :		%.c ./libft/libft.h Makefile header.h
+%.o :		%.c ./libft/libft.h Makefile minishell.h
 			$(CC) $(CFLAGS) -c $< -o $@
 
 $(NAME) :	$(OBJS)
