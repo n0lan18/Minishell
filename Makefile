@@ -12,7 +12,8 @@
 
 NAME	=	minishell
 
-SRC		=	srcs/main.c
+SRC		=	srcs/main.c \
+			srcs/parsing.c \
 
 OBJS	=	$(SRC:.c=.o)
 
