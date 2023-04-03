@@ -29,9 +29,29 @@ typedef	struct	s_param
     int deb;
 }		t_param;
 
-/*************Parsing***************/
-void	readline_to_tab(char *readline);
+/*************Readline_to_tab***************/
+char	**readline_to_tab(char *readline);
 int     count_words(char *readline, int i, int j, t_param inc);
 char	**split_new_format(char **tab, char *str, int i, int j, t_param inc);
 char	*ft_strcpy_new_format(char *dst, char *str, int deb, int end);
+
+/*************Replace_dollar_in_tab********/
+char *ft_strcpy(char *dst, char *src, int deb, int end);
+char    **check_if_dollar(char **tab, char **env, t_param inc);
+char *ft_strcpy(char *dst, char *src, int deb, int end);
+char *search_var_in_env(char *str, char **env);
+char *add_var_and_word(char *str, char *str1, char *tab);
+
+/*************check_words_in_tab***********/
+int    check_which_type (char **tab, char **env);
+
+/*************search_cmd*******************/
+int	    search_path_in_env(char **envp);
+char	*join_all_path(char *env, char *cmd, char slash);
+char	*existence_of_cmd(char **env, char *cmd);
+int     search_of_type_cmd(char **env, char *tab);
+
+/*************free_fonctions***************/
+void    free_double_tab(char **tab);
+
 #endif

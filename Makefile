@@ -13,7 +13,10 @@
 NAME	=	minishell
 
 SRC		=	srcs/main.c \
-			srcs/parsing.c \
+			srcs/readline_to_tab.c \
+			srcs/check_words_in_tab.c \
+			srcs/search_cmd.c \
+			srcs/free_fonctions.c \
 
 OBJS	=	$(SRC:.c=.o)
 
