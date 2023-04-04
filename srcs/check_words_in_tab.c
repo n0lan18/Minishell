@@ -12,6 +12,27 @@
 
 #include "../minishell.h"
 
+
+int search_quote_in_tab(char **tab)
+{
+    t_param inc;
+
+    inc.i = 0;
+    inc.j = 0;
+    while (tab[inc.i])
+    {
+        while (tab[inc.i][inc.j])
+        {
+            if (tab[inc.i][inc.j] == 39)
+                return(1);
+            inc.j++;
+        }
+        inc.i++;
+        inc.j = 0;
+    }
+    return (0);
+}
+
 char *ft_strcpy(char *dst, char *src, int deb, int end)
 {
     int i;
@@ -64,6 +85,7 @@ char *search_var_in_env(char *str, char **env)
     inc.x = ft_strlen(str) - 1;
     while (env[inc.i])
     {
+        printf("%s\n", env[inc.i]);
         if (ft_strncmp(str, env[inc.i], inc.x) == 0 && env[inc.i][inc.x + 1] == '=')
         {
             inc.x++;
@@ -86,6 +108,8 @@ char **check_if_dollar(char **tab, char **env, t_param inc)
     inc.i = 0;
     inc.j = 0;
     inc.deb = inc.j;
+    if (search_quote_in_tab(tab) == 1)
+        return (tab);
     while (tab[inc.i])
     {
         while (tab[inc.i][inc.j])
@@ -96,10 +120,10 @@ char **check_if_dollar(char **tab, char **env, t_param inc)
                 while (tab[inc.i][inc.j] && tab[inc.i][inc.j + 1] != ' ')
                     inc.j++;
                 str = ft_strcpy(str, tab[inc.i], inc.deb, inc.j);
+                printf("%s\n", str);
                 str1 = search_var_in_env(str, env);
+                printf("%s\n", str1);
                 tab[inc.i] = add_var_and_word(str, str1, tab[inc.i]);
-                inc.i++;
-                inc.j = 0;
             }
             inc.j++;
         }

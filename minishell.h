@@ -36,6 +36,7 @@ char	**split_new_format(char **tab, char *str, int i, int j, t_param inc);
 char	*ft_strcpy_new_format(char *dst, char *str, int deb, int end);
 
 /*************Replace_dollar_in_tab********/
+int search_quote_in_tab(char **tab);
 char *ft_strcpy(char *dst, char *src, int deb, int end);
 char    **check_if_dollar(char **tab, char **env, t_param inc);
 char *ft_strcpy(char *dst, char *src, int deb, int end);

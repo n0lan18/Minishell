@@ -78,6 +78,7 @@ char	**split_new_format(char	**tab, char *str, int i, int j, t_param inc)
         }
         i++;
     }
+    tab[++inc.y] = NULL;
     return (tab);
 }
 
