@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing.c                                          :+:      :+:    :+:   */
+/*   readline_to_tab.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nleggeri <nleggeri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/02 22:36:46 by nleggeri          #+#    #+#             */
-/*   Updated: 2023/04/03 10:31:49 by nleggeri         ###   ########.fr       */
+/*   Updated: 2023/04/05 15:06:37 by nleggeri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,9 +71,12 @@ char	**split_new_format(char	**tab, char *str, int i, int j, t_param inc)
             else if (str[inc.deb] == 39)
                 while (str[i] != 39 && i <= j)
                     i++;
-            else
-                while (str[i + 1] != ' ' && i <= j)
-                    ++i;
+			else
+			{
+				while (str[i] != ' ' && i <= j)
+					i++;
+				i--;
+			}
             tab[++inc.y] = ft_strcpy_new_format(*tab, str, inc.deb, i);
         }
         i++;
