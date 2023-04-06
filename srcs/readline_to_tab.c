@@ -12,33 +12,6 @@
 
 #include "../minishell.h"
 
-int	count_words(char *readline, int i, int j, t_param inc)
-{
-	inc.num = 1;
-	while (i <= j)
-	{
-        if (readline[i] == ' ' && readline[i])
-        {
-            inc.num++;
-            i++;
-            while (readline[i] == ' ' && readline[i])
-                i++;
-        }
-        if (readline[i] == '"' || readline[i] == 39)
-        {
-            i++;
-            if (readline[i] == '"')
-                while (readline[i] != '"' && readline[i])
-                    i++;
-            if (readline[i] == 39)
-                while (readline[i] != 39 && readline[i])
-                    i++;
-        }
-        i++;
-	}
-	return (inc.num);
-}
-
 char	*ft_strcpy_new_format(char *dst, char *str, int deb, int end)
 {
 	int	i;
@@ -53,52 +26,54 @@ char	*ft_strcpy_new_format(char *dst, char *str, int deb, int end)
 	return (dst);
 }
 
-char	**split_new_format(char	**tab, char *str, int i, int j, t_param inc)
+t_list	*split_new_format(t_list *liste, char *str, int i, int j, t_param inc)
 {
-    inc.deb = i;
-    inc.y = -1;
-    while (i <= j)
-    {
-        while (str[i] == ' ' && i <= j)
-            i++;
-        if (str[i] != ' ')
-        {
-            inc.deb = i;
-            i++;
-            if (str[inc.deb] == '"')
-                while (str[i] != '"' && i <= j)
-                    i++;
-            else if (str[inc.deb] == 39)
-                while (str[i] != 39 && i <= j)
-                    i++;
-			else
-			{
-				while (str[i] != ' ' && i <= j)
-					i++;
-				i--;
-			}
-            tab[++inc.y] = ft_strcpy_new_format(*tab, str, inc.deb, i);
-        }
-        i++;
-    }
-    tab[++inc.y] = NULL;
-    return (tab);
+	t_list *tmp;
+
+	tmp = liste;
+	while (i <= j)
+	{
+		while (str[i] == ' ' && i <= j)
+			i++;
+		inc.deb = i;
+		if (str[inc.deb] == '$')
+		{
+			while ((str[i + 1] != '$' && i <= j))
+				i++;
+		}
+		else if (str[inc.deb] == '"' || str[inc.deb] == 39)
+			i++;
+		else
+		{
+			while (str[i] != ' ' && i <= j)
+				i++;
+			i--;
+		}
+		tmp = add_new_element(tmp, str, inc.deb, i);
+		printf("%s\n", tmp->str);
+		tmp = tmp->next;
+		i++;
+	}
+	return (tmp);
 }
 
-char	**readline_to_tab(char *readline)
+t_list 	*readline_to_tab(char *readline, t_list *liste)
 {
-	char	**tab;
 	t_param inc;
+	t_list *tmp;
 
 	inc.i = 0;
 	inc.j = ft_strlen(readline) - 1;
+	tmp = liste;
 	while (readline[inc.i] && readline[inc.i] == ' ')
 		inc.i++;
 	while (inc.j >= 0 && readline[inc.j] == ' ')
 		inc.j--;
-	tab = malloc(sizeof(char *) * count_words(readline, inc.i, inc.j, inc) + 1);
-    if (!tab)
-        return (NULL);
-	tab = split_new_format(tab, readline, inc.i, inc.j, inc);
-    return (tab);
+	tmp = split_new_format(tmp, readline, inc.i, inc.j, inc);
+	while (tmp)
+	{
+		printf("liste %s\n", tmp->str);
+		tmp = tmp->next;
+	}
+    return (liste);
 }
