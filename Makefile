@@ -56,4 +56,7 @@ fclean: 		clean
 re: 			fclean all
 				@echo "$(_SUCCESS)🧹Clean + 🚀Build!$(_END)"
 
+check:
+				bash checker.sh
+
 .PHONY:			all clean fclean re
