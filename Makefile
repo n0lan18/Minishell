@@ -10,42 +10,50 @@
 #                                                                              #
 # **************************************************************************** #
 
-NAME	=	minishell
+# VARIABLES
+NAME 			= minishell
+CC				= gcc
+FLAGS 			= -Wall -Werror -Wextra -g
+SANITIZE		= -fsanitize=address
 
-SRC		=	srcs/main.c \
-			srcs/readline_to_tab.c \
-			srcs/check_words_in_tab.c \
-			srcs/search_cmd.c \
-			srcs/free_fonctions.c \
+# OBJ
+OBJS			= $(SRC:.c=.o)
 
-OBJS	=	$(SRC:.c=.o)
+# SOURCES
+SRC				= srcs/main.c \
+                  srcs/readline_to_tab.c \
+                  srcs/check_words_in_tab.c \
+                  srcs/search_cmd.c \
+                  srcs/free_fonctions.c \
 
-LIBFT	=	./libft/libft.a
-MLIBFT	=	$(MAKE) -C ./libft
+# COLORS
+_END=$'\x1b[0m'
+_SUCCESS=$'\x1b[42m'
+_CLEANED=$'\x1b[44m'
 
-CC		=	gcc
-CFLAGS	=	-Wall -Werror -Wextra -g
-L		=	-fsanitize=address
-RM		=	rm -f
+# COMMANDS
+all:			$(NAME)
+				@echo "$(_SUCCESS)🚀Build All!$(_END)"
 
-all :		lib $(NAME)
+$(NAME): 		$(OBJS)
+				make -C libft
+				$(CC) $(FLAGS) $(OBJS) libft/libft.a -o $(NAME) -lreadline
+				@echo "$(_SUCCESS)🚀Build!$(_END)"
 
-lib :
-			$(MLIBFT) all
+%.o: %.c
+				$(CC) $(FLAGS) -c $< -o $@
 
-%.o :		%.c ./libft/libft.h Makefile minishell.h
-			$(CC) $(CFLAGS) -c $< -o $@
+clean:
+				make clean -C libft
+				/bin/rm -rf $(OBJS)
+				@echo "$(_CLEANED)🧹Clean object files!$(_END)"
 
-$(NAME) :	$(OBJS)
-			${CC} ${CFLAGS} -o ${NAME} ${OBJS} ${LIBFT} -lreadline
+fclean: 		clean
+				make fclean -C libft
+				/bin/rm -rf $(NAME)
+				@echo "$(_CLEANED)🧹Clean executable files!$(_END)"
 
-clean	:
-			${RM} ${OBJS}
+re: 			fclean all
+				@echo "$(_SUCCESS)🧹Clean + 🚀Build!$(_END)"
 
-fclean	:	clean
-			${RM} ${NAME}
-			cd libft && make fclean
-
-re	:		fclean all
-
-.PHONY	:	all clean fclean
+.PHONY:			all clean fclean re

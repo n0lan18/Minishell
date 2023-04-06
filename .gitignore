@@ -2,3 +2,4 @@
 /srcs/*.o
 /libft/libft.a
 /.idea/
+/minishell
