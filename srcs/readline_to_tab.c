@@ -156,10 +156,11 @@ t_list	*split_new_format(char *rline, t_list *liste)
 	char **tab1;
 	t_list	*tmp;
 
-	inc.i = remove_space_begin_or_end(rline, 0);
+	inc.i = 0;
+	inc.deb = remove_space_begin_or_end(rline, 0);
 	inc.y = remove_space_begin_or_end(rline, 1);
 	tmp = liste;
-	tab = ft_split_next_gen(rline, ' ', inc.i, inc.y);
+	tab = ft_split_next_gen(rline, ' ', inc.deb, inc.y);
 	while (tab[inc.i])
 	{
 		inc.j = 0;
