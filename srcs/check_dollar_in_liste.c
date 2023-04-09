@@ -12,23 +12,23 @@
 
 #include "../minishell.h"
 
-
-int search_quote_in_tab(char **tab)
+int search_quote_in_liste(t_list *liste)
 {
-    t_param inc;
+    t_list *tmp;
+	t_param	inc;
 
-    inc.i = 0;
-    inc.j = 0;
-    while (tab[inc.i])
+	tmp = liste;
+	inc.i = 0;
+    while (tmp)
     {
-        while (tab[inc.i][inc.j])
+        while (tmp->str[inc.i])
         {
-            if (tab[inc.i][inc.j] == 39)
+            if (tmp->str[inc.i] == 39 && tmp->str[inc.i + 1] == '$')
                 return(1);
-            inc.j++;
+            inc.i++;
         }
-        inc.i++;
-        inc.j = 0;
+		inc.i = 0;
+        tmp = tmp->next;
     }
     return (0);
 }
@@ -58,7 +58,6 @@ char *add_var_and_word(char *str, char *str1, char *tab)
     inc.x = -1;
     tmp = ft_strcpy(tmp, tab, 0, ft_strlen(tab));
     free(str);
-    free(tab);
     while (tmp[inc.i] && tmp[inc.i] != '$')
         inc.i++;
     while (str1[inc.j])
@@ -85,7 +84,7 @@ char *search_var_in_env(char *str, char **env)
     inc.x = ft_strlen(str) - 1;
     while (env[inc.i])
     {
-        printf("%s\n", env[inc.i]);
+		inc.x = ft_strlen(str) - 1;
         if (ft_strncmp(str, env[inc.i], inc.x) == 0 && env[inc.i][inc.x + 1] == '=')
         {
             inc.x++;
@@ -100,62 +99,52 @@ char *search_var_in_env(char *str, char **env)
     return (NULL);
 }
 
-char **check_if_dollar(char **tab, char **env, t_param inc)
+t_list *check_if_dollar(t_list *liste, char **env)
 {
-    char *str;
-    char *str1;
+    t_list *tmp;
+	t_param	inc;
+	char *str;
+	char *str1;
 
-    inc.i = 0;
-    inc.j = 0;
-    inc.deb = inc.j;
-    if (search_quote_in_tab(tab) == 1)
-        return (tab);
-    while (tab[inc.i])
+	tmp = liste;
+	inc.i = 0;
+	inc.deb = 0;
+	if (search_quote_in_liste(tmp) == 1)
+		return (liste);
+    while (tmp)
     {
-        while (tab[inc.i][inc.j])
+        while (tmp->str[inc.i])
         {
-            if (tab[inc.i][inc.j] == '$')
+            if (tmp->str[inc.i] == '$')
             {
-                inc.deb = inc.j + 1;
-                while (tab[inc.i][inc.j] && tab[inc.i][inc.j + 1] != ' ')
-                    inc.j++;
-                str = ft_strcpy(str, tab[inc.i], inc.deb, inc.j);
-                printf("%s\n", str);
+                inc.deb = inc.i + 1;
+                while (tmp->str[inc.i] && tmp->str[inc.i + 1] != ' ')
+                    inc.i++;
+                str = ft_strcpy(str, tmp->str, inc.deb, inc.i);
+				printf("STR %s\n", str);
                 str1 = search_var_in_env(str, env);
-                printf("%s\n", str1);
-                tab[inc.i] = add_var_and_word(str, str1, tab[inc.i]);
+                tmp->str = add_var_and_word(str, str1, tmp->str);
+				break ;
             }
-            inc.j++;
+            inc.i++;
         }
-        inc.j = 0;
-        inc.i++;
+        tmp = tmp->next;
+		inc.i = 0;
     }
-    return (tab);
-}
-/*
-void    replace_dollar_per_var(char **tab, char *str, int i, int j)
-{
-    while()
+    return (liste);
 }
 
-void    check_which_type(char **tab, char **env)
+int check_many_dollar_in_str(char *str)
 {
-    if (ft_strncmp(tab[0], "env", ft_strlen(tab[i])) == 0)
+	t_param inc;
 
-       if (ft_strncmp(tab[i], "echo", ft_strlen(tab[i])) == 0)
-            num += 10;
-    if (ft_strncmp(tab[i], "export", ft_strlen(tab[i])) == 0)
-            num += 100;
-        if (ft_strncmp(tab[i], "pwd", ft_strlen(tab[i])) == 0)
-            num += 1000;
-        if (ft_strncmp(tab[i], "unset", ft_strlen(tab[i])) == 0)
-            num += 10000;
-        if (ft_strncmp(tab[i], "cd", ft_strlen(tab[i])) == 0)
-            num += 100000;
-        if (ft_strncmp(tab[i], "|", ft_strlen(tab[i])) == 0)
-            num += 1000000;
-        if (search_of_type_cmd(env, tab[i]) == 0)
-            num += 10000000;
-    }
+	inc.i = 0;
+	inc.num = 0;
+	while (str[inc.i] && str[inc.i] != ' ')
+	{
+		if (str[inc.i] == '$')
+			inc.num++;
+		inc.i++;
+	}
+	return (inc.num);
 }
-*/
