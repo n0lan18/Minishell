@@ -22,9 +22,10 @@ OBJS			= $(SRC:.c=.o)
 # SOURCES
 SRC				= srcs/main.c \
                   srcs/readline_to_tab.c \
-                  srcs/check_words_in_tab.c \
+                  srcs/check_dollar_in_liste.c \
                   srcs/search_cmd.c \
                   srcs/free_fonctions.c \
+                  srcs/fonctions_list.c \
 
 # COLORS
 _END=$'\x1b[0m'
