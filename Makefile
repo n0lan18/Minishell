@@ -18,7 +18,7 @@ SANITIZE		= -fsanitize=address
 
 # OBJ
 OBJS_DIR   		= objs
-OBJS 			= $(SRCS:srcs/%.c=objs/%.o)
+OBJS 			= $(SRCS:$(SRCS_DIR)/%.c=$(OBJS_DIR)/%.o)
 
 # SOURCES
 SRCS_DIR   		= srcs

@@ -1,5 +1,5 @@
 /libft/*.o
-/srcs/*.o
 /libft/libft.a
 /.idea/
 /minishell
+/objs/
