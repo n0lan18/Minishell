@@ -22,7 +22,7 @@ OBJS 			= $(SRCS:$(SRCS_DIR)/%.c=$(OBJS_DIR)/%.o)
 
 # SOURCES
 SRCS_DIR   		= srcs
-SRCS 			= $(wildcard srcs/*.c)
+SRCS 			= $(wildcard $(SRCS_DIR)/*.c)
 
 # COLORS
 _END=$'\x1b[0m'
