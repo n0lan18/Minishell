@@ -17,15 +17,12 @@ FLAGS 			= -Wall -Werror -Wextra -g
 SANITIZE		= -fsanitize=address
 
 # OBJ
-OBJS			= $(SRC:.c=.o)
+OBJS_DIR   		= objs
+OBJS 			= $(SRCS:srcs/%.c=objs/%.o)
 
 # SOURCES
-SRC				= srcs/main.c \
-                  srcs/readline_to_tab.c \
-                  srcs/check_dollar_in_liste.c \
-                  srcs/search_cmd.c \
-                  srcs/free_fonctions.c \
-                  srcs/fonctions_list.c \
+SRCS_DIR   		= srcs
+SRCS 			= $(wildcard srcs/*.c)
 
 # COLORS
 _END=$'\x1b[0m'
@@ -33,7 +30,7 @@ _SUCCESS=$'\x1b[42m'
 _CLEANED=$'\x1b[44m'
 
 # COMMANDS
-all:			$(NAME)
+all:			$(OBJS_DIR) $(NAME)
 				@echo "$(_SUCCESS)🚀Build All!$(_END)"
 
 $(NAME): 		$(OBJS)
@@ -41,12 +38,15 @@ $(NAME): 		$(OBJS)
 				$(CC) $(FLAGS) $(OBJS) libft/libft.a -o $(NAME) -lreadline
 				@echo "$(_SUCCESS)🚀Build!$(_END)"
 
-%.o: %.c
+$(OBJS_DIR):
+				mkdir -p $(OBJS_DIR)
+
+$(OBJS_DIR)/%.o: $(SRCS_DIR)/%.c
 				$(CC) $(FLAGS) -c $< -o $@
 
 clean:
 				make clean -C libft
-				/bin/rm -rf $(OBJS)
+				/bin/rm -rf $(OBJS_DIR)
 				@echo "$(_CLEANED)🧹Clean object files!$(_END)"
 
 fclean: 		clean
@@ -60,4 +60,4 @@ re: 			fclean all
 check:
 				bash checker.sh
 
-.PHONY:			all clean fclean re
+.PHONY:			all clean fclean re check
