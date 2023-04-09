@@ -12,7 +12,7 @@
 
 #include "../minishell.h"
 
-t_list	*add_new_element(t_list *liste, char *tab, int deb, int end)
+t_list	*add_new_element(t_list *liste, char *tab)
 {
 	t_list	*new_element;
 	t_list	*tmp;
@@ -21,7 +21,7 @@ t_list	*add_new_element(t_list *liste, char *tab, int deb, int end)
 	if (!new_element)
 		return (NULL);
 	tmp = liste;
-	new_element->str = ft_strcpy_new_format(new_element->str, tab, deb, end);
+	new_element->str = ft_strcpy_new(new_element->str, tab, 0, ft_strlen(tab) - 1);
 	new_element->next = NULL;
 	if (tmp == NULL)
 		return (new_element);
@@ -32,6 +32,15 @@ t_list	*add_new_element(t_list *liste, char *tab, int deb, int end)
 		tmp->next = new_element;
 	}
 	return (liste);
+}
+
+t_list	*char_to_tab(char *tab, t_list *liste)
+{
+	t_list	*tmp;
+
+	tmp = liste;
+	tmp = add_new_element(tmp, tab);
+	return (tmp);
 }
 
 void	free_liste(t_list *a)

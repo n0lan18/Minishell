@@ -27,6 +27,7 @@ typedef	struct	s_param
 	int	y;
     int num;
     int deb;
+	char	**tab;
 }		t_param;
 
 typedef	struct	s_list
@@ -36,12 +37,14 @@ typedef	struct	s_list
 }		t_list;
 
 /*************Readline_to_tab***************/
-/*char	**readline_to_tab(char *readline);*/
-int     count_words(char *readline, int i, int j, t_param inc);
-/*char	**split_new_format(char **tab, char *str, int i, int j, t_param inc);*/
-t_list	*split_new_format(t_list *liste, char *str, int i, int j, t_param inc);
-t_list 	*readline_to_tab(char *readline, t_list *liste);
-char	*ft_strcpy_new_format(char *dst, char *str, int deb, int end);
+int search_in_str(char s, char *str);
+int 	count_word(const char *s, char c, int deb, int end);
+int 	count_word_fort_second_split(const char *s);
+char	**ft_split_next_gen(char const *s, char c, int deb, int end);
+char	**ft_split_in_ft_split(char const *s);
+char	*ft_strcpy_new(char *dst, char *str, int deb, int end);
+t_list	*split_new_format(char *rline, t_list *liste);
+int remove_space_begin_or_end(char *str, int pos);
 
 /*************Check_dollar_in_liste********/
 int search_quote_in_tab(char **tab);
@@ -66,7 +69,8 @@ int     search_of_type_cmd(char **env, char *tab);
 void    free_double_tab(char **tab);
 
 /*************Fonctions_list***************/
-t_list	*add_new_element(t_list *liste, char *tab, int deb, int end);
+t_list	*add_new_element(t_list *liste, char *tab);
+t_list	*char_to_tab(char *tab, t_list *liste);
 void	free_liste(t_list *a);
 void	free_element(t_list *a);
 
