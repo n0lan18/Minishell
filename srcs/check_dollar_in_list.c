@@ -12,12 +12,12 @@
 
 #include "../minishell.h"
 
-int search_dollar_in_liste(t_list *liste)
+int	search_dollar_in_list(t_list *list)
 {
-	t_list *tmp;
+	t_list	*tmp;
 	t_param	inc;
 
-	tmp = liste;
+	tmp = list;
 	inc.i = 0;
 	inc.num = 0;
 	while (tmp)
@@ -35,10 +35,10 @@ int search_dollar_in_liste(t_list *liste)
 	return (0);
 }
 
-char *add_var_and_word(char *str, char *str1, char *tab)
+char	*add_var_and_word(char *str, char *str1, char *tab)
 {
-	t_param inc;
-	char *tmp;
+	t_param	inc;
+	char	*tmp;
 
 	tmp = NULL;
 	inc.i = 0;
@@ -65,9 +65,9 @@ char *add_var_and_word(char *str, char *str1, char *tab)
 	return (tab);
 }
 
-char *search_var_in_env(char *str, char **env)
+char	*search_var_in_env(char *str, char **env)
 {
-	t_param inc;
+	t_param	inc;
 
 	inc.i = 0;
 	inc.j = 0;
@@ -76,7 +76,8 @@ char *search_var_in_env(char *str, char **env)
 	while (env[inc.i])
 	{
 		inc.x = ft_strlen(str) - 1;
-		if (ft_strncmp(str, env[inc.i], inc.x) == 0 && env[inc.i][inc.x + 1] == '=')
+		if (ft_strncmp(str, env[inc.i], inc.x) == 0
+			&& env[inc.i][inc.x + 1] == '=')
 		{
 			inc.x++;
 			inc.deb = inc.x + 1;
@@ -90,13 +91,13 @@ char *search_var_in_env(char *str, char **env)
 	return (NULL);
 }
 
-t_list *replace_if_dollar(t_list *liste, char **env)
+t_list	*replace_if_dollar(t_list *list, char **env)
 {
-	t_list *tmp;
+	t_list	*tmp;
 	t_param	inc;
-	char *str1;
+	char	*str1;
 
-	tmp = liste;
+	tmp = list;
 	inc.i = 0;
 	inc.deb = 0;
 	while (tmp)
@@ -114,7 +115,7 @@ t_list *replace_if_dollar(t_list *liste, char **env)
 		}
 		tmp = tmp->next;
 	}
-	liste = remove_first_elem_liste(liste);
-	liste = remove_after_first_elem_liste(liste);
-	return (liste);
+	list = remove_first_elem_list(list);
+	list = remove_after_first_elem_list(list);
+	return (list);
 }

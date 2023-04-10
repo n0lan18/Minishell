@@ -50,7 +50,7 @@ int		remove_space_begin_or_end(char *str, int pos);
 int		search_quote_in_list(t_list *list);
 char	*search_var_in_env(char *str, char **env);
 char	*add_var_and_word(char *str, char *str1, char *tab);
-t_list *replace_if_dollar(t_list *liste, char **env);
+t_list	*replace_if_dollar(t_list *list, char **env);
 
 /*************check_words_in_tab***********/
 int		check_which_type(char **tab, char **env);
@@ -68,8 +68,8 @@ void	free_double_tab(char **tab);
 t_list	*add_new_element(t_list *list, char *tab);
 t_list	*char_to_tab(char *tab, t_list *list);
 void	free_list(t_list *a);
-t_list	*remove_first_elem_liste(t_list *liste);
-t_list	*remove_after_first_elem_liste(t_list *liste);
-int size_liste(t_list *liste);
+t_list	*remove_first_elem_list(t_list *list);
+t_list	*remove_after_first_elem_list(t_list *list);
+int		size_list(t_list *list);
 
 #endif

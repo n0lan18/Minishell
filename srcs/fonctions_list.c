@@ -12,7 +12,7 @@
 
 #include "../minishell.h"
 
-t_list	*add_new_element(t_list *liste, char *tab)
+t_list	*add_new_element(t_list *list, char *tab)
 {
 	t_list	*new_element;
 	t_list	*tmp;
@@ -20,8 +20,9 @@ t_list	*add_new_element(t_list *liste, char *tab)
 	new_element = malloc(sizeof(t_list));
 	if (!new_element)
 		return (NULL);
-	tmp = liste;
-	new_element->str = ft_strcpy_new(new_element->str, tab, 0, ft_strlen(tab) - 1);
+	tmp = list;
+	new_element->str = ft_strcpy_new(
+			new_element->str, tab, 0, ft_strlen(tab) - 1);
 	new_element->next = NULL;
 	if (tmp == NULL)
 		return (new_element);
@@ -31,10 +32,10 @@ t_list	*add_new_element(t_list *liste, char *tab)
 			tmp = tmp->next;
 		tmp->next = new_element;
 	}
-	return (liste);
+	return (list);
 }
 
-void	free_liste(t_list *a)
+void	free_list(t_list *a)
 {
 	t_list	*temp;
 	t_list	*temp_next;
@@ -48,13 +49,13 @@ void	free_liste(t_list *a)
 	}
 }
 
-t_list	*remove_first_elem_liste(t_list *liste)
+t_list	*remove_first_elem_list(t_list *list)
 {
 	t_list	*tmp;
 	t_list	*first_elem;
 
-	tmp = liste;
-	if (liste == NULL)
+	tmp = list;
+	if (list == NULL)
 		return (NULL);
 	else
 	{
@@ -65,18 +66,18 @@ t_list	*remove_first_elem_liste(t_list *liste)
 			return (first_elem);
 		}
 		else
-			return (liste);
+			return (list);
 	}
 }
 
-t_list	*remove_after_first_elem_liste(t_list *liste)
+t_list	*remove_after_first_elem_list(t_list *list)
 {
 	t_list	*tmp;
 	t_list	*temp;
 
-	tmp = liste;
-	if (size_liste(liste) < 2)
-		return (liste);
+	tmp = list;
+	if (size_list(list) < 2)
+		return (list);
 	while (tmp->next)
 	{
 		temp = tmp;
@@ -85,7 +86,7 @@ t_list	*remove_after_first_elem_liste(t_list *liste)
 			while (tmp && tmp->next->str[0] != 39)
 				tmp = tmp->next;
 			if (tmp->next == NULL)
-				return (liste);
+				return (list);
 		}
 		if (tmp->next->str[0] == '$')
 		{
@@ -95,19 +96,19 @@ t_list	*remove_after_first_elem_liste(t_list *liste)
 			tmp = temp;
 		}
 		if (tmp->next == NULL)
-			return (liste);
+			return (list);
 		tmp = tmp->next;
 	}
-	return (liste);
+	return (list);
 }
 
-int size_liste(t_list *liste)
+int	size_list(t_list *list)
 {
 	t_list	*tmp;
-	int i;
+	int		i;
 
 	i = 0;
-	tmp = liste;
+	tmp = list;
 	while (tmp)
 	{
 		i++;
