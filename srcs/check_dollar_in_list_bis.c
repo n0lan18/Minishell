@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "../minishell.h"
-
+/*
 t_list	*check_if_dollar(t_list *list, char **env)
 {
 	t_list	*tmp;
@@ -61,3 +61,4 @@ int	check_many_dollar_in_str(char *str)
 	}
 	return (inc.num);
 }
+*/

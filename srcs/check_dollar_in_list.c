@@ -12,54 +12,45 @@
 
 #include "../minishell.h"
 
-int	search_quote_in_list(t_list *list)
+int search_dollar_in_liste(t_list *liste)
 {
-	t_list	*tmp;
+	t_list *tmp;
 	t_param	inc;
 
-	tmp = list;
+	tmp = liste;
 	inc.i = 0;
+	inc.num = 0;
 	while (tmp)
 	{
-		while (tmp->str[inc.i])
+		if (tmp->str[0] == 39)
 		{
-			if (tmp->str[inc.i] == 39 && tmp->str[inc.i + 1] == '$')
-				return (1);
-			inc.i++;
+			tmp = tmp->next;
+			while (tmp && tmp->str[0] != 39)
+				tmp = tmp->next;
 		}
-		inc.i = 0;
+		if (tmp->str[0] == '$' && tmp->next->str[0] != ' ')
+			inc.num -= 1;
 		tmp = tmp->next;
 	}
 	return (0);
 }
 
-char	*ft_strcpy(char *dst, char *src, int deb, int end)
+char *add_var_and_word(char *str, char *str1, char *tab)
 {
-	int	i;
-
-	i = 0;
-	dst = malloc(sizeof(char) * (end - deb) + 1);
-	if (!dst)
-		return (NULL);
-	while (deb <= end)
-		dst[i++] = src[deb++];
-	dst[i] = '\0';
-	return (dst);
-}
-
-char	*add_var_and_word(char *str, char *str1, char *tab)
-{
-	t_param	inc;
-	char	*tmp;
+	t_param inc;
+	char *tmp;
 
 	tmp = NULL;
 	inc.i = 0;
 	inc.j = 0;
 	inc.x = -1;
-	tmp = ft_strcpy(tmp, tab, 0, ft_strlen(tab));
+	if (str1 == NULL)
+	{
+		tab = "sdiuhsidhisd";
+		return (tab);
+	}
+	tmp = ft_strcpy_new(tmp, tab, 0, ft_strlen(tab));
 	free(str);
-	while (tmp[inc.i] && tmp[inc.i] != '$')
-		inc.i++;
 	while (str1[inc.j])
 		inc.j++;
 	tab = malloc(sizeof(char) * (inc.i + inc.j) + 1);
@@ -74,9 +65,9 @@ char	*add_var_and_word(char *str, char *str1, char *tab)
 	return (tab);
 }
 
-char	*search_var_in_env(char *str, char **env)
+char *search_var_in_env(char *str, char **env)
 {
-	t_param	inc;
+	t_param inc;
 
 	inc.i = 0;
 	inc.j = 0;
@@ -85,17 +76,45 @@ char	*search_var_in_env(char *str, char **env)
 	while (env[inc.i])
 	{
 		inc.x = ft_strlen(str) - 1;
-		if (ft_strncmp(str, env[inc.i], inc.x) == 0
-			&& env[inc.i][inc.x + 1] == '=')
+		if (ft_strncmp(str, env[inc.i], inc.x) == 0 && env[inc.i][inc.x + 1] == '=')
 		{
 			inc.x++;
 			inc.deb = inc.x + 1;
 			while (env[inc.i][inc.x])
 				inc.x++;
-			str = ft_strcpy(str, env[inc.i], inc.deb, inc.x);
+			str = ft_strcpy_new(str, env[inc.i], inc.deb, inc.x);
 			return (str);
 		}
 		inc.i++;
 	}
 	return (NULL);
+}
+
+t_list *replace_if_dollar(t_list *liste, char **env)
+{
+	t_list *tmp;
+	t_param	inc;
+	char *str1;
+
+	tmp = liste;
+	inc.i = 0;
+	inc.deb = 0;
+	while (tmp)
+	{
+		if (tmp->str[0] == 39)
+		{
+			tmp = tmp->next;
+			while (tmp && tmp->str[0] != 39)
+				tmp = tmp->next;
+		}
+		if (tmp->str[0] == '$' && tmp->next->str[0] != ' ')
+		{
+			str1 = search_var_in_env(tmp->next->str, env);
+			tmp->next->str = add_var_and_word(tmp->next->str, str1, tmp->str);
+		}
+		tmp = tmp->next;
+	}
+	liste = remove_first_elem_liste(liste);
+	liste = remove_after_first_elem_liste(liste);
+	return (liste);
 }
