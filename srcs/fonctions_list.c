@@ -12,7 +12,7 @@
 
 #include "../minishell.h"
 
-t_list	*add_new_element(t_list *liste, char *tab)
+t_list	*add_new_element(t_list *list, char *tab)
 {
 	t_list	*new_element;
 	t_list	*tmp;
@@ -20,8 +20,9 @@ t_list	*add_new_element(t_list *liste, char *tab)
 	new_element = malloc(sizeof(t_list));
 	if (!new_element)
 		return (NULL);
-	tmp = liste;
-	new_element->str = ft_strcpy_new(new_element->str, tab, 0, ft_strlen(tab) - 1);
+	tmp = list;
+	new_element->str = ft_strcpy_new(
+			new_element->str, tab, 0, ft_strlen(tab) - 1);
 	new_element->next = NULL;
 	if (tmp == NULL)
 		return (new_element);
@@ -31,19 +32,19 @@ t_list	*add_new_element(t_list *liste, char *tab)
 			tmp = tmp->next;
 		tmp->next = new_element;
 	}
-	return (liste);
+	return (list);
 }
 
-t_list	*char_to_tab(char *tab, t_list *liste)
+t_list	*char_to_tab(char *tab, t_list *list)
 {
 	t_list	*tmp;
 
-	tmp = liste;
+	tmp = list;
 	tmp = add_new_element(tmp, tab);
 	return (tmp);
 }
 
-void	free_liste(t_list *a)
+void	free_list(t_list *a)
 {
 	t_list	*temp;
 	t_list	*temp_next;
@@ -59,8 +60,8 @@ void	free_liste(t_list *a)
 
 void	free_element(t_list *a)
 {
-	t_list *tmp;
-	t_list *tmp_next;
+	t_list	*tmp;
+	t_list	*tmp_next;
 
 	tmp = a;
 	tmp_next = tmp->next;

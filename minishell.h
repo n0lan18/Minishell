@@ -19,59 +19,59 @@
 # include <readline/history.h>
 # include "./libft/libft.h"
 
-typedef	struct	s_param
+typedef struct s_param
 {
-	int	i;
-	int	j;
-	int	x;
-	int	y;
-    int num;
-    int deb;
+	int		i;
+	int		j;
+	int		x;
+	int		y;
+	int		num;
+	int		deb;
 	char	**tab;
-}		t_param;
+}	t_param;
 
-typedef	struct	s_list
+typedef struct s_list
 {
-	char *str;
-	struct s_list *next;
-}		t_list;
+	char			*str;
+	struct s_list	*next;
+}	t_list;
 
 /*************Readline_to_tab***************/
-int search_in_str(char s, char *str);
-int 	count_word(const char *s, char c, int deb, int end);
-int 	count_word_fort_second_split(const char *s);
+int		search_in_str(char s, char *str);
+int		count_word(const char *s, char c, int deb, int end);
+int		count_word_fort_second_split(const char *s);
 char	**ft_split_next_gen(char const *s, char c, int deb, int end);
 char	**ft_split_in_ft_split(char const *s);
 char	*ft_strcpy_new(char *dst, char *str, int deb, int end);
-t_list	*split_new_format(char *rline, t_list *liste);
-int remove_space_begin_or_end(char *str, int pos);
+t_list	*split_new_format(char *rline, t_list *list);
+int		remove_space_begin_or_end(char *str, int pos);
 
-/*************Check_dollar_in_liste********/
-int search_quote_in_tab(char **tab);
-int search_quote_in_liste(t_list *liste);
-char *ft_strcpy(char *dst, char *src, int deb, int end);
-t_list	*check_if_dollar(t_list *liste, char **env);
-char *ft_strcpy(char *dst, char *src, int deb, int end);
-char *search_var_in_env(char *str, char **env);
-char *add_var_and_word(char *str, char *str1, char *tab);
-int check_many_dollar_in_str(char *str);
+/*************Check_dollar_in_list********/
+int		search_quote_in_tab(char **tab);
+int		search_quote_in_list(t_list *list);
+char	*ft_strcpy(char *dst, char *src, int deb, int end);
+t_list	*check_if_dollar(t_list *list, char **env);
+char	*ft_strcpy(char *dst, char *src, int deb, int end);
+char	*search_var_in_env(char *str, char **env);
+char	*add_var_and_word(char *str, char *str1, char *tab);
+int		check_many_dollar_in_str(char *str);
 
 /*************check_words_in_tab***********/
-int    check_which_type (char **tab, char **env);
+int		check_which_type(char **tab, char **env);
 
 /*************search_cmd*******************/
-int	    search_path_in_env(char **envp);
+int		search_path_in_env(char **envp);
 char	*join_all_path(char *env, char *cmd, char slash);
 char	*existence_of_cmd(char **env, char *cmd);
-int     search_of_type_cmd(char **env, char *tab);
+int		search_of_type_cmd(char **env, char *tab);
 
 /*************free_fonctions***************/
-void    free_double_tab(char **tab);
+void	free_double_tab(char **tab);
 
 /*************Fonctions_list***************/
-t_list	*add_new_element(t_list *liste, char *tab);
-t_list	*char_to_tab(char *tab, t_list *liste);
-void	free_liste(t_list *a);
+t_list	*add_new_element(t_list *list, char *tab);
+t_list	*char_to_tab(char *tab, t_list *list);
+void	free_list(t_list *a);
 void	free_element(t_list *a);
 
 #endif

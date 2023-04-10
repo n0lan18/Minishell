@@ -67,18 +67,18 @@ char	*existence_of_cmd(char **env, char *cmd)
 	return (NULL);
 }
 
-int     search_of_type_cmd(char **env, char *tab)
+int	search_of_type_cmd(char **env, char *tab)
 {
-    char    *tmp;
-    int     j;
+	char	*tmp;
+	int		j;
 
-    j = -1;
-    while (env[++j])
-    {
-        tmp = join_all_path(env[j], tab, '/');
-        if (access(tmp, F_OK) == 0)
-            return (0);
-        free(tmp);
-    }
-    return (1);
+	j = -1;
+	while (env[++j])
+	{
+		tmp = join_all_path(env[j], tab, '/');
+		if (access(tmp, F_OK) == 0)
+			return (0);
+		free(tmp);
+	}
+	return (1);
 }
