@@ -21,8 +21,8 @@ t_list	*add_new_element(t_list *list, char *tab)
 	if (!new_element)
 		return (NULL);
 	tmp = list;
-	new_element->str = ft_strcpy_new(
-			new_element->str, tab, 0, ft_strlen(tab) - 1);
+	new_element->str = ft_strcpy_new
+			(new_element->str, tab, 0, ft_strlen(tab) - 1);
 	new_element->next = NULL;
 	if (tmp == NULL)
 		return (new_element);
@@ -53,21 +53,29 @@ t_list	*remove_first_elem_list(t_list *list)
 {
 	t_list	*tmp;
 	t_list	*first_elem;
+	int i;
 
 	tmp = list;
+	i = 0;
 	if (list == NULL)
 		return (NULL);
-	else
+	if ((tmp->str[0] == '$' && tmp->next->str[0] == '$') || \
+	(tmp->str[0] == '$' && tmp->next->str[0] == ' '))
 	{
-		if (tmp->str[0] == '$' && tmp->next->str[0] != ' ')
+		while (tmp->next->str[0] == '$' && tmp->next)
 		{
-			first_elem = tmp->next;
-			free(tmp);
-			return (first_elem);
+			i++;
+			tmp = tmp->next;
 		}
-		else
-			return (list);
 	}
+	if (tmp->str[0] == '$' && tmp->next->str[0] != ' ' && (i % 2) == 0)
+	{
+		first_elem = tmp->next;
+		free(tmp);
+		return (first_elem);
+	}
+	else
+		return (list);
 }
 
 t_list	*remove_after_first_elem_list(t_list *list)
@@ -80,24 +88,24 @@ t_list	*remove_after_first_elem_list(t_list *list)
 		return (list);
 	while (tmp->next)
 	{
-		temp = tmp;
 		if (tmp->str[0] == 39)
-		{
-			while (tmp && tmp->next->str[0] != 39)
+			while (tmp->next && tmp->next->str[0] != 39)
 				tmp = tmp->next;
-			if (tmp->next == NULL)
-				return (list);
-		}
-		if (tmp->next->str[0] == '$')
+		temp = tmp;
+		if (tmp->next == NULL)
+			return (list);
+		tmp = tmp->next;
+		if (tmp->next == NULL)
+			return (list);
+		printf("tmp %c\n", tmp->str[0]);
+		printf("tmp next %c\n", tmp->next->str[0]);
+		if ((tmp->str[0] == '$' && tmp->next->str[0] == ' ') || (temp->str[0] == ' ' && tmp->str[0] == '$' && tmp->next->str[0] == ' ') || (temp->str[0] == '$' && tmp->str[0] == '$' && tmp->next->str[0] == ' '))
 		{
-			tmp = tmp->next;
+			printf("KKKK\n");
 			temp->next = tmp->next;
 			free(tmp);
 			tmp = temp;
 		}
-		if (tmp->next == NULL)
-			return (list);
-		tmp = tmp->next;
 	}
 	return (list);
 }

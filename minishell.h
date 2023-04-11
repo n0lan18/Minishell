@@ -28,6 +28,7 @@ typedef struct s_param
 	int		num;
 	int		deb;
 	char	**tab;
+	char 	*str;
 }	t_param;
 
 typedef struct s_list
@@ -51,6 +52,7 @@ int		search_quote_in_list(t_list *list);
 char	*search_var_in_env(char *str, char **env);
 char	*add_var_and_word(char *str, char *str1, char *tab);
 t_list	*replace_if_dollar(t_list *list, char **env);
+int		check_just_dollar(t_list *list);
 
 /*************check_words_in_tab***********/
 int		check_which_type(char **tab, char **env);
@@ -71,5 +73,9 @@ void	free_list(t_list *a);
 t_list	*remove_first_elem_list(t_list *list);
 t_list	*remove_after_first_elem_list(t_list *list);
 int		size_list(t_list *list);
+
+/*************Fonctions_list_bis***********/
+t_list	*remove_first_elem_if_var_NULL(t_list *list);
+t_list	*remove_after_first_elem_list_if_NULL(t_list *list);
 
 #endif

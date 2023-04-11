@@ -38,9 +38,8 @@ int	search_dollar_in_list(t_list *list)
 char	*add_var_and_word(char *str, char *str1, char *tab)
 {
 	t_param	inc;
-	char	*tmp;
 
-	tmp = NULL;
+	inc.str = NULL;
 	inc.i = 0;
 	inc.j = 0;
 	inc.x = -1;
@@ -49,7 +48,7 @@ char	*add_var_and_word(char *str, char *str1, char *tab)
 		tab = "sdiuhsidhisd";
 		return (tab);
 	}
-	tmp = ft_strcpy_new(tmp, tab, 0, ft_strlen(tab));
+	inc.str = ft_strcpy_new(inc.str, tab, 0, ft_strlen(tab));
 	free(str);
 	while (str1[inc.j])
 		inc.j++;
@@ -57,7 +56,7 @@ char	*add_var_and_word(char *str, char *str1, char *tab)
 	if (!tab)
 		return (NULL);
 	while (++inc.x < inc.i)
-		tab[inc.x] = tmp[inc.x];
+		tab[inc.x] = inc.str[inc.x];
 	inc.j = 0;
 	while (str1[inc.j])
 		tab[inc.x++] = str1[inc.j++];
@@ -95,27 +94,53 @@ t_list	*replace_if_dollar(t_list *list, char **env)
 {
 	t_list	*tmp;
 	t_param	inc;
-	char	*str1;
 
 	tmp = list;
-	inc.i = 0;
-	inc.deb = 0;
-	while (tmp)
+	if (size_list(tmp) <= 1 || check_just_dollar(tmp) == 0)
+		return (list);
+	while (tmp->next)
 	{
+		inc.i = 0;
 		if (tmp->str[0] == 39)
 		{
 			tmp = tmp->next;
-			while (tmp && tmp->str[0] != 39)
+			while ((tmp && tmp->str[0] != 39))
 				tmp = tmp->next;
 		}
-		if (tmp->str[0] == '$' && tmp->next->str[0] != ' ')
+		if (tmp->str[0] == '$' && tmp->next->str == NULL)
+			return (list);
+		if ((tmp->str[0] == '$' && tmp->next->str[0] == '$') || (tmp->str[0] == '$' && tmp->next->str[0] == ' '))
 		{
-			str1 = search_var_in_env(tmp->next->str, env);
-			tmp->next->str = add_var_and_word(tmp->next->str, str1, tmp->str);
+			while (tmp->next->str[0] == '$' && tmp->next)
+			{
+				inc.i++;
+				tmp = tmp->next;
+			}
 		}
+		if (tmp->str[0] == '$' && tmp->next->str[0] != ' ' && (inc.i % 2) == 0)
+		{
+			inc.str = search_var_in_env(tmp->next->str, env);
+			tmp->next->str = add_var_and_word(tmp->next->str, inc.str, tmp->str);
+			printf("%s\n", tmp->str);
+		}
+		if (tmp->next == NULL)
+			break ;
 		tmp = tmp->next;
 	}
-	list = remove_first_elem_list(list);
-	list = remove_after_first_elem_list(list);
-	return (list);
+/*	list = remove_first_elem_list(list);
+*/	return (list);
+}
+
+int	check_just_dollar(t_list *list)
+{
+	t_list	*tmp;
+
+	tmp = list;
+	while (tmp)
+	{
+		if (tmp->str[0] != '$')
+			return (1);
+		tmp = tmp->next;
+	}
+	return (0);
 }
