@@ -121,14 +121,14 @@ t_list	*replace_if_dollar(t_list *list, char **env)
 		{
 			inc.str = search_var_in_env(tmp->next->str, env);
 			tmp->next->str = add_var_and_word(tmp->next->str, inc.str, tmp->str);
-			printf("%s\n", tmp->str);
 		}
 		if (tmp->next == NULL)
 			break ;
 		tmp = tmp->next;
 	}
-/*	list = remove_first_elem_list(list);
-*/	return (list);
+	list = remove_first_elem_list(list);
+	list = remove_after_first_elem_list(list);
+	return (list);
 }
 
 int	check_just_dollar(t_list *list)

@@ -53,59 +53,58 @@ t_list	*remove_first_elem_list(t_list *list)
 {
 	t_list	*tmp;
 	t_list	*first_elem;
-	int i;
 
 	tmp = list;
-	i = 0;
+	first_elem = tmp;
 	if (list == NULL)
 		return (NULL);
-	if ((tmp->str[0] == '$' && tmp->next->str[0] == '$') || \
-	(tmp->str[0] == '$' && tmp->next->str[0] == ' '))
+	if (tmp->str[0] == '$')
 	{
-		while (tmp->next->str[0] == '$' && tmp->next)
+		if (tmp->next->str[0] != '$')
 		{
-			i++;
-			tmp = tmp->next;
+			first_elem = tmp->next;
+			free(tmp);
+			return (first_elem);
 		}
 	}
-	if (tmp->str[0] == '$' && tmp->next->str[0] != ' ' && (i % 2) == 0)
-	{
-		first_elem = tmp->next;
-		free(tmp);
-		return (first_elem);
-	}
-	else
-		return (list);
+	return (list);
 }
 
 t_list	*remove_after_first_elem_list(t_list *list)
 {
 	t_list	*tmp;
-	t_list	*temp;
+/*	t_list	*temp;
+*/	int i;
 
 	tmp = list;
 	if (size_list(list) < 2)
 		return (list);
-	while (tmp->next)
+	while (tmp)
 	{
-		if (tmp->str[0] == 39)
-			while (tmp->next && tmp->next->str[0] != 39)
-				tmp = tmp->next;
-		temp = tmp;
-		if (tmp->next == NULL)
+/*		temp = tmp;
+*/
+		if (tmp == NULL)
 			return (list);
-		tmp = tmp->next;
-		if (tmp->next == NULL)
-			return (list);
-		printf("tmp %c\n", tmp->str[0]);
-		printf("tmp next %c\n", tmp->next->str[0]);
-		if ((tmp->str[0] == '$' && tmp->next->str[0] == ' ') || (temp->str[0] == ' ' && tmp->str[0] == '$' && tmp->next->str[0] == ' ') || (temp->str[0] == '$' && tmp->str[0] == '$' && tmp->next->str[0] == ' '))
+		if (tmp->str[0] == '$')
 		{
-			printf("KKKK\n");
-			temp->next = tmp->next;
-			free(tmp);
-			tmp = temp;
-		}
+			i = number_of_dollar(tmp);
+			tmp = maj_list(tmp, i);
+		/*	if((i % 2) == 0)
+			{
+				printf("oooooooo\n");
+				if (tmp->next->str[0] != '$' || tmp->next->str[0] != ' ')
+				{
+					printf("lllllll\n");
+					printf("temp %s\n", temp->str);
+					printf("tmp next %s\n", tmp->next->str);
+					temp->next = tmp->next;
+					free(tmp);
+					tmp = temp;
+				}
+				i = 0;
+			}
+		*/}
+		tmp = tmp->next;
 	}
 	return (list);
 }
@@ -123,4 +122,36 @@ int	size_list(t_list *list)
 		tmp = tmp->next;
 	}
 	return (i);
+}
+
+int number_of_dollar(t_list *list)
+{
+	int i;
+	t_list	*tmp;
+
+	i = 1;
+	tmp = list;
+	while (tmp)
+	{
+		if (tmp->str[0] != '$')
+			break;
+		i++;
+		tmp = tmp->next;
+	}
+	return (i);
+}
+
+t_list	*maj_list(t_list *list, int num)
+{
+	t_list	*tmp;
+	int i;
+
+	tmp = list;
+	i = 0;
+	while (i <= num)
+	{
+		i++;
+		tmp = tmp->next;
+	}
+	return (tmp);
 }
