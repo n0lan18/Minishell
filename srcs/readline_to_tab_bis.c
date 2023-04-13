@@ -75,12 +75,16 @@ char	*ft_strcpy_new(char *dst, char *str, int deb, int end)
 	int	i;
 
 	i = 0;
-	dst = malloc(sizeof(char) * (end - deb) + 1);
+	if ((end - deb) == 0)
+		dst = malloc(sizeof(char) * 2);
+	else
+		dst = malloc(sizeof(char) * (end - deb) + 1);
 	if (!dst)
 		return (NULL);
 	while (deb <= end)
 		dst[i++] = str[deb++];
 	dst[i] = '\0';
+	printf("%s\n", dst);
 	return (dst);
 }
 
