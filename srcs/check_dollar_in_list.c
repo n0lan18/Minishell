@@ -93,14 +93,11 @@ char	*search_var_in_env(char *str, char **env)
 t_list	*replace_if_dollar(t_list *list, char **env)
 {
 	t_list	*tmp;
-	t_param	inc;
+    char *str;
 
 	tmp = list;
-	if (size_list(tmp) <= 1 || check_just_dollar(tmp) == 0)
-		return (list);
 	while (tmp->next)
 	{
-		inc.i = 0;
 		if (tmp->str[0] == 39)
 		{
 			tmp = tmp->next;
@@ -109,38 +106,12 @@ t_list	*replace_if_dollar(t_list *list, char **env)
 		}
 		if (tmp->str[0] == '$' && tmp->next->str == NULL)
 			return (list);
-		if ((tmp->str[0] == '$' && tmp->next->str[0] == '$') || (tmp->str[0] == '$' && tmp->next->str[0] == ' '))
+		if (tmp->str[0] == '$' && tmp->next->str[0] != ' ')
 		{
-			while (tmp->next->str[0] == '$' && tmp->next)
-			{
-				inc.i++;
-				tmp = tmp->next;
-			}
+			str = search_var_in_env(tmp->next->str, env);
+			tmp->next->str = add_var_and_word(tmp->next->str, str, tmp->str);
 		}
-		if (tmp->str[0] == '$' && tmp->next->str[0] != ' ' && (inc.i % 2) == 0)
-		{
-			inc.str = search_var_in_env(tmp->next->str, env);
-			tmp->next->str = add_var_and_word(tmp->next->str, inc.str, tmp->str);
-		}
-		if (tmp->next == NULL)
-			break ;
 		tmp = tmp->next;
 	}
-	list = remove_first_elem_list(list);
-	list = remove_after_first_elem_list(list);
 	return (list);
-}
-
-int	check_just_dollar(t_list *list)
-{
-	t_list	*tmp;
-
-	tmp = list;
-	while (tmp)
-	{
-		if (tmp->str[0] != '$')
-			return (1);
-		tmp = tmp->next;
-	}
-	return (0);
 }

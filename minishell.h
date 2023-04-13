@@ -37,6 +37,7 @@ typedef struct s_list
 	struct s_list	*next;
 }	t_list;
 
+void test(char *rl);
 /*************Readline_to_tab***************/
 int		search_in_str(char s, char *str);
 int		count_word(const char *s, char c, int deb, int end);

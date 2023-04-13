@@ -55,18 +55,21 @@ char	**ft_split_in_ft_split(char const *s)
 		if (s[a.i] == '$' || s[a.i] == '>' || s[a.i] == '<' \
 		|| s[a.i] == '"' || s[a.i] == '|' || s[a.i] == 39 || s[a.i] == '\0')
 		{
-			a.tab[a.j++] = ft_strcpy_new(a.tab[a.j], (char *) s, a.i, a.i);
+			a.tab[a.j] = ft_strcpy_new(a.tab[a.j], (char *) s, a.i, a.i);
 			a.deb = a.i + 1;
+			a.j++;
 		}
 		else if (s[a.i + 1] == '$' || s[a.i + 1] == '>' || s[a.i + 1] == '<' \
 		|| s[a.i + 1] == '"' || s[a.i + 1] == '|' || s[a.i + 1] == 39
 			|| s[a.i + 1] == '\0')
-		{
-			a.tab[a.j++] = ft_strcpy_new(a.tab[a.j], (char *) s, a.deb, a.i);
-			a.deb = a.i;
-		}
-		a.i++;
+        {
+            a.tab[a.j] = ft_strcpy_new(a.tab[a.j], (char *) s, a.deb, a.i);
+            a.deb = a.i;
+            a.j++;
+        }
+        a.i++;
 	}
+    a.tab[a.j] = NULL;
 	return (a.tab);
 }
 
@@ -84,7 +87,6 @@ char	*ft_strcpy_new(char *dst, char *str, int deb, int end)
 	while (deb <= end)
 		dst[i++] = str[deb++];
 	dst[i] = '\0';
-	printf("%s\n", dst);
 	return (dst);
 }
 
@@ -105,10 +107,8 @@ t_list	*split_new_format(char *rline, t_list *list)
 		inc.j = 0;
 		inc.x = 0;
 		tab1 = ft_split_in_ft_split(tab[inc.i]);
-		while (tab1[inc.j])
-			inc.j++;
-		while (inc.x < inc.j)
-			tmp = add_new_element(tmp, tab1[inc.x++]);
+        while (tab1[inc.x])
+            tmp = add_new_element(tmp, tab1[inc.x++]);
 		free_double_tab(tab1);
 		inc.i++;
 	}

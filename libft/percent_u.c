@@ -14,9 +14,9 @@
 
 int	percent_u(unsigned int n, int i)
 {
-	if (n < 0)
+/*	if (n < 0)
 		n = 4294967295 - n + 1;
-	if (n >= 10)
+*/	if (n >= 10)
 		i = percent_u(n / 10, i);
 	percent_c(n % 10 + '0');
 	i++;

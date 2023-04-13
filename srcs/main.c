@@ -26,13 +26,14 @@ int	main(int argc, char **argv, char **envp)
 		{
 			list = NULL;
 			rl = readline("minishell-1.0$ ");
-			list = split_new_format(rl, list);
-			/*list = replace_if_dollar(list, envp);
-			*/while (list)
+            list = split_new_format(rl, list);
+			list = replace_if_dollar(list, envp);
+			while (list)
 			{
 				printf("LISTE %s\n", list->str);
 				list = list->next;
 			}
+            free_list(list);
 		}
 		return (0);
 	}
