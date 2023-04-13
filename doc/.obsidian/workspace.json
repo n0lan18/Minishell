@@ -15,9 +15,9 @@
               "state": {
                 "file": "🧠 Architecture.canvas",
                 "viewState": {
-                  "x": 377.31700873258546,
-                  "y": -993.4135122384205,
-                  "zoom": -0.9876812924866504
+                  "x": 1064.6394664923266,
+                  "y": -852.5413561061991,
+                  "zoom": -1.71989072196559
                 }
               }
             }
@@ -151,27 +151,27 @@
   },
   "active": "d13e1e25ee21753e",
   "lastOpenFiles": [
-    "📚 Glossaire.md",
-    "🛣️ Roadmap.md",
-    "🧠 Architecture.canvas",
-    "t_data.md",
-    "t_token.md",
-    "t_command.md",
-    "builtins",
-    "builtins/exit.md",
-    "builtins/unset.md",
-    "builtins/pwd.md",
-    "builtins/export.md",
-    "builtins/env.md",
-    "builtins/echo.md",
-    "builtins/cd.md",
     "README.md",
+    "🧠 Architecture.canvas",
+    "🛣️ Roadmap.md",
+    "📚 Glossaire.md",
+    "t_token.md",
+    "t_data.md",
+    "t_command.md",
     "signals.md",
     "parsing.md",
     "minishell.h.md",
-    "executing.md",
-    "interactive_mod.md",
     "main.c.md",
+    "interactive_mod.md",
+    "executing.md",
+    "builtins/unset.md",
+    "builtins/pwd.md",
+    "builtins/export.md",
+    "builtins/exit.md",
+    "builtins/env.md",
+    "builtins/echo.md",
+    "builtins/cd.md",
+    "builtins",
     "Readme.md"
   ]
 }

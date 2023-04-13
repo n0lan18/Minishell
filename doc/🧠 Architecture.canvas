@@ -1,7 +1,6 @@
 {
 	"nodes":[
 		{"type":"file","file":"interactive_mod.md","id":"394109c5a186ff0a","x":-220,"y":-480,"width":400,"height":400},
-		{"type":"file","file":"parsing.md","id":"06864d752f627e06","x":480,"y":-780,"width":400,"height":400,"color":"1"},
 		{"type":"file","file":"executing.md","id":"34f35b28048d1481","x":480,"y":-240,"width":400,"height":400},
 		{"type":"file","file":"signals.md","id":"0d6670c5a011a69a","x":480,"y":-1280,"width":400,"height":400,"color":"1"},
 		{"type":"text","text":"builtins","id":"c659a8c57bdb0006","x":1000,"y":-70,"width":250,"height":60},
@@ -16,7 +15,8 @@
 		{"type":"file","file":"minishell.h.md","id":"46f9f8ba84d2896f","x":-860,"y":-1440,"width":500,"height":300},
 		{"type":"file","file":"t_token.md","id":"b3b301d4e0c12685","x":-220,"y":-1820,"width":400,"height":310},
 		{"type":"file","file":"t_data.md","id":"0b2308c3fb52431d","x":-220,"y":-1080,"width":400,"height":400},
-		{"type":"file","file":"main.c.md","id":"b5b2cfa11772e371","x":-640,"y":-450,"width":280,"height":340}
+		{"type":"file","file":"main.c.md","id":"b5b2cfa11772e371","x":-640,"y":-450,"width":280,"height":340},
+		{"type":"file","file":"parsing.md","id":"06864d752f627e06","x":480,"y":-850,"width":400,"height":400,"color":"1"}
 	],
 	"edges":[
 		{"id":"1a9db9bc7cfb2cc1","fromNode":"b5b2cfa11772e371","fromSide":"right","toNode":"394109c5a186ff0a","toSide":"left"},
