@@ -15,9 +15,9 @@
               "state": {
                 "file": "🧠 Architecture.canvas",
                 "viewState": {
-                  "x": 1064.6394664923266,
-                  "y": -852.5413561061991,
-                  "zoom": -1.71989072196559
+                  "x": 1454.3422036466613,
+                  "y": -620.3368545605001,
+                  "zoom": -0.9890638990489229
                 }
               }
             }
@@ -151,7 +151,8 @@
   },
   "active": "d13e1e25ee21753e",
   "lastOpenFiles": [
-    "README.md",
+    "ctrl_d.md",
+    "ctrl_c.md",
     "🧠 Architecture.canvas",
     "🛣️ Roadmap.md",
     "📚 Glossaire.md",
@@ -172,6 +173,7 @@
     "builtins/echo.md",
     "builtins/cd.md",
     "builtins",
+    "README.md",
     "Readme.md"
   ]
 }

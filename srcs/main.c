@@ -42,6 +42,11 @@
 
 int	main(void)
 {
-	testing_signal();
+	char	*input;
+	set_signal_action();
+	while (1)
+	{
+		input = readline("minishell-1.0$ ");
+	}
 	return (0);
 }

@@ -18,6 +18,7 @@
 # include <unistd.h>
 # include <readline/readline.h>
 # include <readline/history.h>
+# include <signal.h>
 # include "./libft/libft.h"
 
 typedef struct s_param
@@ -80,6 +81,6 @@ t_list	*remove_first_elem_if_var_NULL(t_list *list);
 t_list	*remove_after_first_elem_list_if_NULL(t_list *list);
 
 /*************Signals***********/
-void	testing_signal(void);
+void	set_signal_action(void);
 
 #endif

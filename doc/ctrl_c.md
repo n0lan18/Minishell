@@ -1,0 +1,1 @@
+Affiche un nouveau prompt sur une nouvelle ligne
