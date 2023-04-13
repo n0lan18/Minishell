@@ -73,23 +73,21 @@ t_list	*remove_first_elem_list(t_list *list)
 t_list	*remove_after_first_elem_list(t_list *list)
 {
 	t_list	*tmp;
-/*	t_list	*temp;
-*/	int i;
+	t_list	*temp;
+	int i;
 
 	tmp = list;
 	if (size_list(list) < 2)
 		return (list);
 	while (tmp)
 	{
-/*		temp = tmp;
-*/
+		temp = tmp;
+
 		if (tmp == NULL)
 			return (list);
 		if (tmp->str[0] == '$')
 		{
-			i = number_of_dollar(tmp);
-			tmp = maj_list(tmp, i);
-		/*	if((i % 2) == 0)
+			if((i % 2) == 0)
 			{
 				printf("oooooooo\n");
 				if (tmp->next->str[0] != '$' || tmp->next->str[0] != ' ')
@@ -103,7 +101,7 @@ t_list	*remove_after_first_elem_list(t_list *list)
 				}
 				i = 0;
 			}
-		*/}
+		}
 		tmp = tmp->next;
 	}
 	return (list);
