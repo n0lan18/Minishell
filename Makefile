@@ -22,7 +22,9 @@ OBJS 			= $(SRCS:$(SRCS_DIR)/%.c=$(OBJS_DIR)/%.o)
 
 # SOURCES
 SRCS_DIR   		= srcs
-SRCS 			= $(wildcard $(SRCS_DIR)/*.c)
+SIGNALS_DIR		= signals
+SRCS 			= $(wildcard $(SRCS_DIR)/*.c) \
+				  $(wildcard $(SRCS_DIR)/$(SIGNALS_DIR)/*.c)
 
 # COLORS
 _END=$'\x1b[0m'
@@ -40,6 +42,7 @@ $(NAME): 		$(OBJS)
 
 $(OBJS_DIR):
 				mkdir -p $(OBJS_DIR)
+				mkdir -p $(OBJS_DIR)/$(SIGNALS_DIR)
 
 $(OBJS_DIR)/%.o: $(SRCS_DIR)/%.c
 				$(CC) $(FLAGS) -c $< -o $@

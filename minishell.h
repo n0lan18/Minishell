@@ -15,6 +15,7 @@
 
 # include <stdlib.h>
 # include <stdio.h>
+# include <unistd.h>
 # include <readline/readline.h>
 # include <readline/history.h>
 # include "./libft/libft.h"
@@ -77,5 +78,8 @@ int		size_list(t_list *list);
 /*************Fonctions_list_bis***********/
 t_list	*remove_first_elem_if_var_NULL(t_list *list);
 t_list	*remove_after_first_elem_list_if_NULL(t_list *list);
+
+/*************Signals***********/
+void	testing_signal(void);
 
 #endif
