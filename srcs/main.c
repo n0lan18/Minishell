@@ -43,7 +43,8 @@
 int	main(void)
 {
 	char	*input;
-	set_signal_action();
+
+	set_signals();
 	while (1)
 	{
 		input = readline("minishell-1.0$ ");

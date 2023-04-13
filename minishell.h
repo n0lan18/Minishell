@@ -81,6 +81,7 @@ t_list	*remove_first_elem_if_var_NULL(t_list *list);
 t_list	*remove_after_first_elem_list_if_NULL(t_list *list);
 
 /*************Signals***********/
-void	set_signal_action(void);
+void	set_signals(void);
+extern void	rl_replace_line(const char *c, int i);
 
 #endif

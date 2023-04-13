@@ -1,1 +1,1 @@
-Gérer ctrl-c, ctrl-d et ctrl-\
+- Gérer ctrl-c, ctrl-d et ctrl-\

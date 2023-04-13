@@ -13,39 +13,42 @@
 
 #include "../../minishell.h"
 
-// Routine de gestion de SIGINT
+/**
+ * Change le comportement du signal SIGINT (ctrl-c)
+ * Affiche un nouveau prompt sur une nouvelle ligne
+ */
 void	reset_prompt(int signal)
 {
-	(void) signal;
-	ft_putchar_fd('\n', 1);
-	rl_on_new_line();
-	rl_replace_line("", 0);
-	rl_redisplay();
-}
-
-void	ignore_sigquit(void)
-{
-	struct sigaction	act;
-
-	ft_memset(&act, 0, sizeof(act));
-	act.sa_handler = SIG_IGN;
-	sigaction(SIGINT, &act, NULL);
+	if (signal == SIGINT)
+	{
+		ft_putchar_fd('\n', 1);
+		rl_on_new_line();
+		rl_replace_line("", 0);
+		rl_redisplay();
+	}
 }
 
 /**
- * Déclaration de la structure sigaction
- * Met à 0 tous les bits dans la structure,
- * sinon on aura de mauvaises surprises de valeurs non-initialisées...
- *
- * On voudrait invoquer la routine sigint_handler quand on reçoit le signal :
- * Applique cette structure avec la fonction à invoquer au signal SIGINT (ctrl-c)
+ * Ignore le signal SIGQUIT (ctrl-\)
  */
-void	set_signal_action(void)
+static void	ignore_sigquit(void)
+{
+	struct sigaction	sa;
+
+	sa.sa_handler = SIG_IGN;
+	sigaction(SIGQUIT, &sa, NULL);
+}
+
+/**
+ * Change le comportement de certains signaux :
+ * - SIGINT (ctrl-c)
+ * - SIGQUIT (ctrl-\)
+ */
+void	set_signals(void)
 {
 	struct sigaction	sa;
 
 	ignore_sigquit();
-	ft_bzero(&sa, sizeof(sa));
 	sa.sa_handler = &reset_prompt;
 	sigaction(SIGINT, &sa, NULL);
 }

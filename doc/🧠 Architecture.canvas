@@ -2,7 +2,6 @@
 	"nodes":[
 		{"type":"file","file":"interactive_mod.md","id":"394109c5a186ff0a","x":-220,"y":-480,"width":400,"height":400},
 		{"type":"file","file":"executing.md","id":"34f35b28048d1481","x":480,"y":-240,"width":400,"height":400},
-		{"type":"file","file":"signals.md","id":"0d6670c5a011a69a","x":480,"y":-1280,"width":400,"height":400,"color":"1"},
 		{"type":"text","text":"builtins","id":"c659a8c57bdb0006","x":1000,"y":-70,"width":250,"height":60},
 		{"type":"file","file":"builtins/cd.md","id":"c428af72f838063d","x":1560,"y":-570,"width":200,"height":100},
 		{"type":"file","file":"builtins/echo.md","id":"7f1b9578e397599c","x":1560,"y":-390,"width":200,"height":100},
@@ -17,8 +16,11 @@
 		{"type":"file","file":"t_data.md","id":"0b2308c3fb52431d","x":-220,"y":-1080,"width":400,"height":400},
 		{"type":"file","file":"main.c.md","id":"b5b2cfa11772e371","x":-640,"y":-450,"width":280,"height":340},
 		{"type":"file","file":"parsing.md","id":"06864d752f627e06","x":480,"y":-850,"width":400,"height":400,"color":"1"},
-		{"id":"ec31e0948908cf21","x":1150,"y":-1030,"width":400,"height":150,"type":"file","file":"ctrl_d.md"},
-		{"id":"891987f5c9049463","x":1150,"y":-1365,"width":400,"height":250,"type":"file","file":"ctrl_c.md"}
+		{"type":"file","file":"signals.md","id":"0d6670c5a011a69a","x":500,"y":-1730,"width":400,"height":400,"color":"1"},
+		{"type":"file","file":"signals/ctrl_c.md","id":"891987f5c9049463","x":1085,"y":-2124,"width":475,"height":375},
+		{"type":"file","file":"signals/ctrl_d.md","id":"ec31e0948908cf21","x":1085,"y":-1704,"width":475,"height":350},
+		{"type":"file","file":"signals/ctrl_slash.md","id":"a546f79e781e6160","x":1085,"y":-1290,"width":472,"height":175,"color":"4"},
+		{"id":"528fb420f7a14c71","x":1615,"y":-2034,"width":477,"height":195,"type":"text","text":"- [ ] Ne plus afficher le ^ C\n- [ ] Mode normal / interactif .."}
 	],
 	"edges":[
 		{"id":"1a9db9bc7cfb2cc1","fromNode":"b5b2cfa11772e371","fromSide":"right","toNode":"394109c5a186ff0a","toSide":"left"},
@@ -36,6 +38,8 @@
 		{"id":"5b16ff6d9f2dd748","fromNode":"46f9f8ba84d2896f","fromSide":"right","toNode":"b3b301d4e0c12685","toSide":"left"},
 		{"id":"adba18dcef4f641a","fromNode":"46f9f8ba84d2896f","fromSide":"right","toNode":"0b2308c3fb52431d","toSide":"left"},
 		{"id":"aa6f3038cb62fe1f","fromNode":"0d6670c5a011a69a","fromSide":"right","toNode":"ec31e0948908cf21","toSide":"left"},
-		{"id":"f4af48bd4a405455","fromNode":"0d6670c5a011a69a","fromSide":"right","toNode":"891987f5c9049463","toSide":"left"}
+		{"id":"f4af48bd4a405455","fromNode":"0d6670c5a011a69a","fromSide":"right","toNode":"891987f5c9049463","toSide":"left"},
+		{"id":"70db404fdcf0a008","fromNode":"0d6670c5a011a69a","fromSide":"right","toNode":"a546f79e781e6160","toSide":"left"},
+		{"id":"13c0ef60d7296677","fromNode":"891987f5c9049463","fromSide":"right","toNode":"528fb420f7a14c71","toSide":"left"}
 	]
 }
