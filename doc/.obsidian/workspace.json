@@ -4,20 +4,20 @@
     "type": "split",
     "children": [
       {
-        "id": "6334d40e0bf283ac",
+        "id": "5275adc3a5821ab1",
         "type": "tabs",
         "children": [
           {
-            "id": "d13e1e25ee21753e",
+            "id": "9acf1b14d6374100",
             "type": "leaf",
             "state": {
               "type": "canvas",
               "state": {
                 "file": "🧠 Architecture.canvas",
                 "viewState": {
-                  "x": 1064.6394664923266,
-                  "y": -852.5413561061991,
-                  "zoom": -1.71989072196559
+                  "x": 994.0623195378914,
+                  "y": -1145.9692791487937,
+                  "zoom": -1.4848266601562474
                 }
               }
             }
@@ -149,10 +149,11 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "d13e1e25ee21753e",
+  "active": "9acf1b14d6374100",
   "lastOpenFiles": [
-    "README.md",
     "🧠 Architecture.canvas",
+    "signals",
+    "signals/ctrl_slash.md",
     "🛣️ Roadmap.md",
     "📚 Glossaire.md",
     "t_token.md",
@@ -164,6 +165,8 @@
     "main.c.md",
     "interactive_mod.md",
     "executing.md",
+    "signals/ctrl_d.md",
+    "signals/ctrl_c.md",
     "builtins/unset.md",
     "builtins/pwd.md",
     "builtins/export.md",
@@ -172,6 +175,7 @@
     "builtins/echo.md",
     "builtins/cd.md",
     "builtins",
+    "README.md",
     "Readme.md"
   ]
 }
