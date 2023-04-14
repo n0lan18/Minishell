@@ -14,41 +14,38 @@
 #include "../../minishell.h"
 
 /**
- * Change le comportement du signal SIGINT (ctrl-c)
- * Affiche un nouveau prompt sur une nouvelle ligne
+ * Cette fonction est appelée lorsqu'un signal est reçu.
+ * Elle traite les signaux SIGINT et SIGQUIT de manière différente.
+ * Affiche ou en réinitialise la ligne de commande selon le signal reçu.
  */
-void	reset_prompt(int signal)
+static void	ft_handle_signals(int signal)
 {
 	if (signal == SIGINT)
 	{
-		ft_putchar_fd('\n', 1);
-		rl_on_new_line();
+		ft_putstr_fd("\n", STDOUT_FILENO);
 		rl_replace_line("", 0);
+		rl_on_new_line();
+		rl_redisplay();
+	}
+	else if (signal == SIGQUIT)
+	{
+		rl_on_new_line();
 		rl_redisplay();
 	}
 }
 
 /**
- * Ignore le signal SIGQUIT (ctrl-\)
+ * Initialise la gestion des signaux SIGINT et SIGQUIT.
+ * Appelle la fonction ft_handle_signals() lorsqu'un signal est reçu.
+ * Utilise la fonction sigaction() pour configurer la gestion des signaux.
  */
-static void	ignore_sigquit(void)
+void	ft_init_signals(void)
 {
 	struct sigaction	sa;
 
-	sa.sa_handler = SIG_IGN;
-	sigaction(SIGQUIT, &sa, NULL);
-}
-
-/**
- * Change le comportement de certains signaux :
- * - SIGINT (ctrl-c)
- * - SIGQUIT (ctrl-\)
- */
-void	set_signals(void)
-{
-	struct sigaction	sa;
-
-	ignore_sigquit();
-	sa.sa_handler = &reset_prompt;
-	sigaction(SIGINT, &sa, NULL);
+	sa.sa_handler = ft_handle_signals;
+	if (sigaction(SIGINT, &sa, NULL) == -1)
+		perror("Error: cannot handle SIGINT");
+	if (sigaction(SIGQUIT, &sa, NULL) == -1)
+		perror("Error: cannot handle SIGQUIT");
 }

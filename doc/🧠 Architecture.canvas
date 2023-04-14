@@ -16,11 +16,11 @@
 		{"type":"file","file":"t_data.md","id":"0b2308c3fb52431d","x":-220,"y":-1080,"width":400,"height":400},
 		{"type":"file","file":"main.c.md","id":"b5b2cfa11772e371","x":-640,"y":-450,"width":280,"height":340},
 		{"type":"file","file":"parsing.md","id":"06864d752f627e06","x":480,"y":-850,"width":400,"height":400,"color":"1"},
-		{"type":"file","file":"signals.md","id":"0d6670c5a011a69a","x":500,"y":-1730,"width":400,"height":400,"color":"1"},
-		{"type":"file","file":"signals/ctrl_c.md","id":"891987f5c9049463","x":1085,"y":-2124,"width":475,"height":375},
-		{"type":"file","file":"signals/ctrl_d.md","id":"ec31e0948908cf21","x":1085,"y":-1704,"width":475,"height":350},
+		{"type":"file","file":"signals.md","id":"0d6670c5a011a69a","x":500,"y":-1730,"width":400,"height":400,"color":"4"},
+		{"type":"file","file":"signals/ctrl_c.md","id":"891987f5c9049463","x":1085,"y":-2124,"width":475,"height":375,"color":"4"},
+		{"type":"file","file":"signals/ctrl_d.md","id":"ec31e0948908cf21","x":1085,"y":-1704,"width":475,"height":350,"color":"4"},
 		{"type":"file","file":"signals/ctrl_slash.md","id":"a546f79e781e6160","x":1085,"y":-1290,"width":472,"height":175,"color":"4"},
-		{"id":"528fb420f7a14c71","x":1615,"y":-2034,"width":477,"height":195,"type":"text","text":"- [ ] Ne plus afficher le ^ C\n- [ ] Mode normal / interactif .."}
+		{"type":"text","text":"- [x] Ne plus afficher le ^ C\n- [ ] Mode normal / interactif ..","id":"528fb420f7a14c71","x":1615,"y":-2034,"width":477,"height":195,"color":"4"}
 	],
 	"edges":[
 		{"id":"1a9db9bc7cfb2cc1","fromNode":"b5b2cfa11772e371","fromSide":"right","toNode":"394109c5a186ff0a","toSide":"left"},

@@ -42,12 +42,15 @@
 
 int	main(void)
 {
-	char	*input;
+	char	*prompt_output;
 
-	set_signals();
-	while (1)
+	prompt_output = "";
+	while (prompt_output != NULL)
 	{
-		input = readline("minishell-1.0$ ");
+		ft_init_signals();
+		prompt_output = readline("minishell-1.0$ ");
+		add_history(prompt_output);
 	}
+	ft_close();
 	return (0);
 }
