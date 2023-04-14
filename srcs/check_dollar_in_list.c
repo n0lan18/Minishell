@@ -93,25 +93,31 @@ char	*search_var_in_env(char *str, char **env)
 t_list	*replace_if_dollar(t_list *list, char **env)
 {
 	t_list	*tmp;
+    t_list  *temp;
     char *str;
 
 	tmp = list;
-	while (tmp->next)
+	while (tmp)
 	{
-		if (tmp->str[0] == 39)
+        temp = tmp;
+        tmp = tmp->next;
+		if (temp->str[0] == 39)
 		{
-			tmp = tmp->next;
-			while ((tmp && tmp->str[0] != 39))
-				tmp = tmp->next;
+			while ((temp && temp->str[0] != 39))
+				temp = temp->next;
+            tmp = temp;
+            tmp = tmp->next;
 		}
-		if (tmp->str[0] == '$' && tmp->next->str == NULL)
-			return (list);
+        if (tmp->next == NULL)
+            return (list);
 		if (tmp->str[0] == '$' && tmp->next->str[0] != ' ')
 		{
 			str = search_var_in_env(tmp->next->str, env);
 			tmp->next->str = add_var_and_word(tmp->next->str, str, tmp->str);
+            temp->next = tmp->next;
+            free(tmp);
+            tmp = temp;
 		}
-		tmp = tmp->next;
 	}
 	return (list);
 }
