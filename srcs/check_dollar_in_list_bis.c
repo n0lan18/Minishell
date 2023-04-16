@@ -71,14 +71,11 @@ char	*search_var_in_env(char *str, char **env)
 	inc.i = 0;
 	inc.j = 0;
 	inc.deb = 0;
-	inc.x = ft_strlen(str) - 1;
 	while (env[inc.i])
 	{
-		inc.x = ft_strlen(str) - 1;
-		if (ft_strncmp(str, env[inc.i], inc.x) == 0
-			&& env[inc.i][inc.x + 1] == '=')
+		inc.x = compare_length_in_env(env[inc.i]);
+		if (ft_strncmp(str, env[inc.i], inc.x) == 0)
 		{
-			inc.x++;
 			inc.deb = inc.x + 1;
 			while (env[inc.i][inc.x])
 				inc.x++;
@@ -88,4 +85,14 @@ char	*search_var_in_env(char *str, char **env)
 		inc.i++;
 	}
 	return (NULL);
+}
+
+int	compare_length_in_env(char *env)
+{
+	int	i;
+
+	i = 0;
+	while (env[i] && env[i] != '=')
+		i++;
+	return (i);
 }

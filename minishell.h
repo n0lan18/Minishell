@@ -59,6 +59,7 @@ t_list	*replace_if_dollar(t_list *list, char **env);
 int	search_dollar_in_list(t_list *list);
 char	*add_var_and_word(char *str, char *str1, char *tab);
 char	*search_var_in_env(char *str, char **env);
+int	compare_length_in_env(char *env);
 
 /*************check_words_in_tab***********/
 int		check_which_type(char **tab, char **env);

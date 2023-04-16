@@ -78,7 +78,7 @@ t_list	*replace_dollar_if_after_bis(t_list *temp, t_list *tmp, char **env)
 		if (tmp->next->str[0] != '$')
 			break ;
 	}
-	if (tmp->next->str[0] != ' ')
+	if (tmp->next->str[0] != ' ' && tmp->next->str[0] != '?')
 	{
 		str = search_var_in_env(tmp->next->str, env);
 		tmp->next->str = add_var_and_word(tmp->next->str, str, tmp->str);
