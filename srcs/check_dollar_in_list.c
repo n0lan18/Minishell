@@ -12,112 +12,92 @@
 
 #include "../minishell.h"
 
-int	search_dollar_in_list(t_list *list)
+t_list	*replace_dollar_if_first(t_list *list, char **env)
 {
 	t_list	*tmp;
-	t_param	inc;
+	t_list	*new_element;
+	char	*str;
 
+	if (size_list(list) <= 1)
+		return (list);
 	tmp = list;
-	inc.i = 0;
-	inc.num = 0;
+	if (tmp->str[0] == '$' && tmp->next->str[0] != ' ')
+	{
+		if (tmp->str[0] == '$' && tmp->next->str[0] != '$')
+		{
+			str = search_var_in_env(tmp->next->str, env);
+			tmp->next->str = add_var_and_word(tmp->next->str, str, tmp->str);
+			new_element = tmp->next;
+			free(tmp);
+			return (new_element);
+		}
+	}
+	return (list);
+}
+
+t_list	*replace_dollar_if_after(t_list *list, t_list *tmp, char **env)
+{
+	t_list	*temp;
+	int		i;
+
+	i = 0;
+	list = tmp;
 	while (tmp)
 	{
+		if (tmp->next == NULL)
+			return (list);
 		if (tmp->str[0] == 39)
 		{
-			tmp = tmp->next;
-			while (tmp && tmp->str[0] != 39)
+			while (i < search_case_in_list(tmp, "'"))
+			{
 				tmp = tmp->next;
+				i++;
+			}
 		}
-		if (tmp->str[0] == '$' && tmp->next->str[0] != ' ')
-			inc.num -= 1;
+		else if (tmp->next->str[0] == '$')
+			tmp = replace_dollar_if_after_bis(temp, tmp, env);
+		if (tmp->next == NULL || tmp == NULL)
+			return (list);
+		temp = tmp;
 		tmp = tmp->next;
 	}
-	return (0);
+	return (list);
 }
 
-char	*add_var_and_word(char *str, char *str1, char *tab)
+t_list	*replace_dollar_if_after_bis(t_list *temp, t_list *tmp, char **env)
 {
-	t_param	inc;
+	char	*str;
 
-	inc.str = NULL;
-	inc.i = 0;
-	inc.j = 0;
-	inc.x = -1;
-	if (str1 == NULL)
+	str = NULL;
+	while (tmp)
 	{
-		tab = "sdiuhsidhisd";
-		return (tab);
+		temp = tmp;
+		tmp = tmp->next;
+		if (tmp->next == NULL)
+			return (tmp);
+		if (tmp->next->str[0] != '$')
+			break ;
 	}
-	inc.str = ft_strcpy_new(inc.str, tab, 0, ft_strlen(tab));
-	free(str);
-	while (str1[inc.j])
-		inc.j++;
-	tab = malloc(sizeof(char) * (inc.i + inc.j) + 1);
-	if (!tab)
-		return (NULL);
-	while (++inc.x < inc.i)
-		tab[inc.x] = inc.str[inc.x];
-	inc.j = 0;
-	while (str1[inc.j])
-		tab[inc.x++] = str1[inc.j++];
-	tab[inc.x] = '\0';
-	return (tab);
-}
-
-char	*search_var_in_env(char *str, char **env)
-{
-	t_param	inc;
-
-	inc.i = 0;
-	inc.j = 0;
-	inc.deb = 0;
-	inc.x = ft_strlen(str) - 1;
-	while (env[inc.i])
+	if (tmp->next->str[0] != ' ')
 	{
-		inc.x = ft_strlen(str) - 1;
-		if (ft_strncmp(str, env[inc.i], inc.x) == 0
-			&& env[inc.i][inc.x + 1] == '=')
-		{
-			inc.x++;
-			inc.deb = inc.x + 1;
-			while (env[inc.i][inc.x])
-				inc.x++;
-			str = ft_strcpy_new(str, env[inc.i], inc.deb, inc.x);
-			return (str);
-		}
-		inc.i++;
+		str = search_var_in_env(tmp->next->str, env);
+		tmp->next->str = add_var_and_word(tmp->next->str, str, tmp->str);
+		temp->next = tmp->next;
+		free(tmp);
+		tmp = temp;
+		tmp = tmp->next;
 	}
-	return (NULL);
+	return (tmp);
 }
 
 t_list	*replace_if_dollar(t_list *list, char **env)
 {
 	t_list	*tmp;
-    t_list  *temp;
-    char *str;
 
 	tmp = list;
-	while (tmp)
-	{
-        temp = tmp;
-        tmp = tmp->next;
-		if (temp->str[0] == 39)
-		{
-			while ((temp && temp->str[0] != 39))
-				temp = temp->next;
-            tmp = temp;
-            tmp = tmp->next;
-		}
-        if (tmp->next == NULL)
-            return (list);
-		if (tmp->str[0] == '$' && tmp->next->str[0] != ' ')
-		{
-			str = search_var_in_env(tmp->next->str, env);
-			tmp->next->str = add_var_and_word(tmp->next->str, str, tmp->str);
-            temp->next = tmp->next;
-            free(tmp);
-            tmp = temp;
-		}
-	}
+	tmp = replace_dollar_if_first(tmp, env);
+	if (size_list(tmp) <= 1)
+		return (tmp);
+	list = replace_dollar_if_after(list, tmp, env);
 	return (list);
 }

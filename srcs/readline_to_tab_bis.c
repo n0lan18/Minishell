@@ -47,6 +47,12 @@ char	**ft_split_in_ft_split(char const *s)
 	a.i = 0;
 	a.j = 0;
 	a.deb = 0;
+	a.tab = ft_split_in_ft_split_bis(s, a);
+	return (a.tab);
+}
+
+char	**ft_split_in_ft_split_bis(char const *s, t_param a)
+{
 	a.tab = malloc(sizeof(char *) * count_word_fort_second_split(s) + 1);
 	if (!a.tab)
 		return (NULL);
@@ -60,16 +66,16 @@ char	**ft_split_in_ft_split(char const *s)
 			a.j++;
 		}
 		else if (s[a.i + 1] == '$' || s[a.i + 1] == '>' || s[a.i + 1] == '<' \
-		|| s[a.i + 1] == '"' || s[a.i + 1] == '|' || s[a.i + 1] == 39
-			|| s[a.i + 1] == '\0')
-        {
-            a.tab[a.j] = ft_strcpy_new(a.tab[a.j], (char *) s, a.deb, a.i);
-            a.deb = a.i;
-            a.j++;
-        }
-        a.i++;
+		|| s[a.i + 1] == '"' || s[a.i + 1] == '|' || s[a.i + 1] == 39 \
+		|| s[a.i + 1] == '\0')
+		{
+			a.tab[a.j] = ft_strcpy_new(a.tab[a.j], (char *) s, a.deb, a.i);
+			a.deb = a.i;
+			a.j++;
+		}
+		a.i++;
 	}
-    a.tab[a.j] = NULL;
+	a.tab[a.j] = NULL;
 	return (a.tab);
 }
 
@@ -81,7 +87,7 @@ char	*ft_strcpy_new(char *dst, char *str, int deb, int end)
 	if ((end - deb) == 0)
 		dst = malloc(sizeof(char) * 2);
 	else
-		dst = malloc(sizeof(char) * (end - deb) + 1);
+		dst = malloc(sizeof(char) * (end - deb) + 2);
 	if (!dst)
 		return (NULL);
 	while (deb <= end)
@@ -107,8 +113,8 @@ t_list	*split_new_format(char *rline, t_list *list)
 		inc.j = 0;
 		inc.x = 0;
 		tab1 = ft_split_in_ft_split(tab[inc.i]);
-        while (tab1[inc.x])
-            tmp = add_new_element(tmp, tab1[inc.x++]);
+		while (tab1[inc.x])
+			tmp = add_new_element(tmp, tab1[inc.x++]);
 		free_double_tab(tab1);
 		inc.i++;
 	}
