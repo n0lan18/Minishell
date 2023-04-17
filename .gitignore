@@ -2,5 +2,7 @@
 /libft/libft.a
 /.idea/
 /minishell
-/objs/
+/objs/*.o
 .DS_Store
+/objs/close/*.o
+/objs/signals/*.o
