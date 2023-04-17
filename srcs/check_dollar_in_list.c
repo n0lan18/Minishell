@@ -23,7 +23,7 @@ t_token	*replace_dollar_if_first(t_token *list, char **env)
 	tmp = list;
 	if (tmp->str[0] == '$' && tmp->next->str[0] != ' ')
 	{
-		if (tmp->str[0] == '$' && tmp->next->str[0] != '?')
+		if (tmp->str[0] == '$' && tmp->next->str[0] == '?')
 			return (list);
 		if (tmp->str[0] == '$' && tmp->next->str[0] != '$')
 		{
