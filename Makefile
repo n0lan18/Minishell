@@ -22,7 +22,11 @@ OBJS 			= $(SRCS:$(SRCS_DIR)/%.c=$(OBJS_DIR)/%.o)
 
 # SOURCES
 SRCS_DIR   		= srcs
-SRCS 			= $(wildcard $(SRCS_DIR)/*.c)
+SIGNALS_DIR		= signals
+CLOSE_DIR		= close
+SRCS 			= $(wildcard $(SRCS_DIR)/*.c) \
+				  $(wildcard $(SRCS_DIR)/$(SIGNALS_DIR)/*.c) \
+				  $(wildcard $(SRCS_DIR)/$(CLOSE_DIR)/*.c)
 
 # COLORS
 _END=$'\x1b[0m'
@@ -35,11 +39,13 @@ all:			$(OBJS_DIR) $(NAME)
 
 $(NAME): 		$(OBJS)
 				make -C libft
-				$(CC) $(FLAGS) $(OBJS) libft/libft.a -o $(NAME) -lreadline
+				$(CC) $(FLAGS) $(OBJS) libft/libft.a -o $(NAME) -lreadline -L $(HOME)/.brew/opt/readline/lib -I $(HOME)/.brew/opt/readline/include
 				@echo "$(_SUCCESS)🚀Build!$(_END)"
 
 $(OBJS_DIR):
 				mkdir -p $(OBJS_DIR)
+				mkdir -p $(OBJS_DIR)/$(SIGNALS_DIR)
+				mkdir -p $(OBJS_DIR)/$(CLOSE_DIR)
 
 $(OBJS_DIR)/%.o: $(SRCS_DIR)/%.c
 				$(CC) $(FLAGS) -c $< -o $@
