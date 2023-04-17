@@ -12,12 +12,12 @@
 
 #include "../minishell.h"
 
-t_list	*add_new_element(t_list *list, char *tab)
+t_token	*add_new_element(t_token *list, char *tab)
 {
-	t_list	*new_element;
-	t_list	*tmp;
+	t_token	*new_element;
+	t_token	*tmp;
 
-	new_element = malloc(sizeof(t_list));
+	new_element = malloc(sizeof(t_token));
 	if (!new_element)
 		return (NULL);
 	tmp = list;
@@ -35,10 +35,10 @@ t_list	*add_new_element(t_list *list, char *tab)
 	return (list);
 }
 
-void	free_list(t_list *a)
+void	free_list(t_token *a)
 {
-	t_list	*temp;
-	t_list	*temp_next;
+	t_token	*temp;
+	t_token	*temp_next;
 
 	temp = a;
 	while (temp)
@@ -49,9 +49,9 @@ void	free_list(t_list *a)
 	}
 }
 
-int	search_case_in_list(t_list *list, char *str)
+int	search_case_in_list(t_token *list, char *str)
 {
-	t_list	*tmp;
+	t_token	*tmp;
 	int		i;
 
 	i = 0;
@@ -65,9 +65,9 @@ int	search_case_in_list(t_list *list, char *str)
 	return (i);
 }
 
-int	size_list(t_list *list)
+int	size_list(t_token *list)
 {
-	t_list	*tmp;
+	t_token	*tmp;
 	int		i;
 
 	i = 0;

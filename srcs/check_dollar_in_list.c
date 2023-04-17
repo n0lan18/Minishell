@@ -12,10 +12,10 @@
 
 #include "../minishell.h"
 
-t_list	*replace_dollar_if_first(t_list *list, char **env)
+t_token	*replace_dollar_if_first(t_token *list, char **env)
 {
-	t_list	*tmp;
-	t_list	*new_element;
+	t_token	*tmp;
+	t_token	*new_element;
 	char	*str;
 
 	if (size_list(list) <= 1)
@@ -23,6 +23,8 @@ t_list	*replace_dollar_if_first(t_list *list, char **env)
 	tmp = list;
 	if (tmp->str[0] == '$' && tmp->next->str[0] != ' ')
 	{
+		if (tmp->str[0] == '$' && tmp->next->str[0] != '?')
+			return (list);
 		if (tmp->str[0] == '$' && tmp->next->str[0] != '$')
 		{
 			str = search_var_in_env(tmp->next->str, env);
@@ -35,9 +37,9 @@ t_list	*replace_dollar_if_first(t_list *list, char **env)
 	return (list);
 }
 
-t_list	*replace_dollar_if_after(t_list *list, t_list *tmp, char **env)
+t_token	*replace_dollar_if_after(t_token *list, t_token *tmp, char **env)
 {
-	t_list	*temp;
+	t_token	*temp;
 	int		i;
 
 	i = 0;
@@ -64,7 +66,7 @@ t_list	*replace_dollar_if_after(t_list *list, t_list *tmp, char **env)
 	return (list);
 }
 
-t_list	*replace_dollar_if_after_bis(t_list *temp, t_list *tmp, char **env)
+t_token	*replace_dollar_if_after_bis(t_token *temp, t_token *tmp, char **env)
 {
 	char	*str;
 
@@ -90,9 +92,9 @@ t_list	*replace_dollar_if_after_bis(t_list *temp, t_list *tmp, char **env)
 	return (tmp);
 }
 
-t_list	*replace_if_dollar(t_list *list, char **env)
+t_token	*replace_if_dollar(t_token *list, char **env)
 {
-	t_list	*tmp;
+	t_token	*tmp;
 
 	tmp = list;
 	tmp = replace_dollar_if_first(tmp, env);

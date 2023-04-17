@@ -12,9 +12,9 @@
 
 #include "../minishell.h"
 
-int	search_dollar_in_list(t_list *list)
+int	search_dollar_in_list(t_token *list)
 {
-	t_list	*tmp;
+	t_token	*tmp;
 	t_param	inc;
 
 	tmp = list;

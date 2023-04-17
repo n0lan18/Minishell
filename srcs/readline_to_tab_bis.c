@@ -96,12 +96,12 @@ char	*ft_strcpy_new(char *dst, char *str, int deb, int end)
 	return (dst);
 }
 
-t_list	*split_new_format(char *rline, t_list *list)
+t_token	*split_new_format(char *rline, t_token *list)
 {
 	t_param	inc;
 	char	**tab;
 	char	**tab1;
-	t_list	*tmp;
+	t_token	*tmp;
 
 	inc.i = 0;
 	inc.deb = remove_space_begin_or_end(rline, 0);

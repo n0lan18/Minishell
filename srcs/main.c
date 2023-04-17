@@ -15,7 +15,7 @@
 int	main(int argc, char **argv, char **envp)
 {
 	char	*prompt_output;
-	t_list	*list;
+	t_token	*list;
 
 	(void)argc;
 	(void)argv;
