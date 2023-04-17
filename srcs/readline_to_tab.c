@@ -61,22 +61,28 @@ int	count_word_fort_second_split(const char *s)
 		inc.i++;
 	if (inc.i > inc.deb)
 		inc.num++;
-	while (s[inc.i])
-	{
-		if (s[inc.i] == '$' || s[inc.i] == '>' || s[inc.i] == '<' \
-				|| s[inc.i] == '"' || s[inc.i] == '|' || s[inc.i] == 39)
-		{
-			if (s[inc.i + 1] == '$' || s[inc.i + 1] == '>'
-				|| s[inc.i + 1] == '<' || s[inc.i + 1] == '"'
-				|| s[inc.i + 1] == '|' || s[inc.i + 1] == 39
-				|| s[inc.i + 1] == '\0')
-				inc.num++;
-			else
-				inc.num += 2;
-		}
-		inc.i++;
-	}
+	inc.num = count_word_fort_second_split_bis(s, inc.num, inc.i);
 	return (inc.num);
+}
+
+int	count_word_fort_second_split_bis(const char *s, int num, int i)
+{
+	while (s[i])
+	{
+		if (s[i] == '$' || s[i] == '>' || s[i] == '<' \
+				|| s[i] == '"' || s[i] == '|' || s[i] == 39)
+		{
+			if (s[i + 1] == '$' || s[i + 1] == '>'
+				|| s[i + 1] == '<' || s[i + 1] == '"'
+				|| s[i + 1] == '|' || s[i + 1] == 39 \
+				||s[i + 1] == '\0')
+				num++;
+			else
+				num += 2;
+		}
+		i++;
+	}
+	return (num);
 }
 
 int	remove_space_begin_or_end(char *str, int pos)

@@ -11,54 +11,88 @@
 /* ************************************************************************** */
 
 #include "../minishell.h"
-/*
-t_list	*check_if_dollar(t_list *list, char **env)
+
+int	search_dollar_in_list(t_list *list)
 {
 	t_list	*tmp;
 	t_param	inc;
-	char	*str;
-	char	*str1;
 
 	tmp = list;
 	inc.i = 0;
-	inc.deb = 0;
-	if (search_quote_in_list(tmp) == 1)
-		return (list);
+	inc.num = 0;
 	while (tmp)
 	{
-		while (tmp->str[inc.i])
+		if (tmp->str[0] == 39)
 		{
-			if (tmp->str[inc.i] == '$')
-			{
-				inc.deb = inc.i + 1;
-				while (tmp->str[inc.i] && tmp->str[inc.i + 1] != ' ')
-					inc.i++;
-				str = ft_strcpy(str, tmp->str, inc.deb, inc.i);
-				printf("STR %s\n", str);
-				str1 = search_var_in_env(str, env);
-				tmp->str = add_var_and_word(str, str1, tmp->str);
-				break ;
-			}
-			inc.i++;
+			tmp = tmp->next;
+			while (tmp && tmp->str[0] != 39)
+				tmp = tmp->next;
 		}
+		if (tmp->str[0] == '$' && tmp->next->str[0] != ' ')
+			inc.num -= 1;
 		tmp = tmp->next;
-		inc.i = 0;
 	}
-	return (list);
+	return (0);
 }
 
-int	check_many_dollar_in_str(char *str)
+char	*add_var_and_word(char *str, char *str1, char *tab)
+{
+	t_param	inc;
+
+	inc.str = NULL;
+	inc.i = 0;
+	inc.j = 0;
+	inc.x = -1;
+	if (str1 == NULL)
+	{
+		tab = "sdiuhsidhisd";
+		return (tab);
+	}
+	inc.str = ft_strcpy_new(inc.str, tab, 0, ft_strlen(tab));
+	free(str);
+	while (str1[inc.j])
+		inc.j++;
+	tab = malloc(sizeof(char) * (inc.i + inc.j) + 1);
+	if (!tab)
+		return (NULL);
+	while (++inc.x < inc.i)
+		tab[inc.x] = inc.str[inc.x];
+	inc.j = 0;
+	while (str1[inc.j])
+		tab[inc.x++] = str1[inc.j++];
+	tab[inc.x] = '\0';
+	return (tab);
+}
+
+char	*search_var_in_env(char *str, char **env)
 {
 	t_param	inc;
 
 	inc.i = 0;
-	inc.num = 0;
-	while (str[inc.i] && str[inc.i] != ' ')
+	inc.j = 0;
+	inc.deb = 0;
+	while (env[inc.i])
 	{
-		if (str[inc.i] == '$')
-			inc.num++;
+		inc.x = compare_length_in_env(env[inc.i]);
+		if (ft_strncmp(str, env[inc.i], inc.x) == 0)
+		{
+			inc.deb = inc.x + 1;
+			while (env[inc.i][inc.x])
+				inc.x++;
+			str = ft_strcpy_new(str, env[inc.i], inc.deb, inc.x);
+			return (str);
+		}
 		inc.i++;
 	}
-	return (inc.num);
+	return (NULL);
 }
-*/
+
+int	compare_length_in_env(char *env)
+{
+	int	i;
+
+	i = 0;
+	while (env[i] && env[i] != '=')
+		i++;
+	return (i);
+}
