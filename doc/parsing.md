@@ -1,0 +1,1 @@
+Tokeniser et parser l'entrée de l'utilisateur dans une structure pour l'exécution

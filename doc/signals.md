@@ -1,0 +1,1 @@
+- Gérer ctrl-c, ctrl-d et ctrl-\

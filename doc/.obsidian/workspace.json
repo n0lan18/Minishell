@@ -4,18 +4,21 @@
     "type": "split",
     "children": [
       {
-        "id": "6334d40e0bf283ac",
+        "id": "5275adc3a5821ab1",
         "type": "tabs",
         "children": [
           {
-            "id": "d13e1e25ee21753e",
+            "id": "9acf1b14d6374100",
             "type": "leaf",
             "state": {
-              "type": "markdown",
+              "type": "canvas",
               "state": {
-                "file": "README.md",
-                "mode": "source",
-                "source": false
+                "file": "🧠 Architecture.canvas",
+                "viewState": {
+                  "x": 994.0623195378914,
+                  "y": -1145.9692791487937,
+                  "zoom": -1.4848266601562474
+                }
               }
             }
           }
@@ -85,7 +88,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "README.md",
+                "file": "🧠 Architecture.canvas",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +105,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "README.md",
+                "file": "🧠 Architecture.canvas",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -125,7 +128,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "README.md"
+                "file": "🧠 Architecture.canvas"
               }
             }
           }
@@ -146,9 +149,33 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "d13e1e25ee21753e",
+  "active": "9acf1b14d6374100",
   "lastOpenFiles": [
-    "Readme.md",
-    "README.md"
+    "🧠 Architecture.canvas",
+    "signals",
+    "signals/ctrl_slash.md",
+    "🛣️ Roadmap.md",
+    "📚 Glossaire.md",
+    "t_token.md",
+    "t_data.md",
+    "t_command.md",
+    "signals.md",
+    "parsing.md",
+    "minishell.h.md",
+    "main.c.md",
+    "interactive_mod.md",
+    "executing.md",
+    "signals/ctrl_d.md",
+    "signals/ctrl_c.md",
+    "builtins/unset.md",
+    "builtins/pwd.md",
+    "builtins/export.md",
+    "builtins/exit.md",
+    "builtins/env.md",
+    "builtins/echo.md",
+    "builtins/cd.md",
+    "builtins",
+    "README.md",
+    "Readme.md"
   ]
 }

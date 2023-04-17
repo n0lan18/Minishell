@@ -12,31 +12,45 @@
 
 #include "../minishell.h"
 
-int	main(int argc, char **argv, char **envp)
-{
-	char	*rl;
-	t_list	*list;
+//int	main(int argc, char **argv, char **envp)
+//{
+//	char	*rl;
+//	t_list	*list;
+//
+//	(void) envp;
+//	if (argc == 1)
+//	{
+//		list = NULL;
+//		rl = "0";
+//		while (ft_strncmp(rl, "exit", ft_strlen(rl)) != 0)
+//		{
+//			list = NULL;
+//			rl = readline("minishell-1.0$ ");
+//			list = split_new_format(rl, list);
+//			list = replace_if_dollar(list, envp);
+//			while (list)
+//			{
+//				printf("LISTE %s\n", list->str);
+//				list = list->next;
+//			}
+//		}
+//		return (0);
+//	}
+//	perror(argv[1]);
+//	return (0);
+//}
 
-	(void) envp;
-	if (argc == 1)
+int	main(void)
+{
+	char	*prompt_output;
+
+	prompt_output = "";
+	while (prompt_output != NULL)
 	{
-		list = NULL;
-		rl = "0";
-		while (ft_strncmp(rl, "exit", ft_strlen(rl)) != 0)
-		{
-			list = NULL;
-			rl = readline("minishell-1.0$ ");
-			list = split_new_format(rl, list);
-			list = replace_if_dollar(list, envp);
-			while (list)
-			{
-				printf("LISTE %s\n", list->str);
-				list = list->next;
-			}
-			free_list(list);
-		}
-		return (0);
+		ft_init_signals();
+		prompt_output = readline("minishell-1.0$ ");
+		add_history(prompt_output);
 	}
-	perror(argv[1]);
+	ft_close();
 	return (0);
 }

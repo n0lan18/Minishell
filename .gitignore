@@ -3,3 +3,4 @@
 /.idea/
 /minishell
 /objs/
+.DS_Store
