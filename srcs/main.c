@@ -18,7 +18,7 @@ int	main(int argc, char **argv, char **envp)
 	t_list	*list;
 
 	(void)argc;
-	(void)argv;∆
+	(void)argv;
 	list = NULL;
 	prompt_output = "";
 	while (prompt_output != NULL)
