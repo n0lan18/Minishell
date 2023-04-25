@@ -128,4 +128,11 @@ int		search_alpha_order(t_token *env, char *str);
 
 /*************built_unset******************/
 void	launch_unset(t_token *env, t_token *list);
+
+/*************built_pwd********************/
+void	launch_pwd(t_token *env, t_token *list);
+
+/*************built_cd********************/
+void	launch_cd(t_token *env, t_token *list);
+
 #endif

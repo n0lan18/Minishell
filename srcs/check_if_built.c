@@ -22,6 +22,10 @@ void	check_if_built(t_token *list, t_token *env)
 		launch_export(env, list);
 	else if (ft_strncmp(list->str, "unset", 6) == 0)
 		launch_unset(env, list);
+	else if (ft_strncmp(list->str, "pwd", 4) == 0)
+		launch_pwd(env, list);
+	else if (ft_strncmp(list->str, "cd", 3) == 0)
+		launch_cd(env, list);
 	else if (ft_strncmp(list->str, "exit", 5) == 0)
 		exit(EXIT_SUCCESS);
 }
