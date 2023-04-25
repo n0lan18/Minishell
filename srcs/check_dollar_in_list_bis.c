@@ -64,25 +64,26 @@ char	*add_var_and_word(char *str, char *str1, char *tab)
 	return (tab);
 }
 
-char	*search_var_in_env(char *str, char **env)
+char	*search_var_in_env(char *str, t_token *env)
 {
 	t_param	inc;
+	t_token	*tmp;
 
-	inc.i = 0;
 	inc.j = 0;
 	inc.deb = 0;
-	while (env[inc.i])
+	tmp = env;
+	while (tmp)
 	{
-		inc.x = compare_length_in_env(env[inc.i]);
-		if (ft_strncmp(str, env[inc.i], inc.x) == 0)
+		inc.x = compare_length_in_env(tmp->str);
+		if (ft_strncmp(str, tmp->str, inc.x) == 0)
 		{
 			inc.deb = inc.x + 1;
-			while (env[inc.i][inc.x])
+			while (tmp->str[inc.x])
 				inc.x++;
-			str = ft_strcpy_new(str, env[inc.i], inc.deb, inc.x);
+			str = ft_strcpy_new(str, tmp->str, inc.deb, inc.x);
 			return (str);
 		}
-		inc.i++;
+		tmp = tmp->next;
 	}
 	return (NULL);
 }

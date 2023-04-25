@@ -16,21 +16,27 @@ int	main(int argc, char **argv, char **envp)
 {
 	char	*prompt_output;
 	t_token	*list;
+	t_token *env;
 
 	(void)argc;
 	(void)argv;
 	list = NULL;
+	env = NULL;
+	env = env_in_list(envp, env);
 	prompt_output = "";
 	while (prompt_output != NULL)
 	{
 		ft_init_signals();
 		prompt_output = readline("minishell-1.0$ ");
 		list = split_new_format(prompt_output, list);
-		list = replace_if_dollar(list, envp);
+		list = replace_if_dollar(list, env);
+		init_type_in_list(list, env);
+		check_if_built(list, env);
 		while (list)
 		{
-			printf("LISTE %s\n", list->str);
-			list = list->next;
+		/*	printf("liste : %s\n", list->str);
+			printf("type : %d\n", list->type);
+		*/	list = list->next;
 		}
 		free_list(list);
 		add_history(prompt_output);
