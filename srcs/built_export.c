@@ -19,7 +19,53 @@ void	launch_export(t_token *env, t_token *list)
 	tmp = list;
 	tmp = tmp->next;
 	tmp = tmp->next;
-	add_element(env, tmp->str);
+	if (check_if_var_is_good(tmp->str) == 0)
+	{
+		if (check_after_equal(tmp->str) >= 0)
+			add_element(env, tmp->str);
+		else
+			add_element(env, "sdiuhsidhisd");
+	}
+}
+
+int check_if_var_is_good(char *str)
+{
+	int i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] == '=')
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
+int check_after_equal(char *str)
+{
+	int i;
+	int num;
+
+	i = 0;
+	num = 0;
+	while (str[i] && str[i] != '=')
+		i++;
+	i++;
+	if (str[i] == '\0')
+		return (0);
+	while (str[i])
+	{
+		if (str[i] == ' ')
+			num++;
+		if (str[i] != ' ')
+		{
+			num *= -1;
+			break;
+		}
+		i++;
+	}
+	return (num);
 }
 
 int	search_alpha_order(t_token *env, char *str)

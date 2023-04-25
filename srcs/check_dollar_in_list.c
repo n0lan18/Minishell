@@ -101,5 +101,6 @@ t_token	*replace_if_dollar(t_token *list, t_token *env)
 	if (size_list(tmp) <= 1)
 		return (tmp);
 	list = replace_dollar_if_after(list, tmp, env);
+	list = replace_dollar_if_after(list, tmp, env);
 	return (list);
 }

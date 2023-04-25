@@ -123,6 +123,8 @@ void	launch_env(t_token *env);
 
 /*************built_export******************/
 void	launch_export(t_token *env, t_token *list);
+int 	check_if_var_is_good(char *str);
+int		check_after_equal(char *str);
 char	**add_var_in_env(t_token *env, t_token *list);
 int		search_alpha_order(t_token *env, char *str);
 

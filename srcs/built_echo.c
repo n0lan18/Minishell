@@ -14,23 +14,41 @@
 
 void	launch_echo(t_token *list)
 {
+	t_token	*tmp;
 	int	j;
 
+	tmp = list;
 	j = 0;
-	if (list->next == NULL)
-		return ;
-	list = list->next;
-	list = list->next;
-	if (ft_strncmp(list->str, "-n", ft_strlen(list->str)) == 0)
+	if (tmp->next == NULL)
 	{
-		list = list->next;
-		list = list->next;
+		printf("\n");
+		return;
+	}
+	tmp = tmp->next;
+	if ((ft_strncmp("sdiuhsidhisd", tmp->str, 13) != 0) && tmp->next == NULL)
+	{
+		printf("\n");
+		return;
+	}
+	tmp = tmp->next;
+	if (ft_strncmp(tmp->str, "-n", ft_strlen(tmp->str)) == 0)
+	{
+		tmp = tmp->next;
+		tmp = tmp->next;
 		j++;
 	}
-	while (list)
+	if (tmp == NULL)
 	{
-		printf("%s", list->str);
-		list = list->next;
+		printf("\n");
+		return ;
+	}
+	while (tmp)
+	{
+		if (tmp == NULL)
+			break;
+		if (ft_strncmp("sdiuhsidhisd", tmp->str, 13) != 0)
+			printf("%s", tmp->str);
+		tmp = tmp->next;
 	}
 	if (j == 0)
 		printf("\n");
