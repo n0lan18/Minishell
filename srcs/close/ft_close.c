@@ -16,4 +16,5 @@ void	ft_close(void)
 {
 	ft_putstr_fd("exit\n", STDOUT_FILENO);
 	clear_history();
+	exit(EXIT_SUCCESS);
 }

@@ -28,6 +28,8 @@ int	main(int argc, char **argv, char **envp)
 	{
 		ft_init_signals();
 		prompt_output = readline("minishell-1.0$ ");
+		if (!prompt_output)
+			ft_close();
 		list = split_new_format(prompt_output, list);
 		list = replace_if_dollar(list, env);
 		if (list)
@@ -44,6 +46,5 @@ int	main(int argc, char **argv, char **envp)
 		free_list(list);
 		add_history(prompt_output);
 	}
-	ft_close();
 	return (0);
 }
