@@ -31,7 +31,7 @@ typedef enum part
 	DQUOTE,
 	DKNOWN,
 	SPACE,
-}		part;
+}	t_part;
 
 typedef struct s_token
 {
@@ -52,7 +52,6 @@ typedef struct s_param
 	char			**tab;
 	char			*str;
 }	t_param;
-
 
 /*************Readline_to_tab***************/
 int		search_in_str(char s, char *str);
@@ -100,17 +99,17 @@ int		search_case_in_list(t_token *list, char *str);
 int		size_list(t_token *list);
 
 /************* Signals ***********/
-void		ft_init_signals(void);
+void	ft_init_signals(void);
 
 /************* Closing functions ***********/
-void		ft_close(void);
+void	ft_close(void);
 
 /************* External functions ***********/
-extern void	rl_replace_line(const char *c, int i);
+void	rl_replace_line(const char *c, int i);
 
 /*************which_type_of_case*************/
 void	init_type_in_list(t_token *list, t_token *env);
-int search_which_type(char *str, t_token *list, t_token *env);
+int		search_which_type(char *str, t_token *list, t_token *env);
 
 /*************check_if_built****************/
 void	check_if_built(t_token *list, t_token *env);
@@ -119,13 +118,13 @@ void	check_if_built(t_token *list, t_token *env);
 void	launch_echo(t_token *list);
 
 /*************built_env*********************/
-t_token *env_in_list(char **env, t_token *list);
+t_token	*env_in_list(char **env, t_token *list);
 void	launch_env(t_token *env);
 
 /*************built_export******************/
 void	launch_export(t_token *env, t_token *list);
-char **add_var_in_env(t_token *env, t_token *list);
-int search_alpha_order(t_token *env, char *str);
+char	**add_var_in_env(t_token *env, t_token *list);
+int		search_alpha_order(t_token *env, char *str);
 
 /*************built_unset******************/
 void	launch_unset(t_token *env, t_token *list);

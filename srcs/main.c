@@ -16,7 +16,7 @@ int	main(int argc, char **argv, char **envp)
 {
 	char	*prompt_output;
 	t_token	*list;
-	t_token *env;
+	t_token	*env;
 
 	(void)argc;
 	(void)argv;
@@ -34,9 +34,9 @@ int	main(int argc, char **argv, char **envp)
 		check_if_built(list, env);
 		while (list)
 		{
-		/*	printf("liste : %s\n", list->str);
-			printf("type : %d\n", list->type);
-		*/	list = list->next;
+//			printf("liste : %s\n", list->str);
+//			printf("type : %d\n", list->type);
+			list = list->next;
 		}
 		free_list(list);
 		add_history(prompt_output);

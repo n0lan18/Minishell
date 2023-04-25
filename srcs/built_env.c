@@ -12,9 +12,9 @@
 
 #include "../minishell.h"
 
-t_token *env_in_list(char **env, t_token *list)
+t_token	*env_in_list(char **env, t_token *list)
 {
-	int i;
+	int		i;
 	t_token	*tmp;
 
 	i = -1;

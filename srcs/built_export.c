@@ -14,7 +14,7 @@
 
 void	launch_export(t_token *env, t_token *list)
 {
-	t_token *tmp;
+	t_token	*tmp;
 
 	tmp = list;
 	tmp = tmp->next;
@@ -22,18 +22,20 @@ void	launch_export(t_token *env, t_token *list)
 	add_element(env, tmp->str);
 }
 
-int search_alpha_order(t_token *env, char *str)
+int	search_alpha_order(t_token *env, char *str)
 {
 	t_token	*tmp;
-	int i;
+	int		i;
 
 	tmp = env;
 	i = 0;
 	while (tmp)
 	{
-		if ((tmp->str[0] >= 'a' && tmp->str[0] <= 'z') && (str[0] >= 'A' && str[0] <= 'Z'))
+		if ((tmp->str[0] >= 'a' && tmp->str[0] <= 'z')
+			&& (str[0] >= 'A' && str[0] <= 'Z'))
 			tmp->str[0] -= 32;
-		else if ((tmp->str[0] >= 'A' && tmp->str[0] <= 'Z') && (str[0] >= 'a' && str[0] <= 'z'))
+		else if ((tmp->str[0] >= 'A' && tmp->str[0] <= 'Z') && (str[0] >= 'a'
+				&& str[0] <= 'z'))
 			tmp->str[0] += 32;
 		if (tmp->str[0] > str[0])
 		{

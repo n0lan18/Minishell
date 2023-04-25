@@ -15,7 +15,7 @@
 int	search_path_in_env(t_token *env)
 {
 	t_token	*tmp;
-	int j;
+	int		j;
 
 	tmp = env;
 	j = 0;
@@ -53,44 +53,12 @@ char	*join_all_path(char *env, char *cmd, char slash)
 	join[j] = '\0';
 	return (join);
 }
-/*
-char	*existence_of_cmd(t_token *envp, char *cmd)
-{
-	int		j;
-	char	*tmp;
-	char	*envpi;
-	char 	**env;
 
-	j = -1;
-	envpi = &envp[search_path_in_env(envp)][5];
-	env = ft_split(envpi, ':');
-	while (env[++j])
-	{
-		tmp = join_all_path(env[j], cmd, '/');
-		if (access(tmp, F_OK) == 0)
-			return (tmp);
-		free(tmp);
-	}
-	return (NULL);
-}
-*/
-int	search_of_type_cmd(t_token *env, char *tab)
+static int	search_of_type_cmd_ext(char **envp, char *tab)
 {
-	char 	*temp;
-	char	*envpi;
-	char 	**envp;
-	t_token *tmp;
-	int 	i;
+	char	*temp;
+	int		i;
 
-	i = 0;
-	tmp = env;
-	while (i < search_path_in_env(env))
-	{
-		tmp = tmp->next;
-		i++;
-	}
-	envpi = &tmp->str[5];
-	envp = ft_split(envpi, ':');
 	i = -1;
 	while (envp[++i])
 	{
@@ -105,4 +73,20 @@ int	search_of_type_cmd(t_token *env, char *tab)
 	}
 	free_double_tab(envp);
 	return (1);
+}
+
+int	search_of_type_cmd(t_token *env, char *tab)
+{
+	char	*envpi;
+	char	**envp;
+	t_token	*tmp;
+	int		i;
+
+	i = -1;
+	tmp = env;
+	while (i++ < search_path_in_env(env))
+		tmp = tmp->next;
+	envpi = &tmp->str[5];
+	envp = ft_split(envpi, ':');
+	return (search_of_type_cmd_ext(envp, tab));
 }

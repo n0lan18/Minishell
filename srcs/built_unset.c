@@ -14,10 +14,10 @@
 
 void	launch_unset(t_token *env, t_token *list)
 {
-	t_token *tmp;
+	t_token	*tmp;
 	t_token	*temp;
 	t_token	*prev;
-	int i;
+	int		i;
 
 	tmp = env;
 	temp = list;

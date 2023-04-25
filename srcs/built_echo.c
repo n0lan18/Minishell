@@ -14,13 +14,11 @@
 
 void	launch_echo(t_token *list)
 {
-/*	t_token *tmp;
-*/	int j;
+	int	j;
 
 	j = 0;
-/*	tmp = list;
-*/	if (list->next == NULL)
-		return;
+	if (list->next == NULL)
+		return ;
 	list = list->next;
 	list = list->next;
 	if (ft_strncmp(list->str, "-n", ft_strlen(list->str)) == 0)
