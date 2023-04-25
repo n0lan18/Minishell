@@ -22,4 +22,6 @@ void	check_if_built(t_token *list, t_token *env)
 		launch_export(env, list);
 	else if (ft_strncmp(list->str, "unset", ft_strlen(list->str)) == 0)
 		launch_unset(env, list);
+	else if (ft_strncmp(list->str, "exit", ft_strlen(list->str)) == 0)
+		exit(EXIT_SUCCESS);
 }
