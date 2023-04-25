@@ -39,7 +39,7 @@ all:			$(OBJS_DIR) $(NAME)
 
 $(NAME): 		$(OBJS)
 				make -C libft
-				$(CC) $(FLAGS) $(OBJS) libft/libft.a -o $(NAME) -lreadline -L /opt/homebrew/opt/readline/lib -I /opt/homebrew/opt/readline/include
+				$(CC) $(FLAGS) $(OBJS) $(SANITIZE) libft/libft.a -o $(NAME) -lreadline -L /opt/homebrew/opt/readline/lib -I /opt/homebrew/opt/readline/include
 				@echo "$(_SUCCESS)🚀Build!$(_END)"
 
 $(OBJS_DIR):

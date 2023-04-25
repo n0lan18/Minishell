@@ -30,13 +30,16 @@ int	main(int argc, char **argv, char **envp)
 		prompt_output = readline("minishell-1.0$ ");
 		list = split_new_format(prompt_output, list);
 		list = replace_if_dollar(list, env);
-		init_type_in_list(list, env);
-		check_if_built(list, env);
-		while (list)
+		if (list)
 		{
-//			printf("liste : %s\n", list->str);
-//			printf("type : %d\n", list->type);
-			list = list->next;
+			init_type_in_list(list, env);
+			check_if_built(list, env);
+			while (list)
+			{
+				printf("liste : %s\n", list->str);
+				printf("type : %d\n", list->type);
+				list = list->next;
+			}
 		}
 		free_list(list);
 		add_history(prompt_output);
