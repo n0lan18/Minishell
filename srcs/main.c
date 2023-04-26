@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: synicole <synicole@student.42lausanne.ch>  +#+  +:+       +#+        */
+/*   By: nleggeri <nleggeri@42.student.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/10 11:23:50 by synicole          #+#    #+#             */
-/*   Updated: 2023/04/10 11:23:53 by synicole         ###   ########.fr       */
+/*   Updated: 2023/04/26 14:31:26 by nleggeri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	main(int argc, char **argv, char **envp)
 		check_if_built(list, env);
 		while (list)
 		{
-			printf("liste : %s\n", list->str);
+//			printf("liste : %s\n", list->str);
 //			printf("type : %d\n", list->type);
 			list = list->next;
 		}

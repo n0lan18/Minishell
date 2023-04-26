@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fonctions_list.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nleggeri <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: nleggeri <nleggeri@42.student.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 09:18:27 by nleggeri          #+#    #+#             */
-/*   Updated: 2023/04/06 09:18:32 by nleggeri         ###   ########.fr       */
+/*   Updated: 2023/04/26 16:36:25 by nleggeri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ void	add_element(t_token *list, char *tab)
 	new_element->str = ft_strcpy_new(new_element->str, tab, \
 	0, ft_strlen(tab) - 1);
 	new_element->next = NULL;
+	free(tab);
 	while (tmp->next)
 		tmp = tmp->next;
 	tmp->next = new_element;
