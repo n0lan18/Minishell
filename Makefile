@@ -16,6 +16,16 @@ CC				= gcc
 FLAGS 			= -Wall -Werror -Wextra -g
 SANITIZE		= -fsanitize=address
 
+# CHANGE TO 42 IF YOU WORK AT 42, DEFAULT IF YOU WORK AT HOME
+ENVIRONMENT		= DEFAULT
+ifeq ($(ENVIRONMENT), 42)
+    READLINE_LIB_DIR = $(HOME)/.brew/opt/readline/lib
+    READLINE_INCLUDE_DIR = $(HOME)/.brew/opt/readline/include
+else
+    READLINE_LIB_DIR = /opt/homebrew/opt/readline/lib
+    READLINE_INCLUDE_DIR = /opt/homebrew/opt/readline/include
+endif
+
 # OBJ
 OBJS_DIR   		= objs
 OBJS 			= $(SRCS:$(SRCS_DIR)/%.c=$(OBJS_DIR)/%.o)
@@ -39,7 +49,7 @@ all:			$(OBJS_DIR) $(NAME)
 
 $(NAME): 		$(OBJS)
 				make -C libft
-				$(CC) $(FLAGS) $(OBJS) $(SANITIZE) libft/libft.a -o $(NAME) -lreadline -L /opt/homebrew/opt/readline/lib -I /opt/homebrew/opt/readline/include
+				$(CC) $(FLAGS) $(OBJS) $(SANITIZE) libft/libft.a -o $(NAME) -lreadline -L $(READLINE_LIB_DIR) -I $(READLINE_INCLUDE_DIR)
 				@echo "$(_SUCCESS)🚀Build!$(_END)"
 
 $(OBJS_DIR):
