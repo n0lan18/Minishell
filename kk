@@ -3,6 +3,7 @@ README.md
 checker.sh
 doc
 hello
+kk
 libft
 minishell.h
 salut

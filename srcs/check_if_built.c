@@ -6,7 +6,7 @@
 /*   By: nleggeri <nleggeri@42.student.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 23:48:35 by nleggeri          #+#    #+#             */
-/*   Updated: 2023/04/27 12:42:05 by nleggeri         ###   ########.fr       */
+/*   Updated: 2023/04/27 14:06:16 by nleggeri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,8 @@ int	check_if_built_bis_bis(t_token *list)
 
 	num = 0;
 	tmp = list;
+	if (tmp->next == NULL || tmp->next->next == NULL)
+		return (num);
 	tmp = tmp->next;
 	tmp = tmp->next;
 	if ((list->str[0] == '"' && tmp->str[0] == '"') || \
