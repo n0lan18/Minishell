@@ -1,20 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_close.c                                         :+:      :+:    :+:   */
+/*   built_pwd.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: synicole <synicole@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/14 14:12:59 by synicole          #+#    #+#             */
-/*   Updated: 2023/04/14 14:13:01 by synicole         ###   ########.fr       */
+/*   Created: 2023/04/25 23:02:59 by synicole          #+#    #+#             */
+/*   Updated: 2023/04/25 23:03:01 by synicole         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../minishell.h"
+#include "../minishell.h"
 
-void	ft_close(void)
+void	launch_pwd(t_token *env, t_token *list)
 {
-	ft_putstr_fd("exit\n", STDOUT_FILENO);
-	clear_history();
-	exit(EXIT_SUCCESS);
+	char	cwd[1024];
+
+	(void)env;
+	(void)list;
+	if (getcwd(cwd, sizeof(cwd)) != NULL)
+		printf("%s\n", cwd);
+	else
+	{
+		perror("getcwd() erreur");
+		exit(EXIT_FAILURE);
+	}
 }

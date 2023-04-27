@@ -12,17 +12,20 @@
 
 #include "../minishell.h"
 
-int	search_path_in_env(char **envp)
+int	search_path_in_env(t_token *env)
 {
-	int	j;
+	t_token	*tmp;
+	int		j;
 
+	tmp = env;
 	j = 0;
-	while (envp[j])
+	while (tmp)
 	{
-		if (envp[j][0] == 'P' && envp[j][1] == 'A' \
-			&& envp[j][2] == 'T' && envp[j][3] == 'H')
+		if (tmp->str[0] == 'P' && tmp->str[1] == 'A' \
+			&& tmp->str[2] == 'T' && tmp->str[3] == 'H')
 			break ;
 		j++;
+		tmp = tmp->next;
 	}
 	return (j);
 }
@@ -51,34 +54,39 @@ char	*join_all_path(char *env, char *cmd, char slash)
 	return (join);
 }
 
-char	*existence_of_cmd(char **env, char *cmd)
+static int	search_of_type_cmd_ext(char **envp, char *tab)
 {
-	int		j;
-	char	*tmp;
+	char	*temp;
+	int		i;
 
-	j = -1;
-	while (env[++j])
+	i = -1;
+	while (envp[++i])
 	{
-		tmp = join_all_path(env[j], cmd, '/');
-		if (access(tmp, F_OK) == 0)
-			return (tmp);
-		free(tmp);
+		temp = join_all_path(envp[i], tab, '/');
+		if (access(temp, F_OK) == 0)
+		{
+			free(temp);
+			free_double_tab(envp);
+			return (0);
+		}
+		free(temp);
 	}
-	return (NULL);
+	free_double_tab(envp);
+	return (1);
 }
 
-int	search_of_type_cmd(char **env, char *tab)
+int	search_of_type_cmd(t_token *env, char *tab)
 {
-	char	*tmp;
-	int		j;
+	char	*envpi;
+	char	**envp;
+	t_token	*tmp;
+	int		i;
 
-	j = -1;
-	while (env[++j])
-	{
-		tmp = join_all_path(env[j], tab, '/');
-		if (access(tmp, F_OK) == 0)
-			return (0);
-		free(tmp);
-	}
-	return (1);
+	i = -1;
+	tmp = env;
+	while (i++ < search_path_in_env(env))
+		tmp = tmp->next;
+	envpi = &tmp->str[5];
+	envp = ft_split(envpi, ':');
+	return (search_of_type_cmd_ext(envp, tab));
 }

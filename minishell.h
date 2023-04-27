@@ -21,7 +21,7 @@
 # include <signal.h>
 # include "./libft/libft.h"
 
-typedef enum type
+typedef enum part
 {
 	CMD,
 	BUILTIN,
@@ -29,9 +29,9 @@ typedef enum type
 	CHEVRON,
 	QUOTE,
 	DQUOTE,
-	RETURN_PROC,
+	DKNOWN,
 	SPACE,
-}		type;
+}	t_part;
 
 typedef struct s_token
 {
@@ -53,7 +53,6 @@ typedef struct s_param
 	char			*str;
 }	t_param;
 
-
 /*************Readline_to_tab***************/
 int		search_in_str(char s, char *str);
 int		count_word(const char *s, char c, int deb, int end);
@@ -69,42 +68,74 @@ char	*ft_strcpy_new(char *dst, char *str, int deb, int end);
 t_token	*split_new_format(char *rline, t_token *list);
 
 /*************Check_dollar_in_list********/
-t_token	*replace_dollar_if_first(t_token *list, char **env);
-t_token	*replace_dollar_if_after(t_token *list, t_token *tmp, char **env);
-t_token	*replace_dollar_if_after_bis(t_token *temp, t_token *tmp, char **env);
-t_token	*replace_if_dollar(t_token *list, char **env);
+t_token	*replace_dollar_if_first(t_token *list, t_token *env);
+t_token	*replace_dollar_if_after(t_token *list, t_token *tmp, t_token *env);
+t_token	*replace_dollar_if_after_bis(t_token *temp, t_token *tmp, t_token *env);
+t_token	*replace_if_dollar(t_token *list, t_token *env);
 
 /*************Check_dollar_in_list_bis****/
 int		search_dollar_in_list(t_token *list);
 int		compare_length_in_env(char *env);
 char	*add_var_and_word(char *str, char *str1, char *tab);
-char	*search_var_in_env(char *str, char **env);
+char	*search_var_in_env(char *str, t_token *env);
 
 /*************check_words_in_tab***********/
 int		check_which_type(char **tab, char **env);
 
 /*************search_cmd*******************/
-int		search_path_in_env(char **envp);
+int		search_path_in_env(t_token *envp);
 char	*join_all_path(char *env, char *cmd, char slash);
-char	*existence_of_cmd(char **env, char *cmd);
-int		search_of_type_cmd(char **env, char *tab);
+char	*existence_of_cmd(t_token *envp, char *cmd);
+int		search_of_type_cmd(t_token *envp, char *tab);
 
 /*************free_fonctions***************/
 void	free_double_tab(char **tab);
 
 /*************Fonctions_list***************/
+void	add_element(t_token *list, char *tab);
 t_token	*add_new_element(t_token *list, char *tab);
 void	free_list(t_token *a);
 int		search_case_in_list(t_token *list, char *str);
 int		size_list(t_token *list);
 
 /************* Signals ***********/
-void		ft_init_signals(void);
+void	ft_init_signals(void);
 
 /************* Closing functions ***********/
-void		ft_close(void);
+void	ft_close(void);
 
 /************* External functions ***********/
-extern void	rl_replace_line(const char *c, int i);
+void	rl_replace_line(const char *c, int i);
+
+/*************which_type_of_case*************/
+void	init_type_in_list(t_token *list, t_token *env);
+int		search_which_type(char *str, t_token *list, t_token *env);
+
+/*************check_if_built****************/
+int		check_if_built(t_token *list, t_token *env);
+
+/*************built_echo********************/
+void	launch_echo(t_token *list);
+
+/*************built_env*********************/
+t_token	*env_in_list(char **env, t_token *list);
+void	launch_env(t_token *env);
+
+/*************built_export******************/
+void	launch_export(t_token *env, t_token *list);
+char	**add_var_in_env(t_token *env, t_token *list);
+int		search_alpha_order(t_token *env, char *str);
+
+/*************built_unset******************/
+void	launch_unset(t_token *env, t_token *list);
+
+/*************built_pwd********************/
+void	launch_pwd(t_token *env, t_token *list);
+
+/*************built_cd********************/
+void	launch_cd(t_token *env, t_token *list);
+
+/*************check_if_command********************/
+void	check_if_command(t_token *list, char **envp);
 
 #endif

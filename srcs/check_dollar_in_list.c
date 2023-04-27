@@ -12,7 +12,7 @@
 
 #include "../minishell.h"
 
-t_token	*replace_dollar_if_first(t_token *list, char **env)
+t_token	*replace_dollar_if_first(t_token *list, t_token *env)
 {
 	t_token	*tmp;
 	t_token	*new_element;
@@ -37,7 +37,7 @@ t_token	*replace_dollar_if_first(t_token *list, char **env)
 	return (list);
 }
 
-t_token	*replace_dollar_if_after(t_token *list, t_token *tmp, char **env)
+t_token	*replace_dollar_if_after(t_token *list, t_token *tmp, t_token *env)
 {
 	t_token	*temp;
 	int		i;
@@ -66,7 +66,7 @@ t_token	*replace_dollar_if_after(t_token *list, t_token *tmp, char **env)
 	return (list);
 }
 
-t_token	*replace_dollar_if_after_bis(t_token *temp, t_token *tmp, char **env)
+t_token	*replace_dollar_if_after_bis(t_token *temp, t_token *tmp, t_token *env)
 {
 	char	*str;
 
@@ -92,7 +92,7 @@ t_token	*replace_dollar_if_after_bis(t_token *temp, t_token *tmp, char **env)
 	return (tmp);
 }
 
-t_token	*replace_if_dollar(t_token *list, char **env)
+t_token	*replace_if_dollar(t_token *list, t_token *env)
 {
 	t_token	*tmp;
 
