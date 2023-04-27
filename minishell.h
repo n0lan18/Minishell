@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: synicole <synicole@student.42lausanne.ch>  +#+  +:+       +#+        */
+/*   By: nleggeri <nleggeri@42.student.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 13:09:55 by synicole          #+#    #+#             */
-/*   Updated: 2023/04/03 00:44:26 by nleggeri         ###   ########.fr       */
+/*   Updated: 2023/04/26 19:24:44 by nleggeri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,6 +116,7 @@ int		check_if_built(t_token *list, t_token *env);
 
 /*************built_echo********************/
 void	launch_echo(t_token *list);
+t_token	*launch_echo_bis(t_token *tmp, int j);
 
 /*************built_env*********************/
 t_token	*env_in_list(char **env, t_token *list);
@@ -123,8 +124,10 @@ void	launch_env(t_token *env);
 
 /*************built_export******************/
 void	launch_export(t_token *env, t_token *list);
-char	**add_var_in_env(t_token *env, t_token *list);
-int		search_alpha_order(t_token *env, char *str);
+char	*join_var(t_token *list);
+void	check_if_var_exist(t_token *env, char *str);
+int		check_if_var_is_good(char *str);
+int		check_after_equal(char *str);
 
 /*************built_unset******************/
 void	launch_unset(t_token *env, t_token *list);

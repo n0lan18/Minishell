@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_dollar_in_list.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nleggeri <nleggeri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nleggeri <nleggeri@42.student.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 12:58:29 by nleggeri          #+#    #+#             */
-/*   Updated: 2023/04/03 12:58:43 by nleggeri         ###   ########.fr       */
+/*   Updated: 2023/04/26 19:24:20 by nleggeri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,6 @@ t_token	*replace_dollar_if_after_bis(t_token *temp, t_token *tmp, t_token *env)
 		temp->next = tmp->next;
 		free(tmp);
 		tmp = temp;
-		tmp = tmp->next;
 	}
 	return (tmp);
 }

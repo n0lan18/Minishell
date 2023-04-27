@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_dollar_in_list_bis.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: synicole <synicole@student.42lausanne.ch>  +#+  +:+       +#+        */
+/*   By: nleggeri <nleggeri@42.student.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/10 12:03:33 by synicole          #+#    #+#             */
-/*   Updated: 2023/04/10 12:03:36 by synicole         ###   ########.fr       */
+/*   Updated: 2023/04/26 14:37:27 by nleggeri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ char	*add_var_and_word(char *str, char *str1, char *tab)
 	inc.x = -1;
 	if (str1 == NULL)
 	{
-		tab = "sdiuhsidhisd";
+		tab = "💩";
 		return (tab);
 	}
 	inc.str = ft_strcpy_new(inc.str, tab, 0, ft_strlen(tab));
