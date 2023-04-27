@@ -12,7 +12,7 @@
 
 #include "../minishell.h"
 
-void	check_if_built(t_token *list, t_token *env)
+int	check_if_built(t_token *list, t_token *env)
 {
 	if (ft_strncmp(list->str, "echo", 5) == 0)
 		launch_echo(list);
@@ -28,4 +28,7 @@ void	check_if_built(t_token *list, t_token *env)
 		launch_cd(env, list);
 	else if (ft_strncmp(list->str, "exit", 5) == 0)
 		ft_close();
+	else
+		return (0);
+	return (1);
 }

@@ -112,7 +112,7 @@ void	init_type_in_list(t_token *list, t_token *env);
 int		search_which_type(char *str, t_token *list, t_token *env);
 
 /*************check_if_built****************/
-void	check_if_built(t_token *list, t_token *env);
+int		check_if_built(t_token *list, t_token *env);
 
 /*************built_echo********************/
 void	launch_echo(t_token *list);
@@ -134,5 +134,8 @@ void	launch_pwd(t_token *env, t_token *list);
 
 /*************built_cd********************/
 void	launch_cd(t_token *env, t_token *list);
+
+/*************check_if_command********************/
+void	check_if_command(t_token *list, char **envp);
 
 #endif
