@@ -6,7 +6,7 @@
 /*   By: nleggeri <nleggeri@42.student.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 13:09:55 by synicole          #+#    #+#             */
-/*   Updated: 2023/04/26 19:24:44 by nleggeri         ###   ########.fr       */
+/*   Updated: 2023/04/27 12:40:21 by nleggeri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,9 +113,12 @@ int		search_which_type(char *str, t_token *list, t_token *env);
 
 /*************check_if_built****************/
 int		check_if_built(t_token *list, t_token *env);
+int		check_if_built_bis(t_token *list);
+int		check_if_built_bis_bis(t_token *list);
+int		check_if_built_bis_bis_bis(t_token *tmp, t_token *env, int num);
 
 /*************built_echo********************/
-void	launch_echo(t_token *list);
+void	launch_echo(t_token *list, int check);
 t_token	*launch_echo_bis(t_token *tmp, int j);
 
 /*************built_env*********************/

@@ -6,13 +6,13 @@
 /*   By: nleggeri <nleggeri@42.student.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 23:46:04 by nleggeri          #+#    #+#             */
-/*   Updated: 2023/04/26 19:23:40 by nleggeri         ###   ########.fr       */
+/*   Updated: 2023/04/27 12:27:28 by nleggeri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	launch_echo(t_token *list)
+void	launch_echo(t_token *list, int check)
 {
 	t_token	*tmp;
 	int		j;
@@ -21,6 +21,8 @@ void	launch_echo(t_token *list)
 	tmp = list;
 	j = 0;
 	num = 0;
+	if (check < 0)
+		tmp = tmp->next;
 	while (tmp)
 	{
 		if (ft_strncmp(tmp->str, "-n", 3) == 0 && j == 2)

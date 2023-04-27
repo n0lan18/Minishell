@@ -6,7 +6,7 @@
 /*   By: nleggeri <nleggeri@42.student.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 12:58:29 by nleggeri          #+#    #+#             */
-/*   Updated: 2023/04/26 19:24:20 by nleggeri         ###   ########.fr       */
+/*   Updated: 2023/04/27 11:52:48 by nleggeri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ t_token	*replace_dollar_if_after(t_token *list, t_token *tmp, t_token *env)
 		}
 		else if (tmp->next->str[0] == '$')
 			tmp = replace_dollar_if_after_bis(temp, tmp, env);
-		if (tmp->next == NULL || tmp == NULL)
+		if (tmp == NULL || tmp->next == NULL)
 			return (list);
 		temp = tmp;
 		tmp = tmp->next;
