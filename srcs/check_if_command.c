@@ -30,19 +30,19 @@ static void	find_cmd_path_ext(char *dir, char *cmd, char **cmd_path)
 	}
 }
 
-static void	find_cmd_path(char *cmd, char **cmd_path, char **envp)
+static void	find_cmd_path(char *cmd, char **cmd_path, t_token *env)
 {
-	int		i;
 	char	*path;
 	char	*path_copy;
 	char	*dir;
+	t_token	*tmp;
 
-	i = 0;
-	while (envp[i] != NULL)
+	tmp = env;
+	while (tmp)
 	{
-		if (strncmp(envp[i], "PATH=", 5) == 0)
+		if (strncmp(tmp->str, "PATH=", 5) == 0)
 		{
-			path = envp[i] + 5;
+			path = tmp->str + 5;
 			path_copy = strdup(path);
 			dir = strtok(path_copy, ":");
 			find_cmd_path_ext(dir, cmd, cmd_path);
@@ -50,13 +50,14 @@ static void	find_cmd_path(char *cmd, char **cmd_path, char **envp)
 			if (cmd_path != NULL)
 				break ;
 		}
-		i++;
+		tmp = tmp->next;
 	}
 }
 
-static void	child_process(char *cmd, char *cmd_path, char **envp)
+static void	child_process(char *cmd, char *cmd_path, t_token *env)
 {
 	char	*args[2];
+	char	**envp;
 
 	args[0] = cmd;
 	args[1] = NULL;
@@ -65,6 +66,7 @@ static void	child_process(char *cmd, char *cmd_path, char **envp)
 		printf("minishell: %s: command not found\n", cmd);
 		exit(1);
 	}
+	envp = token_to_char(env);
 	if (execve(cmd_path, args, envp) == -1)
 	{
 		perror("execve");
@@ -86,7 +88,7 @@ static void	parent_process(pid_t pid)
 		printf("Failed command by signal %d\n", WTERMSIG(status));
 }
 
-void	check_if_command(t_token *list, char **envp)
+void	check_if_command(t_token *list, t_token *env)
 {
 	char	*cmd;
 	char	*cmd_path;
@@ -94,7 +96,7 @@ void	check_if_command(t_token *list, char **envp)
 
 	cmd = list->str;
 	cmd_path = NULL;
-	find_cmd_path(cmd, &cmd_path, envp);
+	find_cmd_path(cmd, &cmd_path, env);
 	pid = fork();
 	if (pid == -1)
 	{
@@ -102,7 +104,7 @@ void	check_if_command(t_token *list, char **envp)
 		return ;
 	}
 	else if (pid == 0)
-		child_process(cmd, cmd_path, envp);
+		child_process(cmd, cmd_path, env);
 	else
 		parent_process(pid);
 }

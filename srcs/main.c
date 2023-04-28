@@ -36,7 +36,7 @@ int	main(int argc, char **argv, char **envp)
 		{
 			init_type_in_list(list, env);
 			if (!check_if_built(list, env))
-				check_if_command(list, envp);
+				check_if_command(list, env);
 			while (list)
 			{
 				printf("liste : %s\n", list->str);

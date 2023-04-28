@@ -142,6 +142,7 @@ void	launch_pwd(t_token *env, t_token *list);
 void	launch_cd(t_token *env, t_token *list);
 
 /*************check_if_command********************/
-void	check_if_command(t_token *list, char **envp);
+void	check_if_command(t_token *list, t_token *env);
+char	**token_to_char(t_token *env);
 
 #endif
