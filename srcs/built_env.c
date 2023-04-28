@@ -27,7 +27,6 @@ t_token	*env_in_list(char **env, t_token *list)
 		{
 			getcwd(cwd, sizeof(cwd));
 			env_path = ft_strjoin(env[i], ft_strjoin(":", cwd));
-			printf("PATH : %s\n", env_path);
 			tmp = add_new_element(tmp, env_path);
 		}
 		else
