@@ -51,7 +51,6 @@ int	check_if_built_bis_bis(t_token *list)
 	num = 0;
 	tmp = list;
 	tmp = tmp->next;
-	tmp = tmp->next;
 	if ((list->str[0] == '"' && tmp->str[0] == '"') || \
 	(list->str[0] == 39 && tmp->str[0] == 39))
 		num--;
