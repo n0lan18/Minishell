@@ -4,3 +4,4 @@
 /minishell
 .DS_Store
 /objs/**/*.o
+/.vscode/
