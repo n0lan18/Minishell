@@ -12,6 +12,8 @@
 
 #include "../minishell.h"
 
+int	g_last_exit_code;
+
 int	main(int argc, char **argv, char **envp)
 {
 	char	*prompt_output;
@@ -20,12 +22,11 @@ int	main(int argc, char **argv, char **envp)
 	t_token	*env;
 	int		i;
 
-	(void)argc;
-	(void)argv;
 	list = NULL;
 	env = NULL;
 	env = env_in_list(envp, env);
 	prompt_output = "";
+	g_last_exit_code = 0;
 	if (argc == 3 && ft_strncmp(argv[1], "-c", 3) == 0 && argv[2])
 	{
 		arg_input = ft_split(argv[2], ';');
@@ -67,8 +68,7 @@ int	main(int argc, char **argv, char **envp)
 					check_if_command(list, env);
 				while (list)
 				{
-//					printf("liste : %s\n", list->str);
-//					printf("type : %d\n", list->type);
+					printf("(TOKEN)[%s] -> (TYPE)[%d]\n", list->str, list->type);
 					list = list->next;
 				}
 			}

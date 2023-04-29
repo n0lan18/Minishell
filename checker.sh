@@ -31,10 +31,12 @@ function exec_test()
 {
   # Run minishell and bash
 	TEST1=$(./minishell -c "$@")
+	EXIT_STATUS_1=$?
 	TEST2=$(bash -c "$@")
+	EXIT_STATUS_2=$?
 
 	# Check if ✅or ❌
-	if [ "$TEST1" == "$TEST2" ]; then
+	if [ "$TEST1" == "$TEST2" ] && [ "$EXIT_STATUS_1" == "$EXIT_STATUS_2" ]; then
 		printf " $BOLDGREEN%s$RESET" "✅ "
 		((SUCCESS=SUCCESS+1))
 	else
@@ -47,8 +49,13 @@ function exec_test()
 	if [ "$TEST1" != "$TEST2" ]; then
 	  echo
 		printf $BOLDRED"Your output :%.20s\n$BOLDRED$TEST1%.20s$RESET\n"
-		printf $BOLDGREEN"Expected output :%.20s\n$BOLDGREEN$TEST2%.20s$RESET\n"
+		printf $BOLDGREEN"Expected output :%.20s\n$BOLDGREEN$TEST2%.20s$RESET"
 	fi
+	if [ "$EXIT_STATUS_1" != "$EXIT_STATUS_2" ]; then
+  		echo
+  		printf $BOLDRED"Your exit status : $BOLDRED$EXIT_STATUS_1$RESET\n"
+  		printf $BOLDGREEN"Expected exit status : $BOLDGREEN$EXIT_STATUS_2$RESET\n"
+  fi
 
   echo
 	((TOTAL=TOTAL+1))
@@ -68,16 +75,35 @@ exec_test "echo -n -n -n caca pipi"
 exec_test 'echo "caca   pipi"'
 exec_test "echo 'caca   pipi'"
 exec_test 'echo $USER'
+exec_test 'echo $USER      $USER'
 exec_test 'echo "$USER"'
+exec_test 'echo "$USER$USER$USER"'
+exec_test 'echo "$USER$USER=caca$USER"'
+exec_test 'echo "   $USER caca $USER"'
 exec_test 'echo '\''$USER'\'''
+exec_test 'echo $INEXISTINGVAR'
+exec_test 'echo $INEXISTINGVAR caca'
+exec_test 'echo $?'
+exec_test 'echo $??'
+exec_test 'ec"ho" caca'
+exec_test "ec'ho' caca"
+exec_test 'echo caca "" caca "" caca'
+exec_test 'echo "$=CACA"'
+exec_test 'echo "$"'
+exec_test 'echo "$?CACA"'
 
 # PWD TESTS
 printf "\n$BOLDYELLOW%s$RESET\n" "PWD TESTS"
 exec_test 'pwd'
+exec_test 'cd srcs; pwd'
+exec_test 'cd ..; pwd'
+exec_test 'cd .; pwd'
+exec_test 'cd /Users ; pwd'
 
 # EXECVE TESTS
 printf "\n$BOLDYELLOW%s$RESET\n" "EXECVE TESTS"
 exec_test 'ls'
+exec_test 'ls -l'
 exec_test 'clear'
 
 # PRINT TOTAL

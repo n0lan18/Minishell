@@ -23,16 +23,11 @@ t_token	*replace_dollar_if_first(t_token *list, t_token *env)
 	tmp = list;
 	if (tmp->str[0] == '$' && tmp->next->str[0] != ' ')
 	{
-		if (tmp->str[0] == '$' && tmp->next->str[0] == '?')
-			return (list);
-		if (tmp->str[0] == '$' && tmp->next->str[0] != '$')
-		{
-			str = search_var_in_env(tmp->next->str, env);
-			tmp->next->str = add_var_and_word(tmp->next->str, str, tmp->str);
-			new_element = tmp->next;
-			free(tmp);
-			return (new_element);
-		}
+		str = search_var_in_env(tmp->next->str, env);
+		tmp->next->str = add_var_and_word(tmp->next->str, str, tmp->str);
+		new_element = tmp->next;
+		free(tmp);
+		return (new_element);
 	}
 	return (list);
 }
@@ -80,14 +75,14 @@ t_token	*replace_dollar_if_after_bis(t_token *temp, t_token *tmp, t_token *env)
 		if (tmp->next->str[0] != '$')
 			break ;
 	}
-	if (tmp->next->str[0] != ' ' && tmp->next->str[0] != '?')
-	{
+	if (tmp->next->str[0] == '?')
+		str = ft_itoa(g_last_exit_code);
+	else if (tmp->next->str[0] != ' ')
 		str = search_var_in_env(tmp->next->str, env);
-		tmp->next->str = add_var_and_word(tmp->next->str, str, tmp->str);
-		temp->next = tmp->next;
-		free(tmp);
-		tmp = temp;
-	}
+	tmp->next->str = add_var_and_word(tmp->next->str, str, tmp->str);
+	temp->next = tmp->next;
+	free(tmp);
+	tmp = temp;
 	return (tmp);
 }
 

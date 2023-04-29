@@ -21,8 +21,11 @@
 # include <signal.h>
 # include "./libft/libft.h"
 
+extern int	g_last_exit_code;
+
 typedef enum part
 {
+	SPACE,
 	CMD,
 	BUILTIN,
 	PIPE,
@@ -30,7 +33,6 @@ typedef enum part
 	QUOTE,
 	DQUOTE,
 	DKNOWN,
-	SPACE,
 }	t_part;
 
 typedef struct s_token
