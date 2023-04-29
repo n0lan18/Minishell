@@ -23,19 +23,17 @@ BOLDWHITE="\033[1m\033[37m"
 make
 chmod 755 minishell
 
+# Init vars
 TOTAL=0
 SUCCESS=0
 
 function exec_test()
 {
-  # Compile and set executable rights
-#	TEST1=$(echo $@ "; exit" | ./minishell 2>&-)
+  # Run minishell and bash
 	TEST1=$(./minishell -c "$@")
-
-	# Compile and set executable rights
 	TEST2=$(bash -c "$@")
 
-	# Check if ✅
+	# Check if ✅or ❌
 	if [ "$TEST1" == "$TEST2" ]; then
 		printf " $BOLDGREEN%s$RESET" "✅ "
 		((SUCCESS=SUCCESS+1))
@@ -43,13 +41,13 @@ function exec_test()
 	  echo
 		printf " $BOLDRED%s$RESET" "❌ "
 	fi
-	printf "$CYAN \"$@\" $RESET"
+	printf "$CYAN TEST : \"$@\" $RESET"
 
-  # OUTPUT
+  # Compare outputs
 	if [ "$TEST1" != "$TEST2" ]; then
 	  echo
-		printf $BOLDRED"Your output : \n%.20s\n$BOLDRED$TEST1\n%.20s$RESET\n" "-----------------------------------------" "-----------------------------------------"
-		printf $BOLDGREEN"Expected output : \n%.20s\n$BOLDGREEN$TEST2\n%.20s$RESET\n" "-----------------------------------------" "-----------------------------------------"
+		printf $BOLDRED"Your output :%.20s\n$BOLDRED$TEST1%.20s$RESET\n"
+		printf $BOLDGREEN"Expected output :%.20s\n$BOLDGREEN$TEST2%.20s$RESET\n"
 	fi
 
   echo

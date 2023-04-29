@@ -90,6 +90,8 @@ t_token	*together_if_not_space(t_token *list)
 	str = NULL;
 	new = NULL;
 	tmp = list;
+	if (!list)
+		return (NULL);
 	if (tmp->next == NULL)
 		return (tmp);
 	tmp = free_if_space_at_last(tmp);

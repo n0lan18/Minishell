@@ -37,9 +37,9 @@ int	main(int argc, char **argv, char **envp)
 			if (!arg_input[i])
 				ft_close();
 			list = split_new_format(arg_input[i], list);
+			list = good_parse(list, env);
 			if (list)
 			{
-				list = good_parse(list, env);
 				init_type_in_list(list, env);
 				if (!check_if_built(list, env))
 					check_if_command(list, env);
@@ -59,9 +59,9 @@ int	main(int argc, char **argv, char **envp)
 			if (!prompt_output)
 				ft_close();
 			list = split_new_format(prompt_output, list);
+			list = good_parse(list, env);
 			if (list)
 			{
-				list = good_parse(list, env);
 				init_type_in_list(list, env);
 				if (!check_if_built(list, env))
 					check_if_command(list, env);
