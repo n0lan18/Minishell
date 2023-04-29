@@ -6,7 +6,7 @@
 /*   By: nleggeri <nleggeri@42.student.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/10 11:23:50 by synicole          #+#    #+#             */
-/*   Updated: 2023/04/26 14:31:26 by nleggeri         ###   ########.fr       */
+/*   Updated: 2023/04/29 01:57:37 by nleggeri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	main(int argc, char **argv, char **envp)
 		if (!prompt_output)
 			ft_close();
 		list = split_new_format(prompt_output, list);
-		list = replace_if_dollar(list, env);
+		list = good_parse(list, env);
 		if (list)
 		{
 			init_type_in_list(list, env);
