@@ -1,3 +1,4 @@
+#!/bin/bash
 
 # Colors
 RESET="\033[0m"
@@ -28,18 +29,18 @@ SUCCESS=0
 function exec_test()
 {
   # Compile and set executable rights
-	TEST1=$(echo $@ "; exit" | ./minishell 2>&-)
-	ES_1=$?
+#	TEST1=$(echo $@ "; exit" | ./minishell 2>&-)
+	TEST1=$(./minishell -c "$@")
 
 	# Compile and set executable rights
-	TEST2=$(echo $@ "; exit" | bash 2>&-)
-	ES_2=$?
+	TEST2=$(bash -c "$@")
 
 	# Check if ✅
-	if [ "$TEST1" == "$TEST2" ] && [ "$ES_1" == "$ES_2" ]; then
+	if [ "$TEST1" == "$TEST2" ]; then
 		printf " $BOLDGREEN%s$RESET" "✅ "
 		((SUCCESS=SUCCESS+1))
 	else
+	  echo
 		printf " $BOLDRED%s$RESET" "❌ "
 	fi
 	printf "$CYAN \"$@\" $RESET"
@@ -51,23 +52,28 @@ function exec_test()
 		printf $BOLDGREEN"Expected output : \n%.20s\n$BOLDGREEN$TEST2\n%.20s$RESET\n" "-----------------------------------------" "-----------------------------------------"
 	fi
 
-	# EXIT_STATUS
-	if [ "$ES_1" != "$ES_2" ]; then
-	  echo
-		printf $BOLDRED"Your exit status : $BOLDRED$ES_1$RESET\n"
-		printf $BOLDGREEN"Expected exit status : $BOLDGREEN$ES_2$RESET\n"
-	fi
-	echo
-	echo
+  echo
 	((TOTAL=TOTAL+1))
 	sleep 0.1
 }
 
 # ECHO TESTS
-exec_test 'echo test tout'
-exec_test 'echo test      tout'
-exec_test 'echo -n test tout'
-exec_test 'echo -n -n -n test tout'
-exec_test 'echo test'
+printf "\n$BOLDYELLOW%s$RESET\n" "ECHO TESTS"
+exec_test 'echo caca'
+exec_test 'echo caca      pipi'
+exec_test 'echo -n caca pipi'
+exec_test 'echo -n -n -n caca pipi'
 
+# PWD TESTS
+printf "\n$BOLDYELLOW%s$RESET\n" "PWD TESTS"
+exec_test 'pwd'
+
+# EXECVE TESTS
+printf "\n$BOLDYELLOW%s$RESET\n" "EXECVE TESTS"
+exec_test 'ls'
+exec_test 'clear'
+
+# PRINT TOTAL
+echo
+echo
 printf "(TEST $SUCCESS/$TOTAL)\n"

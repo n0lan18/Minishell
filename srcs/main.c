@@ -15,8 +15,10 @@
 int	main(int argc, char **argv, char **envp)
 {
 	char	*prompt_output;
+	char	**arg_input;
 	t_token	*list;
 	t_token	*env;
+	int		i;
 
 	(void)argc;
 	(void)argv;
@@ -24,28 +26,55 @@ int	main(int argc, char **argv, char **envp)
 	env = NULL;
 	env = env_in_list(envp, env);
 	prompt_output = "";
-	while (prompt_output != NULL)
+	if (argc == 3 && ft_strncmp(argv[1], "-c", 3) == 0 && argv[2])
 	{
-		ft_init_signals();
-		prompt_output = readline("minishell-1.0$ ");
-		if (!prompt_output)
+		arg_input = ft_split(argv[2], ';');
+		if (!arg_input)
 			ft_close();
-		list = split_new_format(prompt_output, list);
-		list = replace_if_dollar(list, env);
-		if (list)
+		i = 0;
+		while (arg_input[i])
 		{
-			init_type_in_list(list, env);
-			if (!check_if_built(list, env))
-				check_if_command(list, env);
-			while (list)
+			if (!arg_input[i])
+				ft_close();
+			list = split_new_format(arg_input[i], list);
+			list = replace_if_dollar(list, env);
+			if (list)
 			{
-				printf("liste : %s\n", list->str);
-				printf("type : %d\n", list->type);
-				list = list->next;
+				init_type_in_list(list, env);
+				if (!check_if_built(list, env))
+					check_if_command(list, env);
+				while (list)
+					list = list->next;
 			}
+			free_list(list);
+			i++;
 		}
-		free_list(list);
-		add_history(prompt_output);
+	}
+	else
+	{
+		while (prompt_output != NULL)
+		{
+			ft_init_signals();
+			prompt_output = readline("minishell-1.0$ ");
+			if (!prompt_output)
+				ft_close();
+			list = split_new_format(prompt_output, list);
+			list = replace_if_dollar(list, env);
+			if (list)
+			{
+				init_type_in_list(list, env);
+				if (!check_if_built(list, env))
+					check_if_command(list, env);
+				while (list)
+				{
+					printf("liste : %s\n", list->str);
+					printf("type : %d\n", list->type);
+					list = list->next;
+				}
+			}
+			free_list(list);
+			add_history(prompt_output);
+		}
 	}
 	return (0);
 }
