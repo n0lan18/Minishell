@@ -6,7 +6,7 @@
 /*   By: nleggeri <nleggeri@42.student.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/10 12:03:33 by synicole          #+#    #+#             */
-/*   Updated: 2023/04/26 14:37:27 by nleggeri         ###   ########.fr       */
+/*   Updated: 2023/04/29 00:09:23 by nleggeri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ char	*search_var_in_env(char *str, t_token *env)
 	while (tmp)
 	{
 		inc.x = compare_length_in_env(tmp->str);
-		if (ft_strncmp(str, tmp->str, inc.x) == 0)
+		if (ft_strncmp(str, tmp->str, ft_strlen(str)) == 0)
 		{
 			inc.deb = inc.x + 1;
 			while (tmp->str[inc.x])
