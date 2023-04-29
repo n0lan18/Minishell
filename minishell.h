@@ -6,7 +6,7 @@
 /*   By: nleggeri <nleggeri@42.student.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 13:09:55 by synicole          #+#    #+#             */
-/*   Updated: 2023/04/27 12:40:21 by nleggeri         ###   ########.fr       */
+/*   Updated: 2023/04/29 02:36:05 by nleggeri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,20 @@ int		compare_length_in_env(char *env);
 char	*add_var_and_word(char *str, char *str1, char *tab);
 char	*search_var_in_env(char *str, t_token *env);
 
+/*************Rewrite_list*****************/
+t_token	*rewrite(t_token *list, int num);
+t_token	*hey_follow_tmp(t_token *list, char c, int num);
+t_token	*rewrite_bis(t_token *tmp, t_token *new, char c, int num);
+t_token	*rewrite_bis_bis(t_token *tmp, t_token *new);
+t_token	*good_parse(t_token *list, t_token *env);
+
+/*************Rewrite_list_bis*************/
+t_token	*free_if_space_at_last(t_token *list);
+int		just_space(char	*str);
+t_token	*together_if_not_space_bis_bis(char *tmp, char *str, t_token *new);
+t_token	*together_if_not_space_bis(t_token *tmp, char *str, t_token *new);
+t_token	*together_if_not_space(t_token *list);
+
 /*************check_words_in_tab***********/
 int		check_which_type(char **tab, char **env);
 
@@ -119,7 +133,8 @@ int		check_if_built_bis_bis_bis(t_token *tmp, t_token *env, int num);
 
 /*************built_echo********************/
 void	launch_echo(t_token *list, int check);
-t_token	*launch_echo_bis(t_token *tmp, int j);
+t_token	*launch_echo_bis(t_token *tmp, int j, int i);
+int		search_str_in_str(char *first, char *second);
 
 /*************built_env*********************/
 t_token	*env_in_list(char **env, t_token *list);
