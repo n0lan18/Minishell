@@ -24,7 +24,7 @@ int	check_if_built(t_token *list, t_token *env)
 		return (0);
 	if (num < 0)
 		tmp = tmp->next;
-	ret = check_if_built_bis_bis_bis(tmp, env, num);
+	ret = check_if_built_bis_bis_bis(tmp, env);
 	return (ret);
 }
 
@@ -32,7 +32,6 @@ int	check_if_built_bis(t_token *list)
 {
 	int	num;
 
-	num = 0;
 	if ((list->str[0] == '"' && list->next == NULL) || \
 	(list->str[0] == '"' && list->next->next == NULL))
 		return (1);
@@ -57,10 +56,10 @@ int	check_if_built_bis_bis(t_token *list)
 	return (num);
 }
 
-int	check_if_built_bis_bis_bis(t_token *tmp, t_token *env, int num)
+int	check_if_built_bis_bis_bis(t_token *tmp, t_token *env)
 {
 	if (ft_strncmp(tmp->str, "echo", 5) == 0)
-		launch_echo(tmp, num);
+		launch_echo(tmp);
 	else if (ft_strncmp(tmp->str, "env", 4) == 0)
 		launch_env(env);
 	else if (ft_strncmp(tmp->str, "export", 7) == 0)

@@ -40,7 +40,7 @@ int	search_which_type(char *str, t_token *list, t_token *env)
 		list->type = QUOTE;
 	else if (str[0] == '"')
 		list->type = DQUOTE;
-	else if (ft_strncmp(str, " ", ft_strlen(str)) == 0)
+	else if (is_space(str))
 		list->type = SPACE;
 	else if ((ft_strncmp(str, ">", ft_strlen(str)) == 0)
 		|| (ft_strncmp(str, "<", ft_strlen(str)) == 0))

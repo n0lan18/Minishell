@@ -129,12 +129,10 @@ int		search_which_type(char *str, t_token *list, t_token *env);
 int		check_if_built(t_token *list, t_token *env);
 int		check_if_built_bis(t_token *list);
 int		check_if_built_bis_bis(t_token *list);
-int		check_if_built_bis_bis_bis(t_token *tmp, t_token *env, int num);
+int		check_if_built_bis_bis_bis(t_token *tmp, t_token *env);
 
 /*************built_echo********************/
-void	launch_echo(t_token *list, int check);
-t_token	*launch_echo_bis(t_token *tmp, int j, int i);
-int		search_str_in_str(char *first, char *second);
+void	launch_echo(t_token *list);
 
 /*************built_env*********************/
 t_token	*env_in_list(char **env, t_token *list);
@@ -159,5 +157,8 @@ void	launch_cd(t_token *env, t_token *list);
 /*************check_if_command********************/
 void	check_if_command(t_token *list, t_token *env);
 char	**token_to_char(t_token *env);
+
+/*************check_space********************/
+int		is_space(const char *s);
 
 #endif

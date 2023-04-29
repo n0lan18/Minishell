@@ -67,8 +67,8 @@ int	main(int argc, char **argv, char **envp)
 					check_if_command(list, env);
 				while (list)
 				{
-					printf("liste : %s\n", list->str);
-					printf("type : %d\n", list->type);
+//					printf("liste : %s\n", list->str);
+//					printf("type : %d\n", list->type);
 					list = list->next;
 				}
 			}

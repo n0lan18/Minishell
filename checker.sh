@@ -41,7 +41,7 @@ function exec_test()
 	  echo
 		printf " $BOLDRED%s$RESET" "❌ "
 	fi
-	printf "$CYAN TEST : \"$@\" $RESET"
+	printf "$CYAN \"$@\" $RESET"
 
   # Compare outputs
 	if [ "$TEST1" != "$TEST2" ]; then
@@ -57,10 +57,19 @@ function exec_test()
 
 # ECHO TESTS
 printf "\n$BOLDYELLOW%s$RESET\n" "ECHO TESTS"
-exec_test 'echo caca'
-exec_test 'echo caca      pipi'
-exec_test 'echo -n caca pipi'
-exec_test 'echo -n -n -n caca pipi'
+exec_test "echo"
+exec_test "echo caca"
+exec_test "echo caca      pipi"
+exec_test "    echo    caca      pipi"
+exec_test "echo -n caca"
+exec_test "echo -n"
+exec_test "echo -n -n"
+exec_test "echo -n -n -n caca pipi"
+exec_test 'echo "caca   pipi"'
+exec_test "echo 'caca   pipi'"
+exec_test 'echo $USER'
+exec_test 'echo "$USER"'
+exec_test 'echo '\''$USER'\'''
 
 # PWD TESTS
 printf "\n$BOLDYELLOW%s$RESET\n" "PWD TESTS"
