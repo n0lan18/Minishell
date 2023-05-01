@@ -10,12 +10,12 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "../../minishell.h"
 
 static void	check_all_option_n(t_token **tmp, t_param inc)
 {
 	while (*tmp && (ft_strncmp((*tmp)->str, "-n", 3) == 0
-			|| (*tmp)->type == SPACE))
+			|| (*tmp)->type == T_SPACE))
 	{
 		inc.i++;
 		*tmp = (*tmp)->next;
@@ -24,7 +24,7 @@ static void	check_all_option_n(t_token **tmp, t_param inc)
 
 static void	print_token(t_token *tmp)
 {
-	if (tmp->type == SPACE)
+	if (tmp->type == T_SPACE)
 		printf(" ");
 	else
 		printf("%s", tmp->str);

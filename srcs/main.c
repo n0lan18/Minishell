@@ -60,12 +60,12 @@ int	main(int argc, char **argv, char **envp)
 			if (!prompt_output)
 				ft_close();
 			list = split_new_format(prompt_output, list);
-			list = good_parse(list, env);
+//			list = good_parse(list, env);
 			if (list)
 			{
 				ft_assign_type_for_each_token(list);
-				if (!check_if_built(list, env))
-					check_if_command(list, env);
+//				if (!check_if_built(list, env))
+//					check_if_command(list, env);
 				while (list)
 				{
 					printf("(TOKEN)[%s] -> (TYPE)[%d]\n", list->str, list->type);

@@ -25,13 +25,15 @@ extern int	g_last_exit_code;
 
 typedef enum part
 {
-	SPACE,
-	BUILTIN,
-	PIPE,
-	CHEVRON,
-	QUOTE,
-	DQUOTE,
-	DKNOWN,
+	T_SPACE,
+	T_BUILTIN,
+	T_QUOTE,
+	T_DQUOTE,
+	T_DOLLAR,
+	T_EXIT_CODE,
+	T_PIPE,
+	T_CHEVRON,
+	T_DKNOWN,
 }	t_part;
 
 typedef struct s_token
@@ -94,13 +96,9 @@ t_token	*together_if_not_space_bis_bis(char *tmp, char *str, t_token *new);
 t_token	*together_if_not_space_bis(t_token *tmp, char *str, t_token *new);
 t_token	*together_if_not_space(t_token *list);
 
-/*************check_words_in_tab***********/
-int		check_which_type(char **tab, char **env);
-
 /*************search_cmd*******************/
 int		search_path_in_env(t_token *envp);
 char	*join_all_path(char *env, char *cmd, char slash);
-char	*existence_of_cmd(t_token *envp, char *cmd);
 int		search_of_type_cmd(t_token *envp, char *tab);
 
 /*************free_fonctions***************/
@@ -113,17 +111,11 @@ void	free_list(t_token *a);
 int		search_case_in_list(t_token *list, char *str);
 int		size_list(t_token *list);
 
-/************* Signals ***********/
-void	ft_init_signals(void);
-
 /************* Closing functions ***********/
 void	ft_close(void);
 
 /************* External functions ***********/
 void	rl_replace_line(const char *c, int i);
-
-// ----- TYPES ----- //
-void	ft_assign_type_for_each_token(t_token *list);
 
 /*************check_if_built****************/
 int		check_if_built(t_token *list, t_token *env);
@@ -158,7 +150,13 @@ void	launch_cd(t_token *env, t_token *list);
 void	check_if_command(t_token *list, t_token *env);
 char	**token_to_char(t_token *env);
 
-/*************check_space********************/
-int		is_space(const char *s);
+/** ----- UTILS ----- **/
+int		ft_contains_only_space(const char *s);
+
+/** ----- TYPES ----- **/
+void	ft_assign_type_for_each_token(t_token *list);
+
+/** ----- SIGNALS ----- **/
+void	ft_init_signals(void);
 
 #endif

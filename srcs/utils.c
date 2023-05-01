@@ -1,28 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   built_pwd.c                                        :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: synicole <synicole@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/25 23:02:59 by synicole          #+#    #+#             */
-/*   Updated: 2023/04/25 23:03:01 by synicole         ###   ########.fr       */
+/*   Created: 2023/05/01 20:33:01 by synicole          #+#    #+#             */
+/*   Updated: 2023/05/01 20:33:03 by synicole         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	launch_pwd(t_token *env, t_token *list)
+/**
+ * Checks if a given string contains only whitespace characters.
+ * @param const char *s The string to check.
+ * @return int Returns 1 if the string contains only whitespace characters,
+ * otherwise 0.
+*/
+int	ft_contains_only_space(const char *s)
 {
-	char	cwd[1024];
+	int	i;
 
-	(void)env;
-	(void)list;
-	if (getcwd(cwd, sizeof(cwd)) != NULL)
-		printf("%s\n", cwd);
-	else
+	i = 0;
+	while (s[i])
 	{
-		perror("getcwd() erreur");
-		exit(EXIT_FAILURE);
+		if (s[i] != ' ')
+			return (0);
+		i++;
 	}
+	return (1);
 }

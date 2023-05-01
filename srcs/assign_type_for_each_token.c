@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   which_type_of_case.c                               :+:      :+:    :+:   */
+/*   ft_assign_type_for_each_token.c                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nleggeri <nleggeri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,6 +12,12 @@
 
 #include "../minishell.h"
 
+/**
+ * Checks if a given string represents a built-in shell command.
+ * @param const char *str The string to check.
+ *
+ * @return int Returns 1 if it's a built-in command, otherwise 0.
+*/
 static int	ft_is_builtin(const char *str)
 {
 	if ((ft_strncmp(str, "echo", 5) == 0)
@@ -25,24 +31,34 @@ static int	ft_is_builtin(const char *str)
 	return (0);
 }
 
+/**
+ * Assigns a type to each token based on the token's value.
+ * @param t_token *list The token list to iterate over.
+ *
+ * @return void
+*/
 void	ft_assign_type_for_each_token(t_token *list)
 {
 	while (list)
 	{
 		if (ft_is_builtin(list->str))
-			list->type = BUILTIN;
+			list->type = T_BUILTIN;
 		else if (list->str[0] == '|')
-			list->type = PIPE;
+			list->type = T_PIPE;
 		else if (ft_strncmp(list->str, "'", 2) == 0)
-			list->type = QUOTE;
+			list->type = T_QUOTE;
 		else if (list->str[0] == '"')
-			list->type = DQUOTE;
-		else if (is_space(list->str))
-			list->type = SPACE;
+			list->type = T_DQUOTE;
+		else if (ft_contains_only_space(list->str))
+			list->type = T_SPACE;
 		else if (list->str[0] == '>' || list->str[0] == '<')
-			list->type = CHEVRON;
+			list->type = T_CHEVRON;
+		else if (list->str[0] == '$' && list->str[1] == '?')
+			list->type = T_EXIT_CODE;
+		else if (list->str[0] == '$' && list->str[1] != '?')
+			list->type = T_DOLLAR;
 		else
-			list->type = DKNOWN;
+			list->type = T_DKNOWN;
 		list = list->next;
 	}
 }
