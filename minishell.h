@@ -26,7 +26,6 @@ extern int	g_last_exit_code;
 typedef enum part
 {
 	SPACE,
-	CMD,
 	BUILTIN,
 	PIPE,
 	CHEVRON,
@@ -123,9 +122,8 @@ void	ft_close(void);
 /************* External functions ***********/
 void	rl_replace_line(const char *c, int i);
 
-/*************which_type_of_case*************/
-void	init_type_in_list(t_token *list, t_token *env);
-int		search_which_type(char *str, t_token *list, t_token *env);
+// ----- TYPES ----- //
+void	ft_assign_type_for_each_token(t_token *list);
 
 /*************check_if_built****************/
 int		check_if_built(t_token *list, t_token *env);

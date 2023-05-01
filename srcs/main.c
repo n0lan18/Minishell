@@ -41,7 +41,7 @@ int	main(int argc, char **argv, char **envp)
 			list = good_parse(list, env);
 			if (list)
 			{
-				init_type_in_list(list, env);
+				ft_assign_type_for_each_token(list);
 				if (!check_if_built(list, env))
 					check_if_command(list, env);
 				while (list)
@@ -63,7 +63,7 @@ int	main(int argc, char **argv, char **envp)
 			list = good_parse(list, env);
 			if (list)
 			{
-				init_type_in_list(list, env);
+				ft_assign_type_for_each_token(list);
 				if (!check_if_built(list, env))
 					check_if_command(list, env);
 				while (list)
