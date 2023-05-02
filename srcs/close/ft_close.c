@@ -12,6 +12,9 @@
 
 #include "../../minishell.h"
 
+/**
+ * TODO
+*/
 void	ft_close(void)
 {
 	ft_putstr_fd("exit\n", STDOUT_FILENO);

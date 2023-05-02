@@ -12,17 +12,17 @@
 
 #include "../../minishell.h"
 
-//void	launch_pwd(t_token *env, t_token *list)
-//{
-//	char	cwd[1024];
-//
-//	(void)env;
-//	(void)list;
-//	if (getcwd(cwd, sizeof(cwd)) != NULL)
-//		printf("%s\n", cwd);
-//	else
-//	{
-//		perror("getcwd() erreur");
-//		exit(EXIT_FAILURE);
-//	}
-//}
+void	launch_pwd(t_token *env, t_token *list)
+{
+	char	cwd[1024];
+
+	(void)env;
+	(void)list;
+	if (getcwd(cwd, sizeof(cwd)) != NULL)
+		printf("%s\n", cwd);
+	else
+	{
+		perror("getcwd() erreur");
+		exit(EXIT_FAILURE);
+	}
+}

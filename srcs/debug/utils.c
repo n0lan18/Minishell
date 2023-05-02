@@ -35,5 +35,6 @@ void	db_print_tab(char **tab)
 */
 void	db_print_token(t_token *token)
 {
-	printf("(TOKEN)[%s] -> (TYPE)[%d]\n", token->str, token->type);
+	if (token)
+		printf("(TOKEN)[%s] -> (TYPE)[%d]\n", token->str, token->type);
 }

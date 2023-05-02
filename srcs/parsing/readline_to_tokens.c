@@ -19,19 +19,31 @@
  *
  * @return void
 */
-static void	ft_init_tokens(char **tab, t_token **list)
+//static void	ft_init_tokens(char **tab, t_token **list)
+//{
+//	int		i;
+//	int		j;
+//	char	**tab_trimmed;
+//
+//	i = 0;
+//	while (tab[i])
+//	{
+//		j = 0;
+//		tab_trimmed = ft_split_in_ft_split(tab[i]);
+//		while (tab_trimmed[j])
+//			*list = ft_add_new_token(*list, tab_trimmed[j++]);
+//		i++;
+//	}
+//}
+
+static void	ft_tab_to_tokens(char **tab, t_token **list)
 {
 	int		i;
-	int		j;
-	char	**tab_trimmed;
 
 	i = 0;
 	while (tab[i])
 	{
-		j = 0;
-		tab_trimmed = ft_split_in_ft_split(tab[i]);
-		while (tab_trimmed[j])
-			*list = ft_add_new_token(*list, tab_trimmed[j++]);
+		*list = ft_add_new_token(*list, tab[i]);
 		i++;
 	}
 }
@@ -48,8 +60,8 @@ t_token	*ft_readline_to_tokens(char *readline)
 	t_token	*tokens;
 
 	tokens = NULL;
-	split_space_tab = ft_split_space(ft_trim_str(readline));
-	db_print_tab(split_space_tab);
-	ft_init_tokens(split_space_tab, &tokens);
+	split_space_tab = ft_split_tokens(ft_trim_str(readline));
+	ft_tab_to_tokens(split_space_tab, &tokens);
+//	ft_assign_type_for_each_token(tokens);
 	return (tokens);
 }
