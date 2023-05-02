@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   readline_to_tab_bis.c                              :+:      :+:    :+:   */
+/*   utils_parsing.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: synicole <synicole@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/10 12:49:05 by synicole          #+#    #+#             */
-/*   Updated: 2023/04/10 12:49:06 by synicole         ###   ########.fr       */
+/*   Created: 2023/05/02 15:38:52 by synicole          #+#    #+#             */
+/*   Updated: 2023/05/02 15:38:55 by synicole         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,30 +94,4 @@ char	*ft_strcpy_new(char *dst, char *str, int deb, int end)
 		dst[i++] = str[deb++];
 	dst[i] = '\0';
 	return (dst);
-}
-
-t_token	*split_new_format(char *rline, t_token *list)
-{
-	t_param	inc;
-	char	**tab;
-	char	**tab1;
-	t_token	*tmp;
-
-	inc.i = 0;
-	inc.deb = remove_space_begin_or_end(rline, 0);
-	inc.y = remove_space_begin_or_end(rline, 1);
-	tmp = list;
-	tab = ft_split_next_gen(rline, ' ', inc.deb, inc.y);
-	while (tab[inc.i])
-	{
-		inc.j = 0;
-		inc.x = 0;
-		tab1 = ft_split_in_ft_split(tab[inc.i]);
-		while (tab1[inc.x])
-			tmp = add_new_element(tmp, tab1[inc.x++]);
-		free_double_tab(tab1);
-		inc.i++;
-	}
-	free_double_tab(tab);
-	return (tmp);
 }

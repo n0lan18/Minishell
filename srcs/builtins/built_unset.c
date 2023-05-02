@@ -12,29 +12,29 @@
 
 #include "../../minishell.h"
 
-void	launch_unset(t_token *env, t_token *list)
-{
-	t_token	*tmp;
-	t_token	*temp;
-	t_token	*prev;
-	int		i;
-
-	tmp = env;
-	temp = list;
-	temp = temp->next;
-	temp = temp->next;
-	while (tmp)
-	{
-		i = compare_length_in_env(tmp->next->str);
-		if (ft_strncmp(tmp->next->str, temp->str, i) == 0)
-		{
-			prev = tmp;
-			tmp = tmp->next;
-			prev->next = tmp->next;
-			free(tmp);
-			return ;
-		}
-		prev = tmp;
-		tmp = tmp->next;
-	}
-}
+//void	launch_unset(t_token *env, t_token *list)
+//{
+//	t_token	*tmp;
+//	t_token	*temp;
+//	t_token	*prev;
+//	int		i;
+//
+//	tmp = env;
+//	temp = list;
+//	temp = temp->next;
+//	temp = temp->next;
+//	while (tmp)
+//	{
+//		i = compare_length_in_env(tmp->next->str);
+//		if (ft_strncmp(tmp->next->str, temp->str, i) == 0)
+//		{
+//			prev = tmp;
+//			tmp = tmp->next;
+//			prev->next = tmp->next;
+//			free(tmp);
+//			return ;
+//		}
+//		prev = tmp;
+//		tmp = tmp->next;
+//	}
+//}

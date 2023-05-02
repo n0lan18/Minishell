@@ -11,21 +11,21 @@
 /* ************************************************************************** */
 
 #include "../../minishell.h"
-
-void	launch_cd(t_token *env, t_token *list)
-{
-	char	*path;
-
-	(void)env;
-	if (!list->next)
-	{
-		if (chdir(getenv("HOME")))
-			perror(ft_strjoin("minishell: cd: ", path));
-	}
-	else
-	{
-		path = list->next->next->str;
-		if (chdir(path))
-			perror(ft_strjoin("minishell: cd: ", path));
-	}
-}
+//
+//void	launch_cd(t_token *env, t_token *list)
+//{
+//	char	*path;
+//
+//	(void)env;
+//	if (!list->next)
+//	{
+//		if (chdir(getenv("HOME")))
+//			perror(ft_strjoin("minishell: cd: ", path));
+//	}
+//	else
+//	{
+//		path = list->next->next->str;
+//		if (chdir(path))
+//			perror(ft_strjoin("minishell: cd: ", path));
+//	}
+//}

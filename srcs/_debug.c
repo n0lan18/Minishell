@@ -1,22 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_fonctions.c                                   :+:      :+:    :+:   */
+/*   debug.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nleggeri <nleggeri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: synicole <synicole@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/03 18:19:12 by nleggeri          #+#    #+#             */
-/*   Updated: 2023/04/03 18:19:15 by nleggeri         ###   ########.fr       */
+/*   Created: 2023/05/02 14:54:47 by synicole          #+#    #+#             */
+/*   Updated: 2023/05/02 14:54:50 by synicole         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	free_double_tab(char **tab)
+/**
+ * Prints the content of a token.
+ * @param t_token *token
+ *
+ * @return void
+*/
+void	db_print_token(t_token *token)
 {
-	int	i;
-
-	i = 0;
-	while (tab[i])
-		free(tab[i++]);
+	printf("(TOKEN)[%s] -> (TYPE)[%d]\n", token->str, token->type);
 }
