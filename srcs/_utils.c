@@ -15,8 +15,7 @@
 /**
  * Checks if a given string contains only whitespace characters.
  * @param const char *s The string to check.
- * @return int Returns 1 if the string contains only whitespace characters,
- * otherwise 0.
+ * @return int 1 if the string contains only whitespace characters, otherwise 0.
 */
 int	ft_contains_only_space(const char *s)
 {

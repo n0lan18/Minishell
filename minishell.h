@@ -40,7 +40,6 @@ typedef struct s_token
 {
 	int				type;
 	char			*str;
-	struct s_token	*prev;
 	struct s_token	*next;
 }	t_token;
 
@@ -150,6 +149,9 @@ void	ft_assign_type_for_each_token(t_token *list);
 
 /** ----- SIGNALS ----- **/
 void	ft_init_signals(void);
+
+/** ----- STRUCTS ----- **/
+t_token	*ft_add_new_token(t_token *list, char *tab);
 
 /** ----- DEBUG ----- **/
 void	db_print_token(t_token *token);

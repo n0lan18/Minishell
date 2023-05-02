@@ -10,13 +10,13 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "../../minishell.h"
 
 /**
  * Checks if a given string represents a built-in shell command.
  * @param const char *str The string to check.
  *
- * @return int Returns 1 if it's a built-in command, otherwise 0.
+ * @return int 1 if it's a built-in command, otherwise 0.
 */
 static int	ft_is_builtin(const char *str)
 {

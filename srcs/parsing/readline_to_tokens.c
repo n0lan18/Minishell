@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "../../minishell.h"
 
 /**
  * Initializes an array of tokens from a string array
@@ -19,7 +19,7 @@
  *
  * @return void
 */
-static void	ft_init_tokens(char **tab, t_token **tokens)
+static void	ft_init_tokens(char **tab, t_token **list)
 {
 	int		i;
 	int		j;
@@ -31,7 +31,7 @@ static void	ft_init_tokens(char **tab, t_token **tokens)
 		j = 0;
 		tab_trimmed = ft_split_in_ft_split(tab[i]);
 		while (tab_trimmed[j])
-			*tokens = add_new_element(*tokens, tab_trimmed[j++]);
+			*list = ft_add_new_token(*list, tab_trimmed[j++]);
 		i++;
 	}
 }
