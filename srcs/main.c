@@ -35,3 +35,8 @@ int	main(void)
 	}
 	return (0);
 }
+
+//int	main(void)
+//{
+//	printf("%d\n", ft_count_words("helloworld"));
+//}

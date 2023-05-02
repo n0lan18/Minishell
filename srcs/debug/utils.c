@@ -13,6 +13,21 @@
 #include "../../minishell.h"
 
 /**
+ * Prints the content of a char **tab.
+ * @param char **tab
+ *
+ * @return void
+*/
+void	db_print_tab(char **tab)
+{
+	int	i;
+
+	i = 0;
+	while (tab[i])
+		printf("[%s]\n", tab[i++]);
+}
+
+/**
  * Prints the content of a token.
  * @param t_token *token
  *

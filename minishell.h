@@ -140,9 +140,10 @@ char	**token_to_char(t_token *env);
 
 /** ----- PARSING ----- **/
 t_token	*ft_readline_to_tokens(char *readline);
-
-/** ----- UTILS ----- **/
+char	**ft_split_space(char const *s);
 int		ft_contains_only_space(const char *s);
+int		ft_is_space(char c);
+char	*ft_trim_str(const char *str);
 
 /** ----- TYPES ----- **/
 void	ft_assign_type_for_each_token(t_token *list);
@@ -154,6 +155,7 @@ void	ft_init_signals(void);
 t_token	*ft_add_new_token(t_token *list, char *tab);
 
 /** ----- DEBUG ----- **/
+void	db_print_tab(char **tab);
 void	db_print_token(t_token *token);
 
 #endif

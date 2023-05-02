@@ -70,23 +70,3 @@ int	count_word_fort_second_split_bis(const char *s, int num, int i)
 	}
 	return (num);
 }
-
-int	remove_space_begin_or_end(char *str, int pos)
-{
-	int	i;
-
-	if (pos == 0)
-	{
-		i = 0;
-		while (str[i] && str[i] == ' ')
-			i++;
-		return (i);
-	}
-	else
-	{
-		i = (int)ft_strlen(str) - 1;
-		while (i >= 0 && str[i] == ' ')
-			i--;
-		return (i);
-	}
-}

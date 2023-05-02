@@ -44,15 +44,12 @@ static void	ft_init_tokens(char **tab, t_token **list)
 */
 t_token	*ft_readline_to_tokens(char *readline)
 {
-	int		start;
-	int		end;
-	char	**tab_without_space;
+	char	**split_space_tab;
 	t_token	*tokens;
 
 	tokens = NULL;
-	start = remove_space_begin_or_end(readline, 0);
-	end = remove_space_begin_or_end(readline, 1);
-	tab_without_space = ft_split_next_gen(readline, ' ', start, end);
-	ft_init_tokens(tab_without_space, &tokens);
+	split_space_tab = ft_split_space(ft_trim_str(readline));
+	db_print_tab(split_space_tab);
+	ft_init_tokens(split_space_tab, &tokens);
 	return (tokens);
 }
