@@ -12,29 +12,6 @@
 
 #include "../minishell.h"
 
-int	search_dollar_in_list(t_token *list)
-{
-	t_token	*tmp;
-	t_param	inc;
-
-	tmp = list;
-	inc.i = 0;
-	inc.num = 0;
-	while (tmp)
-	{
-		if (tmp->str[0] == 39)
-		{
-			tmp = tmp->next;
-			while (tmp && tmp->str[0] != 39)
-				tmp = tmp->next;
-		}
-		if (tmp->str[0] == '$' && tmp->next->str[0] != ' ')
-			inc.num -= 1;
-		tmp = tmp->next;
-	}
-	return (0);
-}
-
 char	*add_var_and_word(char *str, char *str1, char *tab)
 {
 	t_param	inc;

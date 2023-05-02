@@ -12,20 +12,6 @@
 
 #include "../minishell.h"
 
-int	search_in_str(char s, char *str)
-{
-	int	j;
-
-	j = 0;
-	while (str[j])
-	{
-		if (str[j] == s)
-			return (1);
-		j++;
-	}
-	return (0);
-}
-
 int	count_word(const char *s, char c, int deb, int end)
 {
 	int	i;
@@ -72,7 +58,7 @@ int	count_word_fort_second_split_bis(const char *s, int num, int i)
 		if (s[i] == '$' || s[i] == '>' || s[i] == '<' \
 				|| s[i] == '"' || s[i] == '|' || s[i] == 39)
 		{
-			if (s[i + 1] == '$' || s[i + 1] == '>'
+			if (s[i + 1] == '!' || s[i + 1] == '>'
 				|| s[i + 1] == '<' || s[i + 1] == '"'
 				|| s[i + 1] == '|' || s[i + 1] == 39 \
 				||s[i + 1] == '\0')

@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "../../minishell.h"
 
 static void	find_cmd_path_ext(char *dir, char *cmd, char **cmd_path)
 {

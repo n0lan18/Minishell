@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "../../minishell.h"
 
 int	check_if_built(t_token *list, t_token *env)
 {

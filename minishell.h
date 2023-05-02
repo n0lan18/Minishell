@@ -57,7 +57,6 @@ typedef struct s_param
 }	t_param;
 
 /*************Readline_to_tab***************/
-int		search_in_str(char s, char *str);
 int		count_word(const char *s, char c, int deb, int end);
 int		count_word_fort_second_split(const char *s);
 int		count_word_fort_second_split_bis(const char *s, int num, int i);
@@ -77,7 +76,6 @@ t_token	*replace_dollar_if_after_bis(t_token *temp, t_token *tmp, t_token *env);
 t_token	*replace_if_dollar(t_token *list, t_token *env);
 
 /*************Check_dollar_in_list_bis****/
-int		search_dollar_in_list(t_token *list);
 int		compare_length_in_env(char *env);
 char	*add_var_and_word(char *str, char *str1, char *tab);
 char	*search_var_in_env(char *str, t_token *env);
@@ -95,11 +93,6 @@ int		just_space(char	*str);
 t_token	*together_if_not_space_bis_bis(char *tmp, char *str, t_token *new);
 t_token	*together_if_not_space_bis(t_token *tmp, char *str, t_token *new);
 t_token	*together_if_not_space(t_token *list);
-
-/*************search_cmd*******************/
-int		search_path_in_env(t_token *envp);
-char	*join_all_path(char *env, char *cmd, char slash);
-int		search_of_type_cmd(t_token *envp, char *tab);
 
 /*************free_fonctions***************/
 void	free_double_tab(char **tab);
