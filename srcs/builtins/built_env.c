@@ -35,7 +35,7 @@ t_token	*env_in_list(char **env, t_token *list)
 	return (tmp);
 }
 
-void	launch_env(t_token *env)
+void	ft_run_env(t_token *env)
 {
 	t_token	*tmp;
 

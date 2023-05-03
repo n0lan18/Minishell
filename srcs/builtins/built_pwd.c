@@ -12,7 +12,7 @@
 
 #include "../../minishell.h"
 
-void	launch_pwd(t_token *env, t_token *list)
+void	ft_run_pwd(t_token *env, t_token *list)
 {
 	char	cwd[1024];
 

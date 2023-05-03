@@ -76,6 +76,14 @@ void	ft_init_signals(void);
 /** ----- STRUCTS ----- **/
 t_token	*ft_add_new_token(t_token *list, char *tab);
 
+/** ----- BUILTIN ----- **/
+void	ft_run_echo(t_token *list);
+void	ft_run_cd(t_token *env, t_token *list);
+void	ft_run_pwd(t_token *env, t_token *list);
+void	ft_run_unset(t_token *env, t_token *list);
+void	ft_run_env(t_token *env);
+void	ft_run_export(t_token *env, t_token *list);
+
 /** ----- EXIT ----- **/
 void	ft_close(void);
 
@@ -85,18 +93,6 @@ void	db_print_token(t_token *token);
 
 /** ----- EXTERNAL ----- **/
 void	rl_replace_line(const char *c, int i);
-
-
-
-
-
-
-
-
-
-
-
-
 
 /*************Check_dollar_in_list********/
 t_token	*replace_dollar_if_first(t_token *list, t_token *env);
@@ -125,27 +121,11 @@ t_token	*together_if_not_space_bis_bis(char *tmp, char *str, t_token *new);
 t_token	*together_if_not_space_bis(t_token *tmp, char *str, t_token *new);
 t_token	*together_if_not_space(t_token *list);
 
-/*************check_words_in_tab***********/
-int		check_which_type(char **tab, char **env);
-
-/*************search_cmd*******************/
-int		search_path_in_env(t_token *envp);
-char	*join_all_path(char *env, char *cmd, char slash);
-char	*existence_of_cmd(t_token *envp, char *cmd);
-int		search_of_type_cmd(t_token *envp, char *tab);
-
-/*************free_fonctions***************/
-void	free_double_tab(char **tab);
-
 /*************Fonctions_list***************/
 void	add_element(t_token *list, char *tab);
 void	free_list(t_token *a);
 int		search_case_in_list(t_token *list, char *str);
 int		size_list(t_token *list);
-
-/*************which_type_of_case*************/
-void	init_type_in_list(t_token *list, t_token *env);
-int		search_which_type(char *str, t_token *list, t_token *env);
 
 /*************check_if_built****************/
 int		check_if_built(t_token *list, t_token *env);
@@ -153,34 +133,11 @@ int		check_if_built_bis(t_token *list);
 int		check_if_built_bis_bis(t_token *list);
 int		check_if_built_bis_bis_bis(t_token *tmp, t_token *env);
 
-/*************built_echo********************/
-void	launch_echo(t_token *list);
-
 /*************built_env*********************/
 t_token	*env_in_list(char **env, t_token *list);
-void	launch_env(t_token *env);
-
-/*************built_export******************/
-void	launch_export(t_token *env, t_token *list);
-char	*join_var(t_token *list);
-void	check_if_var_exist(t_token *env, char *str);
-int		check_if_var_is_good(char *str);
-int		check_after_equal(char *str);
-
-/*************built_unset******************/
-void	launch_unset(t_token *env, t_token *list);
-
-/*************built_pwd********************/
-void	launch_pwd(t_token *env, t_token *list);
-
-/*************built_cd********************/
-void	launch_cd(t_token *env, t_token *list);
 
 /*************check_if_command********************/
 void	check_if_command(t_token *list, t_token *env);
 char	**token_to_char(t_token *env);
-
-
-
 
 #endif

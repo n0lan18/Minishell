@@ -12,7 +12,7 @@
 
 #include "../../minishell.h"
 
-void	launch_unset(t_token *env, t_token *list)
+void	ft_run_unset(t_token *env, t_token *list)
 {
 	t_token	*tmp;
 	t_token	*temp;

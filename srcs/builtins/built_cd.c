@@ -12,7 +12,7 @@
 
 #include "../../minishell.h"
 
-void	launch_cd(t_token *env, t_token *list)
+void	ft_run_cd(t_token *env, t_token *list)
 {
 	char	*path;
 

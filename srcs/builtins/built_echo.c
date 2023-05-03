@@ -12,17 +12,7 @@
 
 #include "../../minishell.h"
 
-static void	check_all_option_n(t_token **tmp, t_param inc)
-{
-	while (*tmp && (ft_strncmp((*tmp)->str, "-n", 3) == 0
-			|| (*tmp)->type == T_SPACE))
-	{
-		inc.i++;
-		*tmp = (*tmp)->next;
-	}
-}
-
-static void	print_token(t_token *tmp)
+static void	ft_print_token(t_token *tmp)
 {
 	if (tmp->type == T_SPACE)
 		printf(" ");
@@ -30,30 +20,17 @@ static void	print_token(t_token *tmp)
 		printf("%s", tmp->str);
 }
 
-void	launch_echo(t_token *list)
+void	ft_run_echo(t_token *list)
 {
-	t_token	*tmp;
-	int		has_n;
-	t_param	inc;
+	int		i;
 
-	tmp = list;
-	inc.i = 0;
-	has_n = 0;
-	while (tmp)
+	i = 0;
+	while (list)
 	{
-		if (ft_strncmp(tmp->str, "-n", 3) == 0 && inc.i == 2)
-		{
-			has_n = 1;
-			check_all_option_n(&tmp, inc);
-			continue ;
-		}
-		else if (inc.i > 1)
-		{
-			print_token(tmp);
-		}
-		inc.i++;
-		tmp = tmp->next;
+		if (i > 1)
+			ft_print_token(list);
+		i++;
+		list = list->next;
 	}
-	if (!has_n)
-		printf("\n");
+	printf("\n");
 }

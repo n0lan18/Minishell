@@ -12,34 +12,7 @@
 
 #include "../../minishell.h"
 
-void	launch_export(t_token *env, t_token *list)
-{
-	t_token	*tmp;
-	char	*str;
-
-	tmp = list;
-	tmp = tmp->next;
-	tmp = tmp->next;
-	if (check_if_var_is_good(tmp->str) == 0)
-	{
-		if (tmp->next == NULL)
-			str = tmp->str;
-		else
-			str = join_var(tmp);
-		if (check_after_equal(str) >= 0)
-		{
-			check_if_var_exist(env, str);
-			add_element(env, str);
-		}
-		else
-		{
-			check_if_var_exist(env, str);
-			add_element(env, "💩");
-		}
-	}
-}
-
-void	check_if_var_exist(t_token *env, char *str)
+static void	check_if_var_exist(t_token *env, char *str)
 {
 	t_token	*tmp;
 	t_token	*temp;
@@ -62,7 +35,7 @@ void	check_if_var_exist(t_token *env, char *str)
 	}
 }
 
-char	*join_var(t_token *list)
+static char	*join_var(t_token *list)
 {
 	t_token	*tmp;
 	char	*join;
@@ -89,7 +62,7 @@ char	*join_var(t_token *list)
 	return (join);
 }
 
-int	check_if_var_is_good(char *str)
+static int	check_if_var_is_good(const char *str)
 {
 	int	i;
 
@@ -103,7 +76,7 @@ int	check_if_var_is_good(char *str)
 	return (1);
 }
 
-int	check_after_equal(char *str)
+static int	check_after_equal(const char *str)
 {
 	int	i;
 	int	num;
@@ -127,4 +100,31 @@ int	check_after_equal(char *str)
 		i++;
 	}
 	return (num);
+}
+
+void	ft_run_export(t_token *env, t_token *list)
+{
+	t_token	*tmp;
+	char	*str;
+
+	tmp = list;
+	tmp = tmp->next;
+	tmp = tmp->next;
+	if (check_if_var_is_good(tmp->str) == 0)
+	{
+		if (tmp->next == NULL)
+			str = tmp->str;
+		else
+			str = join_var(tmp);
+		if (check_after_equal(str) >= 0)
+		{
+			check_if_var_exist(env, str);
+			add_element(env, str);
+		}
+		else
+		{
+			check_if_var_exist(env, str);
+			add_element(env, "💩");
+		}
+	}
 }

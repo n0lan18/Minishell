@@ -59,17 +59,17 @@ int	check_if_built_bis_bis(t_token *list)
 int	check_if_built_bis_bis_bis(t_token *tmp, t_token *env)
 {
 	if (ft_strncmp(tmp->str, "echo", 5) == 0)
-		launch_echo(tmp);
+		ft_run_echo(tmp);
 	else if (ft_strncmp(tmp->str, "env", 4) == 0)
-		launch_env(env);
+		ft_run_env(env);
 	else if (ft_strncmp(tmp->str, "export", 7) == 0)
-		launch_export(env, tmp);
+		ft_run_export(env, tmp);
 	else if (ft_strncmp(tmp->str, "unset", 6) == 0)
-		launch_unset(env, tmp);
+		ft_run_unset(env, tmp);
 	else if (ft_strncmp(tmp->str, "pwd", 4) == 0)
-		launch_pwd(env, tmp);
+		ft_run_pwd(env, tmp);
 	else if (ft_strncmp(tmp->str, "cd", 3) == 0)
-		launch_cd(env, tmp);
+		ft_run_cd(env, tmp);
 	else if (ft_strncmp(tmp->str, "exit", 5) == 0)
 		ft_close();
 	else
