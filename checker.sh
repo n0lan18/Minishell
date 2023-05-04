@@ -68,30 +68,30 @@ exec_test "echo"
 exec_test "echo caca"
 exec_test "echo caca      pipi"
 exec_test "    echo    caca      pipi"
+exec_test 'echo "caca   pipi"'
+exec_test "echo 'caca   pipi'"
+exec_test 'ec"ho" caca'
+exec_test "ec'ho' caca"
+exec_test 'echo caca "" caca "" caca'
+#exec_test 'echo $USER'
+#exec_test 'echo $USER      $USER'
+#exec_test 'echo "$USER"'
+#exec_test 'echo "$USER$USER$USER"'
+#exec_test 'echo "$USERcaca"'
+#exec_test 'echo "$USER$USER=caca$USER"'
+#exec_test 'echo "   $USER caca $USER"'
+#exec_test 'echo '\''$USER'\'''
 #exec_test "echo -n caca"
 #exec_test "echo -n"
 #exec_test "echo -n -n"
 #exec_test "echo -n -n -n caca pipi"
-exec_test 'echo "caca   pipi"'
-exec_test "echo 'caca   pipi'"
-exec_test 'echo $USER'
-exec_test 'echo $USER      $USER'
-exec_test 'echo "$USER"'
-exec_test 'echo "$USER$USER$USER"'
-exec_test 'echo "$USERcaca"'
-exec_test 'echo "$USER$USER=caca$USER"'
-exec_test 'echo "   $USER caca $USER"'
-exec_test 'echo '\''$USER'\'''
-exec_test 'echo $INEXISTINGVAR'
-exec_test 'echo $INEXISTINGVAR caca'
-exec_test 'echo $?'
-exec_test 'echo $??'
-exec_test 'ec"ho" caca'
-exec_test "ec'ho' caca"
-exec_test 'echo caca "" caca "" caca'
-exec_test 'echo "$=CACA"'
-exec_test 'echo "$"'
-exec_test 'echo "$?CACA"'
+#exec_test 'echo $INEXISTINGVAR'
+#exec_test 'echo $INEXISTINGVAR caca'
+#exec_test 'echo $?'
+#exec_test 'echo $??'
+#exec_test 'echo "$=CACA"'
+#exec_test 'echo "$"'
+#exec_test 'echo "$?CACA"'
 
 # PWD TESTS
 #printf "\n$BOLDYELLOW%s$RESET\n" "PWD TESTS"

@@ -62,8 +62,10 @@ typedef struct s_param
 /** ----- PARSING ----- **/
 t_token	*ft_readline_to_tokens(char *readline);
 char	**ft_split_tokens(char const *s);
+t_token	*ft_apply_single_quote(t_token *list, int is_double_quote);
 int		ft_contains_only_space(const char *s);
 int		ft_is_space(char c);
+int		ft_is_quote(char c);
 int		ft_is_special_char(char c);
 char	*ft_trim_str(const char *str);
 

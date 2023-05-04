@@ -45,6 +45,19 @@ int	ft_is_space(char c)
 	return (0);
 }
 
+/**
+ * Checks if a given character is a quote character.
+ * @param char c to check.
+ *
+ * @return int 1 if the character is a quote character, otherwise 0.
+*/
+int	ft_is_quote(char c)
+{
+	if (c == '\'' || c == '\"')
+		return (1);
+	return (0);
+}
+
 int	ft_is_special_char(char c)
 {
 	int		i;
