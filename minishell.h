@@ -6,7 +6,7 @@
 /*   By: nleggeri <nleggeri@42.student.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 13:09:55 by synicole          #+#    #+#             */
-/*   Updated: 2023/04/29 02:36:05 by nleggeri         ###   ########.fr       */
+/*   Updated: 2023/05/03 19:28:04 by nleggeri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ typedef enum part
 	QUOTE,
 	DQUOTE,
 	DKNOWN,
+	FILE_OPEN,
 }	t_part;
 
 typedef struct s_token
@@ -157,10 +158,26 @@ void	launch_pwd(t_token *env, t_token *list);
 void	launch_cd(t_token *env, t_token *list);
 
 /*************check_if_command********************/
+void	fork_in_child_proc(char *str, char **envp, char **args, char *cmd_path);
+void	child_process_bis(char **args, char *path, t_token *env, t_token *tmp);
+void	child_process(char *cmd, char *cmd_path, t_token *env, t_token *list);
 void	check_if_command(t_token *list, t_token *env);
+void	parent_process(pid_t pid);
 char	**token_to_char(t_token *env);
+
+/*************check_if_command_bis****************/
+void	find_cmd_path_ext(char *dir, char *cmd, char **cmd_path);
+void	find_cmd_path(char *cmd, char **cmd_path, t_token *env);
 
 /*************check_space********************/
 int		is_space(const char *s);
+
+int		check_if_pipe_in_list(t_token *list);
+void	pipe_cmd(t_token *list, t_token *env);
+char	*exist_of_cmd(char **env, char *cmd);
+int		check_many_cmd(t_token *list);
+char	**list_to_tab_pipe(t_token *list);
+int		number_of_pipe(t_token *list);
+int		size_of_tab_for_pipe(t_token *list);
 
 #endif

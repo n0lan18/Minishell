@@ -3,61 +3,71 @@
 /*                                                        :::      ::::::::   */
 /*   check_if_command.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: synicole <synicole@student.42lausanne.ch>  +#+  +:+       +#+        */
+/*   By: nleggeri <nleggeri@42.student.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/27 08:51:27 by synicole          #+#    #+#             */
-/*   Updated: 2023/04/27 08:51:30 by synicole         ###   ########.fr       */
+/*   Updated: 2023/05/03 19:35:22 by nleggeri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-static void	find_cmd_path_ext(char *dir, char *cmd, char **cmd_path)
+/*Fonction qui execute la commande avec son fichier*/
+void	fork_in_child_proc(char *str, char **envp, char **args, char *cmd_path)
 {
-	char	*tmp_path;
+	int	fd_open;
 
-	while (dir != NULL)
+	fd_open = open(str, O_RDONLY);
+	if (fd_open == -1)
 	{
-		tmp_path = malloc(strlen(dir) + strlen(cmd) + 2);
-		sprintf(tmp_path, "%s/%s", dir, cmd);
-		if (access(tmp_path, X_OK) == 0)
-		{
-			*cmd_path = tmp_path;
-			break ;
-		}
-		free(tmp_path);
-		dir = strtok(NULL, ":");
+		perror(str);
+		exit(1);
+	}
+	if (dup2(fd_open, STDIN_FILENO) == -1)
+	{
+		perror("dup2");
+		exit(1);
+	}
+	if (execve(cmd_path, args, envp) == -1)
+	{
+		perror("execve");
+		exit(1);
 	}
 }
 
-static void	find_cmd_path(char *cmd, char **cmd_path, t_token *env)
+/*La fonction executue la suite de la fonction child_process. Elle fork a chaque
+fois qu'elle rencontre un fichier et léxecute avec la commande qu'elle genere*/
+void	child_process_bis(char **args, char *path, t_token *env, t_token *tmp)
 {
-	char	*path;
-	char	*path_copy;
-	char	*dir;
-	t_token	*tmp;
+	pid_t	pid;
+	char	**envp;
 
-	tmp = env;
+	tmp = tmp->next;
 	while (tmp)
 	{
-		if (strncmp(tmp->str, "PATH=", 5) == 0)
+		if (tmp->type != 0)
 		{
-			path = tmp->str + 5;
-			path_copy = strdup(path);
-			dir = strtok(path_copy, ":");
-			find_cmd_path_ext(dir, cmd, cmd_path);
-			free(path_copy);
-			if (cmd_path != NULL)
-				break ;
+			envp = token_to_char(env);
+			pid = fork();
+			if (pid < 0)
+			{
+				perror("fork");
+				exit(1);
+			}
+			else if (pid == 0)
+				fork_in_child_proc(tmp->str, envp, args, path);
+			else
+				parent_process(pid);
 		}
 		tmp = tmp->next;
 	}
 }
 
-static void	child_process(char *cmd, char *cmd_path, t_token *env)
+/*Execute la commande avec son ou ses fichier avec un fork*/
+void	child_process(char *cmd, char *cmd_path, t_token *env, t_token *list)
 {
+	t_token	*tmp;
 	char	*args[2];
-	char	**envp;
 
 	args[0] = cmd;
 	args[1] = NULL;
@@ -66,15 +76,12 @@ static void	child_process(char *cmd, char *cmd_path, t_token *env)
 		printf("minishell: %s: command not found\n", cmd);
 		exit(1);
 	}
-	envp = token_to_char(env);
-	if (execve(cmd_path, args, envp) == -1)
-	{
-		perror("execve");
-		exit(1);
-	}
+	tmp = list;
+	child_process_bis(args, cmd_path, env, tmp);
+	exit(EXIT_SUCCESS);
 }
 
-static void	parent_process(pid_t pid)
+void	parent_process(pid_t pid)
 {
 	int	status;
 
@@ -88,6 +95,7 @@ static void	parent_process(pid_t pid)
 		printf("Failed command by signal %d\n", WTERMSIG(status));
 }
 
+/*Commande d'entree, elle fork pour executer la commande trouvée*/
 void	check_if_command(t_token *list, t_token *env)
 {
 	char	*cmd;
@@ -104,7 +112,7 @@ void	check_if_command(t_token *list, t_token *env)
 		return ;
 	}
 	else if (pid == 0)
-		child_process(cmd, cmd_path, env);
+		child_process(cmd, cmd_path, env, list);
 	else
 		parent_process(pid);
 }

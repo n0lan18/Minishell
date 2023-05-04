@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   search_cmd.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nleggeri <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: nleggeri <nleggeri@42.student.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 16:59:44 by nleggeri          #+#    #+#             */
-/*   Updated: 2023/03/30 17:00:46 by nleggeri         ###   ########.fr       */
+/*   Updated: 2023/05/03 11:49:32 by nleggeri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ static int	search_of_type_cmd_ext(char **envp, char *tab)
 	while (envp[++i])
 	{
 		temp = join_all_path(envp[i], tab, '/');
-		if (access(temp, F_OK) == 0)
+		if (access(temp, X_OK) == 0)
 		{
 			free(temp);
 			free_double_tab(envp);
@@ -84,7 +84,7 @@ int	search_of_type_cmd(t_token *env, char *tab)
 
 	i = -1;
 	tmp = env;
-	while (i++ < search_path_in_env(env))
+	while (++i < search_path_in_env(env))
 		tmp = tmp->next;
 	envpi = &tmp->str[5];
 	envp = ft_split(envpi, ':');

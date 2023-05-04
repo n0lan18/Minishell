@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   which_type_of_case.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nleggeri <nleggeri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nleggeri <nleggeri@42.student.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/16 23:10:19 by nleggeri          #+#    #+#             */
-/*   Updated: 2023/04/16 23:10:39 by nleggeri         ###   ########.fr       */
+/*   Updated: 2023/05/03 11:44:59 by nleggeri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	init_type_in_list(t_token *list, t_token *env)
 	tmp = list;
 	while (tmp)
 	{
-		tmp->type = search_which_type(tmp->str, list, env);
+		tmp->type = search_which_type(tmp->str, tmp, env);
 		tmp = tmp->next;
 	}
 }
@@ -47,6 +47,11 @@ int	search_which_type(char *str, t_token *list, t_token *env)
 		list->type = CHEVRON;
 	else if (search_of_type_cmd(env, str) == 0)
 		list->type = CMD;
+	else if (open(str, O_RDONLY) != -1)
+	{
+		list->type = FILE_OPEN;
+		close(open(str, O_RDONLY));
+	}
 	else
 		list->type = DKNOWN;
 	return (list->type);

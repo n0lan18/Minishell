@@ -6,7 +6,7 @@
 /*   By: nleggeri <nleggeri@42.student.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/28 10:48:40 by nleggeri          #+#    #+#             */
-/*   Updated: 2023/04/29 01:27:20 by nleggeri         ###   ########.fr       */
+/*   Updated: 2023/05/03 11:46:02 by nleggeri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,6 +119,7 @@ t_token	*rewrite(t_token *list, int num)
 
 t_token	*good_parse(t_token *list, t_token *env)
 {
+	(void)env;
 	list = rewrite(list, 0);
 	list = replace_if_dollar(list, env);
 	list = rewrite(list, 1);

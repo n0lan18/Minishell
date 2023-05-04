@@ -6,7 +6,7 @@
 /*   By: nleggeri <nleggeri@42.student.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/10 11:23:50 by synicole          #+#    #+#             */
-/*   Updated: 2023/04/29 01:57:37 by nleggeri         ###   ########.fr       */
+/*   Updated: 2023/05/03 17:08:05 by nleggeri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,8 +64,11 @@ int	main(int argc, char **argv, char **envp)
 			if (list)
 			{
 				init_type_in_list(list, env);
+			//	if (check_if_pipe_in_list(list) == 1)
+			//		
 				if (!check_if_built(list, env))
 					check_if_command(list, env);
+			//	pipe_cmd(list, env);	
 				while (list)
 				{
 					printf("(TOKEN)[%s] -> (TYPE)[%d]\n", list->str, list->type);
