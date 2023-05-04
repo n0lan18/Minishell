@@ -13,29 +13,12 @@
 #include "../../minishell.h"
 
 /**
- * Initializes an array of tokens from a string array
+ * Convert a string array to an array of tokens
  * @param char **tab containing individual tokens
  * @param t_token **tokens a pointer to the first element in the token array
  *
  * @return void
 */
-//static void	ft_init_tokens(char **tab, t_token **list)
-//{
-//	int		i;
-//	int		j;
-//	char	**tab_trimmed;
-//
-//	i = 0;
-//	while (tab[i])
-//	{
-//		j = 0;
-//		tab_trimmed = ft_split_in_ft_split(tab[i]);
-//		while (tab_trimmed[j])
-//			*list = ft_add_new_token(*list, tab_trimmed[j++]);
-//		i++;
-//	}
-//}
-
 static void	ft_tab_to_tokens(char **tab, t_token **list)
 {
 	int		i;

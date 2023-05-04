@@ -12,7 +12,7 @@
 
 #include "../minishell.h"
 
-char	*add_var_and_word(char *str, char *str1, char *tab)
+char	*add_var_and_word(char *str, const char *str1, char *tab)
 {
 	t_param	inc;
 
@@ -25,7 +25,7 @@ char	*add_var_and_word(char *str, char *str1, char *tab)
 		tab = "💩";
 		return (tab);
 	}
-	inc.str = ft_strcpy_new(inc.str, tab, 0, ft_strlen(tab));
+	inc.str = ft_strcpy_new(inc.str, tab, 0, (int)ft_strlen(tab));
 	free(str);
 	while (str1[inc.j])
 		inc.j++;
@@ -43,21 +43,20 @@ char	*add_var_and_word(char *str, char *str1, char *tab)
 
 char	*search_var_in_env(char *str, t_token *env)
 {
-	t_param	inc;
+	int		start;
+	int		len;
 	t_token	*tmp;
 
-	inc.j = 0;
-	inc.deb = 0;
 	tmp = env;
 	while (tmp)
 	{
-		inc.x = compare_length_in_env(tmp->str);
+		len = compare_length_in_env(tmp->str);
 		if (ft_strncmp(str, tmp->str, ft_strlen(str)) == 0)
 		{
-			inc.deb = inc.x + 1;
-			while (tmp->str[inc.x])
-				inc.x++;
-			str = ft_strcpy_new(str, tmp->str, inc.deb, inc.x);
+			start = len + 1;
+			while (tmp->str[len])
+				len++;
+			str = ft_strcpy_new(str, tmp->str, start, len);
 			return (str);
 		}
 		tmp = tmp->next;
@@ -65,7 +64,7 @@ char	*search_var_in_env(char *str, t_token *env)
 	return (NULL);
 }
 
-int	compare_length_in_env(char *env)
+int	compare_length_in_env(const char *env)
 {
 	int	i;
 

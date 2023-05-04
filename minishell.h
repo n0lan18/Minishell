@@ -105,8 +105,8 @@ char	*ft_strcpy_new(char *dst, char *str, int deb, int end);
 
 /*************Check_dollar_in_list_bis****/
 int		search_dollar_in_list(t_token *list);
-int		compare_length_in_env(char *env);
-char	*add_var_and_word(char *str, char *str1, char *tab);
+int		compare_length_in_env(const char *env);
+char	*add_var_and_word(char *str, const char *str1, char *tab);
 char	*search_var_in_env(char *str, t_token *env);
 
 /*************Rewrite_list*****************/
