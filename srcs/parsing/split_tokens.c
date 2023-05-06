@@ -13,39 +13,6 @@
 #include "../../minishell.h"
 
 /**
- * Counts the number of words in a string,
- * using space and special characters as delimiters.
- * @param char *s string to be split
- *
- * @return int number of words in the string
- */
-static int	ft_count_words(const char *s)
-{
-	int	num_words;
-	int	i;
-
-	num_words = 0;
-	i = 0;
-	while (s[i])
-	{
-		if (ft_is_space(s[i]))
-			while (ft_is_space(s[i]) && s[i])
-				i++;
-		else if (ft_is_special_char(s[i]))
-		{
-			num_words++;
-			i++;
-			continue ;
-		}
-		else
-			while (!ft_is_space(s[i]) && s[i] && !ft_is_special_char(s[i]))
-				i++;
-		num_words++;
-	}
-	return (num_words);
-}
-
-/**
  * Creates a tab containing the split string.
  * @param char *s to be split
  * @param char **split_tab to be filled
@@ -64,16 +31,11 @@ static char	**ft_create_split_tab(char const *s, char **split_tab)
 	{
 		start = i;
 		if (ft_is_space(s[i]))
-			while (ft_is_space(s[i]) && s[i])
-				i++;
-		else if (ft_is_special_char(s[i]))
-		{
-			split_tab[j++] = ft_substr(s, i, 1);
-			i++;
-			continue ;
-		}
+			i = ft_skip_spaces(s, i);
+		else if (s[i] == '\'' || s[i] == '\"')
+			i = ft_skip_quotes(s, i, s[i]);
 		else
-			while (!ft_is_space(s[i]) && s[i] && !ft_is_special_char(s[i]))
+			while (!ft_is_space(s[i]) && !ft_is_quotes(s[i]) && s[i])
 				i++;
 		split_tab[j++] = ft_substr(s, start, i - start);
 	}
@@ -82,7 +44,8 @@ static char	**ft_create_split_tab(char const *s, char **split_tab)
 }
 
 /**
- * Splits a string into an array of strings, using space as a delimiter.
+ * Splits a string into an array of strings,
+ * using space and quotes as delimiters.
  * @param char *s string to be split
  *
  * @return char **tab containing the split string

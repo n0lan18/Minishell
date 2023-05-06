@@ -145,13 +145,13 @@ t_token	*ft_apply_single_quote(t_token *list, int is_double_quote)
 	new = NULL;
 	while (list)
 	{
-		if ((ft_is_quote(list->str[0]) && list->next == NULL)
+		if ((ft_is_quotes(list->str[0]) && list->next == NULL)
 			|| (ft_is_space(list->str[0]) && list->next == NULL))
 		{
 			new = ft_add_new_token(new, list->str);
 			break ;
 		}
-		if (ft_is_quote(list->str[0]) || ft_is_space(list->str[0])
+		if (ft_is_quotes(list->str[0]) || ft_is_space(list->str[0])
 			|| list->str[0] == '$')
 			new = rewrite_bis(list, new, list->str[0], is_double_quote);
 		else

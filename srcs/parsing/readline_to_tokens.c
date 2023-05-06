@@ -45,6 +45,6 @@ t_token	*ft_readline_to_tokens(char *readline)
 	tokens = NULL;
 	split_space_tab = ft_split_tokens(ft_trim_str(readline));
 	ft_tab_to_tokens(split_space_tab, &tokens);
-//	ft_assign_type_for_each_token(tokens);
+	ft_assign_type_for_each_token(tokens);
 	return (tokens);
 }

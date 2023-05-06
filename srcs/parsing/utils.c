@@ -51,7 +51,7 @@ int	ft_is_space(char c)
  *
  * @return int 1 if the character is a quote character, otherwise 0.
 */
-int	ft_is_quote(char c)
+int	ft_is_quotes(char c)
 {
 	if (c == '\'' || c == '\"')
 		return (1);
