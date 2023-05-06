@@ -74,13 +74,16 @@
 
 int	g_last_exit_code;
 
-int	main(void)
+int	main(int argc, char **argv, char **envp)
 {
 	char	*prompt_output;
 	t_env	env;
 
-	ft_init_env(&env, NULL);
+	(void)argc;
+	(void)argv;
+	ft_init_env(&env, envp);
 	prompt_output = "";
+	db_print_tab(env.envp);
 	while (prompt_output != NULL)
 	{
 		ft_init_signals();

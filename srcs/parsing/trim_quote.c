@@ -23,9 +23,9 @@ void	ft_trim_quote(t_env *env)
 	current = env->token;
 	while (current)
 	{
-		if (current->quote == E_SINGLE)
+		if (current->quote == E_SINGLE_QUOTE)
 			current->str = ft_strtrim(current->str, "\'");
-		else if (current->quote == E_DOUBLE)
+		else if (current->quote == E_DOUBLE_QUOTE)
 			current->str = ft_strtrim(current->str, "\"");
 		current = current->next;
 	}

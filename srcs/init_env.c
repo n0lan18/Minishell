@@ -23,5 +23,6 @@ void	ft_init_env(t_env *env, char **envp)
 {
 	(void)envp;
 	*env = (t_env){};
+	env->envp = envp;
 	g_last_exit_code = EXIT_SUCCESS;
 }

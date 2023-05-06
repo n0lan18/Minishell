@@ -21,3 +21,9 @@ void	ft_close(void)
 	clear_history();
 	exit(EXIT_SUCCESS);
 }
+
+void	ft_exit(int status, char *message)
+{
+	ft_putstr_fd(message, STDERR_FILENO);
+	exit(status);
+}

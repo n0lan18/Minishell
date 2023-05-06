@@ -34,9 +34,9 @@ enum e_token_type
 };
 
 enum e_token_quote {
-	E_NONE,
-	E_SINGLE,
-	E_DOUBLE
+	E_NONE_QUOTE,
+	E_SINGLE_QUOTE,
+	E_DOUBLE_QUOTE
 };
 
 /** ----- STRUCTURES ----- **/
@@ -91,6 +91,7 @@ void	ft_run_export(t_token *env, t_token *list);
 
 /** ----- EXIT ----- **/
 void	ft_close(void);
+void	ft_exit(int status, char *message);
 
 /** ----- DEBUG ----- **/
 void	db_print_tab(char **tab);

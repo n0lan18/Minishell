@@ -22,9 +22,11 @@ void	db_print_tab(char **tab)
 {
 	int	i;
 
+	printf("\n--- DEBUG: PRINT TAB ---\n");
 	i = 0;
 	while (tab[i])
 		printf("[%s]\n", tab[i++]);
+	printf("\n");
 }
 
 /**
@@ -45,4 +47,5 @@ void	db_print_token(t_token *token)
 			current->str, current->type, current->quote);
 		current = current->next;
 	}
+	printf("\n");
 }

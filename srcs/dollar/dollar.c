@@ -12,14 +12,15 @@
 
 #include "../../minishell.h"
 
-void	ft_dollar(t_env *env)
-{
-	t_token	*start;
-
-	start = env->token;
-	while (env->token)
-	{
-		env->token = env->token->next;
-	}
-	env->token = start;
-}
+//void	ft_dollar(t_env *env)
+//{
+//	t_token	*current;
+//
+//	current = env->token;
+//	while (current)
+//	{
+//		if (current->type == E_STRING && current->quote == E_NONE_QUOTE)
+//			ft_replace_dollar(env, current);
+//		current = current->next;
+//	}
+//}

@@ -13,7 +13,7 @@
 #include "../../minishell.h"
 
 /**
- * Merges two tokens.
+ * Merges current token with the next one.
  * @param current
  *
  * @return void
