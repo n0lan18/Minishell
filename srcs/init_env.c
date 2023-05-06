@@ -1,19 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing.c                                          :+:      :+:    :+:   */
+/*   init_env.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: synicole <synicole@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/06 21:27:14 by synicole          #+#    #+#             */
-/*   Updated: 2023/05/06 21:27:15 by synicole         ###   ########.fr       */
+/*   Created: 2023/05/06 21:31:24 by synicole          #+#    #+#             */
+/*   Updated: 2023/05/06 21:31:26 by synicole         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../minishell.h"
+#include "../minishell.h"
 
-void	ft_parsing(t_env *env, char *readline)
+/**
+ * Initializes the environment variables.
+ * (t_env){} : initializes all the fields to 0.
+ *
+ * @param env pointer to the t_env structure to be initialized
+ * @param envp array of strings containing the environment variables
+ */
+void	ft_init_env(t_env *env, char **envp)
 {
-	ft_readline_to_token(env, readline);
-	db_print_token(env->token);
+	(void)envp;
+	*env = (t_env){};
+	g_last_exit_code = EXIT_SUCCESS;
 }

@@ -42,6 +42,12 @@ enum e_token_quote {
 };
 
 /** ----- STRUCTURES ----- **/
+typedef struct s_env
+{
+	char			**envp;
+	struct s_token	*token;
+}	t_env;
+
 typedef struct s_token
 {
 	int				type;
@@ -62,12 +68,16 @@ typedef struct s_param
 	char			*str;
 }	t_param;
 
+/** ----- ENV ----- **/
+void	ft_init_env(t_env *env, char **envp);
+
 /** ----- PARSING ----- **/
-t_token	*ft_readline_to_tokens(char *readline);
+void	ft_parsing(t_env *env, char *readline);
+void	ft_readline_to_token(t_env *env, char *readline);
 int		ft_count_words(const char *s);
 int		ft_skip_spaces(const char *s, int i);
 int		ft_skip_quotes(const char *s, int i, char quote);
-char	**ft_split_tokens(char const *s);
+char	**ft_split_token(char const *s);
 t_token	*ft_apply_single_quote(t_token *list, int is_double_quote);
 int		ft_contains_only_space(const char *s);
 int		ft_is_space(char c);

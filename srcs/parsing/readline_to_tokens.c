@@ -19,16 +19,16 @@
  *
  * @return void
 */
-static void	ft_tab_to_tokens(char **tab, t_token **list)
+static void	ft_array_to_token(char **tab, t_env *env)
 {
 	int		i;
 
 	i = 0;
-	*list = ft_new_token(tab[i]);
+	env->token = ft_new_token(tab[i]);
 	i++;
 	while (tab[i])
 	{
-		ft_add_token_end(list, ft_new_token(tab[i]));
+		ft_add_token_end(&env->token, ft_new_token(tab[i]));
 		i++;
 	}
 }
@@ -37,16 +37,12 @@ static void	ft_tab_to_tokens(char **tab, t_token **list)
  * Converts a string input to an array of tokens
  * @param char *readline to be converted to tokens
  *
- * @return A pointer to the first token, or NULL if no tokens were created
+ * @return void
 */
-t_token	*ft_readline_to_tokens(char *readline)
+void	ft_readline_to_token(t_env *env, char *readline)
 {
 	char	**split_space_tab;
-	t_token	*tokens;
 
-	tokens = NULL;
-	split_space_tab = ft_split_tokens(ft_trim_str(readline));
-	db_print_tab(split_space_tab);
-	ft_tab_to_tokens(split_space_tab, &tokens);
-	return (tokens);
+	split_space_tab = ft_split_token(ft_trim_str(readline));
+	ft_array_to_token(split_space_tab, env);
 }

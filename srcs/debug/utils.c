@@ -35,7 +35,14 @@ void	db_print_tab(char **tab)
 */
 void	db_print_token(t_token *token)
 {
-	if (token)
+	t_token	*current;
+
+	printf("\n--- DEBUG: PRINT TOKEN ---\n");
+	current = token;
+	while (current)
+	{
 		printf("(STR)[%s] -> (TYPE)[%d] -> (QUOTE)[%d]\n",
-			token->str, token->type, token->quote);
+			current->str, current->type, current->quote);
+		current = current->next;
+	}
 }

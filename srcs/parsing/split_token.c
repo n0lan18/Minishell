@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   split_space.c                                      :+:      :+:    :+:   */
+/*   split_token.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: synicole <synicole@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -50,7 +50,7 @@ static char	**ft_create_split_tab(char const *s, char **split_tab)
  *
  * @return char **tab containing the split string
 */
-char	**ft_split_tokens(char const *s)
+char	**ft_split_token(char const *s)
 {
 	char	**split_tab;
 

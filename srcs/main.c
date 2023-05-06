@@ -77,8 +77,9 @@ int	g_last_exit_code;
 int	main(void)
 {
 	char	*prompt_output;
-	t_token	*tokens;
+	t_env	env;
 
+	ft_init_env(&env, NULL);
 	prompt_output = "";
 	while (prompt_output != NULL)
 	{
@@ -86,12 +87,7 @@ int	main(void)
 		prompt_output = readline("minishell-1.0$ ");
 		if (!prompt_output)
 			ft_close();
-		tokens = ft_readline_to_tokens(prompt_output);
-		while (tokens)
-		{
-			db_print_token(tokens);
-			tokens = tokens->next;
-		}
+		ft_parsing(&env, prompt_output);
 		add_history(prompt_output);
 	}
 	return (g_last_exit_code);
