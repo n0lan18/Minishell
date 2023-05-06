@@ -14,7 +14,7 @@
 
 static void	ft_print_token(t_token *tmp)
 {
-	if (tmp->type == T_SPACE)
+	if (tmp->type == E_SPACE)
 		printf(" ");
 	else
 		printf("%s", tmp->str);

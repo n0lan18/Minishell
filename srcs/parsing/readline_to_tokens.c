@@ -24,9 +24,11 @@ static void	ft_tab_to_tokens(char **tab, t_token **list)
 	int		i;
 
 	i = 0;
+	*list = ft_new_token(tab[i]);
+	i++;
 	while (tab[i])
 	{
-		*list = ft_add_new_token(*list, tab[i]);
+		ft_add_token_end(list, ft_new_token(tab[i]));
 		i++;
 	}
 }
@@ -44,7 +46,7 @@ t_token	*ft_readline_to_tokens(char *readline)
 
 	tokens = NULL;
 	split_space_tab = ft_split_tokens(ft_trim_str(readline));
+	db_print_tab(split_space_tab);
 	ft_tab_to_tokens(split_space_tab, &tokens);
-	ft_assign_type_for_each_token(tokens);
 	return (tokens);
 }

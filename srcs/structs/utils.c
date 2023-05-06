@@ -12,6 +12,20 @@
 
 #include "../../minishell.h"
 
+t_token	*ft_new_token(char *str)
+{
+	t_token	*new;
+
+	new = malloc(sizeof(t_token));
+	if (!new)
+		return (NULL);
+	new->str = str;
+	new->type = ft_get_token_type(str);
+	new->quote = ft_get_token_quote(str);
+	new->next = NULL;
+	return (new);
+}
+
 /**
  * Adds a new token at the end of the given list.
  * @param t_token *list the current list of tokens to add to
@@ -19,24 +33,17 @@
  *
  * @return t_token* a pointer to the updated list of tokens
 */
-t_token	*ft_add_new_token(t_token *list, char *tab)
+void	ft_add_token_end(t_token **lst, t_token *token)
 {
-	t_token	*new_token;
-	t_token	*current_token;
+	t_token	*current;
 
-	new_token = malloc(sizeof(t_token));
-	if (!new_token)
-		return (NULL);
-	new_token->str = tab;
-	new_token->next = NULL;
-	if (list == NULL)
-		list = new_token;
+	current = *lst;
+	if (!current)
+		return ;
 	else
 	{
-		current_token = list;
-		while (current_token->next)
-			current_token = current_token->next;
-		current_token->next = new_token;
+		while (current->next)
+			current = current->next;
+		current->next = token;
 	}
-	return (list);
 }

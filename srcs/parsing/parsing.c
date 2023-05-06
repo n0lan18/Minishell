@@ -1,41 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   debug.c                                            :+:      :+:    :+:   */
+/*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: synicole <synicole@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/02 14:54:47 by synicole          #+#    #+#             */
-/*   Updated: 2023/05/02 14:54:50 by synicole         ###   ########.fr       */
+/*   Created: 2023/05/06 21:27:14 by synicole          #+#    #+#             */
+/*   Updated: 2023/05/06 21:27:15 by synicole         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-/**
- * Prints the content of a char **tab.
- * @param char **tab
- *
- * @return void
-*/
-void	db_print_tab(char **tab)
+void	ft_parsing(t_minishell *ms, char *str_prompt)
 {
-	int	i;
-
-	i = 0;
-	while (tab[i])
-		printf("[%s]\n", tab[i++]);
-}
-
-/**
- * Prints the content of a token.
- * @param t_token *token
- *
- * @return void
-*/
-void	db_print_token(t_token *token)
-{
-	if (token)
-		printf("(STR)[%s] -> (TYPE)[%d] -> (QUOTE)[%d]\n",
-			token->str, token->type, token->quote);
+	ft_readline_to_tokens(prompt_output);
 }

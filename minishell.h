@@ -26,24 +26,27 @@ extern int	g_last_exit_code;
 # define SPECIAL_CHARS "$><|'\""
 
 /** ----- ENUM ----- **/
-typedef enum part
+enum e_token_type
 {
-	T_SPACE,
-	T_BUILTIN,
-	T_QUOTE,
-	T_DQUOTE,
-	T_DOLLAR,
-	T_EXIT_CODE,
-	T_PIPE,
-	T_CHEVRON,
-	T_DKNOWN,
-}	t_part;
+	E_STRING,
+	E_SPACE,
+	E_BUILTIN,
+	E_PIPE,
+	E_REDIRECTION,
+};
+
+enum e_token_quote {
+	E_NONE,
+	E_SINGLE,
+	E_DOUBLE
+};
 
 /** ----- STRUCTURES ----- **/
 typedef struct s_token
 {
 	int				type;
 	char			*str;
+	int				quote;
 	struct s_token	*next;
 }	t_token;
 
@@ -71,15 +74,15 @@ int		ft_is_space(char c);
 int		ft_is_quotes(char c);
 int		ft_is_special_char(char c);
 char	*ft_trim_str(const char *str);
-
-/** ----- TYPES ----- **/
-void	ft_assign_type_for_each_token(t_token *list);
+int		ft_get_token_type(const char *str);
+int		ft_get_token_quote(const char *str);
 
 /** ----- SIGNALS ----- **/
 void	ft_init_signals(void);
 
 /** ----- STRUCTS ----- **/
-t_token	*ft_add_new_token(t_token *list, char *tab);
+t_token	*ft_new_token(char *str);
+void	ft_add_token_end(t_token **lst, t_token *token);
 
 /** ----- BUILTIN ----- **/
 void	ft_run_echo(t_token *list);

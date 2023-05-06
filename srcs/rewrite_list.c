@@ -41,55 +41,55 @@ t_token	*hey_follow_tmp(t_token *list, char c, int num)
 	return (list);
 }
 
-t_token	*rewrite_bis(t_token *tmp, t_token *new, char c, int is_double_quote)
-{
-	char	*str;
+//t_token	*rewrite_bis(t_token *tmp, t_token *new, char c, int is_double_quote)
+//{
+//	char	*str;
+//
+//	printf("rewrite_bis\n");
+//	str = NULL;
+//	if (c == ' ' || c == '$' || (c == '"' && is_double_quote == 0))
+//			new = ft_add_new_token(new, tmp->str);
+//	else
+//	{
+//		tmp = tmp->next;
+//		if (tmp->str[0] == c)
+//			return (new);
+//		str = ft_strcpy_new(str, tmp->str, 0, ft_strlen(tmp->str));
+//		tmp = tmp->next;
+//		while (tmp)
+//		{
+//			if (tmp->str[0] == c)
+//				break ;
+//			str = ft_strjoin(str, tmp->str);
+//			tmp = tmp->next;
+//		}
+//		new = ft_add_new_token(new, str);
+//	}
+//	return (new);
+//}
 
-	printf("rewrite_bis\n");
-	str = NULL;
-	if (c == ' ' || c == '$' || (c == '"' && is_double_quote == 0))
-			new = ft_add_new_token(new, tmp->str);
-	else
-	{
-		tmp = tmp->next;
-		if (tmp->str[0] == c)
-			return (new);
-		str = ft_strcpy_new(str, tmp->str, 0, ft_strlen(tmp->str));
-		tmp = tmp->next;
-		while (tmp)
-		{
-			if (tmp->str[0] == c)
-				break ;
-			str = ft_strjoin(str, tmp->str);
-			tmp = tmp->next;
-		}
-		new = ft_add_new_token(new, str);
-	}
-	return (new);
-}
-
-t_token	*rewrite_bis_bis(t_token *tmp, t_token *new)
-{
-	char	*str;
-
-	printf("rewrite_bis_bis\n");
-	str = NULL;
-	str = tmp->str;
-	tmp = tmp->next;
-	while (tmp)
-	{
-		if (tmp->str[0] == 39 || tmp->str[0] == '"' || \
-		tmp->str[0] == ' ' || tmp->str[0] == '$')
-			break ;
-		str = ft_strjoin(str, tmp->str);
-		if (tmp->str[0] == 39 || tmp->str[0] == '"' || \
-		tmp->str[0] == ' ' || tmp->str[0] == '$')
-			break ;
-		tmp = tmp->next;
-	}
-	new = ft_add_new_token(new, str);
-	return (new);
-}
+//t_token	*rewrite_bis_bis(t_token *tmp, t_token *new)
+//{
+//	char	*str;
+//
+//	printf("rewrite_bis_bis\n");
+//	str = NULL;
+//	str = tmp->str;
+//	tmp = tmp->next;
+//	while (tmp)
+//	{
+//		if (tmp->str[0] == 39 || tmp->str[0] == '"' || \
+//		tmp->str[0] == ' ' || tmp->str[0] == '$')
+//			break ;
+//		str = ft_strjoin(str, tmp->str);
+//		if (tmp->str[0] == 39 || tmp->str[0] == '"' || \
+//		tmp->str[0] == ' ' || tmp->str[0] == '$')
+//			break ;
+//		tmp = tmp->next;
+//	}
+//	new = ft_add_new_token(new, str);
+//	return (new);
+//}
 
 //t_token	*rewrite(t_token *list, int is_double_quote)
 //{
@@ -138,37 +138,37 @@ t_token	*rewrite_bis_bis(t_token *tmp, t_token *new)
  * modifiée et supprime l'ancienne liste de tokens en appelant
  * la fonction "free_list".
  */
-t_token	*ft_apply_single_quote(t_token *list, int is_double_quote)
-{
-	t_token	*new;
+//t_token	*ft_apply_single_quote(t_token *list, int is_double_quote)
+//{
+//	t_token	*new;
+//
+//	new = NULL;
+//	while (list)
+//	{
+//		if ((ft_is_quotes(list->str[0]) && list->next == NULL)
+//			|| (ft_is_space(list->str[0]) && list->next == NULL))
+//		{
+//			new = ft_add_new_token(new, list->str);
+//			break ;
+//		}
+//		if (ft_is_quotes(list->str[0]) || ft_is_space(list->str[0])
+//			|| list->str[0] == '$')
+//			new = rewrite_bis(list, new, list->str[0], is_double_quote);
+//		else
+//			new = rewrite_bis_bis(list, new);
+//		list = hey_follow_tmp(list, list->str[0], is_double_quote);
+//	}
+//	free_list(list);
+//	return (new);
+//}
 
-	new = NULL;
-	while (list)
-	{
-		if ((ft_is_quotes(list->str[0]) && list->next == NULL)
-			|| (ft_is_space(list->str[0]) && list->next == NULL))
-		{
-			new = ft_add_new_token(new, list->str);
-			break ;
-		}
-		if (ft_is_quotes(list->str[0]) || ft_is_space(list->str[0])
-			|| list->str[0] == '$')
-			new = rewrite_bis(list, new, list->str[0], is_double_quote);
-		else
-			new = rewrite_bis_bis(list, new);
-		list = hey_follow_tmp(list, list->str[0], is_double_quote);
-	}
-	free_list(list);
-	return (new);
-}
-
-t_token	*good_parse(t_token *list, t_token *env)
-{
-	(void)env;
+//t_token	*good_parse(t_token *list, t_token *env)
+//{
+//	(void)env;
 //	list = rewrite(list, 0);
 //	list = replace_if_dollar(list, env);
 //	list = rewrite(list, 1);
-	list = ft_apply_single_quote(list, 1);
-	list = together_if_not_space(list);
-	return (list);
-}
+//	list = ft_apply_single_quote(list, 1);
+//	list = together_if_not_space(list);
+//	return (list);
+//}
