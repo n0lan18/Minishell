@@ -23,8 +23,6 @@
 
 extern int	g_last_exit_code;
 
-# define SPECIAL_CHARS "$><|'\""
-
 /** ----- ENUM ----- **/
 enum e_token_type
 {
@@ -56,18 +54,6 @@ typedef struct s_token
 	struct s_token	*next;
 }	t_token;
 
-typedef struct s_param
-{
-	int				i;
-	int				j;
-	int				x;
-	int				y;
-	int				num;
-	int				deb;
-	char			**tab;
-	char			*str;
-}	t_param;
-
 /** ----- ENV ----- **/
 void	ft_init_env(t_env *env, char **envp);
 
@@ -81,7 +67,6 @@ char	**ft_split_token(char const *s);
 int		ft_contains_only_space(const char *s);
 int		ft_is_space(char c);
 int		ft_is_quotes(char c);
-int		ft_is_special_char(char c);
 char	*ft_trim_str(const char *str);
 int		ft_get_token_type(const char *str);
 int		ft_get_token_quote(const char *str);

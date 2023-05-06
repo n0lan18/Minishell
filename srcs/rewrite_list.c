@@ -12,34 +12,34 @@
 
 #include "../minishell.h"
 
-t_token	*hey_follow_tmp(t_token *list, char c, int num)
-{
-	if (c == 39 || (c == '"' && num > 0))
-	{
-		list = list->next;
-		if (list->str[0] == c)
-		{
-			list = list->next;
-			return (list);
-		}
-		while (list->next && list->str[0] != c)
-			list = list->next;
-		list = list->next;
-	}
-	else if (c == ' ' || c == '$' || c == '"')
-		list = list->next;
-	else
-	{
-		while (list)
-		{
-			if (list->str[0] == '"' || list->str[0] == 39 || \
-			list->str[0] == ' ' || list->str[0] == '$')
-				break ;
-			list = list->next;
-		}
-	}
-	return (list);
-}
+//t_token	*hey_follow_tmp(t_token *list, char c, int num)
+//{
+//	if (c == 39 || (c == '"' && num > 0))
+//	{
+//		list = list->next;
+//		if (list->str[0] == c)
+//		{
+//			list = list->next;
+//			return (list);
+//		}
+//		while (list->next && list->str[0] != c)
+//			list = list->next;
+//		list = list->next;
+//	}
+//	else if (c == ' ' || c == '$' || c == '"')
+//		list = list->next;
+//	else
+//	{
+//		while (list)
+//		{
+//			if (list->str[0] == '"' || list->str[0] == 39 || \
+//			list->str[0] == ' ' || list->str[0] == '$')
+//				break ;
+//			list = list->next;
+//		}
+//	}
+//	return (list);
+//}
 
 //t_token	*rewrite_bis(t_token *tmp, t_token *new, char c, int is_double_quote)
 //{

@@ -58,20 +58,6 @@ int	ft_is_quotes(char c)
 	return (0);
 }
 
-int	ft_is_special_char(char c)
-{
-	int		i;
-
-	i = 0;
-	while (SPECIAL_CHARS[i])
-	{
-		if (c == SPECIAL_CHARS[i])
-			return (1);
-		i++;
-	}
-	return (0);
-}
-
 /**
  * Trims a given string by removing all whitespace characters at the beginning
  * and at the end of the string.
