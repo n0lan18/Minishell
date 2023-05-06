@@ -1,27 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing.c                                          :+:      :+:    :+:   */
+/*   trim_quote.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: synicole <synicole@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/06 21:27:14 by synicole          #+#    #+#             */
-/*   Updated: 2023/05/06 21:27:15 by synicole         ###   ########.fr       */
+/*   Created: 2023/05/06 22:22:48 by synicole          #+#    #+#             */
+/*   Updated: 2023/05/06 22:22:50 by synicole         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
 /**
- * Parses the readline and creates a linked list of tokens.
+ * Removes the quotes from the tokens.
  * @param env
- * @param readline
  */
-void	ft_parsing(t_env *env, char *readline)
+void	ft_trim_quote(t_env *env)
 {
-	ft_readline_to_token(env, readline);
-//	ft_dollar(env);
-	ft_trim_quote(env);
-	ft_join_token_not_separate_by_space(env);
-	db_print_token(env->token);
+	t_token	*current;
+
+	current = env->token;
+	while (current)
+	{
+		if (current->quote == E_SINGLE)
+			current->str = ft_strtrim(current->str, "\'");
+		else if (current->quote == E_DOUBLE)
+			current->str = ft_strtrim(current->str, "\"");
+		current = current->next;
+	}
 }

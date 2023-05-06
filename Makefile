@@ -34,6 +34,7 @@ OBJS 			= $(SRCS:$(SRCS_DIR)/%.c=$(OBJS_DIR)/%.o)
 SRCS_DIR   		= srcs
 SIGNALS_DIR		= signals
 PARSING_DIR		= parsing
+DOLLAR_DIR		= dollar
 STRUCTS_DIR		= structs
 BUILTINS_DIR	= builtins
 CLOSE_DIR		= close
@@ -41,6 +42,7 @@ DEBUG_DIR		= debug
 SRCS 			= $(wildcard $(SRCS_DIR)/*.c) \
 				  $(wildcard $(SRCS_DIR)/$(SIGNALS_DIR)/*.c) \
 				  $(wildcard $(SRCS_DIR)/$(PARSING_DIR)/*.c) \
+				  $(wildcard $(SRCS_DIR)/$(DOLLAR_DIR)/*.c) \
 				  $(wildcard $(SRCS_DIR)/$(STRUCTS_DIR)/*.c) \
 				  $(wildcard $(SRCS_DIR)/$(BUILTINS_DIR)/*.c) \
 				  $(wildcard $(SRCS_DIR)/$(CLOSE_DIR)/*.c) \
@@ -64,6 +66,7 @@ $(OBJS_DIR):
 				mkdir -p $(OBJS_DIR)
 				mkdir -p $(OBJS_DIR)/$(SIGNALS_DIR)
 				mkdir -p $(OBJS_DIR)/$(PARSING_DIR)
+				mkdir -p $(OBJS_DIR)/$(DOLLAR_DIR)
 				mkdir -p $(OBJS_DIR)/$(STRUCTS_DIR)
 				mkdir -p $(OBJS_DIR)/$(BUILTINS_DIR)
 				mkdir -p $(OBJS_DIR)/$(CLOSE_DIR)

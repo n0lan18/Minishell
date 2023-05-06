@@ -85,10 +85,11 @@ int	main(void)
 	{
 		ft_init_signals();
 		prompt_output = readline("minishell-1.0$ ");
-		if (!prompt_output)
-			ft_close();
-		ft_parsing(&env, prompt_output);
-		add_history(prompt_output);
+		if (prompt_output && !ft_contains_only_space(prompt_output))
+		{
+			ft_parsing(&env, prompt_output);
+			add_history(prompt_output);
+		}
 	}
 	return (g_last_exit_code);
 }

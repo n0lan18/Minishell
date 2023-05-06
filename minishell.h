@@ -78,7 +78,6 @@ int		ft_count_words(const char *s);
 int		ft_skip_spaces(const char *s, int i);
 int		ft_skip_quotes(const char *s, int i, char quote);
 char	**ft_split_token(char const *s);
-t_token	*ft_apply_single_quote(t_token *list, int is_double_quote);
 int		ft_contains_only_space(const char *s);
 int		ft_is_space(char c);
 int		ft_is_quotes(char c);
@@ -86,6 +85,9 @@ int		ft_is_special_char(char c);
 char	*ft_trim_str(const char *str);
 int		ft_get_token_type(const char *str);
 int		ft_get_token_quote(const char *str);
+void	ft_dollar(t_env *env);
+void	ft_trim_quote(t_env *env);
+void	ft_join_token_not_separate_by_space(t_env *env);
 
 /** ----- SIGNALS ----- **/
 void	ft_init_signals(void);
