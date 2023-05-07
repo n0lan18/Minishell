@@ -21,20 +21,18 @@
 char	**ft_envp_to_char(t_envp *envp)
 {
 	char	**envpchar;
-	t_envp	*tmp;
 	int		i;
 
-	envpchar = malloc(sizeof(char) * (ft_size_list_envp(envp) + 1));
+	envpchar = malloc(sizeof(char *) * (ft_size_list_envp(envp) + 1));
 	if (!envpchar)
 		ft_exit(EXIT_FAILURE, "malloc error");
-	tmp = envp;
 	i = 0;
-	while (tmp)
+	while (envp)
 	{
-		envpchar[i] = tmp->value;
-		tmp = tmp->next;
+		envpchar[i] = envp->line;
+		envp = envp->next;
 		i++;
 	}
-	envpchar[i] = 0;
+	envpchar[i] = NULL;
 	return (envpchar);
 }
