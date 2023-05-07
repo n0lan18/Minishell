@@ -125,12 +125,12 @@
  * doubles (") sont actuellement actifs ou non. Elle renvoie une nouvelle liste
  * de tokens qui a été modifiée par certaines règles de "réécriture".
  * La fonction parcourt chaque élément de la liste de tokens.
- * Si l'élément est un guillemet double ou simple, un dollar ($), ou un espace,
+ * Si l'élément est un guillemet double ou simple, un envp ($), ou un espace,
  * la fonction appelle la fonction auxiliaire "rewrite_bis" pour réécrire
  * l'élément et les éléments suivants de la liste en fonction de certaines
  * règles de réécriture.
  *
- * Si l'élément n'est pas un guillemet, un dollar ou un espace, la fonction
+ * Si l'élément n'est pas un guillemet, un envp ou un espace, la fonction
  * appelle la fonction auxiliaire "rewrite_bis_bis" pour réécrire l'élément
  * en fonction d'autres règles de réécriture.
  *

@@ -21,11 +21,10 @@
 */
 static void	ft_array_to_token(char **tab, t_env *env)
 {
-	int		i;
+	int	i;
 
-	i = 0;
-	env->token = ft_new_token(tab[i]);
-	i++;
+	env->token = ft_new_token(tab[0]);
+	i = 1;
 	while (tab[i])
 	{
 		ft_add_token_end(&env->token, ft_new_token(tab[i]));

@@ -13,16 +13,16 @@
 #include "../minishell.h"
 
 /**
- * Initializes the environment variables.
- * (t_env){} : initializes all the fields to 0.
+ * Initializes the project structure.
  *
  * @param env pointer to the t_env structure to be initialized
  * @param envp array of strings containing the environment variables
+ *
+ * @return void
  */
 void	ft_init_env(t_env *env, char **envp)
 {
-	(void)envp;
-	*env = (t_env){};
-	env->envp = envp;
+	ft_init_envp(env, envp);
+	env->token = NULL;
 	g_last_exit_code = EXIT_SUCCESS;
 }

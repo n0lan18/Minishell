@@ -1,27 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing.c                                          :+:      :+:    :+:   */
+/*   init_envp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: synicole <synicole@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/06 21:27:14 by synicole          #+#    #+#             */
-/*   Updated: 2023/05/06 21:27:15 by synicole         ###   ########.fr       */
+/*   Created: 2023/05/07 17:31:22 by synicole          #+#    #+#             */
+/*   Updated: 2023/05/07 17:31:23 by synicole         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
 /**
- * Parses the readline and creates a linked list of tokens.
- * @param env
- * @param readline
+ * Initializes the environment variables.
+ *
+ * @param env pointer to the t_env structure to be initialized
+ * @param envp array of strings containing the environment variables
+ *
+ * @return void
  */
-void	ft_parsing(t_env *env, char *readline)
+void	ft_init_envp(t_env *env, char **envpchar)
 {
-	ft_readline_to_token(env, readline);
-	ft_dollar(env);
-//	ft_trim_quote(env);
-//	ft_join_token_not_separate_by_space(env);
-	db_print_token(env->token);
+	int	i;
+
+	env->envp = ft_new_envp(envpchar[0]);
+	i = 1;
+	while (envpchar[i])
+	{
+		ft_add_envp_end(&env->envp, ft_new_envp(envpchar[i]));
+		i++;
+	}
 }

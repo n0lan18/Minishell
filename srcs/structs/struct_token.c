@@ -12,6 +12,11 @@
 
 #include "../../minishell.h"
 
+/**
+ * Creates a new token.
+ * @param str
+ * @return
+ */
 t_token	*ft_new_token(char *str)
 {
 	t_token	*new;

@@ -21,7 +21,35 @@
 # include <signal.h>
 # include "./libft/libft.h"
 
-extern int	g_last_exit_code;
+/** ----- GLOBAL VARIABLE ----- **/
+extern int				g_last_exit_code;
+
+/** ----- STRUCTURES ----- **/
+typedef struct s_env	t_env;
+typedef struct s_envp	t_envp;
+typedef struct s_token	t_token;
+
+typedef struct s_env
+{
+	t_envp	*envp;
+	t_token	*token;
+}	t_env;
+
+typedef struct s_envp
+{
+	char	*line;
+	char	*name;
+	char	*value;
+	t_envp	*next;
+}	t_envp;
+
+typedef struct s_token
+{
+	int		type;
+	char	*str;
+	int		quote;
+	t_token	*next;
+}	t_token;
 
 /** ----- ENUM ----- **/
 enum e_token_type
@@ -39,23 +67,13 @@ enum e_token_quote {
 	E_DOUBLE_QUOTE
 };
 
-/** ----- STRUCTURES ----- **/
-typedef struct s_env
-{
-	char			**envp;
-	struct s_token	*token;
-}	t_env;
-
-typedef struct s_token
-{
-	int				type;
-	char			*str;
-	int				quote;
-	struct s_token	*next;
-}	t_token;
-
 /** ----- ENV ----- **/
 void	ft_init_env(t_env *env, char **envp);
+
+/** ----- ENVP ----- **/
+void	ft_init_envp(t_env *env, char **envpchar);
+int		ft_count_envp(char **envp);
+char	**ft_envp_to_char(t_envp *envp);
 
 /** ----- PARSING ----- **/
 void	ft_parsing(t_env *env, char *readline);
@@ -71,6 +89,7 @@ char	*ft_trim_str(const char *str);
 int		ft_get_token_type(const char *str);
 int		ft_get_token_quote(const char *str);
 void	ft_dollar(t_env *env);
+int		ft_contains_dollar(const char *str);
 void	ft_trim_quote(t_env *env);
 void	ft_join_token_not_separate_by_space(t_env *env);
 
@@ -80,6 +99,9 @@ void	ft_init_signals(void);
 /** ----- STRUCTS ----- **/
 t_token	*ft_new_token(char *str);
 void	ft_add_token_end(t_token **lst, t_token *token);
+t_envp	*ft_new_envp(char *str);
+void	ft_add_envp_end(t_envp **lst, t_envp *envp);
+int		ft_size_list_envp(t_envp *list);
 
 /** ----- BUILTIN ----- **/
 void	ft_run_echo(t_token *list);

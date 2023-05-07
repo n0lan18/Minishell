@@ -1,26 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   dollar.c                                           :+:      :+:    :+:   */
+/*   dollar_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: synicole <synicole@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/06 22:15:22 by synicole          #+#    #+#             */
-/*   Updated: 2023/05/06 22:15:23 by synicole         ###   ########.fr       */
+/*   Created: 2023/05/07 16:31:47 by synicole          #+#    #+#             */
+/*   Updated: 2023/05/07 16:31:49 by synicole         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-//void	ft_dollar(t_env *env)
-//{
-//	t_token	*current;
-//
-//	current = env->token;
-//	while (current)
-//	{
-//		if (current->type == E_STRING && current->quote == E_NONE_QUOTE)
-//			ft_replace_dollar(env, current);
-//		current = current->next;
-//	}
-//}
+/**
+ * Checks if a string contains a envp.
+ * @param const char *str
+ *
+ * @return int
+*/
+int	ft_contains_dollar(const char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] == '$')
+			return (1);
+		i++;
+	}
+	return (0);
+}
