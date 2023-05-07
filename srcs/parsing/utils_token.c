@@ -16,7 +16,7 @@
  * Get the type of the token
  * @param str
  *
- * @return
+ * @return int
  */
 int	ft_get_token_type(const char *str)
 {
@@ -30,7 +30,7 @@ int	ft_get_token_type(const char *str)
  * Get the quote of the token
  * @param str
  *
- * @return
+ * @return int
  */
 int	ft_get_token_quote(const char *str)
 {

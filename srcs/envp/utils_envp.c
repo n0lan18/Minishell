@@ -31,7 +31,7 @@ char	**ft_envp_to_char(t_envp *envp)
 	i = 0;
 	while (tmp)
 	{
-		envpchar[i] = tmp->line;
+		envpchar[i] = tmp->value;
 		tmp = tmp->next;
 		i++;
 	}

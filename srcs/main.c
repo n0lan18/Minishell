@@ -83,7 +83,7 @@ int	main(int argc, char **argv, char **envp)
 	(void)argv;
 	ft_init_env(&env, envp);
 	prompt_output = "";
-	db_print_tab(ft_envp_to_char(env.envp));
+	db_print_envp(env.envp);
 	while (prompt_output != NULL)
 	{
 		ft_init_signals();

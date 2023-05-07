@@ -73,6 +73,8 @@ void	ft_init_env(t_env *env, char **envp);
 /** ----- ENVP ----- **/
 void	ft_init_envp(t_env *env, char **envpchar);
 char	**ft_envp_to_char(t_envp *envp);
+char	*ft_get_envp_value(const char *str);
+char	*ft_get_envp_name(const char *str);
 
 /** ----- PARSING ----- **/
 void	ft_parsing(t_env *env, char *readline);
@@ -117,6 +119,7 @@ void	ft_exit(int status, char *message);
 /** ----- DEBUG ----- **/
 void	db_print_tab(char **tab);
 void	db_print_token(t_token *token);
+void	db_print_envp(t_envp *envp);
 
 /** ----- EXTERNAL ----- **/
 void	rl_replace_line(const char *c, int i);

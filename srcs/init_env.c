@@ -22,7 +22,7 @@
  */
 void	ft_init_env(t_env *env, char **envp)
 {
-	ft_init_envp(env, envp);
 	env->token = NULL;
+	ft_init_envp(env, envp);
 	g_last_exit_code = EXIT_SUCCESS;
 }

@@ -49,3 +49,18 @@ void	db_print_token(t_token *token)
 	}
 	printf("\n");
 }
+
+void	db_print_envp(t_envp *envp)
+{
+	t_envp	*current;
+
+	printf("\n--- DEBUG: PRINT ENVP ---\n");
+	current = envp;
+	while (current)
+	{
+		printf("(NAME)[%s] -> (VALUE)[%s]\n",
+			current->name, current->value);
+		current = current->next;
+	}
+	printf("\n");
+}

@@ -25,6 +25,8 @@ t_envp	*ft_new_envp(char *str)
 	if (!new)
 		return (NULL);
 	new->line = str;
+	new->name = ft_get_envp_name(str);
+	new->value = ft_get_envp_value(str);
 	new->next = NULL;
 	return (new);
 }
