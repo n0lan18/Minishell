@@ -13,22 +13,6 @@
 #include "../../minishell.h"
 
 /**
- * Counts the number of environment variables in envp.
- * @param envp
- *
- * @return int
- */
-int	ft_count_envp(char **envp)
-{
-	int	i;
-
-	i = 0;
-	while (envp[i])
-		i++;
-	return (i);
-}
-
-/**
  * Converts a linked list of environment variables to an array of strings.
  * @param envp
  *

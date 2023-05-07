@@ -72,7 +72,6 @@ void	ft_init_env(t_env *env, char **envp);
 
 /** ----- ENVP ----- **/
 void	ft_init_envp(t_env *env, char **envpchar);
-int		ft_count_envp(char **envp);
 char	**ft_envp_to_char(t_envp *envp);
 
 /** ----- PARSING ----- **/
