@@ -111,6 +111,7 @@ void	ft_add_token_end(t_token **lst, t_token *token);
 t_envp	*ft_new_envp(char *str);
 void	ft_add_envp_end(t_envp **lst, t_envp *envp);
 int		ft_size_list_envp(t_envp *list);
+void	ft_create_list_dollars(t_dollar **list_dollars, char **tab_dollars);
 void	ft_add_dollar_end(t_dollar **lst, t_dollar *new);
 
 /** ----- BUILTIN ----- **/
