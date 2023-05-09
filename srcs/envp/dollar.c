@@ -26,14 +26,32 @@ char	*ft_getenv(t_envp *envp, char *name)
 	return (NULL);
 }
 
+void	ft_create_list_dollars(t_dollar **list_dollars, char **tab_dollars)
+{
+	int			i;
+	t_dollar	*new;
+
+	i = 0;
+	while (tab_dollars[i])
+	{
+		new = malloc(sizeof(t_dollar));
+		new->str = tab_dollars[i];
+		new->next = NULL;
+		ft_add_dollar_end(list_dollars, new);
+		i++;
+	}
+}
+
 void	ft_replace_dollar(t_env *env, t_token *current)
 {
-	char	**tab_dollars;
+	char		**tab_dollars;
+	t_dollar	*list_dollars;
 
 	(void)env;
-
+	list_dollars = NULL;
 	tab_dollars = ft_split_dollar(ft_strtrim(current->str, "\""));
-	db_print_tab(tab_dollars);
+	ft_create_list_dollars(&list_dollars, tab_dollars);
+	db_print_dollar(list_dollars);
 }
 
 void	ft_dollar(t_env *env)

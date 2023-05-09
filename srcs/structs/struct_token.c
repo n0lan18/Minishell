@@ -38,7 +38,7 @@ t_token	*ft_new_token(char *str)
  *
  * @return t_token* a pointer to the updated list of tokens
 */
-void	ft_add_token_end(t_token **lst, t_token *token)
+void	ft_add_token_end(t_token **lst, t_token *new)
 {
 	t_token	*current;
 
@@ -49,6 +49,6 @@ void	ft_add_token_end(t_token **lst, t_token *token)
 	{
 		while (current->next)
 			current = current->next;
-		current->next = token;
+		current->next = new;
 	}
 }

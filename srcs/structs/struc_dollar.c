@@ -1,27 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing.c                                          :+:      :+:    :+:   */
+/*   struc_dollar.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: synicole <synicole@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/06 21:27:14 by synicole          #+#    #+#             */
-/*   Updated: 2023/05/06 21:27:15 by synicole         ###   ########.fr       */
+/*   Created: 2023/05/09 23:29:34 by synicole          #+#    #+#             */
+/*   Updated: 2023/05/09 23:29:36 by synicole         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
 /**
- * Parses the readline and creates a linked list of tokens.
- * @param env
- * @param readline
- */
-void	ft_parsing(t_env *env, char *readline)
+ * Adds a new envp at the end of the given list.
+ * @param t_envp *list the current list of envp to add to
+ * @param char *tab the string value of the new envp to add
+ *
+ * @return t_envp* a pointer to the updated list of envp
+*/
+void	ft_add_dollar_end(t_dollar **lst, t_dollar *new)
 {
-	ft_readline_to_token(env, readline);
-	ft_dollar(env);
-	ft_trim_quote(env);
-	ft_join_token_not_separate_by_space(env);
-	db_print_token(env->token);
+	t_dollar	*current;
+
+	current = *lst;
+	if (!current)
+		return ;
+	else
+	{
+		while (current->next)
+			current = current->next;
+		current->next = new;
+	}
 }

@@ -28,6 +28,7 @@ extern int				g_last_exit_code;
 typedef struct s_env	t_env;
 typedef struct s_envp	t_envp;
 typedef struct s_token	t_token;
+typedef struct s_dollar	t_dollar;
 
 typedef struct s_env
 {
@@ -50,6 +51,12 @@ typedef struct s_token
 	int		quote;
 	t_token	*next;
 }	t_token;
+
+typedef struct s_dollar
+{
+	char		*str;
+	t_dollar	*next;
+}	t_dollar;
 
 /** ----- ENUM ----- **/
 enum e_token_type
@@ -104,6 +111,7 @@ void	ft_add_token_end(t_token **lst, t_token *token);
 t_envp	*ft_new_envp(char *str);
 void	ft_add_envp_end(t_envp **lst, t_envp *envp);
 int		ft_size_list_envp(t_envp *list);
+void	ft_add_dollar_end(t_dollar **lst, t_dollar *new);
 
 /** ----- BUILTIN ----- **/
 void	ft_run_echo(t_token *list);
@@ -121,6 +129,7 @@ void	ft_exit(int status, char *message);
 void	db_print_tab(char **tab);
 void	db_print_token(t_token *token);
 void	db_print_envp(t_envp *envp);
+void	db_print_dollar(t_dollar *dollar);
 
 /** ----- EXTERNAL ----- **/
 void	rl_replace_line(const char *c, int i);

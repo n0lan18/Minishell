@@ -38,7 +38,7 @@ t_envp	*ft_new_envp(char *str)
  *
  * @return t_envp* a pointer to the updated list of envp
 */
-void	ft_add_envp_end(t_envp **lst, t_envp *envp)
+void	ft_add_envp_end(t_envp **lst, t_envp *new)
 {
 	t_envp	*current;
 
@@ -49,7 +49,7 @@ void	ft_add_envp_end(t_envp **lst, t_envp *envp)
 	{
 		while (current->next)
 			current = current->next;
-		current->next = envp;
+		current->next = new;
 	}
 }
 

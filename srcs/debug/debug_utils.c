@@ -50,6 +50,12 @@ void	db_print_token(t_token *token)
 	printf("\n");
 }
 
+/**
+ * Prints the content of a t_env.
+ * @param t_env *env
+ *
+ * @return void
+*/
 void	db_print_envp(t_envp *envp)
 {
 	t_envp	*current;
@@ -60,6 +66,26 @@ void	db_print_envp(t_envp *envp)
 	{
 		printf("(NAME)[%s] -> (VALUE)[%s]\n",
 			current->name, current->value);
+		current = current->next;
+	}
+	printf("\n");
+}
+
+/**
+ * Prints the content of a t_dollar.
+ * @param t_dollar *dollar
+ *
+ * @return void
+*/
+void	db_print_dollar(t_dollar *dollar)
+{
+	t_dollar	*current;
+
+	printf("\n--- DEBUG: PRINT DOLLAR ---\n");
+	current = dollar;
+	while (current)
+	{
+		printf("(STR)[%s]\n", current->str);
 		current = current->next;
 	}
 	printf("\n");
