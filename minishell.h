@@ -91,6 +91,7 @@ int		ft_get_token_type(const char *str);
 int		ft_get_token_quote(const char *str);
 void	ft_dollar(t_env *env);
 int		ft_contains_dollar(const char *str);
+char	**ft_split_dollar(char *s);
 void	ft_trim_quote(t_env *env);
 void	ft_join_token_not_separate_by_space(t_env *env);
 

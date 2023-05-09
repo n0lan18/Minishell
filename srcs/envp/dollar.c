@@ -26,19 +26,14 @@ char	*ft_getenv(t_envp *envp, char *name)
 	return (NULL);
 }
 
-void	ft_replace_envvar(t_env *env, t_token *current)
+void	ft_replace_dollar(t_env *env, t_token *current)
 {
-	char	*tmp;
-	char	*tmp2;
-	char	*tmp3;
+	char	**tab_dollars;
 
-	tmp = ft_substr(current->str, 0, ft_strchr(current->str, '$') - current->str);
-	tmp2 = ft_getenv(env->envp, ft_substr(current->str, ft_strchr(current->str, '$') - current->str + 1, ft_strlen(current->str)));
-	tmp3 = ft_strjoin(tmp, tmp2);
-	free(tmp);
-	free(tmp2);
-	free(current->str);
-	current->str = tmp3;
+	(void)env;
+
+	tab_dollars = ft_split_dollar(ft_strtrim(current->str, "\""));
+	db_print_tab(tab_dollars);
 }
 
 void	ft_dollar(t_env *env)
@@ -50,7 +45,7 @@ void	ft_dollar(t_env *env)
 	{
 		if (current->type == E_STRING && current->quote != E_SINGLE_QUOTE)
 			if (ft_contains_dollar(current->str))
-				ft_replace_envvar(env, current);
+				ft_replace_dollar(env, current);
 		current = current->next;
 	}
 }
