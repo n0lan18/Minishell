@@ -42,7 +42,7 @@ char	*ft_getenv(t_envp *envp, char *name)
 			return (current->value);
 		current = current->next;
 	}
-	return (NULL);
+	return (ft_strdup(""));
 }
 
 static void	ft_replace_dollar_correct_value(t_envp *envp, t_dollar **list)
@@ -65,9 +65,9 @@ static void	ft_replace_dollar(t_env *env, t_token *current)
 	t_dollar	*list_dollars;
 
 	list_dollars = NULL;
-	ft_create_list_dollars(&list_dollars, current->str, 0);
-//	db_print_dollar(list_dollars);
+	ft_create_list_dollars(&list_dollars, ft_strtrim(current->str, "\""), 0);
 	ft_replace_dollar_correct_value(env->envp, &list_dollars);
+//	db_print_dollar(list_dollars);
 	current->str = struct_to_char(list_dollars);
 }
 
