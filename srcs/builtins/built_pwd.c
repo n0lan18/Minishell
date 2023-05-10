@@ -1,22 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_fonctions.c                                   :+:      :+:    :+:   */
+/*   built_pwd.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nleggeri <nleggeri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: synicole <synicole@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/03 18:19:12 by nleggeri          #+#    #+#             */
-/*   Updated: 2023/04/03 18:19:15 by nleggeri         ###   ########.fr       */
+/*   Created: 2023/04/25 23:02:59 by synicole          #+#    #+#             */
+/*   Updated: 2023/04/25 23:03:01 by synicole         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "../../minishell.h"
 
-void	free_double_tab(char **tab)
+void	ft_run_pwd(t_token *env, t_token *list)
 {
-	int	i;
+	char	cwd[1024];
 
-	i = 0;
-	while (tab[i])
-		free(tab[i++]);
+	(void)env;
+	(void)list;
+	if (getcwd(cwd, sizeof(cwd)) != NULL)
+		printf("%s\n", cwd);
+	else
+	{
+		perror("getcwd() erreur");
+		exit(EXIT_FAILURE);
+	}
 }

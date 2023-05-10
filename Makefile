@@ -17,7 +17,7 @@ FLAGS 			= -Wall -Werror -Wextra -g
 SANITIZE		= -fsanitize=address
 
 # CHANGE TO 42 IF YOU WORK AT 42, DEFAULT IF YOU WORK AT HOME
-ENVIRONMENT		= DEFAULT
+ENVIRONMENT		= 42
 ifeq ($(ENVIRONMENT), 42)
     READLINE_LIB_DIR = $(HOME)/.brew/opt/readline/lib
     READLINE_INCLUDE_DIR = $(HOME)/.brew/opt/readline/include
@@ -33,10 +33,20 @@ OBJS 			= $(SRCS:$(SRCS_DIR)/%.c=$(OBJS_DIR)/%.o)
 # SOURCES
 SRCS_DIR   		= srcs
 SIGNALS_DIR		= signals
+PARSING_DIR		= parsing
+ENVP_DIR		= envp
+STRUCTS_DIR		= structs
+BUILTINS_DIR	= builtins
 CLOSE_DIR		= close
+DEBUG_DIR		= debug
 SRCS 			= $(wildcard $(SRCS_DIR)/*.c) \
 				  $(wildcard $(SRCS_DIR)/$(SIGNALS_DIR)/*.c) \
-				  $(wildcard $(SRCS_DIR)/$(CLOSE_DIR)/*.c)
+				  $(wildcard $(SRCS_DIR)/$(PARSING_DIR)/*.c) \
+				  $(wildcard $(SRCS_DIR)/$(ENVP_DIR)/*.c) \
+				  $(wildcard $(SRCS_DIR)/$(STRUCTS_DIR)/*.c) \
+				  $(wildcard $(SRCS_DIR)/$(BUILTINS_DIR)/*.c) \
+				  $(wildcard $(SRCS_DIR)/$(CLOSE_DIR)/*.c) \
+				  $(wildcard $(SRCS_DIR)/$(DEBUG_DIR)/*.c)
 
 # COLORS
 _END=$'\x1b[0m'
@@ -55,7 +65,12 @@ $(NAME): 		$(OBJS)
 $(OBJS_DIR):
 				mkdir -p $(OBJS_DIR)
 				mkdir -p $(OBJS_DIR)/$(SIGNALS_DIR)
+				mkdir -p $(OBJS_DIR)/$(PARSING_DIR)
+				mkdir -p $(OBJS_DIR)/$(ENVP_DIR)
+				mkdir -p $(OBJS_DIR)/$(STRUCTS_DIR)
+				mkdir -p $(OBJS_DIR)/$(BUILTINS_DIR)
 				mkdir -p $(OBJS_DIR)/$(CLOSE_DIR)
+				mkdir -p $(OBJS_DIR)/$(DEBUG_DIR)
 
 $(OBJS_DIR)/%.o: $(SRCS_DIR)/%.c
 				$(CC) $(FLAGS) -c $< -o $@

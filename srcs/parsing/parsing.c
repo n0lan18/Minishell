@@ -1,27 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_space.c                                      :+:      :+:    :+:   */
+/*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: synicole <synicole@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/29 17:10:48 by synicole          #+#    #+#             */
-/*   Updated: 2023/04/29 17:10:49 by synicole         ###   ########.fr       */
+/*   Created: 2023/05/06 21:27:14 by synicole          #+#    #+#             */
+/*   Updated: 2023/05/06 21:27:15 by synicole         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "../../minishell.h"
 
-int	is_space(const char *s)
+/**
+ * Parses the readline and creates a linked list of tokens.
+ * @param env
+ * @param readline
+ */
+void	ft_parsing(t_env *env, char *readline)
 {
-	int	i;
-
-	i = 0;
-	while (s[i])
-	{
-		if (s[i] != ' ')
-			return (0);
-		i++;
-	}
-	return (1);
+	ft_readline_to_token(env, readline);
+	ft_dollar(env);
+	ft_trim_quote(env);
+	ft_join_token_not_separate_by_space(env);
+//	db_print_token(env->token);
 }

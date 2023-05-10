@@ -1,34 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env_utils.c                                        :+:      :+:    :+:   */
+/*   dollar_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: synicole <synicole@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/28 12:19:35 by synicole          #+#    #+#             */
-/*   Updated: 2023/04/28 12:19:37 by synicole         ###   ########.fr       */
+/*   Created: 2023/05/07 16:31:47 by synicole          #+#    #+#             */
+/*   Updated: 2023/05/07 16:31:49 by synicole         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "../../minishell.h"
 
-char	**token_to_char(t_token *env)
+/**
+ * Checks if a string contains a envp.
+ * @param const char *str
+ *
+ * @return int
+*/
+int	ft_contains_dollar(const char *str)
 {
-	char	**envp;
-	t_token	*tmp;
-	int		i;
+	int	i;
 
-	envp = malloc(sizeof(char) * (size_list(env) + 1));
-	if (!envp)
-		return (NULL);
-	tmp = env;
 	i = 0;
-	while (tmp)
+	while (str[i])
 	{
-		envp[i] = tmp->str;
-		tmp = tmp->next;
+		if (str[i] == '$')
+			return (1);
 		i++;
 	}
-	envp[i] = NULL;
-	return (envp);
+	return (0);
 }

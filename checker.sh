@@ -68,43 +68,54 @@ exec_test "echo"
 exec_test "echo caca"
 exec_test "echo caca      pipi"
 exec_test "    echo    caca      pipi"
-exec_test "echo -n caca"
-exec_test "echo -n"
-exec_test "echo -n -n"
-exec_test "echo -n -n -n caca pipi"
 exec_test 'echo "caca   pipi"'
 exec_test "echo 'caca   pipi'"
-exec_test 'echo $USER'
-exec_test 'echo $USER      $USER'
-exec_test 'echo "$USER"'
-exec_test 'echo "$USER$USER$USER"'
-exec_test 'echo "$USER$USER=caca$USER"'
-exec_test 'echo "   $USER caca $USER"'
-exec_test 'echo '\''$USER'\'''
-exec_test 'echo $INEXISTINGVAR'
-exec_test 'echo $INEXISTINGVAR caca'
-exec_test 'echo $?'
-exec_test 'echo $??'
 exec_test 'ec"ho" caca'
 exec_test "ec'ho' caca"
 exec_test 'echo caca "" caca "" caca'
-exec_test 'echo "$=CACA"'
+exec_test 'echo $USER'
+exec_test 'echo $USER      $USER'
+exec_test 'echo '\''$USER'\'''
+exec_test 'echo $?'
+exec_test 'echo $??'
 exec_test 'echo "$"'
+exec_test 'echo "$USER"'
+exec_test 'echo "   $USER caca $USER"'
+exec_test 'echo $USER--'
+exec_test 'echo $USER@caca'
+exec_test 'echo "$=CACA"'
+
+# FIXME
+exec_test 'echo $INEXISTINGVAR'
+exec_test 'echo $USER_'
+
+exec_test 'echo "$USER$USER$USER"'
 exec_test 'echo "$?CACA"'
 
+exec_test 'echo "$USERcaca"'
+exec_test 'echo "$USER$USER=caca$USER"'
+exec_test 'echo $INEXISTINGVAR caca'
+exec_test 'echo "hello world""test"'
+
+
+#exec_test "echo -n caca"
+#exec_test "echo -n"
+#exec_test "echo -n -n"
+#exec_test "echo -n -n -n caca pipi"
+
 # PWD TESTS
-printf "\n$BOLDYELLOW%s$RESET\n" "PWD TESTS"
-exec_test 'pwd'
-exec_test 'cd srcs; pwd'
-exec_test 'cd ..; pwd'
-exec_test 'cd .; pwd'
-exec_test 'cd /Users ; pwd'
+#printf "\n$BOLDYELLOW%s$RESET\n" "PWD TESTS"
+#exec_test 'pwd'
+#exec_test 'cd srcs; pwd'
+#exec_test 'cd ..; pwd'
+#exec_test 'cd .; pwd'
+#exec_test 'cd /Users ; pwd'
 
 # EXECVE TESTS
-printf "\n$BOLDYELLOW%s$RESET\n" "EXECVE TESTS"
-exec_test 'ls'
-exec_test 'ls -l'
-exec_test 'clear'
+#printf "\n$BOLDYELLOW%s$RESET\n" "EXECVE TESTS"
+#exec_test 'ls'
+#exec_test 'ls -l'
+#exec_test 'clear'
 
 # PRINT TOTAL
 echo

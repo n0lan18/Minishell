@@ -21,146 +21,131 @@
 # include <signal.h>
 # include "./libft/libft.h"
 
-extern int	g_last_exit_code;
+/** ----- GLOBAL VARIABLE ----- **/
+extern int				g_last_exit_code;
 
-typedef enum part
+/** ----- STRUCTURES ----- **/
+typedef struct s_env	t_env;
+typedef struct s_envp	t_envp;
+typedef struct s_token	t_token;
+typedef struct s_dollar	t_dollar;
+
+typedef struct s_env
 {
-	SPACE,
-	CMD,
-	BUILTIN,
-	PIPE,
-	CHEVRON,
-	QUOTE,
-	DQUOTE,
-	DKNOWN,
-}	t_part;
+	t_envp	*envp;
+	t_token	*token;
+}	t_env;
+
+typedef struct s_envp
+{
+	char	*line;
+	char	*name;
+	char	*value;
+	t_envp	*next;
+}	t_envp;
 
 typedef struct s_token
 {
-	int				type;
-	char			*str;
-	struct s_token	*prev;
-	struct s_token	*next;
+	int		type;
+	char	*str;
+	int		quote;
+	t_token	*next;
 }	t_token;
 
-typedef struct s_param
+typedef struct s_dollar
 {
-	int				i;
-	int				j;
-	int				x;
-	int				y;
-	int				num;
-	int				deb;
-	char			**tab;
-	char			*str;
-}	t_param;
+	char		*str;
+	t_dollar	*next;
+}	t_dollar;
 
-/*************Readline_to_tab***************/
-int		search_in_str(char s, char *str);
-int		count_word(const char *s, char c, int deb, int end);
-int		count_word_fort_second_split(const char *s);
-int		count_word_fort_second_split_bis(const char *s, int num, int i);
-int		remove_space_begin_or_end(char *str, int pos);
+/** ----- ENUM ----- **/
+enum e_token_type
+{
+	E_STRING,
+	E_SPACE,
+	E_BUILTIN,
+	E_PIPE,
+	E_REDIRECTION,
+};
 
-/*************Readline_to_tab_bis**********/
-char	**ft_split_next_gen(char const *s, char c, int deb, int end);
-char	**ft_split_in_ft_split(char const *s);
-char	**ft_split_in_ft_split_bis(char const *s, t_param a);
-char	*ft_strcpy_new(char *dst, char *str, int deb, int end);
-t_token	*split_new_format(char *rline, t_token *list);
+enum e_token_quote {
+	E_NONE_QUOTE,
+	E_SINGLE_QUOTE,
+	E_DOUBLE_QUOTE
+};
 
-/*************Check_dollar_in_list********/
-t_token	*replace_dollar_if_first(t_token *list, t_token *env);
-t_token	*replace_dollar_if_after(t_token *list, t_token *tmp, t_token *env);
-t_token	*replace_dollar_if_after_bis(t_token *temp, t_token *tmp, t_token *env);
-t_token	*replace_if_dollar(t_token *list, t_token *env);
+/** ----- ENV ----- **/
+void		ft_init_env(t_env *env, char **envp);
 
-/*************Check_dollar_in_list_bis****/
-int		search_dollar_in_list(t_token *list);
-int		compare_length_in_env(char *env);
-char	*add_var_and_word(char *str, char *str1, char *tab);
-char	*search_var_in_env(char *str, t_token *env);
+/** ----- ENVP ----- **/
+void		ft_init_envp(t_env *env, char **envpchar);
+char		**ft_envp_to_char(t_envp *envp);
+char		*ft_get_envp_value(const char *str);
+char		*ft_get_envp_name(const char *str);
 
-/*************Rewrite_list*****************/
-t_token	*rewrite(t_token *list, int num);
-t_token	*hey_follow_tmp(t_token *list, char c, int num);
-t_token	*rewrite_bis(t_token *tmp, t_token *new, char c, int num);
-t_token	*rewrite_bis_bis(t_token *tmp, t_token *new);
-t_token	*good_parse(t_token *list, t_token *env);
+/** ----- PARSING ----- **/
+void		ft_parsing(t_env *env, char *readline);
+void		ft_readline_to_token(t_env *env, char *readline);
+int			ft_count_words(const char *s);
+int			ft_skip_spaces(const char *s, int i);
+int			ft_skip_quotes(const char *s, int i, char quote);
+char		**ft_split_token(char const *s);
+int			ft_contains_only_space(const char *s);
+int			ft_is_space(char c);
+int			ft_is_quotes(char c);
+char		*ft_trim_str(const char *str);
+int			ft_get_token_type(const char *str);
+int			ft_get_token_quote(const char *str);
+void		ft_dollar(t_env *env);
+int			ft_contains_dollar(const char *str);
+void		ft_create_list_dollars(t_dollar **list, const char *str, int i);
+void		ft_trim_quote(t_env *env);
+void		ft_join_token_not_separate_by_space(t_env *env);
 
-/*************Rewrite_list_bis*************/
-t_token	*free_if_space_at_last(t_token *list);
-int		just_space(char	*str);
-t_token	*together_if_not_space_bis_bis(char *tmp, char *str, t_token *new);
-t_token	*together_if_not_space_bis(t_token *tmp, char *str, t_token *new);
-t_token	*together_if_not_space(t_token *list);
+/** ----- SIGNALS ----- **/
+void		ft_init_signals(void);
 
-/*************check_words_in_tab***********/
-int		check_which_type(char **tab, char **env);
+/** ----- STRUCTS ----- **/
+t_token		*ft_new_token(char *str);
+void		ft_add_token_end(t_token **lst, t_token *token);
+t_envp		*ft_new_envp(char *str);
+void		ft_add_envp_end(t_envp **lst, t_envp *envp);
+int			ft_size_list_envp(t_envp *list);
+t_dollar	*ft_new_dollar(char *str);
+void		ft_add_dollar_end(t_dollar **lst, t_dollar *new);
 
-/*************search_cmd*******************/
-int		search_path_in_env(t_token *envp);
-char	*join_all_path(char *env, char *cmd, char slash);
-char	*existence_of_cmd(t_token *envp, char *cmd);
-int		search_of_type_cmd(t_token *envp, char *tab);
+/** ----- BUILTIN ----- **/
+void		ft_run_echo(t_token *list);
+void		ft_run_cd(t_token *env, t_token *list);
+void		ft_run_pwd(t_token *env, t_token *list);
+void		ft_run_unset(t_token *env, t_token *list);
+void		ft_run_env(t_token *env);
+void		ft_run_export(t_token *env, t_token *list);
 
-/*************free_fonctions***************/
-void	free_double_tab(char **tab);
+/** ----- EXIT ----- **/
+void		ft_close(void);
+void		ft_exit(int status, char *message);
 
-/*************Fonctions_list***************/
-void	add_element(t_token *list, char *tab);
-t_token	*add_new_element(t_token *list, char *tab);
-void	free_list(t_token *a);
-int		search_case_in_list(t_token *list, char *str);
-int		size_list(t_token *list);
+/** ----- DEBUG ----- **/
+void		db_print_tab(char **tab);
+void		db_print_token(t_token *token);
+void		db_print_envp(t_envp *envp);
+void		db_print_dollar(t_dollar *dollar);
 
-/************* Signals ***********/
-void	ft_init_signals(void);
-
-/************* Closing functions ***********/
-void	ft_close(void);
-
-/************* External functions ***********/
-void	rl_replace_line(const char *c, int i);
-
-/*************which_type_of_case*************/
-void	init_type_in_list(t_token *list, t_token *env);
-int		search_which_type(char *str, t_token *list, t_token *env);
+/** ----- EXTERNAL ----- **/
+void		rl_replace_line(const char *c, int i);
 
 /*************check_if_built****************/
-int		check_if_built(t_token *list, t_token *env);
-int		check_if_built_bis(t_token *list);
-int		check_if_built_bis_bis(t_token *list);
-int		check_if_built_bis_bis_bis(t_token *tmp, t_token *env);
-
-/*************built_echo********************/
-void	launch_echo(t_token *list);
+int			check_if_built(t_token *list, t_token *env);
+int			check_if_built_bis(t_token *list);
+int			check_if_built_bis_bis(t_token *list);
+int			check_if_built_bis_bis_bis(t_token *tmp, t_token *env);
 
 /*************built_env*********************/
-t_token	*env_in_list(char **env, t_token *list);
-void	launch_env(t_token *env);
-
-/*************built_export******************/
-void	launch_export(t_token *env, t_token *list);
-char	*join_var(t_token *list);
-void	check_if_var_exist(t_token *env, char *str);
-int		check_if_var_is_good(char *str);
-int		check_after_equal(char *str);
-
-/*************built_unset******************/
-void	launch_unset(t_token *env, t_token *list);
-
-/*************built_pwd********************/
-void	launch_pwd(t_token *env, t_token *list);
-
-/*************built_cd********************/
-void	launch_cd(t_token *env, t_token *list);
+t_token		*env_in_list(char **env, t_token *list);
 
 /*************check_if_command********************/
-void	check_if_command(t_token *list, t_token *env);
-char	**token_to_char(t_token *env);
-
-/*************check_space********************/
-int		is_space(const char *s);
+void		check_if_command(t_token *list, t_token *env);
+char		**token_to_char(t_token *env);
 
 #endif

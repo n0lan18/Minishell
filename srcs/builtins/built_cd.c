@@ -1,28 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   built_pwd.c                                        :+:      :+:    :+:   */
+/*   built_cd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: synicole <synicole@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/25 23:02:59 by synicole          #+#    #+#             */
-/*   Updated: 2023/04/25 23:03:01 by synicole         ###   ########.fr       */
+/*   Created: 2023/04/25 23:14:25 by synicole          #+#    #+#             */
+/*   Updated: 2023/04/25 23:14:28 by synicole         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "../../minishell.h"
 
-void	launch_pwd(t_token *env, t_token *list)
+void	ft_run_cd(t_token *env, t_token *list)
 {
-	char	cwd[1024];
+	char	*path;
 
 	(void)env;
-	(void)list;
-	if (getcwd(cwd, sizeof(cwd)) != NULL)
-		printf("%s\n", cwd);
+	if (!list->next)
+	{
+		if (chdir(getenv("HOME")))
+			perror(ft_strjoin("minishell: cd: ", path));
+	}
 	else
 	{
-		perror("getcwd() erreur");
-		exit(EXIT_FAILURE);
+		path = list->next->next->str;
+		if (chdir(path))
+			perror(ft_strjoin("minishell: cd: ", path));
 	}
 }
