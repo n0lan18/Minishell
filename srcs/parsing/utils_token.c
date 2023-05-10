@@ -38,5 +38,5 @@ int	ft_get_token_quote(const char *str)
 		return (E_SINGLE_QUOTE);
 	else if (str[0] == '"')
 		return (E_DOUBLE_QUOTE);
-	return (E_STRING);
+	return (E_NONE_QUOTE);
 }

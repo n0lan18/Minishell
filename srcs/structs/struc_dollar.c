@@ -13,26 +13,21 @@
 #include "../../minishell.h"
 
 /**
- * Creates a linked list of t_dollar from the given tab dollars.
- * @param list_dollars
- * @param tab_dollars
+ * Creates a new t_doallar.
+ * @param str
  *
- * @return void
+ * @return t_dollar *new
  */
-void	ft_create_list_dollars(t_dollar **list_dollars, char **tab_dollars)
+t_dollar	*ft_new_dollar(char *str)
 {
-	int			i;
 	t_dollar	*new;
 
-	i = 0;
-	while (tab_dollars[i])
-	{
-		new = malloc(sizeof(t_dollar));
-		new->str = tab_dollars[i];
-		new->next = NULL;
-		ft_add_dollar_end(list_dollars, new);
-		i++;
-	}
+	new = malloc(sizeof(t_envp));
+	if (!new)
+		return (NULL);
+	new->str = str;
+	new->next = NULL;
+	return (new);
 }
 
 /**
@@ -42,16 +37,16 @@ void	ft_create_list_dollars(t_dollar **list_dollars, char **tab_dollars)
  *
  * @return void
 */
-void	ft_add_dollar_end(t_dollar **list_dollars, t_dollar *new)
+void	ft_add_dollar_end(t_dollar **lst, t_dollar *new)
 {
 	t_dollar	*current;
 
-	if (!*list_dollars)
+	if (!*lst)
 	{
-		*list_dollars = new;
+		*lst = new;
 		return ;
 	}
-	current = *list_dollars;
+	current = *lst;
 	while (current->next)
 		current = current->next;
 	current->next = new;

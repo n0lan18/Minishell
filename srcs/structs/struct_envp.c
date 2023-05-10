@@ -15,7 +15,8 @@
 /**
  * Creates a new envp.
  * @param str
- * @return
+ *
+ * @return t_envp *new
  */
 t_envp	*ft_new_envp(char *str)
 {
@@ -36,7 +37,7 @@ t_envp	*ft_new_envp(char *str)
  * @param t_envp *list the current list of envp to add to
  * @param char *tab the string value of the new envp to add
  *
- * @return t_envp* a pointer to the updated list of envp
+ * @return void
 */
 void	ft_add_envp_end(t_envp **lst, t_envp *new)
 {

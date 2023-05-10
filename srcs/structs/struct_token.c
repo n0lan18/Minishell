@@ -15,7 +15,8 @@
 /**
  * Creates a new token.
  * @param str
- * @return
+ *
+ * @return t_token *new
  */
 t_token	*ft_new_token(char *str)
 {
@@ -36,7 +37,7 @@ t_token	*ft_new_token(char *str)
  * @param t_token *list the current list of tokens to add to
  * @param char *tab the string value of the new token to add
  *
- * @return t_token* a pointer to the updated list of tokens
+ * @return void
 */
 void	ft_add_token_end(t_token **lst, t_token *new)
 {
