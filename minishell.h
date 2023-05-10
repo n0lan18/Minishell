@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nleggeri <nleggeri@42.student.fr>          +#+  +:+       +#+        */
+/*   By: nleggeri <nleggeri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 13:09:55 by synicole          #+#    #+#             */
-/*   Updated: 2023/04/29 02:36:05 by nleggeri         ###   ########.fr       */
+/*   Updated: 2023/05/10 12:01:26 by nleggeri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ typedef enum part
 	CHEVRON,
 	QUOTE,
 	DQUOTE,
+	FILE_OPEN,
 	DKNOWN,
 }	t_part;
 
@@ -162,5 +163,10 @@ char	**token_to_char(t_token *env);
 
 /*************check_space********************/
 int		is_space(const char *s);
+
+/*************pipe***************************/
+int		if_pipe_in_list(t_token *list);
+t_token	*list_without_space_for_pipe(t_token *list);
+void	run_pipeline(t_token *list);
 
 #endif

@@ -17,7 +17,7 @@ FLAGS 			= -Wall -Werror -Wextra -g
 SANITIZE		= -fsanitize=address
 
 # CHANGE TO 42 IF YOU WORK AT 42, DEFAULT IF YOU WORK AT HOME
-ENVIRONMENT		= DEFAULT
+ENVIRONMENT		= 42
 ifeq ($(ENVIRONMENT), 42)
     READLINE_LIB_DIR = $(HOME)/.brew/opt/readline/lib
     READLINE_INCLUDE_DIR = $(HOME)/.brew/opt/readline/include

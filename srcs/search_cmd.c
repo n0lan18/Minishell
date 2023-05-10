@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   search_cmd.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nleggeri <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: nleggeri <nleggeri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 16:59:44 by nleggeri          #+#    #+#             */
-/*   Updated: 2023/03/30 17:00:46 by nleggeri         ###   ########.fr       */
+/*   Updated: 2023/05/10 12:04:55 by nleggeri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,7 @@ int	search_path_in_env(t_token *env)
 	j = 0;
 	while (tmp)
 	{
-		if (tmp->str[0] == 'P' && tmp->str[1] == 'A' \
-			&& tmp->str[2] == 'T' && tmp->str[3] == 'H')
+		if (ft_strncmp(tmp->str, "PATH=", 5) == 0)
 			break ;
 		j++;
 		tmp = tmp->next;
@@ -59,17 +58,18 @@ static int	search_of_type_cmd_ext(char **envp, char *tab)
 	char	*temp;
 	int		i;
 
-	i = -1;
-	while (envp[++i])
+	i = 0;
+	while (envp[i])
 	{
 		temp = join_all_path(envp[i], tab, '/');
-		if (access(temp, F_OK) == 0)
+		if (access(temp, X_OK) == 0)
 		{
 			free(temp);
 			free_double_tab(envp);
 			return (0);
 		}
 		free(temp);
+		i++;
 	}
 	free_double_tab(envp);
 	return (1);
@@ -82,10 +82,13 @@ int	search_of_type_cmd(t_token *env, char *tab)
 	t_token	*tmp;
 	int		i;
 
-	i = -1;
+	i = 0;
 	tmp = env;
-	while (i++ < search_path_in_env(env))
+	while (i < search_path_in_env(env))
+	{
 		tmp = tmp->next;
+		i++;
+	}
 	envpi = &tmp->str[5];
 	envp = ft_split(envpi, ':');
 	return (search_of_type_cmd_ext(envp, tab));

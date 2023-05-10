@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_if_command.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: synicole <synicole@student.42lausanne.ch>  +#+  +:+       +#+        */
+/*   By: nleggeri <nleggeri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/27 08:51:27 by synicole          #+#    #+#             */
-/*   Updated: 2023/04/27 08:51:30 by synicole         ###   ########.fr       */
+/*   Updated: 2023/05/10 11:40:26 by nleggeri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static void	find_cmd_path_ext(char *dir, char *cmd, char **cmd_path)
 	while (dir != NULL)
 	{
 		tmp_path = malloc(strlen(dir) + strlen(cmd) + 2);
-		sprintf(tmp_path, "%s/%s", dir, cmd);
+		//sprintf(tmp_path, "%s/%s", dir, cmd);
 		if (access(tmp_path, X_OK) == 0)
 		{
 			*cmd_path = tmp_path;

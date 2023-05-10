@@ -6,7 +6,7 @@
 /*   By: nleggeri <nleggeri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/16 23:10:19 by nleggeri          #+#    #+#             */
-/*   Updated: 2023/04/16 23:10:39 by nleggeri         ###   ########.fr       */
+/*   Updated: 2023/05/10 12:02:58 by nleggeri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,16 @@ void	init_type_in_list(t_token *list, t_token *env)
 	tmp = list;
 	while (tmp)
 	{
-		tmp->type = search_which_type(tmp->str, list, env);
+		tmp->type = search_which_type(tmp->str, tmp, env);
 		tmp = tmp->next;
 	}
 }
 
 int	search_which_type(char *str, t_token *list, t_token *env)
 {
+	char	open_file;
+
+	open_file = open(str, O_RDONLY);
 	if ((ft_strncmp(str, "echo", 5) == 0)
 		|| (ft_strncmp(str, "cd", 3) == 0)
 		|| (ft_strncmp(str, "export", 7) == 0)
@@ -47,6 +50,8 @@ int	search_which_type(char *str, t_token *list, t_token *env)
 		list->type = CHEVRON;
 	else if (search_of_type_cmd(env, str) == 0)
 		list->type = CMD;
+	else if (open_file != -1)
+		list->type = FILE_OPEN;
 	else
 		list->type = DKNOWN;
 	return (list->type);

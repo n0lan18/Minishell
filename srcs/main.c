@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nleggeri <nleggeri@42.student.fr>          +#+  +:+       +#+        */
+/*   By: nleggeri <nleggeri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/10 11:23:50 by synicole          #+#    #+#             */
-/*   Updated: 2023/04/29 01:57:37 by nleggeri         ###   ########.fr       */
+/*   Updated: 2023/05/10 12:05:55 by nleggeri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,8 +64,10 @@ int	main(int argc, char **argv, char **envp)
 			if (list)
 			{
 				init_type_in_list(list, env);
-				if (!check_if_built(list, env))
-					check_if_command(list, env);
+				if (if_pipe_in_list(list))
+					run_pipeline(list);
+			//	else if (!check_if_built(list, env))
+			//		check_if_command(list, env);
 				while (list)
 				{
 					printf("(TOKEN)[%s] -> (TYPE)[%d]\n", list->str, list->type);
