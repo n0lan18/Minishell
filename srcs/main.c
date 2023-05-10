@@ -6,7 +6,7 @@
 /*   By: nleggeri <nleggeri@42.student.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/10 11:23:50 by synicole          #+#    #+#             */
-/*   Updated: 2023/04/29 01:57:37 by nleggeri         ###   ########.fr       */
+/*   Updated: 2023/05/10 15:59:05 by nleggeri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ int	main(int argc, char **argv, char **envp)
 				ft_parsing(&env, prompt_output);
 				if (ft_strncmp(env.token->str, "echo", 5) == 0)
 					ft_run_echo(env.token);
+				db_print_token(env.token);
 				add_history(prompt_output);
 			}
 		}
