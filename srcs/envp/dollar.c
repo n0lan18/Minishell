@@ -14,35 +14,21 @@
 
 char	*struct_to_char(t_dollar *list)
 {
-//	int			len;
 	t_dollar	*current;
-	char		*result;
-	int			position;
+	char		*str;
 
-//	len = 0;
 	current = list;
-//	while (current)
-//	{
-//		if (current->str)
-//			len += (int)ft_strlen(current->str);
-//		current = current->next;
-//	}
-	result = malloc(1000000);
-	if (!result)
-		ft_exit(EXIT_FAILURE, "malloc error");
-	position = 0;
-	current = list;
+	while (!current->str)
+		current = current->next;
+	str = current->str;
+	current = current->next;
 	while (current)
 	{
 		if (current->str)
-		{
-			ft_strlcpy(result + position, current->str,
-				ft_strlen(current->str) + 1);
-			position += (int) ft_strlen(current->str);
-		}
+			str = ft_strjoin(str, current->str);
 		current = current->next;
 	}
-	return (result);
+	return (str);
 }
 
 char	*ft_getenv(t_envp *envp, char *name)
@@ -80,8 +66,8 @@ static void	ft_replace_dollar(t_env *env, t_token *current)
 
 	list_dollars = NULL;
 	ft_create_list_dollars(&list_dollars, current->str, 0);
-	ft_replace_dollar_correct_value(env->envp, &list_dollars);
 //	db_print_dollar(list_dollars);
+	ft_replace_dollar_correct_value(env->envp, &list_dollars);
 	current->str = struct_to_char(list_dollars);
 }
 
