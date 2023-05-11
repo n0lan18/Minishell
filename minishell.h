@@ -6,7 +6,7 @@
 /*   By: nleggeri <nleggeri@42.student.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 13:09:55 by synicole          #+#    #+#             */
-/*   Updated: 2023/04/29 02:36:05 by nleggeri         ###   ########.fr       */
+/*   Updated: 2023/05/10 19:04:49 by nleggeri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,8 @@ enum e_token_type
 	E_BUILTIN,
 	E_PIPE,
 	E_REDIRECTION,
+	E_FILE,
+	E_CMD
 };
 
 enum e_token_quote {
@@ -101,6 +103,7 @@ int			ft_contains_dollar(const char *str);
 void		ft_create_list_dollars(t_dollar **list, const char *str, int i);
 void		ft_trim_quote(t_env *env);
 void		ft_join_token_not_separate_by_space(t_env *env);
+void		init_type_in_list(t_env *env);
 
 /** ----- SIGNALS ----- **/
 void		ft_init_signals(void);
@@ -135,6 +138,9 @@ void		db_print_dollar(t_dollar *dollar);
 /** ----- EXTERNAL ----- **/
 void		rl_replace_line(const char *c, int i);
 
+/** ----- UTILS ----- **/
+void	free_double_tab(char **tab);
+
 /*************check_if_built****************/
 int			check_if_built(t_token *list, t_token *env);
 int			check_if_built_bis(t_token *list);
@@ -148,4 +154,5 @@ t_token		*env_in_list(char **env, t_token *list);
 void		check_if_command(t_token *list, t_token *env);
 char		**token_to_char(t_token *env);
 
+int     search_of_type_cmd(t_envp *env, char *tab);
 #endif
