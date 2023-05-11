@@ -13,25 +13,6 @@
 #include "../../minishell.h"
 
 /**
- * Fonction who check if case of list is space
- * @param s 
- * @return int 
- */
-static int	is_space(const char *str)
-{
-	int	i;
-
-	i = 0;
-	while (str[i])
-	{
-		if (str[i] != ' ')
-			return (0);
-		i++;
-	}
-	return (1);
-}
-
-/**
  * Give type in all cases of t_token struct
  * @param str 
  * @param token 
@@ -50,7 +31,7 @@ static int	search_which_type(char *str, t_token *token, t_envp *envp)
 		token->type = E_BUILTIN;
 	else if (ft_strncmp(str, "|", ft_strlen(str)) == 0)
 		token->type = E_PIPE;
-	else if (is_space(str))
+	else if (ft_contains_only_space(str))
 		token->type = E_SPACE;
 	else if ((ft_strncmp(str, ">", ft_strlen(str)) == 0)
 		|| (ft_strncmp(str, "<", ft_strlen(str)) == 0))
