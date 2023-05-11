@@ -6,7 +6,7 @@
 /*   By: nleggeri <nleggeri@42.student.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 13:09:55 by synicole          #+#    #+#             */
-/*   Updated: 2023/05/10 19:04:49 by nleggeri         ###   ########.fr       */
+/*   Updated: 2023/05/11 16:41:57 by nleggeri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,9 @@ void		ft_create_list_dollars(t_dollar **list, const char *str, int i);
 void		ft_trim_quote(t_env *env);
 void		ft_join_token_not_separate_by_space(t_env *env);
 void		init_type_in_list(t_env *env);
+int			check_if_cmd_first(t_env env);
+void		launch_cmd(t_env env);
+char		*join_all_path(char *env, char *cmd, char slash);
 
 /** ----- SIGNALS ----- **/
 void		ft_init_signals(void);
