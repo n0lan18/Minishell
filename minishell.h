@@ -107,6 +107,8 @@ void		ft_type(t_env *env);
 
 /** ----- EXECUTION ----- **/
 void		ft_execute(t_env *env);
+int			ft_is_builtins(char *str);
+void		ft_execute_builtins(t_env *env);
 
 /** ----- SIGNALS ----- **/
 void		ft_init_signals(void);
@@ -121,13 +123,11 @@ t_dollar	*ft_new_dollar(char *str);
 void		ft_add_dollar_end(t_dollar **lst, t_dollar *new);
 
 /** ----- BUILTIN ----- **/
-int			ft_is_builtins(char *str);
-void		ft_execute_builtins(t_env *env);
 void		ft_exec_echo(t_token *list);
+void		ft_exec_env(t_envp *envp);
 void		ft_run_cd(t_token *env, t_token *list);
 void		ft_run_pwd(t_token *env, t_token *list);
 void		ft_run_unset(t_token *env, t_token *list);
-void		ft_run_env(t_token *env);
 void		ft_run_export(t_token *env, t_token *list);
 
 /** ----- EXIT ----- **/

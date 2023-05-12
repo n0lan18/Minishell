@@ -12,6 +12,13 @@
 
 #include "../../minishell.h"
 
+/**
+ * Print the token.
+ *
+ * @param t_token *tmp
+ *
+ * @return void
+ */
 static void	ft_print_token(t_token *tmp)
 {
 	if (tmp->type == E_SPACE)
@@ -20,6 +27,13 @@ static void	ft_print_token(t_token *tmp)
 		printf("%s", tmp->str);
 }
 
+/**
+ * Display the arguments passed to the echo command.
+ *
+ * @param t_token *list
+ *
+ * @return void
+ */
 void	ft_exec_echo(t_token *list)
 {
 	int		i;

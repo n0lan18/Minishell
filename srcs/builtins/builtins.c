@@ -48,7 +48,7 @@ void	ft_execute_builtins(t_env *env)
 	if (ft_strncmp(env->token->str, "echo", 5) == 0)
 		ft_exec_echo(env->token);
 	else if (ft_strncmp(env->token->str, "env", 4) == 0)
-		printf("execute env\n");
+		ft_exec_env(env->envp);
 	else if (ft_strncmp(env->token->str, "export", 7) == 0)
 		printf("execute export\n");
 	else if (ft_strncmp(env->token->str, "unset", 6) == 0)
