@@ -103,7 +103,10 @@ int			ft_contains_dollar(const char *str);
 void		ft_create_list_dollars(t_dollar **list, const char *str, int i);
 void		ft_trim_quote(t_env *env);
 void		ft_join_token_not_separate_by_space(t_env *env);
-void		init_type_in_list(t_env *env);
+void		ft_type(t_env *env);
+
+/** ----- EXECUTION ----- **/
+void		ft_execute(t_env *env);
 
 /** ----- SIGNALS ----- **/
 void		ft_init_signals(void);
@@ -118,7 +121,9 @@ t_dollar	*ft_new_dollar(char *str);
 void		ft_add_dollar_end(t_dollar **lst, t_dollar *new);
 
 /** ----- BUILTIN ----- **/
-void		ft_run_echo(t_token *list);
+int			ft_is_builtins(char *str);
+void		ft_execute_builtins(t_env *env);
+void		ft_exec_echo(t_token *list);
 void		ft_run_cd(t_token *env, t_token *list);
 void		ft_run_pwd(t_token *env, t_token *list);
 void		ft_run_unset(t_token *env, t_token *list);
@@ -139,7 +144,7 @@ void		db_print_dollar(t_dollar *dollar);
 void		rl_replace_line(const char *c, int i);
 
 /** ----- UTILS ----- **/
-void	free_double_tab(char **tab);
+void		free_double_tab(char **tab);
 
 /*************check_if_built****************/
 int			check_if_built(t_token *list, t_token *env);

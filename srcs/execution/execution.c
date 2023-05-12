@@ -1,36 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   built_echo.c                                       :+:      :+:    :+:   */
+/*   execution.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nleggeri <nleggeri@42.student.fr>          +#+  +:+       +#+        */
+/*   By: synicole <synicole@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/24 23:46:04 by nleggeri          #+#    #+#             */
-/*   Updated: 2023/04/29 02:38:16 by nleggeri         ###   ########.fr       */
+/*   Created: 2023/05/12 10:58:20 by synicole          #+#    #+#             */
+/*   Updated: 2023/05/12 10:58:22 by synicole         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-static void	ft_print_token(t_token *tmp)
+void	ft_execute(t_env *env)
 {
-	if (tmp->type == E_SPACE)
-		printf(" ");
-	else
-		printf("%s", tmp->str);
-}
-
-void	ft_run_echo(t_token *list)
-{
-	int		i;
-
-	i = 0;
-	while (list)
-	{
-		if (i > 1)
-			ft_print_token(list);
-		i++;
-		list = list->next;
-	}
-	printf("\n");
+	if (ft_is_builtins(env->token->str))
+		ft_execute_builtins(env);
 }

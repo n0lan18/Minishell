@@ -55,7 +55,7 @@ static int	search_which_type(char *str, t_token *token, t_envp *envp)
  * 
  * @return void
  */
-void	init_type_in_list(t_env *env)
+void	ft_type(t_env *env)
 {
 	t_token	*tmp;
 	t_envp	*tmp_env;

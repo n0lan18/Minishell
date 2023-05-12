@@ -1,27 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing.c                                          :+:      :+:    :+:   */
+/*   built_echo.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nleggeri <nleggeri@42.student.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/06 21:27:14 by synicole          #+#    #+#             */
-/*   Updated: 2023/05/10 19:15:31 by nleggeri         ###   ########.fr       */
+/*   Created: 2023/04/24 23:46:04 by nleggeri          #+#    #+#             */
+/*   Updated: 2023/04/29 02:38:16 by nleggeri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-/**
- * Parses the readline and creates a linked list of tokens.
- * @param env
- * @param readline
- */
-void	ft_parsing(t_env *env, char *readline)
+static void	ft_print_token(t_token *tmp)
 {
-	ft_readline_to_token(env, readline);
-	ft_dollar(env);
-	ft_trim_quote(env);
-	ft_join_token_not_separate_by_space(env);
-	ft_type(env);
+	if (tmp->type == E_SPACE)
+		printf(" ");
+	else
+		printf("%s", tmp->str);
+}
+
+void	ft_exec_echo(t_token *list)
+{
+	int		i;
+
+	i = 0;
+	while (list)
+	{
+		if (i > 1)
+			ft_print_token(list);
+		i++;
+		list = list->next;
+	}
+	printf("\n");
 }
