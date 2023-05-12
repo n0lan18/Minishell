@@ -118,6 +118,7 @@ t_token		*ft_new_token(char *str);
 void		ft_add_token_end(t_token **lst, t_token *token);
 t_envp		*ft_new_envp(char *str);
 void		ft_add_envp_end(t_envp **lst, t_envp *envp);
+void		ft_remove_envp(t_envp **lst, char *str);
 int			ft_size_list_envp(t_envp *list);
 t_dollar	*ft_new_dollar(char *str);
 void		ft_add_dollar_end(t_dollar **lst, t_dollar *new);
@@ -127,7 +128,7 @@ void		ft_exec_echo(t_token *list);
 void		ft_exec_env(t_envp *envp);
 void		ft_run_cd(t_token *env, t_token *list);
 void		ft_run_pwd(t_token *env, t_token *list);
-void		ft_run_unset(t_token *env, t_token *list);
+void		ft_exec_unset(t_env *env);
 void		ft_run_export(t_token *env, t_token *list);
 
 /** ----- EXIT ----- **/

@@ -52,7 +52,7 @@ void	ft_execute_builtins(t_env *env)
 	else if (ft_strncmp(env->token->str, "export", 7) == 0)
 		printf("execute export\n");
 	else if (ft_strncmp(env->token->str, "unset", 6) == 0)
-		printf("execute unset\n");
+		ft_exec_unset(env);
 	else if (ft_strncmp(env->token->str, "pwd", 4) == 0)
 		printf("execute pwd\n");
 	else if (ft_strncmp(env->token->str, "cd", 3) == 0)
