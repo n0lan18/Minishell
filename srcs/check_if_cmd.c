@@ -6,7 +6,7 @@
 /*   By: nleggeri <nleggeri@42.student.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 16:52:50 by nleggeri          #+#    #+#             */
-/*   Updated: 2023/05/10 19:15:23 by nleggeri         ###   ########.fr       */
+/*   Updated: 2023/05/11 16:41:46 by nleggeri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
  * @param str 
  * @return char* 
  */
-static char	*ft_strcpy_with_malloc(char *str)
+static	char	*ft_strcpy_with_malloc(char *str)
 {
 	int		i;
 	char	*dst;
@@ -37,6 +37,7 @@ static char	*ft_strcpy_with_malloc(char *str)
 	dst[i] = '\0';
 	return (dst);
 }
+
 /**
  * Join all path with slash and cmd. The perfect path is path/cmd
  * @param env 
@@ -45,7 +46,7 @@ static char	*ft_strcpy_with_malloc(char *str)
  * 
  * @return char* 
  */
-static char	*join_all_path(char *env, char *cmd, char slash)
+char	*join_all_path(char *env, char *cmd, char slash)
 {
 	char	*join;
 	int		i;

@@ -6,7 +6,7 @@
 /*   By: nleggeri <nleggeri@42.student.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/10 11:23:50 by synicole          #+#    #+#             */
-/*   Updated: 2023/05/10 15:59:05 by nleggeri         ###   ########.fr       */
+/*   Updated: 2023/05/11 19:07:23 by nleggeri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,9 +54,11 @@ int	main(int argc, char **argv, char **envp)
 			if (prompt_output && !ft_contains_only_space(prompt_output))
 			{
 				ft_parsing(&env, prompt_output);
-				if (ft_strncmp(env.token->str, "echo", 5) == 0)
+				if (check_if_cmd_first(env) == 1)
+					launch_cmd(env);
+				else if (ft_strncmp(env.token->str, "echo", 5) == 0)
 					ft_run_echo(env.token);
-				db_print_token(env.token);
+			//	db_print_token(env.token);
 				add_history(prompt_output);
 			}
 		}
