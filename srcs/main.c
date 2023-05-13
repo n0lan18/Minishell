@@ -21,7 +21,7 @@ void	ft_for_checker(char **argv, t_env env)
 
 	arg_input = ft_split(argv[2], ';');
 	if (!arg_input)
-		ft_close();
+		ft_exit(EXIT_FAILURE, "invalid input\n");
 	i = 0;
 	while (arg_input[i])
 	{

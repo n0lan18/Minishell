@@ -84,6 +84,7 @@ void		ft_init_envp(t_env *env, char **envpchar);
 char		**ft_envp_to_char(t_envp *envp);
 char		*ft_get_envp_value(const char *str);
 char		*ft_get_envp_name(const char *str);
+int			ft_valid_identifier_todo(int c);
 
 /** ----- PARSING ----- **/
 void		ft_parsing(t_env *env, char *readline);
@@ -126,13 +127,13 @@ void		ft_add_dollar_end(t_dollar **lst, t_dollar *new);
 /** ----- BUILTIN ----- **/
 void		ft_exec_echo(t_token *list);
 void		ft_exec_env(t_envp *envp);
-void		ft_run_cd(t_token *env, t_token *list);
-void		ft_run_pwd(t_token *env, t_token *list);
 void		ft_exec_unset(t_env *env);
-void		ft_run_export(t_token *env, t_token *list);
+void		ft_exec_export(t_env *env);
+void		ft_exec_pwd(void);
+void		ft_exec_cd(t_token *list);
+void		ft_exec_exit(void);
 
 /** ----- EXIT ----- **/
-void		ft_close(void);
 void		ft_exit(int status, char *message);
 
 /** ----- DEBUG ----- **/

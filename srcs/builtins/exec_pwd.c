@@ -12,17 +12,21 @@
 
 #include "../../minishell.h"
 
-void	ft_run_pwd(t_token *env, t_token *list)
+/**
+ * Executes the pwd command.
+ * @param void
+ *
+ * @return void
+ */
+void	ft_exec_pwd(void)
 {
 	char	cwd[1024];
 
-	(void)env;
-	(void)list;
 	if (getcwd(cwd, sizeof(cwd)) != NULL)
 		printf("%s\n", cwd);
 	else
 	{
-		perror("getcwd() erreur");
+		perror("getcwd() error");
 		exit(EXIT_FAILURE);
 	}
 }
