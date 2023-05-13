@@ -36,6 +36,7 @@ SIGNALS_DIR		= signals
 PARSING_DIR		= parsing
 ENVP_DIR		= envp
 STRUCTS_DIR		= structs
+EXECUTION_DIR	= execution
 BUILTINS_DIR	= builtins
 CLOSE_DIR		= close
 DEBUG_DIR		= debug
@@ -44,6 +45,7 @@ SRCS 			= $(wildcard $(SRCS_DIR)/*.c) \
 				  $(wildcard $(SRCS_DIR)/$(PARSING_DIR)/*.c) \
 				  $(wildcard $(SRCS_DIR)/$(ENVP_DIR)/*.c) \
 				  $(wildcard $(SRCS_DIR)/$(STRUCTS_DIR)/*.c) \
+				  $(wildcard $(SRCS_DIR)/$(EXECUTION_DIR)/*.c) \
 				  $(wildcard $(SRCS_DIR)/$(BUILTINS_DIR)/*.c) \
 				  $(wildcard $(SRCS_DIR)/$(CLOSE_DIR)/*.c) \
 				  $(wildcard $(SRCS_DIR)/$(DEBUG_DIR)/*.c)
@@ -68,6 +70,7 @@ $(OBJS_DIR):
 				mkdir -p $(OBJS_DIR)/$(PARSING_DIR)
 				mkdir -p $(OBJS_DIR)/$(ENVP_DIR)
 				mkdir -p $(OBJS_DIR)/$(STRUCTS_DIR)
+				mkdir -p $(OBJS_DIR)/$(EXECUTION_DIR)
 				mkdir -p $(OBJS_DIR)/$(BUILTINS_DIR)
 				mkdir -p $(OBJS_DIR)/$(CLOSE_DIR)
 				mkdir -p $(OBJS_DIR)/$(DEBUG_DIR)

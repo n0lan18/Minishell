@@ -21,7 +21,7 @@ void	ft_for_checker(char **argv, t_env env)
 
 	arg_input = ft_split(argv[2], ';');
 	if (!arg_input)
-		ft_close();
+		ft_exit(EXIT_FAILURE, "invalid input\n");
 	i = 0;
 	while (arg_input[i])
 	{
@@ -29,8 +29,7 @@ void	ft_for_checker(char **argv, t_env env)
 		if (arg_input[i] && !ft_contains_only_space(arg_input[i]))
 		{
 			ft_parsing(&env, arg_input[i]);
-			if (ft_strncmp(env.token->str, "echo", 5) == 0)
-				ft_run_echo(env.token);
+			ft_execute(&env);
 		}
 		i++;
 	}
@@ -53,13 +52,10 @@ int	main(int argc, char **argv, char **envp)
 			prompt_output = readline("minishell-1.0$ ");
 			if (prompt_output && !ft_contains_only_space(prompt_output))
 			{
-				ft_parsing(&env, prompt_output);
-				if (check_if_cmd_first(env) == 1)
-					launch_cmd(env);
-				else if (ft_strncmp(env.token->str, "echo", 5) == 0)
-					ft_run_echo(env.token);
-			//	db_print_token(env.token);
 				add_history(prompt_output);
+				ft_parsing(&env, prompt_output);
+				ft_execute(&env);
+        launch_cmd(env);
 			}
 		}
 	}

@@ -84,6 +84,7 @@ void		ft_init_envp(t_env *env, char **envpchar);
 char		**ft_envp_to_char(t_envp *envp);
 char		*ft_get_envp_value(const char *str);
 char		*ft_get_envp_name(const char *str);
+int			ft_valid_identifier(int c);
 
 /** ----- PARSING ----- **/
 void		ft_parsing(t_env *env, char *readline);
@@ -103,6 +104,11 @@ int			ft_contains_dollar(const char *str);
 void		ft_create_list_dollars(t_dollar **list, const char *str, int i);
 void		ft_trim_quote(t_env *env);
 void		ft_join_token_not_separate_by_space(t_env *env);
+
+/** ----- EXECUTION ----- **/
+void		ft_execute(t_env *env);
+int			ft_is_builtins(char *str);
+void		ft_execute_builtins(t_env *env);
 void		init_type_in_list(t_env *env);
 int			check_if_cmd_first(t_env env);
 char		**tab_with_cmd_and_options(t_token *token);
@@ -121,20 +127,21 @@ t_token		*ft_new_token(char *str);
 void		ft_add_token_end(t_token **lst, t_token *token);
 t_envp		*ft_new_envp(char *str);
 void		ft_add_envp_end(t_envp **lst, t_envp *envp);
+void		ft_remove_envp(t_envp **lst, char *str);
 int			ft_size_list_envp(t_envp *list);
 t_dollar	*ft_new_dollar(char *str);
 void		ft_add_dollar_end(t_dollar **lst, t_dollar *new);
 
 /** ----- BUILTIN ----- **/
-void		ft_run_echo(t_token *list);
-void		ft_run_cd(t_token *env, t_token *list);
-void		ft_run_pwd(t_token *env, t_token *list);
-void		ft_run_unset(t_token *env, t_token *list);
-void		ft_run_env(t_token *env);
-void		ft_run_export(t_token *env, t_token *list);
+void		ft_exec_echo(t_token *list);
+void		ft_exec_env(t_envp *envp);
+void		ft_exec_unset(t_env *env);
+void		ft_exec_export(t_env *env);
+void		ft_exec_pwd(void);
+void		ft_exec_cd(t_token *list);
+void		ft_exec_exit(void);
 
 /** ----- EXIT ----- **/
-void		ft_close(void);
 void		ft_exit(int status, char *message);
 
 /** ----- DEBUG ----- **/
@@ -147,7 +154,7 @@ void		db_print_dollar(t_dollar *dollar);
 void		rl_replace_line(const char *c, int i);
 
 /** ----- UTILS ----- **/
-void	free_double_tab(char **tab);
+void		free_double_tab(char **tab);
 
 /*************check_if_built****************/
 int			check_if_built(t_token *list, t_token *env);

@@ -1,31 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   built_cd.c                                         :+:      :+:    :+:   */
+/*   execution.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: synicole <synicole@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/25 23:14:25 by synicole          #+#    #+#             */
-/*   Updated: 2023/04/25 23:14:28 by synicole         ###   ########.fr       */
+/*   Created: 2023/05/12 10:58:20 by synicole          #+#    #+#             */
+/*   Updated: 2023/05/12 10:58:22 by synicole         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-void	ft_run_cd(t_token *env, t_token *list)
+void	ft_execute(t_env *env)
 {
-	char	*path;
-
-	(void)env;
-	if (!list->next)
-	{
-		if (chdir(getenv("HOME")))
-			perror(ft_strjoin("minishell: cd: ", path));
-	}
-	else
-	{
-		path = list->next->next->str;
-		if (chdir(path))
-			perror(ft_strjoin("minishell: cd: ", path));
-	}
+	if (ft_is_builtins(env->token->str))
+		ft_execute_builtins(env);
 }

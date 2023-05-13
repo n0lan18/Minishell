@@ -12,13 +12,6 @@
 
 #include "../../minishell.h"
 
-static int	ft_allowed_char(int c)
-{
-	if ((c >= 65 && c <= 90) || (c >= 97 && c <= 122) || c == '_')
-		return (1);
-	return (0);
-}
-
 void	ft_create_list_dollars(t_dollar **list, const char *str, int i)
 {
 	t_dollar	*dollar;
@@ -44,7 +37,7 @@ void	ft_create_list_dollars(t_dollar **list, const char *str, int i)
 				continue ;
 			}
 			j = i + 1;
-			while (str[j] && ft_allowed_char(str[j]))
+			while (str[j] && ft_valid_identifier(str[j]))
 				j++;
 			dollar = ft_new_dollar(ft_substr(str, i, j - i));
 			ft_add_dollar_end(list, dollar);

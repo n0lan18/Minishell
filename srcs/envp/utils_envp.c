@@ -36,3 +36,16 @@ char	**ft_envp_to_char(t_envp *envp)
 	envpchar[i] = NULL;
 	return (envpchar);
 }
+
+/**
+ * Checks if the character is allowed in an environment variable name.
+ * @param c
+ *
+ * @return int
+ */
+int	ft_valid_identifier(int c)
+{
+	if ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z') || c == '_')
+		return (1);
+	return (0);
+}

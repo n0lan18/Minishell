@@ -12,29 +12,51 @@
 
 #include "../../minishell.h"
 
-//void	ft_run_unset(t_token *env, t_token *list)
-//{
-//	t_token	*tmp;
-//	t_token	*temp;
-//	t_token	*prev;
-//	int		i;
-//
-//	tmp = env;
-//	temp = list;
-//	temp = temp->next;
-//	temp = temp->next;
-//	while (tmp)
-//	{
-//		i = compare_length_in_env(tmp->next->str);
-//		if (ft_strncmp(tmp->next->str, temp->str, i) == 0)
-//		{
-//			prev = tmp;
-//			tmp = tmp->next;
-//			prev->next = tmp->next;
-//			free(tmp);
-//			return ;
-//		}
-//		prev = tmp;
-//		tmp = tmp->next;
-//	}
-//}
+/**
+ * Checks if the string contains only valid characters for an environment
+ * variable name.
+ * @param str
+ *
+ * @return int
+ */
+static int	ft_contains_only_valid_identifier(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (!ft_valid_identifier(str[i]))
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
+/**
+ * Execute the unset command.
+ * @param env
+ *
+ * @return void
+ */
+void	ft_exec_unset(t_env *env)
+{
+	t_token	*current;
+
+	current = env->token->next;
+	while (current)
+	{
+		if (current->type != E_SPACE)
+		{
+			if (!ft_contains_only_valid_identifier(current->str))
+			{
+				ft_putstr_fd("minishell: unset: `", STDERR_FILENO);
+				ft_putstr_fd(current->str, STDERR_FILENO);
+				ft_putstr_fd("': not a valid identifier\n", STDERR_FILENO);
+				g_last_exit_code = EXIT_FAILURE;
+			}
+			ft_remove_envp(&env->envp, current->str);
+		}
+		current = current->next;
+	}
+}

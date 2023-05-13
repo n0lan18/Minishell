@@ -13,6 +13,19 @@
 #include "../../minishell.h"
 
 /**
+ * Replaces the value of an envp.
+ * @param current
+ * @param new
+ *
+ * @return void
+ */
+static void	ft_replace_envp(t_envp *current, t_envp *new)
+{
+	current->value = ft_strdup(new->value);
+	current->line = ft_strdup(new->line);
+}
+
+/**
  * Creates a new envp.
  * @param str
  *
@@ -49,8 +62,50 @@ void	ft_add_envp_end(t_envp **lst, t_envp *new)
 	else
 	{
 		while (current->next)
+		{
+			if (ft_strncmp(current->name, new->name, ft_strlen(new->name) + 1)
+				== 0)
+			{
+				ft_replace_envp(current, new);
+				return ;
+			}
 			current = current->next;
-		current->next = new;
+		}
+		if (ft_strncmp(current->name, new->name, ft_strlen(new->name) + 1)
+			== 0)
+			ft_replace_envp(current, new);
+		else
+			current->next = new;
+	}
+}
+
+/**
+ * Removes the envp with the given name from the given list.
+ * @param t_envp *list the current list of envp to remove from
+ * @param char *str the name of the envp to remove
+ *
+ * @return void
+*/
+void	ft_remove_envp(t_envp **lst, char *str)
+{
+	t_envp	*current;
+	t_envp	*prev;
+
+	current = *lst;
+	prev = NULL;
+	while (current)
+	{
+		if (ft_strncmp(current->name, str, ft_strlen(str) + 1) == 0)
+		{
+			if (!prev)
+				*lst = current->next;
+			else
+				prev->next = current->next;
+			free(current);
+			return ;
+		}
+		prev = current;
+		current = current->next;
 	}
 }
 
