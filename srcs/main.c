@@ -6,7 +6,7 @@
 /*   By: nleggeri <nleggeri@42.student.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/10 11:23:50 by synicole          #+#    #+#             */
-/*   Updated: 2023/05/10 15:59:05 by nleggeri         ###   ########.fr       */
+/*   Updated: 2023/05/11 19:07:23 by nleggeri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ int	main(int argc, char **argv, char **envp)
 				add_history(prompt_output);
 				ft_parsing(&env, prompt_output);
 				ft_execute(&env);
+        launch_cmd(env);
 			}
 		}
 	}

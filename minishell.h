@@ -6,7 +6,7 @@
 /*   By: nleggeri <nleggeri@42.student.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 13:09:55 by synicole          #+#    #+#             */
-/*   Updated: 2023/05/10 19:04:49 by nleggeri         ###   ########.fr       */
+/*   Updated: 2023/05/12 11:29:56 by nleggeri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,6 +109,15 @@ void		ft_join_token_not_separate_by_space(t_env *env);
 void		ft_execute(t_env *env);
 int			ft_is_builtins(char *str);
 void		ft_execute_builtins(t_env *env);
+void		init_type_in_list(t_env *env);
+int			check_if_cmd_first(t_env env);
+char		**tab_with_cmd_and_options(t_token *token);
+int			size_of_char_for_cmd_options(t_token *token);
+char		**ft_create_path_for_execve(t_envp *env, char *cmd);
+char		**ft_create_path_for_execve(t_envp *env, char *cmd);
+int			search_e_file_in_list(t_token *token);
+void		launch_cmd(t_env env);
+char		*join_all_path(char *env, char *cmd, char slash);
 
 /** ----- SIGNALS ----- **/
 void		ft_init_signals(void);
