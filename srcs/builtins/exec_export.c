@@ -13,20 +13,6 @@
 #include "../../minishell.h"
 
 /**
- * Checks if the character is allowed in an environment variable name.
- * @param c
- *
- * @return int
- */
-static int	ft_valid_identifier(int c)
-{
-	if ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z')
-		|| c == '_' || c == '=')
-		return (1);
-	return (0);
-}
-
-/**
  * Checks if the string contains only valid characters for an environment
  * variable name.
  * @param str
@@ -38,7 +24,9 @@ static int	ft_contains_only_valid_identifier(char *str)
 	int	i;
 
 	i = 0;
-	while (str[i])
+	if (str[i] == '=')
+		return (0);
+	while (str[i] && str[i] != '=')
 	{
 		if (!ft_valid_identifier(str[i]))
 			return (0);
@@ -56,6 +44,7 @@ static int	ft_contains_only_valid_identifier(char *str)
 void	ft_exec_export(t_env *env)
 {
 	t_token	*current;
+	t_envp	*envp;
 
 	current = env->token->next;
 	while (current)
@@ -69,8 +58,11 @@ void	ft_exec_export(t_env *env)
 				ft_putstr_fd("': not a valid identifier\n", STDERR_FILENO);
 				g_last_exit_code = EXIT_FAILURE;
 			}
-//			else if (ft_strchr(current->str, '='))
-//				printf("export: valid identifier: %s\n", current->str);
+			else if (ft_strchr(current->str, '='))
+			{
+				envp = ft_new_envp(current->str);
+				ft_add_envp_end(&env->envp, envp);
+			}
 		}
 		current = current->next;
 	}

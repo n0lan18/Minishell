@@ -110,6 +110,7 @@ exec_test 'unset $'
 exec_test 'unset 101=dalmatiens'
 exec_test 'unset _=caca'
 exec_test 'unset $USER=caca'
+exec_test 'unset $?'
 
 # EXPORT TESTS
 printf "\n$BOLDYELLOW%s$RESET\n" "EXPORT TESTS"
@@ -118,16 +119,18 @@ exec_test 'export $'
 exec_test 'export 101=dalmatiens'
 exec_test 'export _=caca'
 exec_test 'export $USER=caca'
-
-
+exec_test 'export $?'
+exec_test 'export =caca'
+exec_test 'export caca = pipi'
 
 # PWD TESTS
-#printf "\n$BOLDYELLOW%s$RESET\n" "PWD TESTS"
-#exec_test 'pwd'
-#exec_test 'cd srcs; pwd'
-#exec_test 'cd ..; pwd'
-#exec_test 'cd .; pwd'
-#exec_test 'cd /Users ; pwd'
+printf "\n$BOLDYELLOW%s$RESET\n" "PWD TESTS"
+exec_test 'pwd'
+exec_test 'cd srcs; pwd'
+exec_test 'cd caca; pwd'
+exec_test 'cd ..; pwd'
+exec_test 'cd .; pwd'
+exec_test 'cd /Users ; pwd'
 
 # EXECVE TESTS
 #printf "\n$BOLDYELLOW%s$RESET\n" "EXECVE TESTS"

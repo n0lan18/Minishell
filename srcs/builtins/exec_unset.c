@@ -13,19 +13,6 @@
 #include "../../minishell.h"
 
 /**
- * Checks if the character is allowed in an environment variable name.
- * @param c
- *
- * @return int
- */
-static int	ft_valid_identifier(int c)
-{
-	if ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z') || c == '_')
-		return (1);
-	return (0);
-}
-
-/**
  * Checks if the string contains only valid characters for an environment
  * variable name.
  * @param str

@@ -43,9 +43,9 @@ char	**ft_envp_to_char(t_envp *envp)
  *
  * @return int
  */
-int	ft_valid_identifier_todo(int c)
+int	ft_valid_identifier(int c)
 {
-	if ((c >= 65 && c <= 90) || (c >= 97 && c <= 122) || c == '_')
+	if ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z') || c == '_')
 		return (1);
 	return (0);
 }

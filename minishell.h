@@ -84,7 +84,7 @@ void		ft_init_envp(t_env *env, char **envpchar);
 char		**ft_envp_to_char(t_envp *envp);
 char		*ft_get_envp_value(const char *str);
 char		*ft_get_envp_name(const char *str);
-int			ft_valid_identifier_todo(int c);
+int			ft_valid_identifier(int c);
 
 /** ----- PARSING ----- **/
 void		ft_parsing(t_env *env, char *readline);
@@ -104,7 +104,6 @@ int			ft_contains_dollar(const char *str);
 void		ft_create_list_dollars(t_dollar **list, const char *str, int i);
 void		ft_trim_quote(t_env *env);
 void		ft_join_token_not_separate_by_space(t_env *env);
-void		ft_type(t_env *env);
 
 /** ----- EXECUTION ----- **/
 void		ft_execute(t_env *env);
