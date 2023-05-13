@@ -55,7 +55,6 @@ int	main(int argc, char **argv, char **envp)
 				add_history(prompt_output);
 				ft_parsing(&env, prompt_output);
 				ft_execute(&env);
-        launch_cmd(env);
 			}
 		}
 	}

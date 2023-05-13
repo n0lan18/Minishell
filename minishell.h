@@ -111,12 +111,11 @@ int			ft_is_builtins(char *str);
 void		ft_execute_builtins(t_env *env);
 void		init_type_in_list(t_env *env);
 int			check_if_cmd_first(t_env env);
+void		ft_exec_cmd(t_env *env);
 char		**tab_with_cmd_and_options(t_token *token);
 int			size_of_char_for_cmd_options(t_token *token);
 char		**ft_create_path_for_execve(t_envp *env, char *cmd);
-char		**ft_create_path_for_execve(t_envp *env, char *cmd);
 int			search_e_file_in_list(t_token *token);
-void		launch_cmd(t_env env);
 char		*join_all_path(char *env, char *cmd, char slash);
 
 /** ----- SIGNALS ----- **/
@@ -156,18 +155,4 @@ void		rl_replace_line(const char *c, int i);
 /** ----- UTILS ----- **/
 void		free_double_tab(char **tab);
 
-/*************check_if_built****************/
-int			check_if_built(t_token *list, t_token *env);
-int			check_if_built_bis(t_token *list);
-int			check_if_built_bis_bis(t_token *list);
-int			check_if_built_bis_bis_bis(t_token *tmp, t_token *env);
-
-/*************built_env*********************/
-t_token		*env_in_list(char **env, t_token *list);
-
-/*************check_if_command********************/
-void		check_if_command(t_token *list, t_token *env);
-char		**token_to_char(t_token *env);
-
-int     search_of_type_cmd(t_envp *env, char *tab);
 #endif

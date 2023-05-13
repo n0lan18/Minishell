@@ -65,6 +65,7 @@ void	launch_cmd_without_file(char **path, char **options, int i)
 	pid_t	pid;
 	int		status;
 
+	printf("launch cmd without file\n");
 	i = -1;
 	pid = fork();
 	if (pid < 0)
@@ -89,17 +90,18 @@ void	launch_cmd_without_file(char **path, char **options, int i)
  * 
  * @return void
  */
-void	launch_cmd(t_env env)
+void	ft_exec_cmd(t_env *env)
 {
 	t_token	*tmp;
 	char	**cmd_with_options;
 	char	**path;
 	int		i;
 
+	printf("exec cmd\n");
 	i = 0;
-	tmp = env.token;
+	tmp = env->token;
 	cmd_with_options = tab_with_cmd_and_options(tmp);
-	path = ft_create_path_for_execve(env.envp, cmd_with_options[0]);
+	path = ft_create_path_for_execve(env->envp, cmd_with_options[0]);
 	if (search_e_file_in_list(tmp) == 1)
 		launch_cmd_if_file_in_list(tmp, path, cmd_with_options, i);
 	else
