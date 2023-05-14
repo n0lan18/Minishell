@@ -80,30 +80,30 @@ void	launch_cmd_without_file(char **path, char **options, int i)
 		waitpid(pid, &status, 0);
 }
 
-/**
- * This is the principal fonction in this file. It create a double char
- * **cmd_with_options (file:launch_cmd_bis.c) with the cmd and options. 
- * The path is the env variable with the cmd in the end (file:launch_cmd_bis.c).
- * Then we check the list if there is a file in it or not (file:launch_cmd_bis.c)
- * and we use the good fonction
- * @param env 
- * 
- * @return void
- */
-void	ft_exec_cmd(t_env *env)
-{
-	t_token	*tmp;
-	char	**cmd_with_options;
-	char	**path;
-	int		i;
-
-	printf("exec cmd\n");
-	i = 0;
-	tmp = env->token;
-	cmd_with_options = tab_with_cmd_and_options(tmp);
-	path = ft_create_path_for_execve(env->envp, cmd_with_options[0]);
-	if (search_e_file_in_list(tmp) == 1)
-		launch_cmd_if_file_in_list(tmp, path, cmd_with_options, i);
-	else
-		launch_cmd_without_file(path, cmd_with_options, i);
-}
+///**
+// * This is the principal fonction in this file. It create a double char
+// * **cmd_with_options (file:launch_cmd_bis.c) with the cmd and options.
+// * The path is the env variable with the cmd in the end (file:launch_cmd_bis.c).
+// * Then we check the list if there is a file in it or not (file:launch_cmd_bis.c)
+// * and we use the good fonction
+// * @param env
+// *
+// * @return void
+// */
+//void	ft_exec_cmd(t_env *env)
+//{
+//	t_token	*tmp;
+//	char	**cmd_with_options;
+//	char	**path;
+//	int		i;
+//
+//	printf("exec cmd\n");
+//	i = 0;
+//	tmp = env->token;
+//	cmd_with_options = tab_with_cmd_and_options(tmp);
+//	path = ft_create_path_for_execve(env->envp, cmd_with_options[0]);
+//	if (search_e_file_in_list(tmp) == 1)
+//		launch_cmd_if_file_in_list(tmp, path, cmd_with_options, i);
+//	else
+//		launch_cmd_without_file(path, cmd_with_options, i);
+//}

@@ -29,11 +29,13 @@ typedef struct s_env	t_env;
 typedef struct s_envp	t_envp;
 typedef struct s_token	t_token;
 typedef struct s_dollar	t_dollar;
+typedef struct s_cmd	t_cmd;
 
 typedef struct s_env
 {
 	t_envp	*envp;
 	t_token	*token;
+	t_cmd	*cmd;
 }	t_env;
 
 typedef struct s_envp
@@ -57,6 +59,13 @@ typedef struct s_dollar
 	char		*str;
 	t_dollar	*next;
 }	t_dollar;
+
+typedef struct s_cmd {
+	char	*name;
+	char	**option;
+	int		read;
+	int		write;
+}	t_cmd;
 
 /** ----- ENUM ----- **/
 enum e_token_type
@@ -85,6 +94,8 @@ char		**ft_envp_to_char(t_envp *envp);
 char		*ft_get_envp_value(const char *str);
 char		*ft_get_envp_name(const char *str);
 int			ft_valid_identifier(int c);
+char		*ft_get_envp_value_by_name(t_envp *envp, char *name);
+char		**ft_get_splited_path(t_envp *envp);
 
 /** ----- PARSING ----- **/
 void		ft_parsing(t_env *env, char *readline);
@@ -118,6 +129,7 @@ void		ft_exec_exit(void);
 
 /** ----- EXECUTION ----- **/
 void		ft_execute(t_env *env);
+void		ft_execute_external_in_fork(t_env *env);
 void		init_type_in_list(t_env *env);
 int			check_if_cmd_first(t_env env);
 void		ft_exec_cmd(t_env *env);
@@ -139,6 +151,10 @@ void		ft_remove_envp(t_envp **lst, char *str);
 int			ft_size_list_envp(t_envp *list);
 t_dollar	*ft_new_dollar(char *str);
 void		ft_add_dollar_end(t_dollar **lst, t_dollar *new);
+
+/** ----- PRINT ----- **/
+void		ft_print_cmd_not_found(char *cmd_name);
+void		ft_print_not_a_valid_identifier(char *str, char *builtin_name);
 
 /** ----- EXIT ----- **/
 void		ft_exit(int status, char *message);

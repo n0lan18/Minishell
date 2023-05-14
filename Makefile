@@ -40,6 +40,7 @@ STRUCTS_DIR		= structs
 EXECUTION_DIR	= execution
 BUILTINS_DIR	= builtins
 COMMAND_DIR		= command
+PRINT_DIR		= print
 CLOSE_DIR		= close
 DEBUG_DIR		= debug
 SRCS 			= $(wildcard $(SRCS_DIR)/*.c) \
@@ -51,6 +52,7 @@ SRCS 			= $(wildcard $(SRCS_DIR)/*.c) \
 				  $(wildcard $(SRCS_DIR)/$(EXECUTION_DIR)/*.c) \
 				  $(wildcard $(SRCS_DIR)/$(BUILTINS_DIR)/*.c) \
 				  $(wildcard $(SRCS_DIR)/$(COMMAND_DIR)/*.c) \
+				  $(wildcard $(SRCS_DIR)/$(PRINT_DIR)/*.c) \
 				  $(wildcard $(SRCS_DIR)/$(CLOSE_DIR)/*.c) \
 				  $(wildcard $(SRCS_DIR)/$(DEBUG_DIR)/*.c)
 
@@ -78,6 +80,7 @@ $(OBJS_DIR):
 				mkdir -p $(OBJS_DIR)/$(EXECUTION_DIR)
 				mkdir -p $(OBJS_DIR)/$(BUILTINS_DIR)
 				mkdir -p $(OBJS_DIR)/$(COMMAND_DIR)
+				mkdir -p $(OBJS_DIR)/$(PRINT_DIR)
 				mkdir -p $(OBJS_DIR)/$(CLOSE_DIR)
 				mkdir -p $(OBJS_DIR)/$(DEBUG_DIR)
 

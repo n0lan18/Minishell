@@ -31,20 +31,6 @@ char	*struct_to_char(t_dollar *list)
 	return (str);
 }
 
-char	*ft_getenv(t_envp *envp, char *name)
-{
-	t_envp	*current;
-
-	current = envp;
-	while (current)
-	{
-		if (ft_strncmp(current->name, name, ft_strlen(name) + 1) == 0)
-			return (current->value);
-		current = current->next;
-	}
-	return (ft_strdup(""));
-}
-
 static void	ft_replace_dollar_correct_value(t_envp *envp, t_dollar **list)
 {
 	t_dollar	*current;
@@ -55,7 +41,8 @@ static void	ft_replace_dollar_correct_value(t_envp *envp, t_dollar **list)
 		if (current->str[0] == '$' && current->str[1] == '?')
 			current->str = ft_itoa(g_last_exit_code);
 		else if (current->str[0] == '$' && current->str[1])
-			current->str = ft_getenv(envp, ft_strtrim(current->str, "$"));
+			current->str = ft_get_envp_value_by_name(
+					envp, ft_strtrim(current->str, "$"));
 		current = current->next;
 	}
 }

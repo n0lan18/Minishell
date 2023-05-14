@@ -50,9 +50,7 @@ void	ft_exec_unset(t_env *env)
 		{
 			if (!ft_contains_only_valid_identifier(current->str))
 			{
-				ft_putstr_fd("minishell: unset: `", STDERR_FILENO);
-				ft_putstr_fd(current->str, STDERR_FILENO);
-				ft_putstr_fd("': not a valid identifier\n", STDERR_FILENO);
+				ft_print_not_a_valid_identifier(current->str, "unset");
 				g_last_exit_code = EXIT_FAILURE;
 			}
 			ft_remove_envp(&env->envp, current->str);
