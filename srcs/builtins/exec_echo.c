@@ -27,12 +27,16 @@ static void	ft_print_token(t_token *list, int i, int has_n)
 		{
 			if (list->type == E_SPACE)
 				printf(" ");
-			else if (ft_strncmp(list->str, "-n", 3) == 0)
+			else if (ft_strncmp(list->str, "-n", 3) == 0 && !has_n)
 			{
 				has_n = 1;
 				if (!list->next)
 					break ;
 				list = list->next;
+				while (list && (list->type == E_SPACE
+						|| ft_strncmp(list->str, "-n", 3) == 0))
+					list = list->next;
+				continue ;
 			}
 			else
 				printf("%s", list->str);

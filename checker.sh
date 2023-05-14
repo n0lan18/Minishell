@@ -97,6 +97,7 @@ exec_test "echo -n caca"
 exec_test "echo -n"
 exec_test "echo -n -n"
 exec_test "echo -n -n -n caca pipi"
+exec_test "echo -n caca -n"
 
 # FIXME
 #exec_test 'echo $INEXISTINGVAR caca'
