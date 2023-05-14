@@ -22,6 +22,10 @@ int	ft_get_token_type(const char *str)
 {
 	if (ft_contains_only_space(str))
 		return (E_SPACE);
+	else if (ft_is_redirection(str) == 1)
+		return (E_REDIRECTION);
+	else if (ft_strncmp(str, "|", 2) == 0)
+		return (E_PIPE);
 	else
 		return (E_STRING);
 }

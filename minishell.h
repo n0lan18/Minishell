@@ -25,7 +25,8 @@
 extern int				g_last_exit_code;
 
 /** ----- DEFINE ----- **/
-# define DEBUG 1
+# define DEBUG_TOKEN 1
+# define DEBUG_CMD 0
 # define PATH_MAX 1024
 
 /** ----- STRUCTURES ----- **/
@@ -80,8 +81,6 @@ enum e_token_type
 	E_BUILTIN,
 	E_PIPE,
 	E_REDIRECTION,
-	E_FILE,
-	E_CMD
 };
 
 enum e_token_quote {
@@ -112,12 +111,15 @@ char		**ft_split_token(char const *s);
 int			ft_contains_only_space(const char *s);
 int			ft_is_space(char c);
 int			ft_is_quotes(char c);
+int			ft_is_redirection(const char *str);
 char		*ft_trim_str(const char *str);
 void		ft_dollar(t_env *env);
 int			ft_contains_dollar(const char *str);
 void		ft_create_list_dollars(t_dollar **list, const char *str, int i);
 void		ft_trim_quote(t_env *env);
 void		ft_join_token_not_separate_by_space(t_env *env);
+void		ft_command(t_env *env);
+char		**ft_get_cmd_option(t_token **current, t_cmd *cmd);
 
 /** ----- BUILTIN ----- **/
 int			ft_is_builtins(const char *str);
@@ -133,14 +135,6 @@ void		ft_exec_exit(void);
 /** ----- EXECUTION ----- **/
 void		ft_execute(t_env *env);
 void		ft_execute_external_in_fork(t_env *env);
-void		init_type_in_list(t_env *env);
-int			check_if_cmd_first(t_env env);
-void		ft_exec_cmd(t_env *env);
-char		**tab_with_cmd_and_options(t_token *token);
-int			size_of_char_for_cmd_options(t_token *token);
-char		**ft_create_path_for_execve(t_envp *env, char *cmd);
-int			search_e_file_in_list(t_token *token);
-char		*join_all_path(char *env, char *cmd, char slash);
 
 /** ----- SIGNALS ----- **/
 void		ft_init_signals(void);
@@ -154,12 +148,15 @@ void		ft_remove_envp(t_envp **lst, char *str);
 int			ft_size_list_envp(t_envp *list);
 t_dollar	*ft_new_dollar(char *str);
 void		ft_add_dollar_end(t_dollar **lst, t_dollar *new);
-t_cmd		*ft_new_cmd(t_token *token);
 void		ft_add_cmd_end(t_cmd **lst, t_cmd *new);
 
 /** ----- PRINT ----- **/
 void		ft_print_cmd_not_found(char *cmd_name);
 void		ft_print_not_a_valid_identifier(char *str, char *builtin_name);
+
+/** ----- FREE ----- **/
+void		ft_free_token(t_env *env);
+void		ft_free_cmd(t_env *env);
 
 /** ----- EXIT ----- **/
 void		ft_exit(int status, char *message);
@@ -173,8 +170,5 @@ void		db_print_dollar(t_dollar *dollar);
 
 /** ----- EXTERNAL ----- **/
 extern void	rl_replace_line(const char *c, int i);
-
-/** ----- UTILS ----- **/
-void		free_double_tab(char **tab);
 
 #endif

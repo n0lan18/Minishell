@@ -12,6 +12,13 @@
 
 #include "../../minishell.h"
 
+/**
+ * Executes an external command in a fork.
+ * @param env
+ * @param cmd
+ *
+ * @return void
+ */
 void	ft_execute_external(t_env *env, t_cmd *cmd)
 {
 	char	filepath[PATH_MAX];
@@ -20,7 +27,7 @@ void	ft_execute_external(t_env *env, t_cmd *cmd)
 	int		i;
 
 	envp = ft_envp_to_char(env->envp);
-	if (access(cmd->name, X_OK) == 0)
+	if (!access(cmd->name, X_OK))
 		execve(cmd->name, cmd->option, envp);
 	splited_path = ft_get_splited_path(env->envp);
 	i = 0;
@@ -29,17 +36,20 @@ void	ft_execute_external(t_env *env, t_cmd *cmd)
 		ft_strlcpy(filepath, splited_path[i], PATH_MAX);
 		ft_strlcat(filepath, "/", PATH_MAX);
 		ft_strlcat(filepath, cmd->name, PATH_MAX);
-		if (access(filepath, X_OK) == 0)
-		{
+		if (!access(filepath, X_OK))
 			execve(filepath, cmd->option, envp);
-			exit(EXIT_FAILURE);
-		}
 		i++;
 	}
 	ft_print_cmd_not_found(cmd->name);
 	exit(127);
 }
 
+/**
+ * Execute the command in a fork and wait for it to finish.
+ * @param env
+ *
+ * @return void
+ */
 void	ft_execute_external_in_fork(t_env *env)
 {
 	pid_t	fork_pid;

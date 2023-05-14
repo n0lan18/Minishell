@@ -12,6 +12,10 @@
 
 #include "../../minishell.h"
 
+/**
+ * Executes a builtins command or an external command in a fork.
+ * @param env
+ */
 static void	ft_execute_cmd(t_env *env)
 {
 	if (ft_is_builtins(env->token->str))
@@ -20,6 +24,12 @@ static void	ft_execute_cmd(t_env *env)
 		ft_execute_external_in_fork(env);
 }
 
+/**
+ * Chooses which function to execute depending if there is one or more commands.
+ * @param env
+ *
+ * @return void
+ */
 void	ft_execute(t_env *env)
 {
 	if (env->cmd)

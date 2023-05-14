@@ -70,7 +70,7 @@ void	db_print_cmd(t_cmd *cmd)
 	current = cmd;
 	while (current)
 	{
-		printf("[%s] <= token\n", current->name);
+		printf("[%s] <= name\n", current->name);
 		if (current->option)
 		{
 			while (current->option[i])

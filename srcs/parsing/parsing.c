@@ -23,10 +23,9 @@ void	ft_parsing(t_env *env, char *readline)
 	ft_dollar(env);
 	ft_trim_quote(env);
 	ft_join_token_not_separate_by_space(env);
-//	ft_command(env);
-	if (DEBUG)
-	{
-		db_print_cmd(env->cmd);
+	ft_command(env);
+	if (DEBUG_TOKEN)
 		db_print_token(env->token);
-	}
+	if (DEBUG_CMD)
+		db_print_cmd(env->cmd);
 }
