@@ -16,6 +16,6 @@ void	ft_execute(t_env *env)
 {
 	if (ft_is_builtins(env->token->str))
 		ft_execute_builtins(env);
-	else
-		ft_exec_cmd(env);
+//	else
+//		ft_exec_cmd(env);
 }

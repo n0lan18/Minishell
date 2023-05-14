@@ -105,10 +105,19 @@ void		ft_create_list_dollars(t_dollar **list, const char *str, int i);
 void		ft_trim_quote(t_env *env);
 void		ft_join_token_not_separate_by_space(t_env *env);
 
+/** ----- BUILTIN ----- **/
+int			ft_is_builtins(const char *str);
+void		ft_execute_builtins(t_env *env);
+void		ft_exec_echo(t_token *list);
+void		ft_exec_env(t_envp *envp);
+void		ft_exec_unset(t_env *env);
+void		ft_exec_export(t_env *env);
+void		ft_exec_pwd(void);
+void		ft_exec_cd(t_token *list);
+void		ft_exec_exit(void);
+
 /** ----- EXECUTION ----- **/
 void		ft_execute(t_env *env);
-int			ft_is_builtins(char *str);
-void		ft_execute_builtins(t_env *env);
 void		init_type_in_list(t_env *env);
 int			check_if_cmd_first(t_env env);
 void		ft_exec_cmd(t_env *env);
@@ -130,15 +139,6 @@ void		ft_remove_envp(t_envp **lst, char *str);
 int			ft_size_list_envp(t_envp *list);
 t_dollar	*ft_new_dollar(char *str);
 void		ft_add_dollar_end(t_dollar **lst, t_dollar *new);
-
-/** ----- BUILTIN ----- **/
-void		ft_exec_echo(t_token *list);
-void		ft_exec_env(t_envp *envp);
-void		ft_exec_unset(t_env *env);
-void		ft_exec_export(t_env *env);
-void		ft_exec_pwd(void);
-void		ft_exec_cd(t_token *list);
-void		ft_exec_exit(void);
 
 /** ----- EXIT ----- **/
 void		ft_exit(int status, char *message);
