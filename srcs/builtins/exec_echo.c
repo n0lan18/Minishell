@@ -19,12 +19,29 @@
  *
  * @return void
  */
-static void	ft_print_token(t_token *tmp)
+static void	ft_print_token(t_token *list, int i, int has_n)
 {
-	if (tmp->type == E_SPACE)
-		printf(" ");
-	else
-		printf("%s", tmp->str);
+	while (list)
+	{
+		if (i > 1)
+		{
+			if (list->type == E_SPACE)
+				printf(" ");
+			else if (ft_strncmp(list->str, "-n", 3) == 0)
+			{
+				has_n = 1;
+				if (!list->next)
+					break ;
+				list = list->next;
+			}
+			else
+				printf("%s", list->str);
+		}
+		i++;
+		list = list->next;
+	}
+	if (!has_n)
+		printf("\n");
 }
 
 /**
@@ -36,15 +53,5 @@ static void	ft_print_token(t_token *tmp)
  */
 void	ft_exec_echo(t_token *list)
 {
-	int		i;
-
-	i = 0;
-	while (list)
-	{
-		if (i > 1)
-			ft_print_token(list);
-		i++;
-		list = list->next;
-	}
-	printf("\n");
+	ft_print_token(list, 0, 0);
 }

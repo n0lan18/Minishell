@@ -31,7 +31,7 @@ void	ft_execute_external(t_env *env, t_cmd *cmd)
 		execve(cmd->name, cmd->option, envp);
 	splited_path = ft_get_splited_path(env->envp);
 	i = 0;
-	while (splited_path && splited_path[i] != NULL)
+	while (splited_path && splited_path[i])
 	{
 		ft_strlcpy(filepath, splited_path[i], PATH_MAX);
 		ft_strlcat(filepath, "/", PATH_MAX);
