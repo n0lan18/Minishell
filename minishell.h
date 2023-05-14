@@ -25,7 +25,7 @@
 extern int				g_last_exit_code;
 
 /** ----- DEFINE ----- **/
-# define DEBUG_TOKEN 1
+# define DEBUG_TOKEN 0
 # define DEBUG_CMD 0
 # define PATH_MAX 1024
 
