@@ -12,10 +12,21 @@
 
 #include "../../minishell.h"
 
-void	ft_execute(t_env *env)
+static void	ft_execute_cmd(t_env *env)
 {
 	if (ft_is_builtins(env->token->str))
 		ft_execute_builtins(env);
 	else
 		ft_execute_external_in_fork(env);
+}
+
+void	ft_execute(t_env *env)
+{
+	if (env->cmd)
+	{
+		if (!env->cmd->next)
+			ft_execute_cmd(env);
+		else
+			printf("ft_execute_cmds(env);\n");
+	}
 }

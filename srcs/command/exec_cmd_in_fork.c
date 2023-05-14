@@ -14,7 +14,7 @@
 
 void	ft_execute_external(t_env *env, t_cmd *cmd)
 {
-	char	filepath[1024];
+	char	filepath[PATH_MAX];
 	char	**splited_path;
 	char	**envp;
 	int		i;
@@ -26,9 +26,9 @@ void	ft_execute_external(t_env *env, t_cmd *cmd)
 	i = 0;
 	while (splited_path && splited_path[i] != NULL)
 	{
-		ft_strlcpy(filepath, splited_path[i], 1024);
-		ft_strlcat(filepath, "/", 1024);
-		ft_strlcat(filepath, cmd->name, 1024);
+		ft_strlcpy(filepath, splited_path[i], PATH_MAX);
+		ft_strlcat(filepath, "/", PATH_MAX);
+		ft_strlcat(filepath, cmd->name, PATH_MAX);
 		if (access(filepath, X_OK) == 0)
 		{
 			execve(filepath, cmd->option, envp);

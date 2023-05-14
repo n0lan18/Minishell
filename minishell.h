@@ -24,6 +24,10 @@
 /** ----- GLOBAL VARIABLE ----- **/
 extern int				g_last_exit_code;
 
+/** ----- DEFINE ----- **/
+# define DEBUG 1
+# define PATH_MAX 1024
+
 /** ----- STRUCTURES ----- **/
 typedef struct s_env	t_env;
 typedef struct s_envp	t_envp;
@@ -63,8 +67,9 @@ typedef struct s_dollar
 typedef struct s_cmd {
 	char	*name;
 	char	**option;
-	int		read;
-	int		write;
+	int		fd_read;
+	int		fd_write;
+	t_cmd	*next;
 }	t_cmd;
 
 /** ----- ENUM ----- **/
@@ -108,8 +113,6 @@ int			ft_contains_only_space(const char *s);
 int			ft_is_space(char c);
 int			ft_is_quotes(char c);
 char		*ft_trim_str(const char *str);
-int			ft_get_token_type(const char *str);
-int			ft_get_token_quote(const char *str);
 void		ft_dollar(t_env *env);
 int			ft_contains_dollar(const char *str);
 void		ft_create_list_dollars(t_dollar **list, const char *str, int i);
@@ -151,6 +154,8 @@ void		ft_remove_envp(t_envp **lst, char *str);
 int			ft_size_list_envp(t_envp *list);
 t_dollar	*ft_new_dollar(char *str);
 void		ft_add_dollar_end(t_dollar **lst, t_dollar *new);
+t_cmd		*ft_new_cmd(t_token *token);
+void		ft_add_cmd_end(t_cmd **lst, t_cmd *new);
 
 /** ----- PRINT ----- **/
 void		ft_print_cmd_not_found(char *cmd_name);
@@ -162,11 +167,12 @@ void		ft_exit(int status, char *message);
 /** ----- DEBUG ----- **/
 void		db_print_tab(char **tab);
 void		db_print_token(t_token *token);
+void		db_print_cmd(t_cmd *cmd);
 void		db_print_envp(t_envp *envp);
 void		db_print_dollar(t_dollar *dollar);
 
 /** ----- EXTERNAL ----- **/
-void		rl_replace_line(const char *c, int i);
+extern void	rl_replace_line(const char *c, int i);
 
 /** ----- UTILS ----- **/
 void		free_double_tab(char **tab);

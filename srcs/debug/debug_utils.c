@@ -40,11 +40,48 @@ void	db_print_token(t_token *token)
 	t_token	*current;
 
 	printf("\n--- DEBUG: PRINT TOKEN ---\n");
+	printf("--------------------------------\n");
 	current = token;
 	while (current)
 	{
-		printf("(STR)[%s] -> (TYPE)[%d] -> (QUOTE)[%d]\n",
-			current->str, current->type, current->quote);
+		printf("[%s] <= token\n", current->str);
+		printf("{%d} <= type\n", current->type);
+		printf("{%d} <= quote\n", current->quote);
+		printf("--------------------------------\n");
+		current = current->next;
+	}
+	printf("\n");
+}
+
+/**
+ * Prints the content of a t_cmd.
+ * @param t_cmd *cmd
+ *
+ * @return void
+*/
+void	db_print_cmd(t_cmd *cmd)
+{
+	t_cmd	*current;
+	int		i;
+
+	i = 0;
+	printf("\n--- DEBUG: PRINT COMMAND ---\n");
+	printf("--------------------------------\n");
+	current = cmd;
+	while (current)
+	{
+		printf("[%s] <= token\n", current->name);
+		if (current->option)
+		{
+			while (current->option[i])
+			{
+				printf("[%s] <= option[%d]\n", current->option[i], i);
+				i++;
+			}
+		}
+		i = 0;
+		printf("[%d] <= fd_read\n", current->fd_read);
+		printf("[%d] <= fd_write\n", current->fd_write);
 		current = current->next;
 	}
 	printf("\n");

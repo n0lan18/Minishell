@@ -47,8 +47,8 @@ t_envp	*ft_new_envp(char *str)
 
 /**
  * Adds a new envp at the end of the given list.
- * @param t_envp *list the current list of envp to add to
- * @param char *tab the string value of the new envp to add
+ * @param t_envp **list the current list of envp to add to
+ * @param t_envp *new the new envp to add
  *
  * @return void
 */

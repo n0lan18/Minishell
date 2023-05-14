@@ -1,53 +1,50 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   struc_dollar.c                                     :+:      :+:    :+:   */
+/*   struct_cmd.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: synicole <synicole@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/09 23:29:34 by synicole          #+#    #+#             */
-/*   Updated: 2023/05/09 23:29:36 by synicole         ###   ########.fr       */
+/*   Created: 2023/05/14 17:27:07 by synicole          #+#    #+#             */
+/*   Updated: 2023/05/14 17:27:09 by synicole         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-/**
- * Creates a new t_dollar.
- * @param str
- *
- * @return t_dollar *new
- */
-t_dollar	*ft_new_dollar(char *str)
+t_cmd	*ft_new_cmd(t_token *token)
 {
-	t_dollar	*new;
+	t_cmd	*new;
 
-	new = malloc(sizeof(t_envp));
+	new = malloc(sizeof(t_cmd));
 	if (!new)
 		return (NULL);
-	new->str = str;
+	new->name = token->str;
+//	new->option = cmd->option;
+//	new->fd_read = cmd->read;
+//	new->fd_write = cmd->write;
 	new->next = NULL;
 	return (new);
 }
 
 /**
- * Adds a new dollar at the end of the given list.
- * @param t_dollar **list the current list of dollars to add to
- * @param t_dollar *new the new dollar to add
+ * Adds a new command at the end of the given list.
+ * @param t_cmd **list the current list of commands to add to
+ * @param t_cmd *new the new command to add
  *
  * @return void
 */
-void	ft_add_dollar_end(t_dollar **lst, t_dollar *new)
+void	ft_add_cmd_end(t_cmd **lst, t_cmd *new)
 {
-	t_dollar	*current;
+	t_cmd	*current;
 
-	if (!*lst)
-	{
-		*lst = new;
-		return ;
-	}
 	current = *lst;
-	while (current->next)
-		current = current->next;
-	current->next = new;
+	if (!current)
+		return ;
+	else
+	{
+		while (current->next)
+			current = current->next;
+		current->next = new;
+	}
 }
