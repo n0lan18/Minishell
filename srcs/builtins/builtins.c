@@ -18,7 +18,7 @@
  *
  * @return int
  */
-int	ft_is_builtins(char *str)
+int	ft_is_builtins(const char *str)
 {
 	if (ft_strncmp(str, "echo", 5) == 0)
 		return (1);

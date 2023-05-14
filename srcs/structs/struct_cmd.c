@@ -1,28 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_env.c                                         :+:      :+:    :+:   */
+/*   struct_cmd.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: synicole <synicole@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/06 21:31:24 by synicole          #+#    #+#             */
-/*   Updated: 2023/05/06 21:31:26 by synicole         ###   ########.fr       */
+/*   Created: 2023/05/14 17:27:07 by synicole          #+#    #+#             */
+/*   Updated: 2023/05/14 17:27:09 by synicole         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "../../minishell.h"
 
 /**
- * Initializes the project structure.
- *
- * @param env pointer to the t_env structure to be initialized
- * @param envp array of strings containing the environment variables
+ * Adds a new command at the end of the given list.
+ * @param t_cmd **list the current list of commands to add to
+ * @param t_cmd *new the new command to add
  *
  * @return void
- */
-void	ft_init_env(t_env *env, char **envp)
+*/
+void	ft_add_cmd_end(t_cmd **lst, t_cmd *new)
 {
-	env->token = NULL;
-	ft_init_envp(env, envp);
-	g_last_exit_code = EXIT_SUCCESS;
+	t_cmd	*current;
+
+	current = *lst;
+	if (!current)
+		return ;
+	else
+	{
+		while (current->next)
+			current = current->next;
+		current->next = new;
+	}
 }

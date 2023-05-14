@@ -49,3 +49,45 @@ int	ft_valid_identifier(int c)
 		return (1);
 	return (0);
 }
+
+/**
+ * Gets the size of the linked list of environment variables.
+ * @param envp
+ * @param name
+ *
+ * @return char*
+ */
+char	*ft_get_envp_value_by_name(t_envp *envp, char *name)
+{
+	t_envp	*current;
+
+	current = envp;
+	while (current)
+	{
+		if (ft_strncmp(current->name, name, ft_strlen(name) + 1) == 0)
+			return (current->value);
+		current = current->next;
+	}
+	return (ft_strdup(""));
+}
+
+/**
+ * Gets the PATH environment variable and splits it into an array of strings.
+ * @param envp
+ *
+ * @return char**
+ */
+char	**ft_get_splited_path(t_envp *envp)
+{
+	char	*unsplited_path;
+	char	**splited_path;
+
+	unsplited_path = ft_get_envp_value_by_name(envp, "PATH");
+	if (unsplited_path[0] == '\0')
+	{
+		free(unsplited_path);
+		return (NULL);
+	}
+	splited_path = ft_split(unsplited_path + 5, ':');
+	return (splited_path);
+}

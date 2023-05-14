@@ -13,6 +13,39 @@
 #include "../../minishell.h"
 
 /**
+ * Get the type of the token
+ * @param str
+ *
+ * @return int
+ */
+int	ft_get_token_type(const char *str)
+{
+	if (ft_contains_only_space(str))
+		return (E_SPACE);
+	else if (ft_is_redirection(str) == 1)
+		return (E_REDIRECTION);
+	else if (ft_strncmp(str, "|", 2) == 0)
+		return (E_PIPE);
+	else
+		return (E_STRING);
+}
+
+/**
+ * Get the quote of the token
+ * @param str
+ *
+ * @return int
+ */
+static int	ft_get_token_quote(const char *str)
+{
+	if (str[0] == '\'')
+		return (E_SINGLE_QUOTE);
+	else if (str[0] == '"')
+		return (E_DOUBLE_QUOTE);
+	return (E_NONE_QUOTE);
+}
+
+/**
  * Creates a new token.
  * @param str
  *
@@ -34,8 +67,8 @@ t_token	*ft_new_token(char *str)
 
 /**
  * Adds a new token at the end of the given list.
- * @param t_token *list the current list of tokens to add to
- * @param char *tab the string value of the new token to add
+ * @param t_token **list the current list of tokens to add to
+ * @param t_token *new the new token to add
  *
  * @return void
 */

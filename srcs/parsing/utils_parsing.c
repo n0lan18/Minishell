@@ -80,3 +80,22 @@ char	*ft_trim_str(const char *str)
 	trimmed_str = ft_substr(str, start, end - start + 1);
 	return (trimmed_str);
 }
+
+/**
+ * Checks if a given string is a redirection.
+ * @param char *str to check.
+ *
+ * @return int 1 if the string is a redirection, otherwise 0.
+*/
+int	ft_is_redirection(const char *str)
+{
+	if (ft_strncmp(str, "<", 2) == 0)
+		return (1);
+	else if (ft_strncmp(str, ">", 2) == 0)
+		return (1);
+	else if (ft_strncmp(str, "<<", 3) == 0)
+		return (1);
+	else if (ft_strncmp(str, ">>", 3) == 0)
+		return (1);
+	return (0);
+}

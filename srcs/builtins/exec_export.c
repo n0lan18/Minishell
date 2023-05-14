@@ -53,9 +53,7 @@ void	ft_exec_export(t_env *env)
 		{
 			if (!ft_contains_only_valid_identifier(current->str))
 			{
-				ft_putstr_fd("minishell: export: `", STDERR_FILENO);
-				ft_putstr_fd(current->str, STDERR_FILENO);
-				ft_putstr_fd("': not a valid identifier\n", STDERR_FILENO);
+				ft_print_not_a_valid_identifier(current->str, "export");
 				g_last_exit_code = EXIT_FAILURE;
 			}
 			else if (ft_strchr(current->str, '='))

@@ -13,7 +13,7 @@
 #include "../../minishell.h"
 
 /**
- * Creates a new t_doallar.
+ * Creates a new t_dollar.
  * @param str
  *
  * @return t_dollar *new
@@ -31,9 +31,9 @@ t_dollar	*ft_new_dollar(char *str)
 }
 
 /**
- * Adds a new envp at the end of the given list.
- * @param t_envp *list the current list of envp to add to
- * @param char *tab the string value of the new envp to add
+ * Adds a new dollar at the end of the given list.
+ * @param t_dollar **list the current list of dollars to add to
+ * @param t_dollar *new the new dollar to add
  *
  * @return void
 */
