@@ -6,14 +6,14 @@
 /*   By: nleggeri <nleggeri@42.student.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/15 09:45:38 by nleggeri          #+#    #+#             */
-/*   Updated: 2023/05/16 19:08:33 by nleggeri         ###   ########.fr       */
+/*   Updated: 2023/05/17 00:48:43 by nleggeri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
 /**
- * Executes the pipe command.
+ * Check if there is a pipe in the structure.
  * @param env
  * @param cmd
  *
@@ -33,6 +33,14 @@ int	check_if_there_is_pipe(t_env *env)
 	return (0);
 }
 
+/**
+ * Check the size of cmd in the struct. To know how many pipe we have to create
+ * and the stop condition of the while loop.
+ * @param env
+ * @param cmd
+ *
+ * @return int
+ */
 int	size_of_struct_cmd(t_cmd *cmd)
 {
 	int		i;

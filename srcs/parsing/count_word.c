@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   count_word.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: synicole <synicole@student.42lausanne.ch>  +#+  +:+       +#+        */
+/*   By: nleggeri <nleggeri@42.student.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 16:40:11 by synicole          #+#    #+#             */
-/*   Updated: 2023/05/06 16:40:14 by synicole         ###   ########.fr       */
+/*   Updated: 2023/05/16 23:48:44 by nleggeri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,9 +64,15 @@ int	ft_count_words(const char *s)
 			i = ft_skip_spaces(s, i);
 		else if (s[i] == '\'' || s[i] == '\"')
 			i = ft_skip_quotes(s, i, s[i]);
+		else if ((s[i] == '>' && s[i + 1] == '>') || \
+		(s[i] == '<' && s[i + 1] == '<'))
+			i += 2;
+		else if (s[i] == '|' || s[i] == '>' || s[i] == '<')
+			i++;
 		else
 		{
-			while (!ft_is_space(s[i]) && !ft_is_quotes(s[i]) && s[i])
+			while (!ft_is_space(s[i]) && !ft_is_quotes(s[i]) && s[i] != '>' && \
+			s[i] != '<' && s[i] != '|' && s[i])
 				i++;
 		}
 		num_words++;
