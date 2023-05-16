@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   command_option.c                                   :+:      :+:    :+:   */
+/*   cmd_option.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: synicole <synicole@student.42lausanne.ch>  +#+  +:+       +#+        */
+/*   By: nleggeri <nleggeri@42.student.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 18:47:17 by synicole          #+#    #+#             */
-/*   Updated: 2023/05/14 18:47:19 by synicole         ###   ########.fr       */
+/*   Updated: 2023/05/16 14:58:58 by nleggeri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ static char	**ft_get_option(char **option, char **option_tmp)
 	}
 	return (option);
 }
+
 
 char	**ft_get_cmd_option(t_token **current, t_cmd *cmd)
 {

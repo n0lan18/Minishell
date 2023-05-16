@@ -6,7 +6,7 @@
 /*   By: nleggeri <nleggeri@42.student.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 13:09:55 by synicole          #+#    #+#             */
-/*   Updated: 2023/05/12 11:29:56 by nleggeri         ###   ########.fr       */
+/*   Updated: 2023/05/15 10:27:13 by nleggeri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,6 +135,11 @@ void		ft_exec_exit(void);
 /** ----- EXECUTION ----- **/
 void		ft_execute(t_env *env);
 void		ft_execute_external_in_fork(t_env *env);
+
+/** ----- EXECUTION PIPE ----- **/
+int			check_if_there_is_pipe(t_env *env);
+void		ft_execute_pipe(t_env *env);
+void		ft_execute_external(t_env *env, t_cmd *cmd);
 
 /** ----- SIGNALS ----- **/
 void		ft_init_signals(void);

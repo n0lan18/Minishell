@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   command.c                                          :+:      :+:    :+:   */
+/*   cmd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: synicole <synicole@student.42lausanne.ch>  +#+  +:+       +#+        */
+/*   By: nleggeri <nleggeri@42.student.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 17:22:32 by synicole          #+#    #+#             */
-/*   Updated: 2023/05/14 17:22:34 by synicole         ###   ########.fr       */
+/*   Updated: 2023/05/16 15:23:02 by nleggeri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,9 @@ static t_cmd	*ft_init_cmd(t_token **current)
 		else if ((*current)->type == E_PIPE)
 		{
 			(*current) = (*current)->next;
+			while (((*current)->type == E_PIPE && (*current) != NULL) ||\
+			((*current)->type == E_SPACE && (*current) != NULL))
+				(*current) = (*current)->next;
 			break ;
 		}
 		else if ((*current) != NULL)
@@ -37,6 +40,7 @@ static t_cmd	*ft_init_cmd(t_token **current)
 	}
 	return (cmd);
 }
+
 
 void	ft_command(t_env *env)
 {
