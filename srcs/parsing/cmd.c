@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nleggeri <nleggeri@42.student.fr>          +#+  +:+       +#+        */
+/*   By: nleggeri <nleggeri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 17:22:32 by synicole          #+#    #+#             */
-/*   Updated: 2023/05/23 12:04:45 by nleggeri         ###   ########.fr       */
+/*   Updated: 2023/05/24 11:57:41 by nleggeri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,14 @@ static void	ft_init_option_in_cmd(t_token **current, t_cmd *cmd)
 		}
 		else if ((*current)->type == E_PIPE)
 		{
-			(*current) = (*current)->next;
-			while (((*current)->type == E_PIPE && (*current) != NULL) || \
-			((*current)->type == E_SPACE && (*current) != NULL))
+			if ((*current)->next != NULL)
+			{
 				(*current) = (*current)->next;
-			break ;
+				while (((*current)->type == E_PIPE && (*current) != NULL) || \
+				((*current)->type == E_SPACE && (*current) != NULL))
+				(*current) = (*current)->next;
+				break ;
+			}
 		}
 		else if ((*current) != NULL)
 			(*current) = (*current)->next;
