@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   pipe_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nleggeri <nleggeri@42.student.fr>          +#+  +:+       +#+        */
+/*   By: nleggeri <nleggeri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 15:25:00 by nleggeri          #+#    #+#             */
-/*   Updated: 2023/05/22 10:22:12 by nleggeri         ###   ########.fr       */
+/*   Updated: 2023/05/24 10:39:28 by nleggeri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
-
 
 int	check_if_there_is_pipe(t_env *env)
 {
@@ -44,4 +43,3 @@ int	**init_fd_for_pipe(int **fd, int num_cmd)
 	}
 	return (fd);
 }
-

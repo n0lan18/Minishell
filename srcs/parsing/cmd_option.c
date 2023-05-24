@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd_option.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nleggeri <nleggeri@42.student.fr>          +#+  +:+       +#+        */
+/*   By: nleggeri <nleggeri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 18:47:17 by synicole          #+#    #+#             */
-/*   Updated: 2023/05/23 11:29:20 by nleggeri         ###   ########.fr       */
+/*   Updated: 2023/05/24 11:29:42 by nleggeri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ static char	**ft_get_option(char **option, char **option_tmp)
 	}
 	return (option);
 }
-
 
 char	**ft_get_cmd_option(t_token **current, t_cmd *cmd)
 {
@@ -70,8 +69,12 @@ char	**ft_get_cmd_option_for_redirection(t_token **current, t_cmd *cmd)
 
 	option_tmp[0] = cmd->name;
 	(*current) = (*current)->next;
-	while ((*current) != NULL && (*current)->type != E_STRING)
+	while ((*current) != NULL)
+	{
+		if ((*current)->type != E_SPACE)
+			break ;
 		(*current) = (*current)->next;
+	}
 	option_tmp[1] = (*current)->str;
 	option_tmp[2] = NULL;
 	option = ft_calloc(sizeof(char *), ft_len_option(option_tmp) + 1);

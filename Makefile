@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: nleggeri <nleggeri@42.student.fr>          +#+  +:+       +#+         #
+#    By: nleggeri <nleggeri@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/10 11:10:16 by nleggeri          #+#    #+#              #
-#    Updated: 2023/05/22 22:22:35 by nleggeri         ###   ########.fr        #
+#    Updated: 2023/05/24 09:14:37 by nleggeri         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ FLAGS 			= -Wall -Werror -Wextra -g
 SANITIZE		= -fsanitize=address
 
 # CHANGE TO 42 IF YOU WORK AT 42, DEFAULT IF YOU WORK AT HOME
-ENVIRONMENT		= DEFAULT
+ENVIRONMENT		= 42
 ifeq ($(ENVIRONMENT), 42)
     READLINE_LIB_DIR = $(HOME)/.brew/opt/readline/lib
     READLINE_INCLUDE_DIR = $(HOME)/.brew/opt/readline/include
