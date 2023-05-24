@@ -6,7 +6,7 @@
 /*   By: nleggeri <nleggeri@42.student.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 13:09:55 by synicole          #+#    #+#             */
-/*   Updated: 2023/05/12 11:29:56 by nleggeri         ###   ########.fr       */
+/*   Updated: 2023/05/22 22:47:58 by nleggeri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,6 +120,7 @@ void		ft_trim_quote(t_env *env);
 void		ft_join_token_not_separate_by_space(t_env *env);
 void		ft_command(t_env *env);
 char		**ft_get_cmd_option(t_token **current, t_cmd *cmd);
+char		**ft_get_cmd_option_for_redirection(t_token **current, t_cmd *cmd);
 
 /** ----- BUILTIN ----- **/
 int			ft_is_builtins(const char *str);
@@ -135,6 +136,28 @@ void		ft_exec_exit(void);
 /** ----- EXECUTION ----- **/
 void		ft_execute(t_env *env);
 void		ft_execute_external_in_fork(t_env *env);
+
+/** ----- EXECUTION PIPE ----- **/
+void		do_pipe(t_env *env);
+int			check_if_there_is_pipe(t_env *env);
+void		ft_execute_pipe(t_env *env);
+void		ft_execute_external(t_env *env, t_cmd *cmd);
+
+/** ----- PIPE UTILS----- **/
+int			size_of_struct_cmd(t_cmd *cmd);
+int			check_if_there_is_pipe(t_env *env);
+int			**init_fd_for_pipe(int **fd, int num_cmd);
+
+/** ----- SLEEP CMD IN PIPE ----- **/
+int			ft_check_if_sleep_cmd(t_cmd *cmd);
+int			ft_search_last_sleep_cmd_struc_cmd(t_cmd *cmd);
+t_cmd		*ft_skip_until_last_sleep(t_cmd *cmd);
+
+/** ----- SLEEP CMD UTILS ----- **/
+void		ft_execute_in_pipe(t_env *env, t_cmd *cmd);
+char		*ft_search_biggest_timer_in_sleep(t_cmd *cmd);
+t_cmd		*search_and_replace_sleep_with_biggest_timer(t_cmd *cmd);
+t_cmd		*ft_init_sleep(t_cmd *cmd);
 
 /** ----- SIGNALS ----- **/
 void		ft_init_signals(void);

@@ -1,35 +1,47 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   struct_cmd.c                                       :+:      :+:    :+:   */
+/*   pipe_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nleggeri <nleggeri@42.student.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/14 17:27:07 by synicole          #+#    #+#             */
-/*   Updated: 2023/05/23 10:22:14 by nleggeri         ###   ########.fr       */
+/*   Created: 2023/05/17 15:25:00 by nleggeri          #+#    #+#             */
+/*   Updated: 2023/05/22 10:22:12 by nleggeri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-/**
- * Adds a new command at the end of the given list.
- * @param t_cmd **list the current list of commands to add to
- * @param t_cmd *new the new command to add
- *
- * @return void
-*/
-void	ft_add_cmd_end(t_cmd **lst, t_cmd *new)
-{
-	t_cmd	*current;
 
-	current = *lst;
-	if (!current)
-		return ;
-	else
+int	check_if_there_is_pipe(t_env *env)
+{
+	t_token	*tmp;
+
+	tmp = env->token;
+	while (tmp)
 	{
-		while (current->next)
-			current = current->next;
-		current->next = new;
+		if (tmp->type == E_PIPE)
+			return (1);
+		tmp = tmp->next;
 	}
+	return (0);
 }
+
+int	**init_fd_for_pipe(int **fd, int num_cmd)
+{
+	int	i;
+
+	i = 0;
+	fd = malloc(sizeof(*fd) * num_cmd);
+	if (!fd)
+		return (NULL);
+	while (i < num_cmd)
+	{
+		fd[i] = malloc(sizeof(**fd) * 2);
+		if (!fd[i])
+			return (NULL);
+		i++;
+	}
+	return (fd);
+}
+

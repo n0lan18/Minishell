@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   command_option.c                                   :+:      :+:    :+:   */
+/*   cmd_option.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: synicole <synicole@student.42lausanne.ch>  +#+  +:+       +#+        */
+/*   By: nleggeri <nleggeri@42.student.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 18:47:17 by synicole          #+#    #+#             */
-/*   Updated: 2023/05/14 18:47:19 by synicole         ###   ########.fr       */
+/*   Updated: 2023/05/23 11:29:20 by nleggeri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ static char	**ft_get_option(char **option, char **option_tmp)
 	return (option);
 }
 
+
 char	**ft_get_cmd_option(t_token **current, t_cmd *cmd)
 {
 	size_t	i;
@@ -59,5 +60,25 @@ char	**ft_get_cmd_option(t_token **current, t_cmd *cmd)
 	option_tmp[i] = NULL;
 	option = ft_calloc(sizeof(char *), ft_len_option(option_tmp) + 1);
 	option = ft_get_option(option, option_tmp);
+	return (option);
+}
+
+char	**ft_get_cmd_option_for_redirection(t_token **current, t_cmd *cmd)
+{
+	char	*option_tmp[1024];
+	char	**option;
+
+	option_tmp[0] = cmd->name;
+	(*current) = (*current)->next;
+	while ((*current) != NULL && (*current)->type != E_STRING)
+		(*current) = (*current)->next;
+	option_tmp[1] = (*current)->str;
+	option_tmp[2] = NULL;
+	option = ft_calloc(sizeof(char *), ft_len_option(option_tmp) + 1);
+	option = ft_get_option(option, option_tmp);
+	if ((*current) != NULL)
+		(*current) = (*current)->next;
+	while ((*current) != NULL && (*current)->type != E_STRING)
+		(*current) = (*current)->next;
 	return (option);
 }

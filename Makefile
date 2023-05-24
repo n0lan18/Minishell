@@ -6,7 +6,7 @@
 #    By: nleggeri <nleggeri@42.student.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/10 11:10:16 by nleggeri          #+#    #+#              #
-#    Updated: 2023/05/11 19:07:46 by nleggeri         ###   ########.fr        #
+#    Updated: 2023/05/22 22:22:35 by nleggeri         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,6 +43,7 @@ COMMAND_DIR		= command
 PRINT_DIR		= print
 CLOSE_DIR		= close
 DEBUG_DIR		= debug
+PIPE_DIR		= pipe
 SRCS 			= $(wildcard $(SRCS_DIR)/*.c) \
 				  $(wildcard $(SRCS_DIR)/$(SIGNALS_DIR)/*.c) \
 				  $(wildcard $(SRCS_DIR)/$(PARSING_DIR)/*.c) \
@@ -54,7 +55,8 @@ SRCS 			= $(wildcard $(SRCS_DIR)/*.c) \
 				  $(wildcard $(SRCS_DIR)/$(COMMAND_DIR)/*.c) \
 				  $(wildcard $(SRCS_DIR)/$(PRINT_DIR)/*.c) \
 				  $(wildcard $(SRCS_DIR)/$(CLOSE_DIR)/*.c) \
-				  $(wildcard $(SRCS_DIR)/$(DEBUG_DIR)/*.c)
+				  $(wildcard $(SRCS_DIR)/$(DEBUG_DIR)/*.c) \
+				  $(wildcard $(SRCS_DIR)/$(PIPE_DIR)/*.c)
 
 # COLORS
 _END=$'\x1b[0m'
@@ -83,6 +85,7 @@ $(OBJS_DIR):
 				mkdir -p $(OBJS_DIR)/$(PRINT_DIR)
 				mkdir -p $(OBJS_DIR)/$(CLOSE_DIR)
 				mkdir -p $(OBJS_DIR)/$(DEBUG_DIR)
+				mkdir -p $(OBJS_DIR)/$(PIPE_DIR)
 
 $(OBJS_DIR)/%.o: $(SRCS_DIR)/%.c
 				$(CC) $(FLAGS) -c $< -o $@

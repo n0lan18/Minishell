@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   split_token.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: synicole <synicole@student.42lausanne.ch>  +#+  +:+       +#+        */
+/*   By: nleggeri <nleggeri@42.student.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 20:08:04 by synicole          #+#    #+#             */
-/*   Updated: 2023/05/02 20:08:06 by synicole         ###   ########.fr       */
+/*   Updated: 2023/05/17 00:41:59 by nleggeri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,12 @@
  * Creates a tab containing the split string.
  * @param char *s to be split
  * @param char **split_tab to be filled
+ * @param int start index of the first character of the string to be split
  *
  * @return char **tab containing the split string
 */
-static char	**ft_create_split_tab(char const *s, char **split_tab)
+static char	**ft_create_split_tab(char const *s, char **split_tab, int start)
 {
-	int		start;
 	int		i;
 	int		j;
 
@@ -34,8 +34,14 @@ static char	**ft_create_split_tab(char const *s, char **split_tab)
 			i = ft_skip_spaces(s, i);
 		else if (s[i] == '\'' || s[i] == '\"')
 			i = ft_skip_quotes(s, i, s[i]);
+		else if ((s[i] == '>' && s[i + 1] == '>') || \
+				(s[i] == '<' && s[i + 1] == '<'))
+			i += 2;
+		else if (s[i] == '|' || s[i] == '>' || s[i] == '<')
+			i++;
 		else
-			while (!ft_is_space(s[i]) && !ft_is_quotes(s[i]) && s[i])
+			while (!ft_is_space(s[i]) && !ft_is_quotes(s[i]) && s[i] != '>' && \
+			s[i] != '<' && s[i] != '|' && s[i])
 				i++;
 		split_tab[j++] = ft_substr(s, start, i - start);
 	}
@@ -53,9 +59,11 @@ static char	**ft_create_split_tab(char const *s, char **split_tab)
 char	**ft_split_token(char const *s)
 {
 	char	**split_tab;
+	int		start;
 
+	start = 0;
 	split_tab = malloc(sizeof(char *) * (ft_count_words(s) + 1));
 	if (!split_tab)
 		return (NULL);
-	return (ft_create_split_tab(s, split_tab));
+	return (ft_create_split_tab(s, split_tab, start));
 }
