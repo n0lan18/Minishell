@@ -91,3 +91,25 @@ char	**ft_get_splited_path(t_envp *envp)
 	splited_path = ft_split(unsplited_path + 5, ':');
 	return (splited_path);
 }
+
+/**
+ * Counts the number of environment variables in a string.
+ * @param str
+ *
+ * @return int
+ */
+int	ft_nbr_var_envp(const char *str)
+{
+	int	i;
+	int	count;
+
+	count = 0;
+	i = 0;
+	while (str[i] != '\0')
+	{
+		if (str[i] == '$')
+			count++;
+		i++;
+	}
+	return (count);
+}

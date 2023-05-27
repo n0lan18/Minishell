@@ -18,7 +18,7 @@
  *
  * @return int
  */
-int	ft_get_token_type(const char *str)
+static int	ft_get_token_type(const char *str)
 {
 	if (ft_contains_only_space(str))
 		return (E_SPACE);
@@ -46,6 +46,25 @@ static int	ft_get_token_quote(const char *str)
 }
 
 /**
+ * Get the redirection of the token
+ * @param str
+ *
+ * @return int
+ */
+static int	ft_get_redirection(char *str)
+{
+	if (ft_strncmp(str, "<", 2) == 0)
+		return (E_INFILE);
+	else if (ft_strncmp(str, ">", 2) == 0)
+		return (E_OUTFILE);
+	else if (ft_strncmp(str, "<<", 3) == 0)
+		return (E_HEREDOC);
+	else if (ft_strncmp(str, ">>", 3) == 0)
+		return (E_APPEND);
+	return (E_NOREDIRECTION);
+}
+
+/**
  * Creates a new token.
  * @param str
  *
@@ -61,7 +80,9 @@ t_token	*ft_new_token(char *str)
 	new->str = str;
 	new->type = ft_get_token_type(str);
 	new->quote = ft_get_token_quote(str);
+	new->redirection = ft_get_redirection(str);
 	new->next = NULL;
+	new->previous = NULL;
 	return (new);
 }
 

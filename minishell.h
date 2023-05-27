@@ -25,7 +25,7 @@
 extern int				g_last_exit_code;
 
 /** ----- DEFINE ----- **/
-# define DEBUG_TOKEN 0
+# define DEBUG_TOKEN 1
 # define DEBUG_CMD 0
 # define PATH_MAX 1024
 
@@ -56,7 +56,9 @@ typedef struct s_token
 	int		type;
 	char	*str;
 	int		quote;
+	int		redirection;
 	t_token	*next;
+	t_token	*previous;
 }	t_token;
 
 typedef struct s_dollar
@@ -89,6 +91,14 @@ enum e_token_quote {
 	E_DOUBLE_QUOTE
 };
 
+enum e_redirection {
+	E_NOREDIRECTION,
+	E_INFILE,
+	E_OUTFILE,
+	E_HEREDOC,
+	E_APPEND
+};
+
 /** ----- ENV ----- **/
 void		ft_init_env(t_env *env, char **envp);
 
@@ -100,6 +110,7 @@ char		*ft_get_envp_name(const char *str);
 int			ft_valid_identifier(int c);
 char		*ft_get_envp_value_by_name(t_envp *envp, char *name);
 char		**ft_get_splited_path(t_envp *envp);
+int			ft_nbr_var_envp(const char *str);
 
 /** ----- PARSING ----- **/
 void		ft_parsing(t_env *env, char *readline);
@@ -121,6 +132,19 @@ void		ft_join_token_not_separate_by_space(t_env *env);
 void		ft_command(t_env *env);
 char		**ft_get_cmd_option(t_token **current, t_cmd *cmd);
 char		**ft_get_cmd_option_for_redirection(t_token **current, t_cmd *cmd);
+
+/** ----- HEREDOC ----- **/
+void		ft_heredoc(t_env *env);
+void		ft_add_previous(t_token *current);
+char		*ft_heredoc_getname(int nb);
+int			ft_heredoc_syntax(t_token *heredoc);
+char		*ft_heredoc_getword(char *word);
+int			ft_heredoc_strcmp(t_token *heredoc, char *line);
+char		*ft_heredoc_strjoin(char *s1, char *s2);
+void		ft_heredoc_open2(char *all, t_env *ms, int fd_heredoc, t_token *hd);
+void		ft_heredoc_replace_varenv(char **str, t_envp *envp);
+int			ft_heredoc_error(int code_error);
+int			ft_heredoc_error_eof(const char *str);
 
 /** ----- BUILTIN ----- **/
 int			ft_is_builtins(const char *str);

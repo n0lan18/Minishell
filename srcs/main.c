@@ -59,7 +59,6 @@ int	main(int argc, char **argv, char **envp)
 			{
 				add_history(prompt_output);
 				ft_parsing(&env, prompt_output);
-				db_print_cmd(env.cmd);
 				if (ft_check_if_there_is_pipe(&env))
 					ft_execute_pipe(&env);
 				else

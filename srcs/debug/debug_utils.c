@@ -47,6 +47,7 @@ void	db_print_token(t_token *token)
 		printf("[%s] <= token\n", current->str);
 		printf("{%d} <= type\n", current->type);
 		printf("{%d} <= quote\n", current->quote);
+		printf("{%d} <= redirection\n", current->redirection);
 		printf("--------------------------------\n");
 		current = current->next;
 	}
