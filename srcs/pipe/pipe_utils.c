@@ -12,8 +12,7 @@
 
 #include "../../minishell.h"
 
-
-int	check_if_there_is_pipe(t_env *env)
+int	ft_check_if_there_is_pipe(t_env *env)
 {
 	t_token	*tmp;
 
@@ -27,7 +26,7 @@ int	check_if_there_is_pipe(t_env *env)
 	return (0);
 }
 
-int	**init_fd_for_pipe(int **fd, int num_cmd)
+int	**ft_init_fd_for_pipe(int **fd, int num_cmd)
 {
 	int	i;
 

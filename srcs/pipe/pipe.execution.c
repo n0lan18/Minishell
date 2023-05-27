@@ -20,7 +20,7 @@
  *
  * @return int
  */
-int	size_of_struct_cmd(t_cmd *cmd)
+int	ft_size_of_struct_cmd(t_cmd *cmd)
 {
 	int		i;
 	t_cmd	*tmp;
@@ -134,7 +134,7 @@ void	ft_execute_pipe(t_env *env)
 		sleep = ft_init_sleep(env->cmd);
 		env->cmd = ft_skip_until_last_sleep(env->cmd);
 	}
-	num_cmd = size_of_struct_cmd(env->cmd);
+	num_cmd = ft_size_of_struct_cmd(env->cmd);
 	if (num_cmd <= 1)
 	{
 		if (num_cmd > 0)
@@ -143,7 +143,7 @@ void	ft_execute_pipe(t_env *env)
 	}
 	else
 	{
-		fd = init_fd_for_pipe(fd, num_cmd);
+		fd = ft_init_fd_for_pipe(fd, num_cmd);
 		i = 1;
 		pipe(fd[i]);
 		ft_execute_first_cmd(env, i, fd);

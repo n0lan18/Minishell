@@ -11,33 +11,14 @@
 /* ************************************************************************** */
 
 #include "../../minishell.h"
-/**
- * Fonction who check if there is sleep cmd in struct
- * @param cmd 
- * 
- * @return int 
- */
-int	ft_check_if_sleep_cmd(t_cmd *cmd)
-{
-	t_cmd	*tmp;
-
-	tmp = cmd;
-	while (tmp)
-	{
-		if (!ft_strncmp(cmd->name, "sleep", 5))
-			return (1);
-		tmp = tmp->next;
-	}
-	return (0);
-}
 
 /**
  * Search the last sleep cmd in struct and return how many cmd we skip
- * @param cmd 
- * 
- * @return int 
+ * @param cmd
+ *
+ * @return int
  */
-int	ft_search_last_sleep_cmd_struc_cmd(t_cmd *cmd)
+static int	ft_search_last_sleep_cmd_struc_cmd(t_cmd *cmd)
 {
 	int		i;
 	int		num;
@@ -56,6 +37,26 @@ int	ft_search_last_sleep_cmd_struc_cmd(t_cmd *cmd)
 	if (num == i)
 		return (0);
 	return (num);
+}
+
+/**
+ * Fonction who check if there is sleep cmd in struct
+ * @param cmd 
+ * 
+ * @return int 
+ */
+int	ft_check_if_sleep_cmd(t_cmd *cmd)
+{
+	t_cmd	*tmp;
+
+	tmp = cmd;
+	while (tmp)
+	{
+		if (!ft_strncmp(cmd->name, "sleep", 5))
+			return (1);
+		tmp = tmp->next;
+	}
+	return (0);
 }
 
 /**
