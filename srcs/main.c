@@ -59,10 +59,7 @@ int	main(int argc, char **argv, char **envp)
 			{
 				add_history(prompt_output);
 				ft_parsing(&env, prompt_output);
-				if (ft_check_if_there_is_pipe(&env))
-					ft_execute_pipe(&env);
-				else
-					ft_execute(&env);
+				ft_execute(&env);
 				ft_free_token(&env);
 				ft_free_cmd(&env);
 			}

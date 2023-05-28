@@ -106,7 +106,6 @@ void	ft_heredoc(t_env *env)
 
 	i = 0;
 	current = env->token;
-	ft_add_previous(current);
 	while (current)
 	{
 		if (!current->next && !current->redirection

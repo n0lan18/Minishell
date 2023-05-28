@@ -44,4 +44,5 @@ void	ft_readline_to_token(t_env *env, char *readline)
 
 	split_space_tab = ft_split_token(ft_trim_str(readline));
 	ft_array_to_token(split_space_tab, env);
+	ft_add_previous(env->token);
 }

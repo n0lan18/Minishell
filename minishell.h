@@ -25,7 +25,7 @@
 extern int				g_last_exit_code;
 
 /** ----- DEFINE ----- **/
-# define DEBUG_TOKEN 1
+# define DEBUG_TOKEN 0
 # define DEBUG_CMD 0
 # define PATH_MAX 1024
 
@@ -41,6 +41,7 @@ typedef struct s_env
 	t_envp	*envp;
 	t_token	*token;
 	t_cmd	*cmd;
+	int		syntax_error_type;
 }	t_env;
 
 typedef struct s_envp
@@ -99,6 +100,12 @@ enum e_redirection {
 	E_APPEND
 };
 
+enum e_syntax_error_type {
+	E_SYNTAX_QUOTE_CLOSE = 1,
+	E_SYNTAX_REDIRECTION = 2,
+	E_SYNTAX_PIPE = 3
+};
+
 /** ----- ENV ----- **/
 void		ft_init_env(t_env *env, char **envp);
 
@@ -145,6 +152,12 @@ void		ft_heredoc_open2(char *all, t_env *ms, int fd_heredoc, t_token *hd);
 void		ft_heredoc_replace_varenv(char **str, t_envp *envp);
 int			ft_heredoc_error(int code_error);
 int			ft_heredoc_error_eof(const char *str);
+
+/** ----- SYNTAX ----- **/
+int			ft_has_syntax_error(t_env *env);
+int			ft_quote_is_valid(char *str);
+int			ft_redirection_is_valid(t_token *token);
+int			ft_pipe_is_valid(t_token *token);
 
 /** ----- BUILTIN ----- **/
 int			ft_is_builtins(const char *str);
