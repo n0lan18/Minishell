@@ -41,7 +41,7 @@ int	ft_heredoc_syntax(t_token *token, t_env *env)
 			return (ft_heredoc_error(env));
 		else if (token->type == E_STRING)
 		{
-			if (ft_heredoc_error_eof(token->str) == 1)
+			if (!ft_heredoc_is_valid_eof(token->str))
 				return (ft_heredoc_error(env));
 			g_last_exit_code = 0;
 			return (0);
@@ -51,17 +51,6 @@ int	ft_heredoc_syntax(t_token *token, t_env *env)
 	if (token == NULL)
 		return (ft_heredoc_error(env));
 	return (0);
-}
-
-void	ft_add_previous(t_token *current)
-{
-	while (current->next)
-	{
-		current->next->previous = current;
-		current = current->next;
-	}
-	while (current->previous)
-		current = current->previous;
 }
 
 char	*ft_heredoc_getword(char *word)
@@ -81,26 +70,23 @@ char	*ft_heredoc_getword(char *word)
 	return (str);
 }
 
-int	ft_heredoc_strcmp(t_token *heredoc, char *line)
+/**
+ * Check if line is equal to eof
+ *
+ * @param eof
+ * @param line
+ * @return 1 if line is equal to eof, 0 otherwise
+ */
+int	ft_heredoc_is_eof(t_token *eof, char *line)
 {
-	size_t	i;
-	size_t	j;
-	size_t	len;
+	char	*str;
 
-	i = 0;
-	j = 0;
-	len = ft_strlen(line);
-	if (heredoc->quote != E_NONE_QUOTE)
-	{
-		j = 1;
-		len -= 1;
-	}
-	while (i < len)
-	{
-		if (heredoc->str[j] != line[i])
-			break ;
-		j++;
-		i++;
-	}
-	return (heredoc->str[j] - line[i]);
+	str = eof->str;
+	if (eof->quote == E_SINGLE_QUOTE)
+		str = ft_strtrim(eof->str, "\'");
+	else if (eof->quote == E_DOUBLE_QUOTE)
+		str = ft_strtrim(eof->str, "\"");
+	if (ft_strncmp(str, line, ft_strlen(str) + 1) == 0)
+		return (1);
+	return (0);
 }

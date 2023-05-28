@@ -12,28 +12,39 @@
 
 #include "../../minishell.h"
 
-static void	ft_heredoc_open(t_token *heredoc, char *name, t_env *env)
+/**
+ * Write the heredoc in the file.
+ *
+ * @param heredoc
+ * @param name
+ * @param env
+ *
+ * @return void
+ */
+static void	ft_heredoc_write(t_token *eof, char *name, t_env *env)
 {
 	int		fd_heredoc;
 	char	*line;
-	char	*nl;
+	char	*new_line;
 	char	*all;
 
+	(void) env;
 	all = NULL;
 	fd_heredoc = open(name, O_TRUNC | O_CREAT | O_WRONLY, 0664);
 	line = readline("> ");
 	while (line)
 	{
-		if (ft_heredoc_strcmp(heredoc, line) == 0)
+		if (ft_heredoc_is_eof(eof, line))
 			break ;
-		nl = ft_strjoin(line, "\n");
+		new_line = ft_strjoin(line, "\n");
 		free(line);
-		all = ft_heredoc_strjoin(all, nl);
+		all = ft_heredoc_strjoin(all, new_line);
 		line = readline("> ");
 	}
+	if (all)
+		ft_putstr_fd(all, fd_heredoc);
 	free(line);
-	if (all != NULL)
-		ft_heredoc_open2(all, env, fd_heredoc, heredoc);
+	free(all);
 	close(fd_heredoc);
 }
 
@@ -41,7 +52,7 @@ static void	ft_eof_found(t_token *token, t_token *new, char *name, t_env *env)
 {
 	t_token	*tmp;
 
-	ft_heredoc_open(token, name, env);
+	ft_heredoc_write(token, name, env);
 	tmp = token;
 	if (token->next)
 		ft_add_token_end(&(*new).next, token->next);
@@ -77,20 +88,21 @@ static t_token	*ft_get_heredoc(t_token *token, t_env *env, int i)
 	return (new);
 }
 
-static void	ft_heredoc_found(t_token **current, t_env *env, int *i)
+static void	ft_heredoc_found(t_token **current, t_env *env)
 {
-	if (!(*current)->next)
-		ft_heredoc_error(env);
-	else if (!(*current)->previous)
+	int		i;
+
+	i = 0;
+	if (!(*current)->previous)
 	{
-		(*i)++;
-		(*current) = ft_get_heredoc((*current), env, (*i));
+		i++;
+		(*current) = ft_get_heredoc((*current), env, i);
 	}
 	else
 	{
-		(*i)++;
+		i++;
 		(*current) = (*current)->previous;
-		(*current)->next = ft_get_heredoc((*current)->next, env, (*i));
+		(*current)->next = ft_get_heredoc((*current)->next, env, i);
 	}
 	if ((*current)->next)
 	{
@@ -109,20 +121,17 @@ static void	ft_heredoc_found(t_token **current, t_env *env, int *i)
 void	ft_heredoc(t_env *env)
 {
 	t_token	*current;
-	int		i;
 
-	i = 0;
 	current = env->token;
 	while (current)
 	{
-		if (!current->next && !current->redirection
-			&& current->redirection == E_HEREDOC)
+		if (current->redirection == E_HEREDOC && !current->next)
 		{
 			ft_heredoc_error(env);
 			break ;
 		}
 		if (current->redirection == E_HEREDOC)
-			ft_heredoc_found(&current, env, &i);
+			ft_heredoc_found(&current, env);
 		if (!current->next)
 			break ;
 		current = current->next;

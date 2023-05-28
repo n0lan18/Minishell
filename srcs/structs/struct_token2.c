@@ -1,29 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   heredoc_error.c                                    :+:      :+:    :+:   */
+/*   struct_token2.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: synicole <synicole@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/27 08:29:33 by synicole          #+#    #+#             */
-/*   Updated: 2023/05/27 08:29:34 by synicole         ###   ########.fr       */
+/*   Created: 2023/05/28 22:50:47 by synicole          #+#    #+#             */
+/*   Updated: 2023/05/28 22:50:49 by synicole         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
 /**
- * Display the error message for the heredoc.
+ * Add the previous token to each token of the list.
  *
- * @param env
+ * @param current
  *
- * @return
+ * @return void
  */
-int	ft_heredoc_error(t_env *env)
+void	ft_add_token_previous(t_token *token)
 {
-	ft_putstr_fd("minishell: syntax error near unexpected token", 2);
-	ft_putstr_fd(" `newline'\n", 1);
-	env->syntax_error_type = E_SYNTAX_HEREDOC;
-	g_last_exit_code = 258;
-	return (1);
+	while (token->next)
+	{
+		token->next->previous = token;
+		token = token->next;
+	}
+	while (token->previous)
+		token = token->previous;
 }

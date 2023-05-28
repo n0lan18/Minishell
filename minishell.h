@@ -143,16 +143,15 @@ char		**ft_get_cmd_option_for_redirection(t_token **current, t_cmd *cmd);
 
 /** ----- HEREDOC ----- **/
 void		ft_heredoc(t_env *env);
-void		ft_add_previous(t_token *current);
 char		*ft_heredoc_getname(int nb);
 int			ft_heredoc_syntax(t_token *token, t_env *env);
 char		*ft_heredoc_getword(char *word);
-int			ft_heredoc_strcmp(t_token *heredoc, char *line);
+int			ft_heredoc_is_eof(t_token *eof, char *line);
 char		*ft_heredoc_strjoin(char *s1, char *s2);
 void		ft_heredoc_open2(char *all, t_env *ms, int fd_heredoc, t_token *hd);
 void		ft_heredoc_replace_varenv(char **str, t_envp *envp);
 int			ft_heredoc_error(t_env *env);
-int			ft_heredoc_error_eof(const char *str);
+int			ft_heredoc_is_valid_eof(const char *str);
 
 /** ----- SYNTAX ----- **/
 int			ft_has_syntax_error(t_env *env);
@@ -161,7 +160,7 @@ int			ft_redirection_is_valid(t_token *token);
 int			ft_pipe_is_valid(t_token *token);
 
 /** ----- REDIRECTION ----- **/
-void	ft_open_files_redirection(t_token **token, t_cmd *cmd);
+void		ft_open_files_redirection(t_token **token, t_cmd *cmd);
 
 /** ----- BUILTIN ----- **/
 int			ft_is_builtins(const char *str);
@@ -201,6 +200,7 @@ void		ft_init_signals(void);
 /** ----- STRUCTS ----- **/
 t_token		*ft_new_token(char *str);
 void		ft_add_token_end(t_token **lst, t_token *token);
+void		ft_add_token_previous(t_token *token);
 t_envp		*ft_new_envp(char *str);
 void		ft_add_envp_end(t_envp **lst, t_envp *envp);
 void		ft_remove_envp(t_envp **lst, char *str);

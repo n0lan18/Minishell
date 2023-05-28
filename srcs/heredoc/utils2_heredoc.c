@@ -33,10 +33,17 @@ char	*ft_heredoc_strjoin(char *s1, char *s2)
 	return (new_str);
 }
 
-void	ft_heredoc_open2(char *all, t_env *env, int fd_heredoc, t_token *hd)
+int	ft_heredoc_is_valid_eof(const char *str)
 {
-	if (hd->quote == E_NONE_QUOTE)
-		ft_heredoc_replace_varenv(&all, env->envp);
-	ft_putstr_fd(all, fd_heredoc);
-	free(all);
+	if (str[0] == '#')
+		return (0);
+	return (1);
 }
+
+//void	ft_heredoc_open2(char *all, t_env *env, int fd_heredoc, t_token *hd)
+//{
+//	if (hd->quote == E_NONE_QUOTE)
+//		ft_heredoc_replace_varenv(&all, env->envp);
+//	ft_putstr_fd(all, fd_heredoc);
+//	free(all);
+//}
