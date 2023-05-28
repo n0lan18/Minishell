@@ -12,7 +12,14 @@
 
 #include "../../minishell.h"
 
-static int	ft_redirection_error(t_token *token)
+/**
+ * Check if there is an error in the redirection.
+ *
+ * @param token
+ *
+ * @return 1 if there is an error, 0 otherwise.
+ */
+static int	ft_has_redirection_error(t_token *token)
 {
 	t_token	*cpy;
 
@@ -28,12 +35,19 @@ static int	ft_redirection_error(t_token *token)
 	return (0);
 }
 
+/**
+ * Check if the redirection is valid.
+ *
+ * @param token
+ *
+ * @return 1 if the redirection is valid, 0 otherwise.
+ */
 int	ft_redirection_is_valid(t_token *token)
 {
 	if ((token->redirection == E_INFILE || token->redirection == E_OUTFILE)
 		&& token->next != NULL)
 	{
-		if (ft_redirection_error(token) == 1)
+		if (ft_has_redirection_error(token))
 			return (0);
 	}
 	if ((token->redirection == E_INFILE || token->redirection == E_OUTFILE)
@@ -41,7 +55,7 @@ int	ft_redirection_is_valid(t_token *token)
 		return (0);
 	if (token->redirection == E_APPEND && token->next != NULL)
 	{
-		if (ft_redirection_error(token) == 1)
+		if (ft_has_redirection_error(token))
 			return (0);
 	}
 	if (token->redirection == E_APPEND && token->next == NULL)

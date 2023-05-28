@@ -12,7 +12,14 @@
 
 #include "../../minishell.h"
 
-static int	ft_pipe_error(t_token *token)
+/**
+ * Check if there is an error with the pipe.
+ *
+ * @param token
+ *
+ * @return 1 if there is an error, 0 otherwise.
+ */
+static int	ft_has_pipe_error(t_token *token)
 {
 	t_token	*cpy;
 
@@ -39,11 +46,18 @@ static int	ft_pipe_error(t_token *token)
 	return (0);
 }
 
+/**
+ * Check if the pipe is valid.
+ *
+ * @param token
+ *
+ * @return 1 if the pipe is valid, 0 otherwise.
+ */
 int	ft_pipe_is_valid(t_token *token)
 {
 	if (token->type == E_PIPE)
 	{
-		if (ft_pipe_error(token))
+		if (ft_has_pipe_error(token))
 			return (0);
 		else
 			return (1);

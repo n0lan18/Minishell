@@ -13,13 +13,13 @@
 #include "../../minishell.h"
 
 /**
- * Check if the quotes are closed.
+ * Check if the quote is open.
  *
  * @param str
  * @param c
  * @param i
  *
- * @return 1 if the quotes are closed, 0 otherwise.
+ * @return 1 if the quote is open, 0 otherwise.
  */
 static int	ft_quote_is_open(const char *str, char c, int *i)
 {

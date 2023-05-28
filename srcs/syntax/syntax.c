@@ -12,6 +12,13 @@
 
 #include "../../minishell.h"
 
+/**
+ * Check if the syntax is valid.
+ *
+ * @param env
+ *
+ * @return void
+ */
 static void	ft_check_syntax(t_env *env)
 {
 	while (env->token)
@@ -36,6 +43,13 @@ static void	ft_check_syntax(t_env *env)
 	env->syntax_error_type = 0;
 }
 
+/**
+ * Display the syntax error.
+ *
+ * @param syntax_error_type
+ *
+ * @return void
+ */
 static void	ft_display_error_syntax(int syntax_error_type)
 {
 	g_last_exit_code = 258;
@@ -48,6 +62,13 @@ static void	ft_display_error_syntax(int syntax_error_type)
 		ft_putstr_fd("minishell: syntax error near unexpected token `|'\n", 2);
 }
 
+/**
+ * Check if there is a syntax error in the command line.
+ *
+ * @param env
+ *
+ * @return 1 if there is a syntax error, 0 otherwise.
+ */
 int	ft_has_syntax_error(t_env *env)
 {
 	t_token	*start;
