@@ -103,7 +103,8 @@ enum e_redirection {
 enum e_syntax_error_type {
 	E_SYNTAX_QUOTE_CLOSE = 1,
 	E_SYNTAX_REDIRECTION = 2,
-	E_SYNTAX_PIPE = 3
+	E_SYNTAX_PIPE = 3,
+	E_SYNTAX_HEREDOC = 4,
 };
 
 /** ----- ENV ----- **/
@@ -144,13 +145,13 @@ char		**ft_get_cmd_option_for_redirection(t_token **current, t_cmd *cmd);
 void		ft_heredoc(t_env *env);
 void		ft_add_previous(t_token *current);
 char		*ft_heredoc_getname(int nb);
-int			ft_heredoc_syntax(t_token *heredoc);
+int			ft_heredoc_syntax(t_token *token, t_env *env);
 char		*ft_heredoc_getword(char *word);
 int			ft_heredoc_strcmp(t_token *heredoc, char *line);
 char		*ft_heredoc_strjoin(char *s1, char *s2);
 void		ft_heredoc_open2(char *all, t_env *ms, int fd_heredoc, t_token *hd);
 void		ft_heredoc_replace_varenv(char **str, t_envp *envp);
-int			ft_heredoc_error(int code_error);
+int			ft_heredoc_error(t_env *env);
 int			ft_heredoc_error_eof(const char *str);
 
 /** ----- SYNTAX ----- **/
@@ -158,6 +159,9 @@ int			ft_has_syntax_error(t_env *env);
 int			ft_quote_is_valid(char *str);
 int			ft_redirection_is_valid(t_token *token);
 int			ft_pipe_is_valid(t_token *token);
+
+/** ----- REDIRECTION ----- **/
+void	ft_open_files_redirection(t_token **token, t_cmd *cmd);
 
 /** ----- BUILTIN ----- **/
 int			ft_is_builtins(const char *str);

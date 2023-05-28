@@ -12,46 +12,50 @@
 
 #include "../../minishell.h"
 
-static void	ft_init_option_in_cmd(t_token **current, t_cmd *cmd)
-{
-	while ((*current) != NULL)
-	{
-		if ((*current)->type == E_REDIRECTION)
-		{
-			cmd->option = ft_get_cmd_option_for_redirection(current, cmd);
-			break ;
-		}
-		else if ((*current)->type == E_STRING)
-		{
-			cmd->option = ft_get_cmd_option(current, cmd);
-			if ((*current) != NULL && (*current)->type == E_REDIRECTION)
-				break ;
-		}
-		else if ((*current)->type == E_PIPE)
-		{
-			(*current) = (*current)->next;
-			while (((*current)->type == E_PIPE && (*current) != NULL) || \
-			((*current)->type == E_SPACE && (*current) != NULL))
-				(*current) = (*current)->next;
-			break ;
-		}
-		else if ((*current) != NULL)
-			(*current) = (*current)->next;
-	}
-}
+//static void	ft_init_option_in_cmd(t_token **token, t_cmd *cmd)
+//{
+//	while ((*token))
+//	{
+//		if ((*token)->type == E_REDIRECTION)
+//			ft_open_files_redirection(token, cmd);
+//		else if ((*token)->type == E_STRING)
+//			cmd->option = ft_get_cmd_option(token, cmd);
+//		else if ((*token)->type == E_PIPE)
+//		{
+//			(*token) = (*token)->next;
+//			break ;
+//		}
+//		else if ((*token))
+//			(*token) = (*token)->next;
+//	}
+//}
 
-static t_cmd	*ft_init_cmd(t_token **current)
+static t_cmd	*ft_init_cmd(t_token **token)
 {
 	t_cmd	*cmd;
 
 	cmd = malloc(sizeof(t_cmd));
 	if (!cmd)
 		return (NULL);
-	cmd->name = (*current)->str;
+	cmd->name = (*token)->str;
 	cmd->fd_read = 0;
 	cmd->fd_write = 1;
 	cmd->next = NULL;
-	ft_init_option_in_cmd(current, cmd);
+//	ft_init_option_in_cmd(token, cmd);
+	while ((*token))
+	{
+		if ((*token)->type == E_REDIRECTION)
+			ft_open_files_redirection(token, cmd);
+		else if ((*token)->type == E_STRING)
+			cmd->option = ft_get_cmd_option(token, cmd);
+		else if ((*token)->type == E_PIPE)
+		{
+			(*token) = (*token)->next;
+			break ;
+		}
+		else if ((*token))
+			(*token) = (*token)->next;
+	}
 	return (cmd);
 }
 

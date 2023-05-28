@@ -23,7 +23,7 @@ char	*ft_heredoc_getname(int nb)
 	name = ft_calloc(sizeof(char), ft_strlen(".heredoc0") + 1);
 	if (!name)
 		return (NULL);
-	while (heredoc[i] != '\0')
+	while (heredoc[i])
 	{
 		name[i] = heredoc[i];
 		i++;
@@ -32,24 +32,24 @@ char	*ft_heredoc_getname(int nb)
 	return (name);
 }
 
-int	ft_heredoc_syntax(t_token *heredoc)
+int	ft_heredoc_syntax(t_token *token, t_env *env)
 {
-	heredoc = heredoc->next;
-	while (heredoc)
+	token = token->next;
+	while (token)
 	{
-		if (heredoc->type == E_PIPE || heredoc->type == E_REDIRECTION)
-			return (ft_heredoc_error(1));
-		else if (heredoc->type == E_STRING)
+		if (token->type == E_PIPE || token->type == E_REDIRECTION)
+			return (ft_heredoc_error(env));
+		else if (token->type == E_STRING)
 		{
-			if (ft_heredoc_error_eof(heredoc->str) == 1)
-				return (ft_heredoc_error(2));
+			if (ft_heredoc_error_eof(token->str) == 1)
+				return (ft_heredoc_error(env));
 			g_last_exit_code = 0;
 			return (0);
 		}
-		heredoc = heredoc->next;
+		token = token->next;
 	}
-	if (heredoc == NULL)
-		return (ft_heredoc_error(1));
+	if (token == NULL)
+		return (ft_heredoc_error(env));
 	return (0);
 }
 
@@ -73,7 +73,7 @@ char	*ft_heredoc_getword(char *word)
 	str = ft_calloc(sizeof(char), ft_strlen(word) + 1);
 	if (!str)
 		return (NULL);
-	while (word[i] != '\0')
+	while (word[i])
 	{
 		str[i] = word[i];
 		i++;

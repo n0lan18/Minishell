@@ -46,6 +46,7 @@ CLOSE_DIR		= close
 DEBUG_DIR		= debug
 PIPE_DIR		= pipe
 SYNTAX_DIR		= syntax
+REDIRECTION_DIR	= redirection
 SRCS 			= $(wildcard $(SRCS_DIR)/*.c) \
 				  $(wildcard $(SRCS_DIR)/$(SIGNALS_DIR)/*.c) \
 				  $(wildcard $(SRCS_DIR)/$(PARSING_DIR)/*.c) \
@@ -60,7 +61,8 @@ SRCS 			= $(wildcard $(SRCS_DIR)/*.c) \
 				  $(wildcard $(SRCS_DIR)/$(CLOSE_DIR)/*.c) \
 				  $(wildcard $(SRCS_DIR)/$(DEBUG_DIR)/*.c) \
 				  $(wildcard $(SRCS_DIR)/$(PIPE_DIR)/*.c) \
-				  $(wildcard $(SRCS_DIR)/$(SYNTAX_DIR)/*.c)
+				  $(wildcard $(SRCS_DIR)/$(SYNTAX_DIR)/*.c) \
+				  $(wildcard $(SRCS_DIR)/$(REDIRECTION_DIR)/*.c)
 
 # COLORS
 _END=$'\x1b[0m'
@@ -92,6 +94,7 @@ $(OBJS_DIR):
 				mkdir -p $(OBJS_DIR)/$(DEBUG_DIR)
 				mkdir -p $(OBJS_DIR)/$(PIPE_DIR)
 				mkdir -p $(OBJS_DIR)/$(SYNTAX_DIR)
+				mkdir -p $(OBJS_DIR)/$(REDIRECTION_DIR)
 
 $(OBJS_DIR)/%.o: $(SRCS_DIR)/%.c
 				$(CC) $(FLAGS) -c $< -o $@

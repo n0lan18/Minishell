@@ -12,15 +12,11 @@
 
 #include "../../minishell.h"
 
-int	ft_heredoc_error(int code_error)
+int	ft_heredoc_error(t_env *env)
 {
-	if (code_error == 1)
-		ft_putstr_fd("minishell: parse error near <<\n", 2);
-	else
-	{
-		ft_putstr_fd("minishell: syntax error near unexpected token", 2);
-		ft_putstr_fd(" `newline'\n", 1);
-	}
+	ft_putstr_fd("minishell: syntax error near unexpected token", 2);
+	ft_putstr_fd(" `newline'\n", 1);
+	env->syntax_error_type = E_SYNTAX_HEREDOC;
 	g_last_exit_code = 258;
 	return (1);
 }

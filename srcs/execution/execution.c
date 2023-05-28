@@ -18,10 +18,27 @@
  */
 static void	ft_execute_cmd(t_env *env)
 {
+	int		original_stdin;
+	int		original_stdout;
+
+	original_stdin = dup(STDIN_FILENO);
+	original_stdout = dup(STDOUT_FILENO);
+	if (env->cmd->fd_read >= 3)
+		dup2(env->cmd->fd_read, STDIN_FILENO);
+	if (env->cmd->fd_write >= 3)
+		dup2(env->cmd->fd_write, STDOUT_FILENO);
 	if (ft_is_builtins(env->token->str))
 		ft_execute_builtins(env);
 	else
 		ft_execute_external_in_fork(env);
+	if (env->cmd->fd_read >= 3)
+		close(env->cmd->fd_read);
+	if (env->cmd->fd_write >= 3)
+		close(env->cmd->fd_write);
+	dup2(original_stdin, STDIN_FILENO);
+	dup2(original_stdout, STDOUT_FILENO);
+	close(original_stdout);
+	close(original_stdin);
 }
 
 /**

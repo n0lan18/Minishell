@@ -22,7 +22,7 @@ static void	ft_heredoc_open(t_token *heredoc, char *name, t_env *env)
 	all = NULL;
 	fd_heredoc = open(name, O_TRUNC | O_CREAT | O_WRONLY, 0664);
 	line = readline("> ");
-	while (line != NULL)
+	while (line)
 	{
 		if (ft_heredoc_strcmp(heredoc, line) == 0)
 			break ;
@@ -37,39 +37,39 @@ static void	ft_heredoc_open(t_token *heredoc, char *name, t_env *env)
 	close(fd_heredoc);
 }
 
-static void	ft_eof_found(t_token *heredoc, t_token *new, char *name, t_env *env)
+static void	ft_eof_found(t_token *token, t_token *new, char *name, t_env *env)
 {
 	t_token	*tmp;
 
-	ft_heredoc_open(heredoc, name, env);
-	tmp = heredoc;
-	if (heredoc->next != NULL)
-		ft_add_token_end(&(*new).next, heredoc->next);
+	ft_heredoc_open(token, name, env);
+	tmp = token;
+	if (token->next)
+		ft_add_token_end(&(*new).next, token->next);
 	free(tmp->str);
 	free(tmp);
 }
 
-static t_token	*ft_get_heredoc(t_token *heredoc, t_env *env, int i)
+static t_token	*ft_get_heredoc(t_token *token, t_env *env, int i)
 {
 	t_token	*new;
 	t_token	*tmp;
 	char	*name;
 
-	if (ft_heredoc_syntax(heredoc) == 1)
-		return (heredoc);
+	if (ft_heredoc_syntax(token, env) == 1)
+		return (token);
 	name = ft_heredoc_getname(i);
 	new = ft_new_token(ft_heredoc_getword("<"));
-	new->previous = heredoc->previous;
+	new->previous = token->previous;
 	ft_add_token_end(&new, ft_new_token(ft_heredoc_getword(name)));
-	while (heredoc)
+	while (token)
 	{
-		if (heredoc->type == E_STRING)
+		if (token->type == E_STRING)
 		{
-			ft_eof_found(heredoc, new, name, env);
+			ft_eof_found(token, new, name, env);
 			break ;
 		}
-		tmp = heredoc;
-		heredoc = heredoc->next;
+		tmp = token;
+		token = token->next;
 		free(tmp->str);
 		free(tmp);
 	}
@@ -80,7 +80,7 @@ static t_token	*ft_get_heredoc(t_token *heredoc, t_env *env, int i)
 static void	ft_heredoc_found(t_token **current, t_env *env, int *i)
 {
 	if (!(*current)->next)
-		ft_heredoc_error(2);
+		ft_heredoc_error(env);
 	else if (!(*current)->previous)
 	{
 		(*i)++;
@@ -99,6 +99,13 @@ static void	ft_heredoc_found(t_token **current, t_env *env, int *i)
 	}
 }
 
+/**
+ * Check each token for heredoc redirection.
+ *
+ * @param env
+ *
+ * @return void
+ */
 void	ft_heredoc(t_env *env)
 {
 	t_token	*current;
@@ -111,7 +118,7 @@ void	ft_heredoc(t_env *env)
 		if (!current->next && !current->redirection
 			&& current->redirection == E_HEREDOC)
 		{
-			ft_heredoc_error(1);
+			ft_heredoc_error(env);
 			break ;
 		}
 		if (current->redirection == E_HEREDOC)

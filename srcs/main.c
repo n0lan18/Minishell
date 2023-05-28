@@ -40,6 +40,15 @@ static void	ft_for_checker(char **argv, t_env env)
 	}
 }
 
+/**
+ * Main function.
+ *
+ * @param argc
+ * @param argv
+ * @param envp
+ *
+ * @return last exit code
+ */
 int	main(int argc, char **argv, char **envp)
 {
 	char	*prompt_output;

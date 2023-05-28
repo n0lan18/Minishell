@@ -105,5 +105,6 @@ void	ft_add_token_end(t_token **lst, t_token *new)
 		while (current->next)
 			current = current->next;
 		current->next = new;
+		new->previous = current;
 	}
 }
