@@ -56,8 +56,8 @@ static void	ft_display_error_syntax(int syntax_error_type)
 	if (syntax_error_type == E_SYNTAX_QUOTE_CLOSE)
 		ft_putstr_fd("minishell: syntax error quote is not closed\n", 2);
 	else if (syntax_error_type == E_SYNTAX_REDIRECTION)
-		ft_putstr_fd \
-			("minishell: syntax error near unexpected token `<' or `>'\n", 2);
+		ft_putstr_fd(
+			"minishell: syntax error near unexpected token `<' or `>'\n", 2);
 	else if (syntax_error_type == E_SYNTAX_PIPE)
 		ft_putstr_fd("minishell: syntax error near unexpected token `|'\n", 2);
 }

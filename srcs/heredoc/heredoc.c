@@ -60,18 +60,31 @@ static void	ft_eof_found(t_token *token, t_token *new, char *name, t_env *env)
 	free(tmp);
 }
 
-static t_token	*ft_get_heredoc(t_token *token, t_env *env, int i)
+/**
+ * 1. Check if the EOF is valid. If not, return the token.
+ * 2. Create a new token of type "<" and add it to the list.
+ * 3. Generate a name for the heredoc file and add it after the "<" token.
+ * 4. Loop through the tokens until a string is found (the EOF).
+ * 5. Write the heredoc in the file.
+ * 6. Return the new token (the "<" token followed by the name of the file).
+ *
+ * @param token
+ * @param env
+ * @param version
+ *
+ * @return t_token* The new token.
+ */
+static t_token	*ft_get_heredoc(t_token *token, t_env *env, int version)
 {
 	t_token	*new;
-	t_token	*tmp;
 	char	*name;
 
-	if (ft_heredoc_syntax(token, env) == 1)
+	if (!ft_heredoc_is_valid_eof(env, token))
 		return (token);
-	name = ft_heredoc_getname(i);
-	new = ft_new_token(ft_heredoc_getword("<"));
+	new = ft_new_token(ft_strdup("<"));
 	new->previous = token->previous;
-	ft_add_token_end(&new, ft_new_token(ft_heredoc_getword(name)));
+	name = ft_heredoc_getname(version);
+	ft_add_token_end(&new, ft_new_token(ft_strdup(name)));
 	while (token)
 	{
 		if (token->type == E_STRING)
@@ -79,30 +92,24 @@ static t_token	*ft_get_heredoc(t_token *token, t_env *env, int i)
 			ft_eof_found(token, new, name, env);
 			break ;
 		}
-		tmp = token;
 		token = token->next;
-		free(tmp->str);
-		free(tmp);
 	}
 	free(name);
 	return (new);
 }
 
-static void	ft_heredoc_found(t_token **current, t_env *env)
+static void	ft_heredoc_found(t_token **current, t_env *env, int *version)
 {
-	int		i;
-
-	i = 0;
 	if (!(*current)->previous)
 	{
-		i++;
-		(*current) = ft_get_heredoc((*current), env, i);
+		(*current) = ft_get_heredoc((*current), env, (*version));
+		(*version)++;
 	}
 	else
 	{
-		i++;
 		(*current) = (*current)->previous;
-		(*current)->next = ft_get_heredoc((*current)->next, env, i);
+		(*current)->next = ft_get_heredoc((*current)->next, env, (*version));
+		(*version)++;
 	}
 	if ((*current)->next)
 	{
@@ -121,7 +128,9 @@ static void	ft_heredoc_found(t_token **current, t_env *env)
 void	ft_heredoc(t_env *env)
 {
 	t_token	*current;
+	int		version;
 
+	version = 0;
 	current = env->token;
 	while (current)
 	{
@@ -131,7 +140,7 @@ void	ft_heredoc(t_env *env)
 			break ;
 		}
 		if (current->redirection == E_HEREDOC)
-			ft_heredoc_found(&current, env);
+			ft_heredoc_found(&current, env, &version);
 		if (!current->next)
 			break ;
 		current = current->next;

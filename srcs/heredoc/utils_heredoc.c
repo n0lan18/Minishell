@@ -12,7 +12,14 @@
 
 #include "../../minishell.h"
 
-char	*ft_heredoc_getname(int nb)
+/**
+ * Generate the name of the heredoc file.
+ *
+ * @param version
+ *
+ * @return the name of the heredoc file
+ */
+char	*ft_heredoc_getname(int version)
 {
 	char	*name;
 	char	*heredoc;
@@ -28,46 +35,41 @@ char	*ft_heredoc_getname(int nb)
 		name[i] = heredoc[i];
 		i++;
 	}
-	name[i - 1] += nb;
+	name[i - 1] += version;
 	return (name);
 }
 
-int	ft_heredoc_syntax(t_token *token, t_env *env)
+/**
+ * Check if token is a valid EOF
+ *
+ * @param env
+ * @param token
+ *
+ * @return 1 if token is valid, 0 otherwise
+ */
+int	ft_heredoc_is_valid_eof(t_env *env, t_token *token)
 {
 	token = token->next;
 	while (token)
 	{
 		if (token->type == E_PIPE || token->type == E_REDIRECTION)
-			return (ft_heredoc_error(env));
+		{
+			ft_heredoc_error(env);
+			return (0);
+		}
 		else if (token->type == E_STRING)
 		{
-			if (!ft_heredoc_is_valid_eof(token->str))
-				return (ft_heredoc_error(env));
+			if (token->str[0] == '#')
+			{
+				ft_heredoc_error(env);
+				return (0);
+			}
 			g_last_exit_code = 0;
-			return (0);
+			return (1);
 		}
 		token = token->next;
 	}
-	if (token == NULL)
-		return (ft_heredoc_error(env));
 	return (0);
-}
-
-char	*ft_heredoc_getword(char *word)
-{
-	char	*str;
-	size_t	i;
-
-	i = 0;
-	str = ft_calloc(sizeof(char), ft_strlen(word) + 1);
-	if (!str)
-		return (NULL);
-	while (word[i])
-	{
-		str[i] = word[i];
-		i++;
-	}
-	return (str);
 }
 
 /**

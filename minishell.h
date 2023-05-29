@@ -143,15 +143,14 @@ char		**ft_get_cmd_option_for_redirection(t_token **current, t_cmd *cmd);
 
 /** ----- HEREDOC ----- **/
 void		ft_heredoc(t_env *env);
-char		*ft_heredoc_getname(int nb);
-int			ft_heredoc_syntax(t_token *token, t_env *env);
+char		*ft_heredoc_getname(int version);
 char		*ft_heredoc_getword(char *word);
 int			ft_heredoc_is_eof(t_token *eof, char *line);
 char		*ft_heredoc_strjoin(char *s1, char *s2);
 void		ft_heredoc_open2(char *all, t_env *ms, int fd_heredoc, t_token *hd);
 void		ft_heredoc_replace_varenv(char **str, t_envp *envp);
-int			ft_heredoc_error(t_env *env);
-int			ft_heredoc_is_valid_eof(const char *str);
+void		ft_heredoc_error(t_env *env);
+int			ft_heredoc_is_valid_eof(t_env *env, t_token *token);
 
 /** ----- SYNTAX ----- **/
 int			ft_has_syntax_error(t_env *env);
