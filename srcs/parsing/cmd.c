@@ -37,10 +37,10 @@ static t_cmd	*ft_init_cmd(t_token **token)
 	cmd = malloc(sizeof(t_cmd));
 	if (!cmd)
 		return (NULL);
-	cmd->name = (*token)->str;
+	cmd->name = NULL;
+	cmd->next = NULL;
 	cmd->fd_read = 0;
 	cmd->fd_write = 1;
-	cmd->next = NULL;
 	while ((*token))
 	{
 		if ((*token)->type == E_REDIRECTION)
