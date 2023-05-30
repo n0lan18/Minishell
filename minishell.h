@@ -165,7 +165,7 @@ void		ft_exec_env(t_envp *envp);
 void		ft_exec_unset(t_env *env, char **option);
 void		ft_exec_export(t_env *env, char **option);
 void		ft_exec_pwd(void);
-void		ft_exec_cd(t_token *list);
+void		ft_exec_cd(t_env *env, char **option);
 void		ft_exec_exit(void);
 
 /** ----- EXECUTION ----- **/
