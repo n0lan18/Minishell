@@ -6,7 +6,7 @@
 /*   By: nleggeri <nleggeri@42.student.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 13:09:55 by synicole          #+#    #+#             */
-/*   Updated: 2023/05/30 13:54:47 by nleggeri         ###   ########.fr       */
+/*   Updated: 2023/05/30 17:47:53 by nleggeri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,6 +147,7 @@ char		*ft_heredoc_strjoin(char *s1, char *s2);
 void		ft_heredoc_error(t_env *env);
 int			ft_heredoc_is_valid_eof(t_env *env, t_token *token);
 char		*ft_replace_dollar_in_line(t_env *env, char *line);
+t_token		*ft_here_doc_to_token(t_token *token, char *line);
 
 /** ----- SYNTAX ----- **/
 int			ft_has_syntax_error(t_env *env);
@@ -160,7 +161,7 @@ void		ft_open_files_redirection(t_token **token, t_cmd *cmd);
 /** ----- BUILTIN ----- **/
 int			ft_is_builtins(const char *str);
 void		ft_execute_builtins(t_env *env);
-void		ft_exec_echo(t_token *list);
+void		ft_exec_echo(t_token *token);
 void		ft_exec_env(t_envp *envp);
 void		ft_exec_unset(t_env *env);
 void		ft_exec_export(t_env *env);
@@ -198,7 +199,7 @@ void		ft_print_not_a_valid_identifier(char *str, char *builtin_name);
 
 /** ----- FREE ----- **/
 void		ft_free_token(t_env *env);
-void		ft_free_liste_token(t_env *env);
+void		ft_free_liste_token(t_token *token);
 void		ft_free_cmd(t_env *env);
 
 /** ----- EXIT ----- **/
