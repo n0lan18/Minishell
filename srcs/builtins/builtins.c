@@ -50,9 +50,9 @@ void	ft_execute_builtins(t_env *env)
 	else if (ft_strncmp(env->token->str, "env", 4) == 0)
 		ft_exec_env(env->envp);
 	else if (ft_strncmp(env->token->str, "export", 7) == 0)
-		ft_exec_export(env);
+		ft_exec_export(env, env->cmd->option);
 	else if (ft_strncmp(env->token->str, "unset", 6) == 0)
-		ft_exec_unset(env);
+		ft_exec_unset(env, env->cmd->option);
 	else if (ft_strncmp(env->token->str, "pwd", 4) == 0)
 		ft_exec_pwd();
 	else if (ft_strncmp(env->token->str, "cd", 3) == 0)

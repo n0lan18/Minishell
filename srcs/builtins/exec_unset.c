@@ -39,22 +39,19 @@ static int	ft_contains_only_valid_identifier(char *str)
  *
  * @return void
  */
-void	ft_exec_unset(t_env *env)
+void	ft_exec_unset(t_env *env, char **option)
 {
-	t_token	*current;
+	int	i;
 
-	current = env->token->next;
-	while (current)
+	i = 1;
+	while (option[i])
 	{
-		if (current->type != E_SPACE)
+		if (!ft_contains_only_valid_identifier(option[i]))
 		{
-			if (!ft_contains_only_valid_identifier(current->str))
-			{
-				ft_print_not_a_valid_identifier(current->str, "unset");
-				g_last_exit_code = EXIT_FAILURE;
-			}
-			ft_remove_envp(&env->envp, current->str);
+			ft_print_not_a_valid_identifier(option[i], "unset");
+			g_last_exit_code = EXIT_FAILURE;
 		}
-		current = current->next;
+		ft_remove_envp(&env->envp, option[i]);
+		i++;
 	}
 }

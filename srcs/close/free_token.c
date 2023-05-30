@@ -26,7 +26,8 @@ void	ft_free_token(t_env *env)
 	{
 		tmp = env->token;
 		env->token = env->token->next;
-		free(tmp->str);
+		if (env->token)
+			free(tmp->str);
 		free(tmp);
 	}
 }

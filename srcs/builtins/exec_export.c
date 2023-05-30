@@ -41,27 +41,24 @@ static int	ft_contains_only_valid_identifier(char *str)
  *
  * @return void
  */
-void	ft_exec_export(t_env *env)
+void	ft_exec_export(t_env *env, char **option)
 {
-	t_token	*current;
+	int		i;
 	t_envp	*envp;
 
-	current = env->token->next;
-	while (current)
+	i = 1;
+	while (option[i])
 	{
-		if (current->type != E_SPACE)
+		if (!ft_contains_only_valid_identifier(option[i]))
 		{
-			if (!ft_contains_only_valid_identifier(current->str))
-			{
-				ft_print_not_a_valid_identifier(current->str, "export");
-				g_last_exit_code = EXIT_FAILURE;
-			}
-			else if (ft_strchr(current->str, '='))
-			{
-				envp = ft_new_envp(current->str);
-				ft_add_envp_end(&env->envp, envp);
-			}
+			ft_print_not_a_valid_identifier(option[i], "export");
+			g_last_exit_code = EXIT_FAILURE;
 		}
-		current = current->next;
+		else if (ft_strchr(option[i], '='))
+		{
+			envp = ft_new_envp(option[i]);
+			ft_add_envp_end(&env->envp, envp);
+		}
+		i++;
 	}
 }
