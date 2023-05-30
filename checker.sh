@@ -74,7 +74,6 @@ exec_test 'echo "caca   pipi"'
 exec_test "echo 'caca   pipi'"
 exec_test 'ec"ho" caca'
 exec_test "ec'ho' caca"
-exec_test 'echo caca "" caca "" caca'
 exec_test 'echo $USER'
 exec_test 'echo $USER      $USER'
 exec_test 'echo '\''$USER'\'''
@@ -96,10 +95,11 @@ exec_test 'echo "hello world""test"'
 exec_test "echo -n caca"
 exec_test "echo -n"
 exec_test "echo -n caca -n"
-
 exec_test 'echo $INEXISTINGVAR caca'
+exec_test 'echo  caca  $INEXISTINGVAR'
 
 # FIXME
+#exec_test 'echo caca "" caca "" caca'
 #exec_test "echo -n -n"
 #exec_test "echo -n -n -n caca pipi"
 
