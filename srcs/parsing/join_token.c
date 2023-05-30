@@ -6,7 +6,7 @@
 /*   By: nleggeri <nleggeri@42.student.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 22:38:23 by synicole          #+#    #+#             */
-/*   Updated: 2023/05/17 00:37:45 by nleggeri         ###   ########.fr       */
+/*   Updated: 2023/05/30 11:25:42 by nleggeri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,34 @@ static void	ft_merge_token(t_token *current)
 	free(current->str);
 	current->str = tmp;
 	current->next = current->next->next;
+}
+
+static void	ft_remove_if_space_before_and_after(t_token *tmp)
+{
+	while (tmp)
+	{
+		if (tmp != NULL && tmp->next != NULL && tmp->next->next != NULL)
+		{
+			if ((tmp->next->type == E_SPACE && \
+					tmp->next->next->type == E_PIPE) || \
+				(tmp->next->type == E_SPACE && \
+					tmp->next->next->type == E_REDIRECTION))
+			{
+				tmp->next = tmp->next->next;
+				tmp = tmp->next;
+			}
+			else if ((tmp->type == E_PIPE && tmp->next->type == E_SPACE) || \
+			(tmp->type == E_REDIRECTION && tmp->next->type == E_SPACE))
+			{
+				tmp->next = tmp->next->next;
+				tmp = tmp->next;
+			}
+			else
+				tmp = tmp->next;
+		}
+		else
+			tmp = tmp->next;
+	}
 }
 
 /**
@@ -52,4 +80,6 @@ void	ft_join_token_not_separate_by_space(t_env *env)
 		else
 			current = current->next;
 	}
+	current = env->token;
+	ft_remove_if_space_before_and_after(current);
 }

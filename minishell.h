@@ -6,7 +6,7 @@
 /*   By: nleggeri <nleggeri@42.student.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 13:09:55 by synicole          #+#    #+#             */
-/*   Updated: 2023/05/22 22:47:58 by nleggeri         ###   ########.fr       */
+/*   Updated: 2023/05/30 10:11:35 by nleggeri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ typedef struct s_token
 	char	*str;
 	int		quote;
 	t_token	*next;
+	t_token	*previous;
 }	t_token;
 
 typedef struct s_dollar
@@ -138,7 +139,6 @@ void		ft_execute(t_env *env);
 void		ft_execute_external_in_fork(t_env *env);
 
 /** ----- EXECUTION PIPE ----- **/
-void		do_pipe(t_env *env);
 int			check_if_there_is_pipe(t_env *env);
 void		ft_execute_pipe(t_env *env);
 void		ft_execute_external(t_env *env, t_cmd *cmd);
@@ -158,6 +158,9 @@ void		ft_execute_in_pipe(t_env *env, t_cmd *cmd);
 char		*ft_search_biggest_timer_in_sleep(t_cmd *cmd);
 t_cmd		*search_and_replace_sleep_with_biggest_timer(t_cmd *cmd);
 t_cmd		*ft_init_sleep(t_cmd *cmd);
+
+/** ----- REDIRECTION IN PIPE ----- **/
+void		ft_check_if_redirection(t_cmd *cmd, int *redirection);
 
 /** ----- SIGNALS ----- **/
 void		ft_init_signals(void);

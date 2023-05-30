@@ -6,7 +6,7 @@
 /*   By: nleggeri <nleggeri@42.student.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/10 11:23:50 by synicole          #+#    #+#             */
-/*   Updated: 2023/05/23 11:20:13 by nleggeri         ###   ########.fr       */
+/*   Updated: 2023/05/30 10:03:05 by nleggeri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ int	main(int argc, char **argv, char **envp)
 			{
 				add_history(prompt_output);
 				ft_parsing(&env, prompt_output);
-				db_print_cmd(env.cmd);
+				db_print_token(env.token);
 				if (check_if_there_is_pipe(&env))
 					ft_execute_pipe(&env);
 				else

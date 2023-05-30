@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: nleggeri <nleggeri@student.42.fr>          +#+  +:+       +#+         #
+#    By: nleggeri <nleggeri@42.student.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/10 11:10:16 by nleggeri          #+#    #+#              #
-#    Updated: 2023/05/24 12:01:38 by nleggeri         ###   ########.fr        #
+#    Updated: 2023/05/24 16:51:26 by nleggeri         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ FLAGS 			= -Wall -Werror -Wextra -g
 SANITIZE		= -fsanitize=address
 
 # CHANGE TO 42 IF YOU WORK AT 42, DEFAULT IF YOU WORK AT HOME
-ENVIRONMENT		= 42
+ENVIRONMENT		= DEFAULT
 ifeq ($(ENVIRONMENT), 42)
     READLINE_LIB_DIR = $(HOME)/.brew/opt/readline/lib
     READLINE_INCLUDE_DIR = $(HOME)/.brew/opt/readline/include
@@ -58,7 +58,7 @@ SRCS 			= $(wildcard $(SRCS_DIR)/*.c) \
 				  $(wildcard $(SRCS_DIR)/$(CLOSE_DIR)/*.c) \
 				  $(wildcard $(SRCS_DIR)/$(DEBUG_DIR)/*.c) \
 				  $(wildcard $(SRCS_DIR)/$(PIPE_DIR)/*.c) \
-				  $(wildcard $(SRCS_DIR)/$(REDIRECTION_DIR)/*.c) \				  
+				  $(wildcard $(SRCS_DIR)/$(REDIRECTION_DIR)/*.c) 			  
 
 # COLORS
 _END=$'\x1b[0m'
