@@ -6,7 +6,7 @@
 /*   By: nleggeri <nleggeri@42.student.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 19:01:41 by synicole          #+#    #+#             */
-/*   Updated: 2023/05/30 13:47:54 by nleggeri         ###   ########.fr       */
+/*   Updated: 2023/05/30 17:48:06 by nleggeri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,12 +33,12 @@ void	ft_free_token(t_env *env)
 	}
 }
 
-void	ft_free_liste_token(t_env *env)
+void	ft_free_liste_token(t_token *token)
 {
 	t_token	*tmp;
 	t_token	*tmp_next;
 
-	tmp = env->token;
+	tmp = token;
 	while (tmp)
 	{
 		tmp_next = tmp->next;

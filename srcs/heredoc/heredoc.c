@@ -6,7 +6,7 @@
 /*   By: nleggeri <nleggeri@42.student.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/27 08:16:32 by synicole          #+#    #+#             */
-/*   Updated: 2023/05/30 13:54:54 by nleggeri         ###   ########.fr       */
+/*   Updated: 2023/05/30 18:05:08 by nleggeri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static void	ft_heredoc_write(t_token *eof, char *name, t_env *env)
 		if (ft_contains_dollar(line))
 			line = ft_replace_dollar_in_line(env, line);
 		new_line = ft_strjoin(line, "\n");
-		free(line);
+		line = NULL;
 		all = ft_heredoc_strjoin(all, new_line);
 		line = readline("> ");
 	}

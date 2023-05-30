@@ -6,7 +6,7 @@
 /*   By: nleggeri <nleggeri@42.student.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/27 09:10:16 by synicole          #+#    #+#             */
-/*   Updated: 2023/05/30 14:03:09 by nleggeri         ###   ########.fr       */
+/*   Updated: 2023/05/30 18:04:11 by nleggeri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,11 +57,11 @@ static void	ft_replace_dollar(t_env *env, t_token *current)
 	current->str = struct_to_char_here_doc(list_dollars);
 }
 
-static void	ft_dollar_in_here_doc(t_env *env)
+static void	ft_dollar_in_here_doc(t_env *env, t_token *token)
 {
 	t_token	*current;
 
-	current = env->token;
+	current = token;
 	while (current)
 	{
 		if (current->type == E_STRING)
@@ -73,15 +73,18 @@ static void	ft_dollar_in_here_doc(t_env *env)
 
 char	*ft_replace_dollar_in_line(t_env *env, char *line)
 {
-	ft_readline_to_token(env, line);
-	ft_dollar_in_here_doc(env);
-	line = env->token->str;
-	env->token = env->token->next;
-	while (env->token)
+	t_token	*tmp;
+
+	tmp = NULL;
+	tmp = ft_here_doc_to_token(tmp, line);
+	ft_dollar_in_here_doc(env, tmp);
+	line = tmp->str;
+	tmp = tmp->next;
+	while (tmp)
 	{
-		line = ft_strjoin(line, env->token->str);
-		env->token = env->token->next;
+		line = ft_strjoin(line, tmp->str);
+		tmp = tmp->next;
 	}
-	ft_free_liste_token(env);
+	ft_free_liste_token(tmp);
 	return (line);
 }
