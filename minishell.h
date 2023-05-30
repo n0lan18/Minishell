@@ -20,6 +20,7 @@
 # include <readline/history.h>
 # include <signal.h>
 # include "./libft/libft.h"
+# include "./memd/mem.h"
 
 /** ----- GLOBAL VARIABLE ----- **/
 extern int				g_last_exit_code;
@@ -117,7 +118,6 @@ char		*ft_get_envp_name(const char *str);
 int			ft_valid_identifier(int c);
 char		*ft_get_envp_value_by_name(t_envp *envp, char *name);
 char		**ft_get_splited_path(t_envp *envp);
-int			ft_nbr_var_envp(const char *str);
 
 /** ----- PARSING ----- **/
 void		ft_parsing(t_env *env, char *readline);
