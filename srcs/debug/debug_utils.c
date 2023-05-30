@@ -47,6 +47,7 @@ void	db_print_token(t_token *token)
 		printf("[%s] <= token\n", current->str);
 		printf("{%d} <= type\n", current->type);
 		printf("{%d} <= quote\n", current->quote);
+		printf("{%d} <= redirection\n", current->redirection);
 		printf("--------------------------------\n");
 		current = current->next;
 	}
@@ -82,6 +83,7 @@ void	db_print_cmd(t_cmd *cmd)
 		i = 0;
 		printf("[%d] <= fd_read\n", current->fd_read);
 		printf("[%d] <= fd_write\n", current->fd_write);
+		printf("--------------------------------\n");
 		current = current->next;
 	}
 	printf("\n");

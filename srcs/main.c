@@ -14,7 +14,12 @@
 
 int	g_last_exit_code;
 
-void	ft_for_checker(char **argv, t_env env)
+/**
+ * Use argv[2] as input for checker
+ * @param argv
+ * @param env
+ */
+static void	ft_for_checker(char **argv, t_env env)
 {
 	char	**arg_input;
 	int		i;
@@ -35,6 +40,15 @@ void	ft_for_checker(char **argv, t_env env)
 	}
 }
 
+/**
+ * Main function.
+ *
+ * @param argc
+ * @param argv
+ * @param envp
+ *
+ * @return last exit code
+ */
 int	main(int argc, char **argv, char **envp)
 {
 	char	*prompt_output;
@@ -54,11 +68,7 @@ int	main(int argc, char **argv, char **envp)
 			{
 				add_history(prompt_output);
 				ft_parsing(&env, prompt_output);
-				db_print_cmd(env.cmd);
-				if (check_if_there_is_pipe(&env))
-					ft_execute_pipe(&env);
-				else
-					ft_execute(&env);
+				ft_execute(&env);
 				ft_free_token(&env);
 				ft_free_cmd(&env);
 			}

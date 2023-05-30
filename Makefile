@@ -37,26 +37,30 @@ PARSING_DIR		= parsing
 ENV_DIR			= env
 ENVP_DIR		= envp
 STRUCTS_DIR		= structs
+HEREDOC_DIR		= heredoc
 EXECUTION_DIR	= execution
 BUILTINS_DIR	= builtins
 COMMAND_DIR		= command
 PRINT_DIR		= print
 CLOSE_DIR		= close
 DEBUG_DIR		= debug
-PIPE_DIR		= pipe
+SYNTAX_DIR		= syntax
+REDIRECTION_DIR	= redirection
 SRCS 			= $(wildcard $(SRCS_DIR)/*.c) \
 				  $(wildcard $(SRCS_DIR)/$(SIGNALS_DIR)/*.c) \
 				  $(wildcard $(SRCS_DIR)/$(PARSING_DIR)/*.c) \
 				  $(wildcard $(SRCS_DIR)/$(ENVP_DIR)/*.c) \
 				  $(wildcard $(SRCS_DIR)/$(ENV_DIR)/*.c) \
 				  $(wildcard $(SRCS_DIR)/$(STRUCTS_DIR)/*.c) \
+				  $(wildcard $(SRCS_DIR)/$(HEREDOC_DIR)/*.c) \
 				  $(wildcard $(SRCS_DIR)/$(EXECUTION_DIR)/*.c) \
 				  $(wildcard $(SRCS_DIR)/$(BUILTINS_DIR)/*.c) \
 				  $(wildcard $(SRCS_DIR)/$(COMMAND_DIR)/*.c) \
 				  $(wildcard $(SRCS_DIR)/$(PRINT_DIR)/*.c) \
 				  $(wildcard $(SRCS_DIR)/$(CLOSE_DIR)/*.c) \
 				  $(wildcard $(SRCS_DIR)/$(DEBUG_DIR)/*.c) \
-				  $(wildcard $(SRCS_DIR)/$(PIPE_DIR)/*.c)
+				  $(wildcard $(SRCS_DIR)/$(SYNTAX_DIR)/*.c) \
+				  $(wildcard $(SRCS_DIR)/$(REDIRECTION_DIR)/*.c)
 
 # COLORS
 _END=$'\x1b[0m'
@@ -79,13 +83,15 @@ $(OBJS_DIR):
 				mkdir -p $(OBJS_DIR)/$(ENVP_DIR)
 				mkdir -p $(OBJS_DIR)/$(ENV_DIR)
 				mkdir -p $(OBJS_DIR)/$(STRUCTS_DIR)
+				mkdir -p $(OBJS_DIR)/$(HEREDOC_DIR)
 				mkdir -p $(OBJS_DIR)/$(EXECUTION_DIR)
 				mkdir -p $(OBJS_DIR)/$(BUILTINS_DIR)
 				mkdir -p $(OBJS_DIR)/$(COMMAND_DIR)
 				mkdir -p $(OBJS_DIR)/$(PRINT_DIR)
 				mkdir -p $(OBJS_DIR)/$(CLOSE_DIR)
 				mkdir -p $(OBJS_DIR)/$(DEBUG_DIR)
-				mkdir -p $(OBJS_DIR)/$(PIPE_DIR)
+				mkdir -p $(OBJS_DIR)/$(SYNTAX_DIR)
+				mkdir -p $(OBJS_DIR)/$(REDIRECTION_DIR)
 
 $(OBJS_DIR)/%.o: $(SRCS_DIR)/%.c
 				$(CC) $(FLAGS) -c $< -o $@

@@ -41,6 +41,7 @@ typedef struct s_env
 	t_envp	*envp;
 	t_token	*token;
 	t_cmd	*cmd;
+	int		syntax_error_type;
 }	t_env;
 
 typedef struct s_envp
@@ -56,7 +57,9 @@ typedef struct s_token
 	int		type;
 	char	*str;
 	int		quote;
+	int		redirection;
 	t_token	*next;
+	t_token	*previous;
 }	t_token;
 
 typedef struct s_dollar
@@ -78,7 +81,6 @@ enum e_token_type
 {
 	E_STRING,
 	E_SPACE,
-	E_BUILTIN,
 	E_PIPE,
 	E_REDIRECTION,
 };
@@ -87,6 +89,21 @@ enum e_token_quote {
 	E_NONE_QUOTE,
 	E_SINGLE_QUOTE,
 	E_DOUBLE_QUOTE
+};
+
+enum e_redirection {
+	E_NOREDIRECTION,
+	E_INFILE,
+	E_OUTFILE,
+	E_HEREDOC,
+	E_APPEND
+};
+
+enum e_syntax_error_type {
+	E_SYNTAX_QUOTE_CLOSE = 1,
+	E_SYNTAX_REDIRECTION = 2,
+	E_SYNTAX_PIPE = 3,
+	E_SYNTAX_HEREDOC = 4,
 };
 
 /** ----- ENV ----- **/
@@ -100,6 +117,7 @@ char		*ft_get_envp_name(const char *str);
 int			ft_valid_identifier(int c);
 char		*ft_get_envp_value_by_name(t_envp *envp, char *name);
 char		**ft_get_splited_path(t_envp *envp);
+int			ft_nbr_var_envp(const char *str);
 
 /** ----- PARSING ----- **/
 void		ft_parsing(t_env *env, char *readline);
@@ -120,7 +138,23 @@ void		ft_trim_quote(t_env *env);
 void		ft_join_token_not_separate_by_space(t_env *env);
 void		ft_command(t_env *env);
 char		**ft_get_cmd_option(t_token **current, t_cmd *cmd);
-char		**ft_get_cmd_option_for_redirection(t_token **current, t_cmd *cmd);
+
+/** ----- HEREDOC ----- **/
+void		ft_heredoc(t_env *env);
+char		*ft_heredoc_getname(int version);
+int			ft_heredoc_is_eof(t_token *eof, char *line);
+char		*ft_heredoc_strjoin(char *s1, char *s2);
+void		ft_heredoc_error(t_env *env);
+int			ft_heredoc_is_valid_eof(t_env *env, t_token *token);
+
+/** ----- SYNTAX ----- **/
+int			ft_has_syntax_error(t_env *env);
+int			ft_quote_is_valid(char *str);
+int			ft_redirection_is_valid(t_token *token);
+int			ft_pipe_is_valid(t_token *token);
+
+/** ----- REDIRECTION ----- **/
+void		ft_open_files_redirection(t_token **token, t_cmd *cmd);
 
 /** ----- BUILTIN ----- **/
 int			ft_is_builtins(const char *str);
@@ -136,28 +170,11 @@ void		ft_exec_exit(void);
 /** ----- EXECUTION ----- **/
 void		ft_execute(t_env *env);
 void		ft_execute_external_in_fork(t_env *env);
-
-/** ----- EXECUTION PIPE ----- **/
-void		do_pipe(t_env *env);
-int			check_if_there_is_pipe(t_env *env);
-void		ft_execute_pipe(t_env *env);
+void		ft_run_cmd(t_env *env, t_cmd *cmd);
 void		ft_execute_external(t_env *env, t_cmd *cmd);
-
-/** ----- PIPE UTILS----- **/
-int			size_of_struct_cmd(t_cmd *cmd);
-int			check_if_there_is_pipe(t_env *env);
-int			**init_fd_for_pipe(int **fd, int num_cmd);
-
-/** ----- SLEEP CMD IN PIPE ----- **/
-int			ft_check_if_sleep_cmd(t_cmd *cmd);
-int			ft_search_last_sleep_cmd_struc_cmd(t_cmd *cmd);
-t_cmd		*ft_skip_until_last_sleep(t_cmd *cmd);
-
-/** ----- SLEEP CMD UTILS ----- **/
-void		ft_execute_in_pipe(t_env *env, t_cmd *cmd);
-char		*ft_search_biggest_timer_in_sleep(t_cmd *cmd);
-t_cmd		*search_and_replace_sleep_with_biggest_timer(t_cmd *cmd);
-t_cmd		*ft_init_sleep(t_cmd *cmd);
+void		ft_prepare_fds(t_cmd *cmd, int *fd_pipe_read_tmp, int *fd_pipe);
+void		ft_close_fds(t_cmd *cmd, int *fd_pipe_read_tmp, int *fd_pipe);
+void		ft_handle_exit_status(int exit_status);
 
 /** ----- SIGNALS ----- **/
 void		ft_init_signals(void);
@@ -165,6 +182,7 @@ void		ft_init_signals(void);
 /** ----- STRUCTS ----- **/
 t_token		*ft_new_token(char *str);
 void		ft_add_token_end(t_token **lst, t_token *token);
+void		ft_add_token_previous(t_token *token);
 t_envp		*ft_new_envp(char *str);
 void		ft_add_envp_end(t_envp **lst, t_envp *envp);
 void		ft_remove_envp(t_envp **lst, char *str);

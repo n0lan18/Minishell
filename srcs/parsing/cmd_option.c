@@ -35,7 +35,6 @@ static char	**ft_get_option(char **option, char **option_tmp)
 	return (option);
 }
 
-
 char	**ft_get_cmd_option(t_token **current, t_cmd *cmd)
 {
 	size_t	i;
@@ -43,6 +42,7 @@ char	**ft_get_cmd_option(t_token **current, t_cmd *cmd)
 	char	**option;
 
 	i = 1;
+	cmd->name = (*current)->str;
 	option_tmp[0] = cmd->name;
 	(*current) = (*current)->next;
 	while ((*current) != NULL)
