@@ -12,6 +12,21 @@
 
 #include "../../minishell.h"
 
+void	ft_create_list_dollars_ext(int *i, const char *str, t_dollar **list,
+	t_dollar *dollar)
+{
+	int	j;
+
+	j = (*i);
+	while (str[(*i)] && str[(*i)] != '$')
+		(*i)++;
+	if ((*i) > j)
+	{
+		dollar = ft_new_dollar(ft_substr(str, j, (*i) - j));
+		ft_add_dollar_end(list, dollar);
+	}
+}
+
 void	ft_create_list_dollars(t_dollar **list, const char *str, int i)
 {
 	t_dollar	*dollar;
@@ -19,14 +34,7 @@ void	ft_create_list_dollars(t_dollar **list, const char *str, int i)
 
 	while (str[i])
 	{
-		j = i;
-		while (str[i] && str[i] != '$')
-			i++;
-		if (i > j)
-		{
-			dollar = ft_new_dollar(ft_substr(str, j, i - j));
-			ft_add_dollar_end(list, dollar);
-		}
+		ft_create_list_dollars_ext(&i, str, list, dollar);
 		if (str[i] == '$')
 		{
 			if (str[i + 1] == '?')
