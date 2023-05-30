@@ -202,9 +202,11 @@ void		ft_print_not_a_valid_identifier(char *str, char *builtin_name);
 void		ft_free_token(t_env *env);
 void		ft_free_liste_token(t_token *token);
 void		ft_free_cmd(t_env *env);
+void		ft_free_envp(t_env *env);
 
 /** ----- EXIT ----- **/
 void		ft_exit(int status, char *message);
+int		ft_close(t_env *env);
 
 /** ----- DEBUG ----- **/
 void		db_print_tab(char **tab);

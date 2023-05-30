@@ -75,5 +75,5 @@ int	main(int argc, char **argv, char **envp)
 			free(prompt_output);
 		}
 	}
-	return (g_last_exit_code);
+	return (ft_close(&env));
 }
