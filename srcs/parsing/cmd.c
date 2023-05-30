@@ -41,7 +41,6 @@ static t_cmd	*ft_init_cmd(t_token **token)
 	cmd->fd_read = 0;
 	cmd->fd_write = 1;
 	cmd->next = NULL;
-//	ft_init_option_in_cmd(token, cmd);
 	while ((*token))
 	{
 		if ((*token)->type == E_REDIRECTION)

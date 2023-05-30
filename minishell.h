@@ -175,11 +175,15 @@ void		ft_exec_exit(void);
 /** ----- EXECUTION ----- **/
 void		ft_execute(t_env *env);
 void		ft_execute_external_in_fork(t_env *env);
+void		ft_run_cmd(t_env *env, t_cmd *cmd);
+void		ft_execute_external(t_env *env, t_cmd *cmd);
+void		ft_prepare_fds(t_cmd *cmd, int *fd_pipe_read_tmp, int *fd_pipe);
+void		ft_close_fds(t_cmd *cmd, int *fd_pipe_read_tmp, int *fd_pipe);
+void		ft_handle_exit_status(int exit_status);
 
 /** ----- EXECUTION PIPE ----- **/
 int			ft_check_if_there_is_pipe(t_env *env);
 void		ft_execute_pipe(t_env *env);
-void		ft_execute_external(t_env *env, t_cmd *cmd);
 
 /** ----- PIPE UTILS----- **/
 int			ft_size_of_struct_cmd(t_cmd *cmd);

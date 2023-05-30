@@ -12,35 +12,35 @@
 
 #include "../../minishell.h"
 
-int	ft_check_if_there_is_pipe(t_env *env)
-{
-	t_token	*tmp;
+//int	ft_check_if_there_is_pipe(t_env *env)
+//{
+//	t_token	*tmp;
+//
+//	tmp = env->token;
+//	while (tmp)
+//	{
+//		if (tmp->type == E_PIPE)
+//			return (1);
+//		tmp = tmp->next;
+//	}
+//	return (0);
+//}
 
-	tmp = env->token;
-	while (tmp)
-	{
-		if (tmp->type == E_PIPE)
-			return (1);
-		tmp = tmp->next;
-	}
-	return (0);
-}
-
-int	**ft_init_fd_for_pipe(int **fd, int num_cmd)
-{
-	int	i;
-
-	i = 0;
-	fd = malloc(sizeof(*fd) * num_cmd);
-	if (!fd)
-		return (NULL);
-	while (i < num_cmd)
-	{
-		fd[i] = malloc(sizeof(**fd) * 2);
-		if (!fd[i])
-			return (NULL);
-		i++;
-	}
-	return (fd);
-}
+//int	**ft_init_fd_for_pipe(int **fd, int num_cmd)
+//{
+//	int	i;
+//
+//	i = 0;
+//	fd = malloc(sizeof(*fd) * num_cmd);
+//	if (!fd)
+//		return (NULL);
+//	while (i < num_cmd)
+//	{
+//		fd[i] = malloc(sizeof(**fd) * 2);
+//		if (!fd[i])
+//			return (NULL);
+//		i++;
+//	}
+//	return (fd);
+//}
 

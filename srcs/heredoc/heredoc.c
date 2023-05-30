@@ -98,24 +98,26 @@ static t_token	*ft_get_heredoc(t_token *token, t_env *env, int version)
 	return (new);
 }
 
+/**
+ * Check if the current token has previous token or not and call ft_get_heredoc.
+ * Also increment the version of the heredoc file.
+ *
+ * @param current
+ * @param env
+ * @param version
+ *
+ * @return void
+ */
 static void	ft_heredoc_found(t_token **current, t_env *env, int *version)
 {
 	if (!(*current)->previous)
-	{
 		(*current) = ft_get_heredoc((*current), env, (*version));
-		(*version)++;
-	}
 	else
 	{
 		(*current) = (*current)->previous;
 		(*current)->next = ft_get_heredoc((*current)->next, env, (*version));
-		(*version)++;
 	}
-	if ((*current)->next)
-	{
-		if ((*current)->next->redirection == E_HEREDOC)
-			(*current) = (*current)->next;
-	}
+	(*version)++;
 }
 
 /**
