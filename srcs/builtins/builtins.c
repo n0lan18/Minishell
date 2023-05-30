@@ -46,7 +46,7 @@ int	ft_is_builtins(const char *str)
 void	ft_execute_builtins(t_env *env)
 {
 	if (ft_strncmp(env->token->str, "echo", 5) == 0)
-		ft_exec_echo(env->token);
+		ft_exec_echo(env->cmd->option);
 	else if (ft_strncmp(env->token->str, "env", 4) == 0)
 		ft_exec_env(env->envp);
 	else if (ft_strncmp(env->token->str, "export", 7) == 0)

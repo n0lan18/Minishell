@@ -160,7 +160,7 @@ void		ft_open_files_redirection(t_token **token, t_cmd *cmd);
 /** ----- BUILTIN ----- **/
 int			ft_is_builtins(const char *str);
 void		ft_execute_builtins(t_env *env);
-void		ft_exec_echo(t_token *list);
+void		ft_exec_echo(char **option);
 void		ft_exec_env(t_envp *envp);
 void		ft_exec_unset(t_env *env);
 void		ft_exec_export(t_env *env);
