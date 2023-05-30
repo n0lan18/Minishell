@@ -12,7 +12,7 @@
 
 #include "../../minishell.h"
 
-char	*struct_to_char_here_doc(t_dollar *list)
+static char	*struct_to_char_here_doc(t_dollar *list)
 {
 	t_dollar	*current;
 	char		*str;
@@ -76,7 +76,7 @@ char	*ft_replace_dollar_in_line(t_env *env, char *line)
 	t_token	*tmp;
 
 	tmp = NULL;
-	tmp = ft_here_doc_to_token(tmp, line);
+	tmp = ft_heredoc_to_token(tmp, line);
 	ft_dollar_in_here_doc(env, tmp);
 	line = tmp->str;
 	tmp = tmp->next;

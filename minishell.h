@@ -147,7 +147,7 @@ char		*ft_heredoc_strjoin(char *s1, char *s2);
 void		ft_heredoc_error(t_env *env);
 int			ft_heredoc_is_valid_eof(t_env *env, t_token *token);
 char		*ft_replace_dollar_in_line(t_env *env, char *line);
-t_token	*ft_here_doc_to_token(t_token *token, char *line);
+t_token		*ft_heredoc_to_token(t_token *token, char *line);
 void		ft_heredoc_remove(t_env *env);
 
 /** ----- SYNTAX ----- **/
@@ -162,7 +162,6 @@ void		ft_open_files_redirection(t_token **token, t_cmd *cmd);
 /** ----- BUILTIN ----- **/
 int			ft_is_builtins(const char *str);
 void		ft_execute_builtins(t_env *env);
-void		ft_exec_echo(t_token *token);
 void		ft_exec_echo(char **option);
 void		ft_exec_env(t_envp *envp);
 void		ft_exec_unset(t_env *env, char **option);

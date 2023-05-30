@@ -40,7 +40,7 @@ static t_token	*ft_array_to_token(char **tab, t_token *token)
  *
  * @return void
 */
-t_token	*ft_here_doc_to_token(t_token *token, char *line)
+t_token	*ft_heredoc_to_token(t_token *token, char *line)
 {
 	char	**split_space_tab;
 
