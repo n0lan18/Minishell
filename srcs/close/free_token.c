@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_token.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: synicole <synicole@student.42lausanne.ch>  +#+  +:+       +#+        */
+/*   By: nleggeri <nleggeri@42.student.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 19:01:41 by synicole          #+#    #+#             */
-/*   Updated: 2023/05/14 19:01:42 by synicole         ###   ########.fr       */
+/*   Updated: 2023/05/30 13:47:54 by nleggeri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,5 +28,19 @@ void	ft_free_token(t_env *env)
 		env->token = env->token->next;
 		free(tmp->str);
 		free(tmp);
+	}
+}
+
+void	ft_free_liste_token(t_env *env)
+{
+	t_token	*tmp;
+	t_token	*tmp_next;
+
+	tmp = env->token;
+	while (tmp)
+	{
+		tmp_next = tmp->next;
+		free(tmp);
+		tmp = tmp_next;
 	}
 }

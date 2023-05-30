@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: synicole <synicole@student.42lausanne.ch>  +#+  +:+       +#+        */
+/*   By: nleggeri <nleggeri@42.student.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/27 08:16:32 by synicole          #+#    #+#             */
-/*   Updated: 2023/05/27 08:16:33 by synicole         ###   ########.fr       */
+/*   Updated: 2023/05/30 13:54:54 by nleggeri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ static void	ft_heredoc_write(t_token *eof, char *name, t_env *env)
 	{
 		if (ft_heredoc_is_eof(eof, line))
 			break ;
+		if (ft_contains_dollar(line))
+			line = ft_replace_dollar_in_line(env, line);
 		new_line = ft_strjoin(line, "\n");
 		free(line);
 		all = ft_heredoc_strjoin(all, new_line);

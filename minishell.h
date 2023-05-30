@@ -6,7 +6,7 @@
 /*   By: nleggeri <nleggeri@42.student.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 13:09:55 by synicole          #+#    #+#             */
-/*   Updated: 2023/05/22 22:47:58 by nleggeri         ###   ########.fr       */
+/*   Updated: 2023/05/30 13:54:47 by nleggeri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,6 +146,7 @@ int			ft_heredoc_is_eof(t_token *eof, char *line);
 char		*ft_heredoc_strjoin(char *s1, char *s2);
 void		ft_heredoc_error(t_env *env);
 int			ft_heredoc_is_valid_eof(t_env *env, t_token *token);
+char		*ft_replace_dollar_in_line(t_env *env, char *line);
 
 /** ----- SYNTAX ----- **/
 int			ft_has_syntax_error(t_env *env);
@@ -197,6 +198,7 @@ void		ft_print_not_a_valid_identifier(char *str, char *builtin_name);
 
 /** ----- FREE ----- **/
 void		ft_free_token(t_env *env);
+void		ft_free_liste_token(t_env *env);
 void		ft_free_cmd(t_env *env);
 
 /** ----- EXIT ----- **/
