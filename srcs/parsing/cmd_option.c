@@ -49,7 +49,7 @@ char	**ft_get_cmd_option(t_token **current, t_cmd *cmd)
 	{
 		if ((*current)->type == E_PIPE || (*current)->type == E_REDIRECTION)
 			break ;
-		else if ((*current)->type == E_STRING)
+		else if ((*current)->type == E_STRING && (*current)->str[0])
 		{
 			option_tmp[i] = (*current)->str;
 			i++;

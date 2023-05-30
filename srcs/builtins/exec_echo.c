@@ -13,49 +13,33 @@
 #include "../../minishell.h"
 
 /**
- * Print the token.
+ * Display the options of echo
+ * If the option is -n, the newline is not displayed
+ * While there are options, display them and add a space between them
  *
- * @param t_token *tmp
+ * @param char **option
  *
  * @return void
  */
-static void	ft_print_token(t_token *list, int i, int has_n)
+void	ft_exec_echo(char **option)
 {
-	while (list)
-	{
-		if (i > 1)
-		{
-			if (list->type == E_SPACE)
-				printf(" ");
-			else if (ft_strncmp(list->str, "-n", 3) == 0 && !has_n)
-			{
-				has_n = 1;
-				if (!list->next)
-					break ;
-				list = list->next;
-				while (list && (list->type == E_SPACE
-						|| ft_strncmp(list->str, "-n", 3) == 0))
-					list = list->next;
-				continue ;
-			}
-			else
-				printf("%s", list->str);
-		}
-		i++;
-		list = list->next;
-	}
-	if (!has_n)
-		printf("\n");
-}
+	int	i;
+	int	has_newline;
 
-/**
- * Display the arguments passed to the echo command.
- *
- * @param t_token *list
- *
- * @return void
- */
-void	ft_exec_echo(t_token *list)
-{
-	ft_print_token(list, 0, 0);
+	i = 1;
+	has_newline = 1;
+	if (option[i] && ft_strncmp(option[i], "-n", 1) == 0)
+	{
+		has_newline = 0;
+		i++;
+	}
+	while (option[i])
+	{
+		ft_putstr_fd(option[i], 1);
+		if (option[i + 1])
+			ft_putchar_fd(' ', 1);
+		i++;
+	}
+	if (has_newline)
+		ft_putchar_fd('\n', 1);
 }

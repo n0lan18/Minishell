@@ -60,7 +60,7 @@ int	main(int argc, char **argv, char **envp)
 		ft_for_checker(argv, env);
 	else
 	{
-		while (prompt_output != NULL)
+		while (prompt_output)
 		{
 			ft_init_signals();
 			prompt_output = readline("minishell-1.0$ ");
@@ -72,6 +72,7 @@ int	main(int argc, char **argv, char **envp)
 				ft_free_token(&env);
 				ft_free_cmd(&env);
 			}
+			free(prompt_output);
 		}
 	}
 	return (g_last_exit_code);

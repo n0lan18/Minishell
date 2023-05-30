@@ -18,19 +18,19 @@
  *
  * @return void
  */
-void	ft_exec_cd(t_token *list)
+void	ft_exec_cd(t_env *env, char **option)
 {
-	char	*path;
+	int		i;
 
-	if (!list->next)
+	i = 1;
+	if (!option[i])
 	{
-		if (chdir(getenv("HOME")))
-			perror(ft_strjoin("minishell: cd: ", path));
+		if (chdir(ft_get_envp_value_by_name(env->envp, "HOME")))
+			perror("minishell: cd: HOME not set");
 	}
 	else
 	{
-		path = list->next->next->str;
-		if (chdir(path))
-			perror(ft_strjoin("minishell: cd: ", path));
+		if (chdir(option[i]))
+			perror(ft_strjoin("minishell: cd: ", option[i]));
 	}
 }

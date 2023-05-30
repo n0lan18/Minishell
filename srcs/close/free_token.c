@@ -22,11 +22,13 @@ void	ft_free_token(t_env *env)
 {
 	t_token	*tmp;
 
+	ft_heredoc_remove(env);
 	while (env->token)
 	{
 		tmp = env->token;
 		env->token = env->token->next;
-		free(tmp->str);
+		if (env->token)
+			free(tmp->str);
 		free(tmp);
 	}
 }
