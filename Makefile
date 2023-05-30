@@ -44,7 +44,6 @@ COMMAND_DIR		= command
 PRINT_DIR		= print
 CLOSE_DIR		= close
 DEBUG_DIR		= debug
-PIPE_DIR		= pipe
 SYNTAX_DIR		= syntax
 REDIRECTION_DIR	= redirection
 SRCS 			= $(wildcard $(SRCS_DIR)/*.c) \
@@ -60,7 +59,6 @@ SRCS 			= $(wildcard $(SRCS_DIR)/*.c) \
 				  $(wildcard $(SRCS_DIR)/$(PRINT_DIR)/*.c) \
 				  $(wildcard $(SRCS_DIR)/$(CLOSE_DIR)/*.c) \
 				  $(wildcard $(SRCS_DIR)/$(DEBUG_DIR)/*.c) \
-				  $(wildcard $(SRCS_DIR)/$(PIPE_DIR)/*.c) \
 				  $(wildcard $(SRCS_DIR)/$(SYNTAX_DIR)/*.c) \
 				  $(wildcard $(SRCS_DIR)/$(REDIRECTION_DIR)/*.c)
 
@@ -92,7 +90,6 @@ $(OBJS_DIR):
 				mkdir -p $(OBJS_DIR)/$(PRINT_DIR)
 				mkdir -p $(OBJS_DIR)/$(CLOSE_DIR)
 				mkdir -p $(OBJS_DIR)/$(DEBUG_DIR)
-				mkdir -p $(OBJS_DIR)/$(PIPE_DIR)
 				mkdir -p $(OBJS_DIR)/$(SYNTAX_DIR)
 				mkdir -p $(OBJS_DIR)/$(REDIRECTION_DIR)
 

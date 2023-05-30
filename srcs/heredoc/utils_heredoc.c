@@ -92,3 +92,32 @@ int	ft_heredoc_is_eof(t_token *eof, char *line)
 		return (1);
 	return (0);
 }
+
+/**
+ * Custom strjoin for heredoc to join s1 and s2
+ *
+ * @param s1
+ * @param s2
+ *
+ * @return joined string
+ */
+char	*ft_heredoc_strjoin(char *s1, char *s2)
+{
+	char	*str;
+	char	*new_str;
+
+	new_str = NULL;
+	str = ft_calloc(sizeof(char), ft_strlen(s1) + ft_strlen(s2) + 1);
+	if (!str)
+		return (NULL);
+	if (s1 != NULL)
+	{
+		str = ft_memcpy(str, s1, ft_strlen(s1));
+		free(s1);
+	}
+	new_str = ft_strjoin(str, s2);
+	free(str);
+	if (s2 != NULL)
+		free(s2);
+	return (new_str);
+}

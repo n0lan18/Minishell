@@ -81,7 +81,6 @@ enum e_token_type
 {
 	E_STRING,
 	E_SPACE,
-	E_BUILTIN,
 	E_PIPE,
 	E_REDIRECTION,
 };
@@ -139,16 +138,12 @@ void		ft_trim_quote(t_env *env);
 void		ft_join_token_not_separate_by_space(t_env *env);
 void		ft_command(t_env *env);
 char		**ft_get_cmd_option(t_token **current, t_cmd *cmd);
-char		**ft_get_cmd_option_for_redirection(t_token **current, t_cmd *cmd);
 
 /** ----- HEREDOC ----- **/
 void		ft_heredoc(t_env *env);
 char		*ft_heredoc_getname(int version);
-char		*ft_heredoc_getword(char *word);
 int			ft_heredoc_is_eof(t_token *eof, char *line);
 char		*ft_heredoc_strjoin(char *s1, char *s2);
-void		ft_heredoc_open2(char *all, t_env *ms, int fd_heredoc, t_token *hd);
-void		ft_heredoc_replace_varenv(char **str, t_envp *envp);
 void		ft_heredoc_error(t_env *env);
 int			ft_heredoc_is_valid_eof(t_env *env, t_token *token);
 
@@ -180,22 +175,6 @@ void		ft_execute_external(t_env *env, t_cmd *cmd);
 void		ft_prepare_fds(t_cmd *cmd, int *fd_pipe_read_tmp, int *fd_pipe);
 void		ft_close_fds(t_cmd *cmd, int *fd_pipe_read_tmp, int *fd_pipe);
 void		ft_handle_exit_status(int exit_status);
-
-/** ----- EXECUTION PIPE ----- **/
-int			ft_check_if_there_is_pipe(t_env *env);
-void		ft_execute_pipe(t_env *env);
-
-/** ----- PIPE UTILS----- **/
-int			ft_size_of_struct_cmd(t_cmd *cmd);
-int			**ft_init_fd_for_pipe(int **fd, int num_cmd);
-
-/** ----- SLEEP CMD IN PIPE ----- **/
-int			ft_check_if_sleep_cmd(t_cmd *cmd);
-t_cmd		*ft_skip_until_last_sleep(t_cmd *cmd);
-
-/** ----- SLEEP CMD UTILS ----- **/
-void		ft_execute_in_pipe(t_env *env, t_cmd *cmd);
-t_cmd		*ft_init_sleep(t_cmd *cmd);
 
 /** ----- SIGNALS ----- **/
 void		ft_init_signals(void);
