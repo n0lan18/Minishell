@@ -83,6 +83,7 @@ t_token	*ft_new_token(char *str)
 	new->redirection = ft_get_redirection(str);
 	new->next = NULL;
 	new->previous = NULL;
+	new->show = 1;
 	return (new);
 }
 

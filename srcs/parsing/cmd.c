@@ -12,24 +12,6 @@
 
 #include "../../minishell.h"
 
-//static void	ft_init_option_in_cmd(t_token **token, t_cmd *cmd)
-//{
-//	while ((*token))
-//	{
-//		if ((*token)->type == E_REDIRECTION)
-//			ft_open_files_redirection(token, cmd);
-//		else if ((*token)->type == E_STRING)
-//			cmd->option = ft_get_cmd_option(token, cmd);
-//		else if ((*token)->type == E_PIPE)
-//		{
-//			(*token) = (*token)->next;
-//			break ;
-//		}
-//		else if ((*token))
-//			(*token) = (*token)->next;
-//	}
-//}
-
 static t_cmd	*ft_init_cmd(t_token **token)
 {
 	t_cmd	*cmd;

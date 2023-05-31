@@ -28,7 +28,7 @@ void	ft_exec_echo(char **option)
 
 	i = 1;
 	has_newline = 1;
-	if (option[i] && ft_strncmp(option[i], "-n", 1) == 0)
+	while (option[i] && ft_strncmp(option[i], "-n", 1) == 0)
 	{
 		has_newline = 0;
 		i++;

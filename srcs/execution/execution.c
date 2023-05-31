@@ -76,6 +76,8 @@ static void	ft_execute_cmds(t_env *env)
  */
 void	ft_execute(t_env *env)
 {
+	if (env->syntax_error_type)
+		return ;
 	if (env->cmd->name)
 	{
 		if (!env->cmd->next)

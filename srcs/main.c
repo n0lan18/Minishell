@@ -38,6 +38,7 @@ static void	ft_for_checker(char **argv, t_env env)
 		}
 		i++;
 	}
+	exit(g_last_exit_code);
 }
 
 /**

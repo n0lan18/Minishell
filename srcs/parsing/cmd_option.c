@@ -12,7 +12,7 @@
 
 #include "../../minishell.h"
 
-int	ft_len_option(char **option)
+static int	ft_len_option(char **option)
 {
 	int	len;
 
@@ -49,7 +49,7 @@ char	**ft_get_cmd_option(t_token **current, t_cmd *cmd)
 	{
 		if ((*current)->type == E_PIPE || (*current)->type == E_REDIRECTION)
 			break ;
-		else if ((*current)->type == E_STRING && (*current)->str[0])
+		else if ((*current)->type == E_STRING && (*current)->show)
 		{
 			option_tmp[i] = (*current)->str;
 			i++;
@@ -60,25 +60,5 @@ char	**ft_get_cmd_option(t_token **current, t_cmd *cmd)
 	option_tmp[i] = NULL;
 	option = ft_calloc(sizeof(char *), ft_len_option(option_tmp) + 1);
 	option = ft_get_option(option, option_tmp);
-	return (option);
-}
-
-char	**ft_get_cmd_option_for_redirection(t_token **current, t_cmd *cmd)
-{
-	char	*option_tmp[1024];
-	char	**option;
-
-	option_tmp[0] = cmd->name;
-	(*current) = (*current)->next;
-	while ((*current) != NULL && (*current)->type != E_STRING)
-		(*current) = (*current)->next;
-	option_tmp[1] = (*current)->str;
-	option_tmp[2] = NULL;
-	option = ft_calloc(sizeof(char *), ft_len_option(option_tmp) + 1);
-	option = ft_get_option(option, option_tmp);
-	if ((*current) != NULL)
-		(*current) = (*current)->next;
-	while ((*current) != NULL && (*current)->type != E_STRING)
-		(*current) = (*current)->next;
 	return (option);
 }

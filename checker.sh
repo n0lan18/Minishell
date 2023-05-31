@@ -97,47 +97,36 @@ exec_test "echo -n"
 exec_test "echo -n caca -n"
 exec_test 'echo $INEXISTINGVAR caca'
 exec_test 'echo  caca  $INEXISTINGVAR'
-
-# FIXME
-#exec_test 'echo caca "" caca "" caca'
-#exec_test "echo -n -n"
-#exec_test "echo -n -n -n caca pipi"
+exec_test 'echo caca "" caca "" caca'
+exec_test "echo -n -n"
+exec_test "echo -n -n -n caca pipi"
 
 
 # UNSET TESTS
-#printf "\n$BOLDYELLOW%s$RESET\n" "UNSET TESTS"
-#exec_test 'unset $USER'
-#exec_test 'unset $'
-#exec_test 'unset 101=dalmatiens'
-#exec_test 'unset _=caca'
-#exec_test 'unset $USER=caca'
-#exec_test 'unset $?'
+printf "\n$BOLDYELLOW%s$RESET\n" "UNSET TESTS"
+exec_test 'unset $USER'
+exec_test 'unset $'
+exec_test 'unset 101=dalmatiens'
+exec_test 'unset _=caca'
+exec_test 'unset $USER=caca'
+exec_test 'unset $?'
 
 # EXPORT TESTS
-#printf "\n$BOLDYELLOW%s$RESET\n" "EXPORT TESTS"
-#exec_test 'export $USER'
-#exec_test 'export $'
-#exec_test 'export 101=dalmatiens'
-#exec_test 'export _=caca'
-#exec_test 'export $USER=caca'
-#exec_test 'export $?'
-#exec_test 'export =caca'
-#exec_test 'export caca = pipi'
-
-# PWD TESTS
-#printf "\n$BOLDYELLOW%s$RESET\n" "PWD TESTS"
-#exec_test 'pwd'
-#exec_test 'cd srcs; pwd'
-#exec_test 'cd caca; pwd'
-#exec_test 'cd ..; pwd'
-#exec_test 'cd .; pwd'
-#exec_test 'cd /Users ; pwd'
+printf "\n$BOLDYELLOW%s$RESET\n" "EXPORT TESTS"
+exec_test 'export $USER'
+exec_test 'export $'
+exec_test 'export 101=dalmatiens'
+exec_test 'export _=caca'
+exec_test 'export $USER=caca'
+exec_test 'export $?'
+exec_test 'export =caca'
+exec_test 'export caca = pipi'
 
 # EXECVE TESTS
-#printf "\n$BOLDYELLOW%s$RESET\n" "EXECVE TESTS"
-#exec_test 'ls'
-#exec_test 'ls -l'
-#exec_test 'clear'
+printf "\n$BOLDYELLOW%s$RESET\n" "EXECVE TESTS"
+exec_test 'ls'
+exec_test 'ls -l'
+exec_test 'clear'
 
 # PRINT TOTAL
 echo

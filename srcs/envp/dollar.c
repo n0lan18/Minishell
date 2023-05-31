@@ -55,6 +55,8 @@ static void	ft_replace_dollar(t_env *env, t_token *current)
 	ft_create_list_dollars(&list_dollars, ft_strtrim(current->str, "\""), 0);
 	ft_replace_dollar_correct_value(env->envp, &list_dollars);
 	current->str = struct_to_char(list_dollars);
+	if (!current->str[0])
+		current->show = 0;
 }
 
 void	ft_dollar(t_env *env)
