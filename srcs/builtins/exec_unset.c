@@ -37,9 +37,9 @@ static int	ft_contains_only_valid_identifier(char *str)
  * Execute the unset command.
  * @param env
  *
- * @return void
+ * @return int exit_code
  */
-void	ft_exec_unset(t_env *env, char **option)
+int	ft_exec_unset(t_env *env, char **option)
 {
 	int	i;
 
@@ -49,9 +49,10 @@ void	ft_exec_unset(t_env *env, char **option)
 		if (!ft_contains_only_valid_identifier(option[i]))
 		{
 			ft_print_not_a_valid_identifier(option[i], "unset");
-			g_last_exit_code = EXIT_FAILURE;
+			return (EXIT_FAILURE);
 		}
 		ft_remove_envp(&env->envp, option[i]);
 		i++;
 	}
+	return (EXIT_SUCCESS);
 }

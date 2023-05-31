@@ -64,7 +64,7 @@ int	ft_heredoc_is_valid_eof(t_env *env, t_token *token)
 				ft_heredoc_error(env);
 				return (0);
 			}
-			g_last_exit_code = 0;
+			g_last_exit_code = EXIT_SUCCESS;
 			return (1);
 		}
 		token = token->next;

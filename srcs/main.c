@@ -73,6 +73,8 @@ int	main(int argc, char **argv, char **envp)
 				ft_free_token(&env);
 				ft_free_cmd(&env);
 			}
+			else
+				g_last_exit_code = 0;
 			free(prompt_output);
 		}
 	}

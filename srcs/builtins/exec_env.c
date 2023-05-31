@@ -17,9 +17,9 @@
  *
  * @param envp
  *
- * @return void
+ * @return int exit_code
  */
-void	ft_exec_env(t_envp *envp)
+int	ft_exec_env(t_envp *envp)
 {
 	t_envp	*current;
 
@@ -29,4 +29,5 @@ void	ft_exec_env(t_envp *envp)
 		printf("%s\n", current->line);
 		current = current->next;
 	}
+	return (EXIT_SUCCESS);
 }

@@ -55,7 +55,7 @@ static int	ft_get_infile(t_token **token)
 	if (fd == -1)
 		g_last_exit_code = ft_open_failed((*token)->str);
 	else
-		g_last_exit_code = 0;
+		g_last_exit_code = EXIT_SUCCESS;
 	return (fd);
 }
 
@@ -84,7 +84,7 @@ static int	ft_get_outfile(t_token **token)
 	}
 	if ((*token) != NULL)
 		fd = open((*token)->str, O_TRUNC | O_CREAT | O_WRONLY, 0644);
-	g_last_exit_code = 0;
+	g_last_exit_code = EXIT_SUCCESS;
 	return (fd);
 }
 
@@ -113,7 +113,7 @@ static int	ft_get_outfile_append(t_token **token)
 	}
 	if ((*token) != NULL)
 		fd = open((*token)->str, O_APPEND | O_CREAT | O_WRONLY, 0644);
-	g_last_exit_code = 0;
+	g_last_exit_code = EXIT_SUCCESS;
 	return (fd);
 }
 

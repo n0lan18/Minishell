@@ -16,9 +16,9 @@
  * Executes the pwd command.
  * @param void
  *
- * @return void
+ * @return int exit_code
  */
-void	ft_exec_pwd(void)
+int	ft_exec_pwd(void)
 {
 	char	cwd[1024];
 
@@ -29,4 +29,5 @@ void	ft_exec_pwd(void)
 		perror("getcwd() error");
 		exit(EXIT_FAILURE);
 	}
+	return (EXIT_SUCCESS);
 }

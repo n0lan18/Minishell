@@ -39,9 +39,9 @@ static int	ft_contains_only_valid_identifier(char *str)
  * Execute the export command.
  * @param env
  *
- * @return void
+ * @return int exit_code
  */
-void	ft_exec_export(t_env *env, char **option)
+int	ft_exec_export(t_env *env, char **option)
 {
 	int		i;
 	t_envp	*envp;
@@ -52,7 +52,7 @@ void	ft_exec_export(t_env *env, char **option)
 		if (!ft_contains_only_valid_identifier(option[i]))
 		{
 			ft_print_not_a_valid_identifier(option[i], "export");
-			g_last_exit_code = EXIT_FAILURE;
+			return (EXIT_FAILURE);
 		}
 		else if (ft_strchr(option[i], '='))
 		{
@@ -61,4 +61,5 @@ void	ft_exec_export(t_env *env, char **option)
 		}
 		i++;
 	}
+	return (EXIT_SUCCESS);
 }

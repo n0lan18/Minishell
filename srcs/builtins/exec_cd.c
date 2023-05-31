@@ -16,9 +16,9 @@
  * Executes the cd command.
  * @param t_token *list
  *
- * @return void
+ * @return int exit_code
  */
-void	ft_exec_cd(t_env *env, char **option)
+int	ft_exec_cd(t_env *env, char **option)
 {
 	int		i;
 
@@ -26,11 +26,18 @@ void	ft_exec_cd(t_env *env, char **option)
 	if (!option[i])
 	{
 		if (chdir(ft_get_envp_value_by_name(env->envp, "HOME")))
+		{
 			perror("minishell: cd: HOME not set");
+			return (EXIT_FAILURE);
+		}
 	}
 	else
 	{
 		if (chdir(option[i]))
+		{
 			perror(ft_strjoin("minishell: cd: ", option[i]));
+			return (EXIT_FAILURE);
+		}
 	}
+	return (EXIT_SUCCESS);
 }

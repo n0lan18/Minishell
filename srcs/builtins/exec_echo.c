@@ -19,9 +19,9 @@
  *
  * @param char **option
  *
- * @return void
+ * @return int exit_code
  */
-void	ft_exec_echo(char **option)
+int	ft_exec_echo(char **option)
 {
 	int	i;
 	int	has_newline;
@@ -42,4 +42,5 @@ void	ft_exec_echo(char **option)
 	}
 	if (has_newline)
 		ft_putchar_fd('\n', 1);
+	return (EXIT_SUCCESS);
 }
