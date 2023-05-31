@@ -30,6 +30,7 @@ static void	ft_array_to_token(char **tab, t_env *env)
 		ft_add_token_end(&env->token, ft_new_token(tab[i]));
 		i++;
 	}
+	ft_free_tab(tab);
 }
 
 /**
@@ -41,8 +42,11 @@ static void	ft_array_to_token(char **tab, t_env *env)
 void	ft_readline_to_token(t_env *env, char *readline)
 {
 	char	**split_space_tab;
+	char	*trimmed;
 
-	split_space_tab = ft_split_token(ft_trim_str(readline));
+	trimmed = ft_trim_str(readline);
+	split_space_tab = ft_split_token(trimmed);
+	free(trimmed);
 	ft_array_to_token(split_space_tab, env);
 	ft_add_token_previous(env->token);
 }

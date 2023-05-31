@@ -77,7 +77,7 @@ t_token	*ft_new_token(char *str)
 	new = malloc(sizeof(t_token));
 	if (!new)
 		return (NULL);
-	new->str = str;
+	new->str = ft_strdup(str);
 	new->type = ft_get_token_type(str);
 	new->quote = ft_get_token_quote(str);
 	new->redirection = ft_get_redirection(str);
