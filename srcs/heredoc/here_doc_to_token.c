@@ -43,8 +43,12 @@ static t_token	*ft_array_to_token(char **tab, t_token *token)
 t_token	*ft_heredoc_to_token(t_token *token, char *line)
 {
 	char	**split_space_tab;
+	char	*trimmed;
 
-	split_space_tab = ft_split_token(ft_trim_str(line));
+	trimmed = ft_trim_str(line);
+	split_space_tab = ft_split_token(trimmed);
 	token = ft_array_to_token(split_space_tab, token);
+	free(trimmed);
+	ft_free_tab(split_space_tab);
 	return (token);
 }

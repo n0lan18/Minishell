@@ -48,6 +48,7 @@ static char	*struct_to_char_here_doc(t_dollar *list)
 static void	ft_replace_dollar_correct_value(t_envp *envp, t_dollar **list)
 {
 	t_dollar	*current;
+	char		*trimmed;
 
 	current = *list;
 	while (current)
@@ -55,8 +56,11 @@ static void	ft_replace_dollar_correct_value(t_envp *envp, t_dollar **list)
 		if (current->str[0] == '$' && current->str[1] == '?')
 			current->str = ft_itoa(g_last_exit_code);
 		else if (current->str[0] == '$' && current->str[1])
-			current->str = ft_get_envp_value_by_name(
-					envp, ft_strtrim(current->str, "$"));
+		{
+			trimmed = ft_strtrim(current->str, "$");
+			current->str = ft_get_envp_value_by_name(envp, trimmed);
+			free(trimmed);
+		}
 		current = current->next;
 	}
 }
@@ -77,6 +81,7 @@ static void	ft_replace_dollar(t_env *env, t_token *current)
 	ft_create_list_dollars(&list_dollars, current->str, 0);
 	ft_replace_dollar_correct_value(env->envp, &list_dollars);
 	current->str = struct_to_char_here_doc(list_dollars);
+	ft_free_dollar(list_dollars);
 }
 
 /**
@@ -111,18 +116,20 @@ static void	ft_dollar_in_here_doc(t_env *env, t_token *token)
  */
 char	*ft_replace_dollar_in_line(t_env *env, char *line)
 {
+	t_token	*token;
 	t_token	*tmp;
 
-	tmp = NULL;
-	tmp = ft_heredoc_to_token(tmp, line);
-	ft_dollar_in_here_doc(env, tmp);
-	line = tmp->str;
-	tmp = tmp->next;
+	token = NULL;
+	token = ft_heredoc_to_token(token, line);
+	ft_dollar_in_here_doc(env, token);
+	line = token->str;
+	tmp = token->next;
 	while (tmp)
 	{
 		line = ft_strjoin(line, tmp->str);
 		tmp = tmp->next;
 	}
 	ft_free_liste_token(tmp);
+	free(line);
 	return (line);
 }

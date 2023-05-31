@@ -28,24 +28,25 @@ static void	ft_heredoc_write(t_token *eof, char *name, t_env *env)
 	char	*new_line;
 	char	*all;
 
-	(void) env;
 	all = NULL;
 	fd_heredoc = open(name, O_TRUNC | O_CREAT | O_WRONLY, 0664);
-	line = readline("> ");
+	line = "";
 	while (line)
 	{
+		line = readline("> ");
 		if (ft_heredoc_is_eof(eof, line))
+		{
+			free(line);
 			break ;
+		}
 		if (ft_contains_dollar(line))
 			line = ft_replace_dollar_in_line(env, line);
 		new_line = ft_strjoin(line, "\n");
-		free(line);
 		all = ft_heredoc_strjoin(all, new_line);
-		line = readline("> ");
+		free(line);
 	}
 	if (all)
 		ft_putstr_fd(all, fd_heredoc);
-	free(line);
 	free(all);
 	close(fd_heredoc);
 }
