@@ -130,6 +130,5 @@ char	*ft_replace_dollar_in_line(t_env *env, char *line)
 		tmp = tmp->next;
 	}
 	ft_free_liste_token(tmp);
-	free(line);
 	return (line);
 }

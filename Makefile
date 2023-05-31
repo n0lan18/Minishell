@@ -73,7 +73,7 @@ all:			$(OBJS_DIR) $(NAME)
 
 $(NAME): 		$(OBJS)
 				make -C libft
-				$(CC) $(FLAGS) $(OBJS) libft/libft.a -o $(NAME) -lreadline -L $(READLINE_LIB_DIR) -I $(READLINE_INCLUDE_DIR)
+				$(CC) $(FLAGS) $(OBJS) $(SANITIZE) libft/libft.a -o $(NAME) -lreadline -L $(READLINE_LIB_DIR) -I $(READLINE_INCLUDE_DIR)
 				@echo "$(_SUCCESS)🚀Build!$(_END)"
 
 $(OBJS_DIR):

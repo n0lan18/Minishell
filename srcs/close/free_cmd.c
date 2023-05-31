@@ -36,7 +36,7 @@ void	ft_free_cmd(t_env *env)
 {
 	t_cmd	*tmp;
 
-	if (!env->cmd->name)
+	if (!env->cmd || !env->cmd->name)
 		return ;
 	while (env->cmd)
 	{
