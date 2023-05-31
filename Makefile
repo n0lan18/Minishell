@@ -73,8 +73,7 @@ all:			$(OBJS_DIR) $(NAME)
 
 $(NAME): 		$(OBJS)
 				make -C libft
-				make -C memd
-				$(CC) $(FLAGS) $(OBJS) $(SANITIZE) libft/libft.a memd/libmemd.a -o $(NAME) -lreadline -L $(READLINE_LIB_DIR) -I $(READLINE_INCLUDE_DIR)
+				$(CC) $(FLAGS) $(OBJS) $(SANITIZE) libft/libft.a -o $(NAME) -lreadline -L $(READLINE_LIB_DIR) -I $(READLINE_INCLUDE_DIR)
 				@echo "$(_SUCCESS)🚀Build!$(_END)"
 
 $(OBJS_DIR):
@@ -99,7 +98,6 @@ $(OBJS_DIR)/%.o: $(SRCS_DIR)/%.c
 
 clean:
 				make clean -C libft
-				make clean -C memd
 				/bin/rm -rf $(OBJS_DIR)
 				@echo "$(_CLEANED)🧹Clean object files!$(_END)"
 

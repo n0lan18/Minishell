@@ -20,7 +20,6 @@
 # include <readline/history.h>
 # include <signal.h>
 # include "./libft/libft.h"
-//# include "./memd/mem.h"
 
 /** ----- GLOBAL VARIABLE ----- **/
 extern int				g_last_exit_code;
