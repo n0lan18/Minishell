@@ -25,6 +25,7 @@ static void	ft_handle_signals(int signal)
 		rl_replace_line("", 0);
 		rl_on_new_line();
 		rl_redisplay();
+		g_last_exit_code = 1;
 	}
 	else if (signal == SIGQUIT)
 	{

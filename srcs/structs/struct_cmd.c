@@ -14,6 +14,7 @@
 
 /**
  * Adds a new command at the end of the given list.
+ *
  * @param t_cmd **list the current list of commands to add to
  * @param t_cmd *new the new command to add
  *

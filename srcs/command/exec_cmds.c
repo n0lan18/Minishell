@@ -36,11 +36,11 @@ void	ft_run_cmd(t_env *env, t_cmd *cmd)
  *
  * @return void
  */
-void	ft_prepare_fds(t_cmd *cmd, const int *fd_pipe_read_tmp, int *fd_pipe)
+void	ft_prepare_fds(t_cmd *cmd, const int *fd_pipe_tmp, int *fd_pipe)
 {
 	close(fd_pipe[0]);
 	if (cmd->fd_read == 0)
-		cmd->fd_read = *fd_pipe_read_tmp;
+		cmd->fd_read = *fd_pipe_tmp;
 	dup2(cmd->fd_read, 0);
 	if (cmd->fd_write >= 3)
 		close(fd_pipe[1]);

@@ -137,7 +137,6 @@ void		ft_create_list_dollars(t_dollar **list, const char *str, int i);
 void		ft_trim_quote(t_env *env);
 void		ft_join_token_not_separate_by_space(t_env *env);
 void		ft_command(t_env *env);
-char		**ft_get_cmd_option(t_token **current, t_cmd *cmd);
 
 /** ----- HEREDOC ----- **/
 void		ft_heredoc(t_env *env);
@@ -175,7 +174,7 @@ void		ft_execute(t_env *env);
 void		ft_execute_external_in_fork(t_env *env);
 void		ft_run_cmd(t_env *env, t_cmd *cmd);
 void		ft_execute_external(t_env *env, t_cmd *cmd);
-void		ft_prepare_fds(t_cmd *cmd, const int *fd_pipe_read_tmp, int *fd_pipe);
+void		ft_prepare_fds(t_cmd *cmd, const int *fd_pipe_tmp, int *fd_pipe);
 void		ft_close_fds(t_cmd *cmd, int *fd_pipe_read_tmp, int *fd_pipe);
 void		ft_handle_exit_status(int exit_status);
 
