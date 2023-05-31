@@ -39,7 +39,7 @@ static void	ft_heredoc_write(t_token *eof, char *name, t_env *env)
 		if (ft_contains_dollar(line))
 			line = ft_replace_dollar_in_line(env, line);
 		new_line = ft_strjoin(line, "\n");
-		line = NULL;
+		free(line);
 		all = ft_heredoc_strjoin(all, new_line);
 		line = readline("> ");
 	}
@@ -93,10 +93,10 @@ static t_token	*ft_get_heredoc(t_token *token, t_env *env, int version)
 
 	if (!ft_heredoc_is_valid_eof(env, token))
 		return (token);
-	new = ft_new_token(ft_strdup("<"));
+	new = ft_new_token("<");
 	new->previous = token->previous;
 	name = ft_heredoc_getname(version);
-	ft_add_token_end(&new, ft_new_token(ft_strdup(name)));
+	ft_add_token_end(&new, ft_new_token(name));
 	while (token)
 	{
 		if (token->type == E_STRING)
