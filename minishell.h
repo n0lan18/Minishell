@@ -203,6 +203,7 @@ void		ft_free_liste_token(t_token *token);
 void		ft_free_cmd(t_env *env);
 void		ft_free_envp(t_env *env);
 void		ft_free_tab(char **tab);
+void		ft_free_dollar(t_dollar *dollar);
 
 /** ----- EXIT ----- **/
 void		ft_exit(int status, char *message);

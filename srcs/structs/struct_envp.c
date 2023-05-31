@@ -38,7 +38,7 @@ t_envp	*ft_new_envp(char *str)
 	new = malloc(sizeof(t_envp));
 	if (!new)
 		return (NULL);
-	new->line = str;
+	new->line = ft_strdup(str);
 	new->name = ft_get_envp_name(str);
 	new->value = ft_get_envp_value(str);
 	new->next = NULL;
