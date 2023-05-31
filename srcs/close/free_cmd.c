@@ -26,7 +26,6 @@ void	ft_free_cmd(t_env *env)
 	{
 		tmp = env->cmd;
 		env->cmd = env->cmd->next;
-		free(tmp->option);
 		free(tmp);
 	}
 }

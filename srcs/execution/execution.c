@@ -27,7 +27,7 @@ static void	ft_execute_cmd(t_env *env)
 		dup2(env->cmd->fd_read, STDIN_FILENO);
 	if (env->cmd->fd_write >= 3)
 		dup2(env->cmd->fd_write, STDOUT_FILENO);
-	if (ft_is_builtins(env->token->str))
+	if (ft_is_builtins(env->cmd->name))
 		ft_execute_builtins(env);
 	else
 		ft_execute_external_in_fork(env);
@@ -76,7 +76,7 @@ static void	ft_execute_cmds(t_env *env)
  */
 void	ft_execute(t_env *env)
 {
-	if (env->cmd)
+	if (env->cmd->name)
 	{
 		if (!env->cmd->next)
 			ft_execute_cmd(env);
