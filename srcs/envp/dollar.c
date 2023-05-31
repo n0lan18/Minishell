@@ -77,13 +77,18 @@ static void	ft_replace_dollar_correct_value(t_envp *envp, t_dollar **list)
 static void	ft_replace_dollar(t_env *env, t_token *current)
 {
 	t_dollar	*list_dollars;
+	char		*strtrim;
 
 	list_dollars = NULL;
-	ft_create_list_dollars(&list_dollars, ft_strtrim(current->str, "\""), 0);
+	strtrim = ft_strtrim(current->str, "\"");
+	ft_create_list_dollars(&list_dollars, strtrim, 0);
 	ft_replace_dollar_correct_value(env->envp, &list_dollars);
+	free(current->str);
 	current->str = struct_to_char(list_dollars);
 	if (!current->str[0])
 		current->show = 0;
+	free(strtrim);
+	ft_free_dollar(list_dollars);
 }
 
 /**

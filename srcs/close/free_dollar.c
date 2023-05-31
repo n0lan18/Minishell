@@ -14,15 +14,12 @@
 
 void	ft_free_dollar(t_dollar *dollar)
 {
-	t_dollar	*current;
-	t_dollar	*next;
+	t_dollar	*tmp;
 
-	current = dollar;
-	while (current)
+	while (dollar)
 	{
-		next = current->next;
-		free(current->str);
-		free(current);
-		current = next;
+		tmp = dollar;
+		dollar = dollar->next;
+		free(tmp);
 	}
 }

@@ -25,15 +25,18 @@
 static void	ft_create_list_dollars_ext(int *i, const char *str, t_dollar **list,
 	t_dollar *dollar)
 {
-	int	j;
+	int		j;
+	char	*substring;
 
 	j = (*i);
 	while (str[(*i)] && str[(*i)] != '$')
 		(*i)++;
 	if ((*i) > j)
 	{
-		dollar = ft_new_dollar(ft_substr(str, j, (*i) - j));
+		substring = ft_substr(str, j, (*i) - j);
+		dollar = ft_new_dollar(substring);
 		ft_add_dollar_end(list, dollar);
+		free(substring);
 	}
 }
 
@@ -50,6 +53,7 @@ void	ft_create_list_dollars(t_dollar **list, const char *str, int i)
 {
 	t_dollar	*dollar;
 	int			j;
+	char		*substring;
 
 	while (str[i])
 	{
@@ -66,8 +70,10 @@ void	ft_create_list_dollars(t_dollar **list, const char *str, int i)
 			j = i + 1;
 			while (str[j] && ft_valid_identifier(str[j]))
 				j++;
-			dollar = ft_new_dollar(ft_substr(str, i, j - i));
+			substring = ft_substr(str, i, j - i);
+			dollar = ft_new_dollar(substring);
 			ft_add_dollar_end(list, dollar);
+			free(substring);
 			i = j;
 		}
 		else
