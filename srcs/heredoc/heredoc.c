@@ -89,6 +89,7 @@ static void	ft_eof_found(t_token *token, t_token *new, char *name, t_env *env)
 static t_token	*ft_get_heredoc(t_token *token, t_env *env, int version)
 {
 	t_token	*new;
+	t_token	*tmp;
 	char	*name;
 
 	if (!ft_heredoc_is_valid_eof(env, token))
@@ -104,7 +105,10 @@ static t_token	*ft_get_heredoc(t_token *token, t_env *env, int version)
 			ft_eof_found(token, new, name, env);
 			break ;
 		}
+		tmp = token;
 		token = token->next;
+		free(tmp->str);
+		free(tmp);
 	}
 	free(name);
 	return (new);
