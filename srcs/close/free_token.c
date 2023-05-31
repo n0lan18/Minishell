@@ -33,6 +33,12 @@ void	ft_free_token(t_env *env)
 	}
 }
 
+/**
+ * Frees the token list from the given token.
+ * @param t_token *token the token list to free
+ *
+ * @return void
+*/
 void	ft_free_liste_token(t_token *token)
 {
 	t_token	*tmp;

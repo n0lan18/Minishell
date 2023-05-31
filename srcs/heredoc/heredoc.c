@@ -50,6 +50,16 @@ static void	ft_heredoc_write(t_token *eof, char *name, t_env *env)
 	close(fd_heredoc);
 }
 
+/**
+ * TODO
+ *
+ * @param token
+ * @param new
+ * @param name
+ * @param env
+ *
+ * @return void
+ */
 static void	ft_eof_found(t_token *token, t_token *new, char *name, t_env *env)
 {
 	t_token	*tmp;

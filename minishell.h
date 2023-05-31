@@ -161,7 +161,7 @@ void		ft_open_files_redirection(t_token **token, t_cmd *cmd);
 
 /** ----- BUILTIN ----- **/
 int			ft_is_builtins(const char *str);
-void		ft_execute_builtins(t_env *env);
+void		ft_execute_builtins(t_env *env, t_cmd *cmd);
 void		ft_exec_echo(char **option);
 void		ft_exec_env(t_envp *envp);
 void		ft_exec_unset(t_env *env, char **option);
@@ -175,7 +175,7 @@ void		ft_execute(t_env *env);
 void		ft_execute_external_in_fork(t_env *env);
 void		ft_run_cmd(t_env *env, t_cmd *cmd);
 void		ft_execute_external(t_env *env, t_cmd *cmd);
-void		ft_prepare_fds(t_cmd *cmd, int *fd_pipe_read_tmp, int *fd_pipe);
+void		ft_prepare_fds(t_cmd *cmd, const int *fd_pipe_read_tmp, int *fd_pipe);
 void		ft_close_fds(t_cmd *cmd, int *fd_pipe_read_tmp, int *fd_pipe);
 void		ft_handle_exit_status(int exit_status);
 
@@ -206,7 +206,7 @@ void		ft_free_envp(t_env *env);
 
 /** ----- EXIT ----- **/
 void		ft_exit(int status, char *message);
-int		ft_close(t_env *env);
+int			ft_close(t_env *env);
 
 /** ----- DEBUG ----- **/
 void		db_print_tab(char **tab);

@@ -12,6 +12,13 @@
 
 #include "../../minishell.h"
 
+/**
+ * TODO
+ *
+ * @param str
+ *
+ * @return void
+ */
 static void	ft_del_file(char *str)
 {
 	char	**option;
@@ -37,6 +44,13 @@ static void	ft_del_file(char *str)
 	free(option);
 }
 
+/**
+ * TODO
+ *
+ * @param env
+ *
+ * @return void
+ */
 void	ft_heredoc_remove(t_env *env)
 {
 	t_token	*current;

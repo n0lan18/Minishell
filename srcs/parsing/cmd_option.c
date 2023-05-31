@@ -12,6 +12,13 @@
 
 #include "../../minishell.h"
 
+/**
+ * TODO
+ *
+ * @param option
+ *
+ * @return int
+ */
 static int	ft_len_option(char **option)
 {
 	int	len;
@@ -22,6 +29,14 @@ static int	ft_len_option(char **option)
 	return (len);
 }
 
+/**
+ * TODO
+ *
+ * @param option
+ * @param option_tmp
+ *
+ * @return char**
+ */
 static char	**ft_get_option(char **option, char **option_tmp)
 {
 	size_t	i;
@@ -35,6 +50,14 @@ static char	**ft_get_option(char **option, char **option_tmp)
 	return (option);
 }
 
+/**
+ * TODO
+ *
+ * @param current
+ * @param cmd
+ *
+ * @return char**
+ */
 char	**ft_get_cmd_option(t_token **current, t_cmd *cmd)
 {
 	size_t	i;

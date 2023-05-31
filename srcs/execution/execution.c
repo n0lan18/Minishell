@@ -28,7 +28,7 @@ static void	ft_execute_cmd(t_env *env)
 	if (env->cmd->fd_write >= 3)
 		dup2(env->cmd->fd_write, STDOUT_FILENO);
 	if (ft_is_builtins(env->cmd->name))
-		ft_execute_builtins(env);
+		ft_execute_builtins(env, env->cmd);
 	else
 		ft_execute_external_in_fork(env);
 	if (env->cmd->fd_read >= 3)
@@ -41,6 +41,13 @@ static void	ft_execute_cmd(t_env *env)
 	close(original_stdin);
 }
 
+/**
+ * TODO
+ *
+ * @param env
+ *
+ * @return void
+ */
 static void	ft_execute_cmds(t_env *env)
 {
 	t_cmd	*cmd;

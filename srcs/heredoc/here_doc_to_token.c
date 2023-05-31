@@ -17,7 +17,7 @@
  * @param char **tab containing individual tokens
  * @param t_token **tokens a pointer to the first element in the token array
  *
- * @return void
+ * @return t_token *token
 */
 static t_token	*ft_array_to_token(char **tab, t_token *token)
 {
@@ -38,7 +38,7 @@ static t_token	*ft_array_to_token(char **tab, t_token *token)
  * @param char *line to be converted to tokens
  * @param t_token *token
  *
- * @return void
+ * @return t_token *token
 */
 t_token	*ft_heredoc_to_token(t_token *token, char *line)
 {

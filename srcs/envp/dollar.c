@@ -12,6 +12,13 @@
 
 #include "../../minishell.h"
 
+/**
+ * TODO
+ *
+ * @param *list
+ *
+ * @return char*
+ */
 char	*struct_to_char(t_dollar *list)
 {
 	t_dollar	*current;
@@ -31,6 +38,14 @@ char	*struct_to_char(t_dollar *list)
 	return (str);
 }
 
+/**
+ * TODO
+ *
+ * @param envp
+ * @param **list
+ *
+ * @return void
+ */
 static void	ft_replace_dollar_correct_value(t_envp *envp, t_dollar **list)
 {
 	t_dollar	*current;
@@ -47,6 +62,14 @@ static void	ft_replace_dollar_correct_value(t_envp *envp, t_dollar **list)
 	}
 }
 
+/**
+ * TODO
+ *
+ * @param env
+ * @param current
+ *
+ * @return void
+ */
 static void	ft_replace_dollar(t_env *env, t_token *current)
 {
 	t_dollar	*list_dollars;
@@ -59,6 +82,13 @@ static void	ft_replace_dollar(t_env *env, t_token *current)
 		current->show = 0;
 }
 
+/**
+ * TODO
+ *
+ * @param *env
+ *
+ * @return void
+ */
 void	ft_dollar(t_env *env)
 {
 	t_token	*current;

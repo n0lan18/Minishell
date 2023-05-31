@@ -43,20 +43,20 @@ int	ft_is_builtins(const char *str)
  *
  * @return void
  */
-void	ft_execute_builtins(t_env *env)
+void	ft_execute_builtins(t_env *env, t_cmd *cmd)
 {
-	if (ft_strncmp(env->cmd->name, "echo", 5) == 0)
-		ft_exec_echo(env->cmd->option);
-	else if (ft_strncmp(env->cmd->name, "env", 4) == 0)
+	if (ft_strncmp(cmd->name, "echo", 5) == 0)
+		ft_exec_echo(cmd->option);
+	else if (ft_strncmp(cmd->name, "env", 4) == 0)
 		ft_exec_env(env->envp);
-	else if (ft_strncmp(env->cmd->name, "export", 7) == 0)
-		ft_exec_export(env, env->cmd->option);
-	else if (ft_strncmp(env->cmd->name, "unset", 6) == 0)
-		ft_exec_unset(env, env->cmd->option);
-	else if (ft_strncmp(env->cmd->name, "pwd", 4) == 0)
+	else if (ft_strncmp(cmd->name, "export", 7) == 0)
+		ft_exec_export(env, cmd->option);
+	else if (ft_strncmp(cmd->name, "unset", 6) == 0)
+		ft_exec_unset(env, cmd->option);
+	else if (ft_strncmp(cmd->name, "pwd", 4) == 0)
 		ft_exec_pwd();
-	else if (ft_strncmp(env->cmd->name, "cd", 3) == 0)
-		ft_exec_cd(env, env->cmd->option);
-	else if (ft_strncmp(env->cmd->name, "exit", 5) == 0)
+	else if (ft_strncmp(cmd->name, "cd", 3) == 0)
+		ft_exec_cd(env, cmd->option);
+	else if (ft_strncmp(cmd->name, "exit", 5) == 0)
 		ft_exec_exit();
 }

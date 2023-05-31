@@ -12,6 +12,13 @@
 
 #include "../../minishell.h"
 
+/**
+ * TODO
+ *
+ * @param str
+ *
+ * @return int
+ */
 static int	ft_open_failed(char *str)
 {
 	ft_putstr_fd("minishell: ", STDERR_FILENO);
@@ -20,6 +27,12 @@ static int	ft_open_failed(char *str)
 	return (1);
 }
 
+/**
+ * TODO
+ *
+ * @param token
+ * @return int
+ */
 static int	ft_get_infile(t_token **token)
 {
 	int	fd;
@@ -46,6 +59,12 @@ static int	ft_get_infile(t_token **token)
 	return (fd);
 }
 
+/**
+ * TODO
+ *
+ * @param **token
+ * @return int
+ */
 static int	ft_get_outfile(t_token **token)
 {
 	int	fd;
@@ -69,6 +88,12 @@ static int	ft_get_outfile(t_token **token)
 	return (fd);
 }
 
+/**
+ * TODO
+ *
+ * @param **token
+ * @return int
+ */
 static int	ft_get_outfile_append(t_token **token)
 {
 	int	fd;
@@ -92,6 +117,12 @@ static int	ft_get_outfile_append(t_token **token)
 	return (fd);
 }
 
+/**
+ * TODO
+ *
+ * @param **token
+ * @param *cmd
+ */
 void	ft_open_files_redirection(t_token **token, t_cmd *cmd)
 {
 	if (ft_strncmp((*token)->str, "<", 2) == 0)

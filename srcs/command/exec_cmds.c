@@ -12,15 +12,31 @@
 
 #include "../../minishell.h"
 
+/**
+ * TODO
+ *
+ * @param t_env *env
+ * @param t_cmd *cmd
+ *
+ * @return void
+ */
 void	ft_run_cmd(t_env *env, t_cmd *cmd)
 {
 	if (!ft_is_builtins(cmd->name))
 		ft_execute_external(env, cmd);
-	ft_execute_builtins(env);
+	ft_execute_builtins(env, cmd);
 	exit(0);
 }
 
-void	ft_prepare_fds(t_cmd *cmd, int *fd_pipe_read_tmp, int *fd_pipe)
+/**
+ * TODO
+ *
+ * @param t_env *env
+ * @param t_cmd *cmd
+ *
+ * @return void
+ */
+void	ft_prepare_fds(t_cmd *cmd, const int *fd_pipe_read_tmp, int *fd_pipe)
 {
 	close(fd_pipe[0]);
 	if (cmd->fd_read == 0)
@@ -35,6 +51,15 @@ void	ft_prepare_fds(t_cmd *cmd, int *fd_pipe_read_tmp, int *fd_pipe)
 	dup2(cmd->fd_write, 1);
 }
 
+/**
+ * TODO
+ *
+ * @param t_cmd *cmd
+ * @param int *fd_pipe_read_tmp
+ * @param int *fd_pipe
+ *
+ * @return void
+ */
 void	ft_close_fds(t_cmd *cmd, int *fd_pipe_read_tmp, int *fd_pipe)
 {
 	close(fd_pipe[1]);
@@ -47,6 +72,13 @@ void	ft_close_fds(t_cmd *cmd, int *fd_pipe_read_tmp, int *fd_pipe)
 	*fd_pipe_read_tmp = fd_pipe[0];
 }
 
+/**
+ * TODO
+ *
+ * @param int exit_status
+ *
+ * @return void
+ */
 void	ft_handle_exit_status(int exit_status)
 {
 	if (WIFEXITED(exit_status))

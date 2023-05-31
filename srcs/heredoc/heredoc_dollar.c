@@ -12,6 +12,12 @@
 
 #include "../../minishell.h"
 
+/**
+ * TODO
+ * @param list
+ *
+ * @return char*
+ */
 static char	*struct_to_char_here_doc(t_dollar *list)
 {
 	t_dollar	*current;
@@ -31,6 +37,14 @@ static char	*struct_to_char_here_doc(t_dollar *list)
 	return (str);
 }
 
+/**
+ * TODO
+ *
+ * @param envp
+ * @param list
+ *
+ * @return void
+ */
 static void	ft_replace_dollar_correct_value(t_envp *envp, t_dollar **list)
 {
 	t_dollar	*current;
@@ -47,6 +61,14 @@ static void	ft_replace_dollar_correct_value(t_envp *envp, t_dollar **list)
 	}
 }
 
+/**
+ * TODO
+ *
+ * @param env
+ * @param current
+ *
+ * @return void
+ */
 static void	ft_replace_dollar(t_env *env, t_token *current)
 {
 	t_dollar	*list_dollars;
@@ -57,6 +79,14 @@ static void	ft_replace_dollar(t_env *env, t_token *current)
 	current->str = struct_to_char_here_doc(list_dollars);
 }
 
+/**
+ * TODO
+ *
+ * @param env
+ * @param token
+ *
+ * @return void
+ */
 static void	ft_dollar_in_here_doc(t_env *env, t_token *token)
 {
 	t_token	*current;
@@ -71,6 +101,14 @@ static void	ft_dollar_in_here_doc(t_env *env, t_token *token)
 	}
 }
 
+/**
+ * TODO
+ *
+ * @param env
+ * @param line
+ *
+ * @return char*
+ */
 char	*ft_replace_dollar_in_line(t_env *env, char *line)
 {
 	t_token	*tmp;

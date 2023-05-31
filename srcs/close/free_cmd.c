@@ -14,7 +14,8 @@
 
 /**
  * Frees the command list from the given environment.
- * @param t_cmd *cmd the command list to free
+ *
+ * @param t_env *env
  *
  * @return void
 */

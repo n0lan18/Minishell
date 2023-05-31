@@ -12,6 +12,12 @@
 
 #include "../../minishell.h"
 
+/**
+ * TODO
+ *
+ * @param token
+ * @return t_cmd*
+ */
 static t_cmd	*ft_init_cmd(t_token **token)
 {
 	t_cmd	*cmd;
@@ -40,6 +46,13 @@ static t_cmd	*ft_init_cmd(t_token **token)
 	return (cmd);
 }
 
+/**
+ * TODO
+ *
+ * @param env
+ *
+ * @return void
+ */
 void	ft_command(t_env *env)
 {
 	t_token	*start;

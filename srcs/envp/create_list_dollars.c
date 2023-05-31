@@ -12,7 +12,17 @@
 
 #include "../../minishell.h"
 
-void	ft_create_list_dollars_ext(int *i, const char *str, t_dollar **list,
+/**
+ * TODO
+ *
+ * @param i
+ * @param str
+ * @param list
+ * @param dollar
+ *
+ * @return void
+ */
+static void	ft_create_list_dollars_ext(int *i, const char *str, t_dollar **list,
 	t_dollar *dollar)
 {
 	int	j;
@@ -27,6 +37,15 @@ void	ft_create_list_dollars_ext(int *i, const char *str, t_dollar **list,
 	}
 }
 
+/**
+ * TODO
+ *
+ * @param list
+ * @param str
+ * @param i
+ *
+ * @return void
+ */
 void	ft_create_list_dollars(t_dollar **list, const char *str, int i)
 {
 	t_dollar	*dollar;

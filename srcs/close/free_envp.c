@@ -12,6 +12,13 @@
 
 #include "../../minishell.h"
 
+/**
+ * Free the envp list from the given environment.
+ *
+ * @param env
+ *
+ * @return void
+ */
 void	ft_free_envp(t_env *env)
 {
 	t_envp	*tmp;

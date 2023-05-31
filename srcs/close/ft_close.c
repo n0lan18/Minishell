@@ -12,12 +12,27 @@
 
 #include "../../minishell.h"
 
+/**
+ * Exits the program with the given status and message.
+ *
+ * @param int status
+ * @param char *message
+ *
+ * @return void
+ */
 void	ft_exit(int status, char *message)
 {
 	ft_putstr_fd(message, STDERR_FILENO);
 	exit(status);
 }
 
+/**
+ * Closes the program.
+ *
+ * @param t_env *env
+ *
+ * @return int
+ */
 int	ft_close(t_env *env)
 {
 	ft_putstr_fd("exit\n", STDOUT_FILENO);
