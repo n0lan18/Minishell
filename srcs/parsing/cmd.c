@@ -44,7 +44,7 @@ static char	**ft_get_option(char **option, char **option_tmp)
 	i = 0;
 	while (option_tmp[i])
 	{
-		option[i] = ft_strdup(option_tmp[i]);
+		option[i] = option_tmp[i];
 		i++;
 	}
 	return (option);

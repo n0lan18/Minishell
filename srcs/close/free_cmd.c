@@ -12,19 +12,6 @@
 
 #include "../../minishell.h"
 
-static void	ft_free_option(char **tab)
-{
-	int	i;
-
-	i = 0;
-	while (tab[i])
-	{
-		free(tab[i]);
-		i++;
-	}
-	free(tab);
-}
-
 /**
  * Frees the command list from the given environment.
  *
@@ -36,13 +23,12 @@ void	ft_free_cmd(t_env *env)
 {
 	t_cmd	*tmp;
 
-	if (!env->cmd || !env->cmd->name)
-		return ;
 	while (env->cmd)
 	{
 		tmp = env->cmd;
-		ft_free_option(tmp->option);
 		env->cmd = env->cmd->next;
+		if (tmp->name)
+			free(tmp->option);
 		free(tmp);
 	}
 }
