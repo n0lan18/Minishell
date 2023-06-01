@@ -46,7 +46,7 @@ static void	ft_create_list_dollars_ext(int *i, const char *str, t_dollar **list,
  *
  * @return void
  */
-void	ft_create_list_dollars(t_dollar **list, const char *str, int i)
+void	ft_create_list_dollars(t_dollar **list, char *str, int i)
 {
 	t_dollar	*dollar;
 	int			j;
@@ -73,4 +73,5 @@ void	ft_create_list_dollars(t_dollar **list, const char *str, int i)
 		else
 			i++;
 	}
+	free(str);
 }

@@ -70,7 +70,7 @@ _CLEANED=$'\x1b[44m'
 # COMMANDS
 all:			$(OBJS_DIR) $(NAME)
 				@echo "$(_SUCCESS)🚀Build All!$(_END)"
-				@./minishell
+				@#./minishell
 
 $(NAME): 		$(OBJS)
 				make -C libft

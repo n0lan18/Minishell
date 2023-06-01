@@ -49,15 +49,26 @@ char	*struct_to_char(t_dollar *list)
 static void	ft_replace_dollar_correct_value(t_envp *envp, t_dollar **list)
 {
 	t_dollar	*current;
+	char		*trimmed;
+	char		*tmp;
 
 	current = *list;
 	while (current)
 	{
 		if (current->str[0] == '$' && current->str[1] == '?')
+		{
+			tmp = current->str;
 			current->str = ft_itoa(g_last_exit_code);
+			free(tmp);
+		}
 		else if (current->str[0] == '$' && current->str[1])
-			current->str = ft_get_envp_value_by_name(
-					envp, ft_strtrim(current->str, "$"));
+		{
+			tmp = current->str;
+			trimmed = ft_strtrim(current->str, "$");
+			free(tmp);
+			current->str = ft_get_envp_value_by_name(envp, trimmed);
+			free(trimmed);
+		}
 		current = current->next;
 	}
 }
@@ -77,9 +88,11 @@ static void	ft_replace_dollar(t_env *env, t_token *current)
 	list_dollars = NULL;
 	ft_create_list_dollars(&list_dollars, ft_strtrim(current->str, "\""), 0);
 	ft_replace_dollar_correct_value(env->envp, &list_dollars);
+	free(current->str);
 	current->str = struct_to_char(list_dollars);
 	if (!current->str[0])
 		current->show = 0;
+	ft_free_dollar(list_dollars);
 }
 
 /**

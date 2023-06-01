@@ -1,35 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_envp.c                                        :+:      :+:    :+:   */
+/*   free_dollar.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: synicole <synicole@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/30 20:42:21 by synicole          #+#    #+#             */
-/*   Updated: 2023/05/30 20:42:22 by synicole         ###   ########.fr       */
+/*   Created: 2023/05/31 16:09:48 by synicole          #+#    #+#             */
+/*   Updated: 2023/05/31 16:09:50 by synicole         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-/**
- * Free the envp list from the given environment.
- *
- * @param env
- *
- * @return void
- */
-void	ft_free_envp(t_env *env)
+void	ft_free_dollar(t_dollar *dollar)
 {
-	t_envp	*tmp;
+	t_dollar	*tmp;
 
-	while (env->envp)
+	while (dollar)
 	{
-		tmp = env->envp;
-		env->envp = env->envp->next;
-		free(tmp->name);
-		free(tmp->value);
-		free(tmp->line);
+		tmp = dollar;
+		dollar = dollar->next;
+//		free(tmp->str);
 		free(tmp);
 	}
 }

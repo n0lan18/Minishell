@@ -133,7 +133,7 @@ int			ft_is_redirection(const char *str);
 char		*ft_trim_str(const char *str);
 void		ft_dollar(t_env *env);
 int			ft_contains_dollar(const char *str);
-void		ft_create_list_dollars(t_dollar **list, const char *str, int i);
+void		ft_create_list_dollars(t_dollar **list, char *str, int i);
 void		ft_trim_quote(t_env *env);
 void		ft_join_token_not_separate_by_space(t_env *env);
 void		ft_command(t_env *env);
@@ -203,6 +203,7 @@ void		ft_free_liste_token(t_token *token);
 void		ft_free_cmd(t_env *env);
 void		ft_free_envp(t_env *env);
 void		ft_free_tab(char **tab);
+void		ft_free_dollar(t_dollar *dollar);
 
 /** ----- EXIT ----- **/
 void		ft_exit(int status, char *message);

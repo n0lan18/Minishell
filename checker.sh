@@ -100,6 +100,7 @@ exec_test 'echo  caca  $INEXISTINGVAR'
 exec_test 'echo caca "" caca "" caca'
 exec_test "echo -n -n"
 exec_test "echo -n -n -n caca pipi"
+exec_test 'echo $USER$USER$USER$USER$USER$USER$USER$USER$USER$USER$USER$USER'
 
 
 # UNSET TESTS
