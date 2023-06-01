@@ -1,33 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_cmd.c                                         :+:      :+:    :+:   */
+/*   free_tab.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: synicole <synicole@student.42lausanne.ch>  +#+  +:+       +#+        */
+/*   By: nleggeri <nleggeri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/14 19:01:34 by synicole          #+#    #+#             */
-/*   Updated: 2023/05/14 19:01:36 by synicole         ###   ########.fr       */
+/*   Created: 2023/05/31 12:19:05 by nleggeri          #+#    #+#             */
+/*   Updated: 2023/05/31 12:50:30 by nleggeri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-/**
- * Frees the command list from the given environment.
- *
- * @param t_env *env
- *
- * @return void
-*/
-void	ft_free_cmd(t_env *env)
+void	ft_free_tab(char **tab)
 {
-	t_cmd	*tmp;
+	int	i;
 
-	while (env->cmd)
+	i = 0;
+	while (tab[i])
 	{
-		tmp = env->cmd;
-		env->cmd = env->cmd->next;
-		free(tmp->option);
-		free(tmp);
+		free(tab[i]);
+		i++;
 	}
+	free(tab);
 }

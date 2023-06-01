@@ -27,8 +27,7 @@ void	ft_free_token(t_env *env)
 	{
 		tmp = env->token;
 		env->token = env->token->next;
-		if (env->token)
-			free(tmp->str);
+		free(tmp->str);
 		free(tmp);
 	}
 }
@@ -48,6 +47,7 @@ void	ft_free_liste_token(t_token *token)
 	while (tmp)
 	{
 		tmp_next = tmp->next;
+		free(tmp->str);
 		free(tmp);
 		tmp = tmp_next;
 	}
