@@ -76,11 +76,14 @@ static void	ft_replace_dollar_correct_value(t_envp *envp, t_dollar **list)
 static void	ft_replace_dollar(t_env *env, t_token *current)
 {
 	t_dollar	*list_dollars;
+	char		*tmp;
 
 	list_dollars = NULL;
 	ft_create_list_dollars(&list_dollars, current->str, 0);
 	ft_replace_dollar_correct_value(env->envp, &list_dollars);
+	tmp = current->str;
 	current->str = struct_to_char_here_doc(list_dollars);
+	free(tmp);
 	ft_free_dollar(list_dollars);
 }
 
@@ -118,17 +121,20 @@ char	*ft_replace_dollar_in_line(t_env *env, char *line)
 {
 	t_token	*token;
 	t_token	*tmp;
+	char	*tmp_line;
 
 	token = NULL;
 	token = ft_heredoc_to_token(token, line);
 	ft_dollar_in_here_doc(env, token);
+	tmp_line = line;
 	line = token->str;
+	free(tmp_line);
 	tmp = token->next;
 	while (tmp)
 	{
 		line = ft_strjoin(line, tmp->str);
 		tmp = tmp->next;
 	}
-	ft_free_liste_token(tmp);
+	ft_free_liste_token(token);
 	return (line);
 }
