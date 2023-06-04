@@ -17,7 +17,7 @@ FLAGS 			= -Wall -Werror -Wextra -g
 SANITIZE		= -fsanitize=address
 
 # CHANGE TO 42 IF YOU WORK AT 42, DEFAULT IF YOU WORK AT HOME
-ENVIRONMENT		= 42
+ENVIRONMENT		= DEFAULT
 ifeq ($(ENVIRONMENT), 42)
     READLINE_LIB_DIR = $(HOME)/.brew/opt/readline/lib
     READLINE_INCLUDE_DIR = $(HOME)/.brew/opt/readline/include
@@ -70,7 +70,10 @@ _CLEANED=$'\x1b[44m'
 # COMMANDS
 all:			$(OBJS_DIR) $(NAME)
 				@echo "$(_SUCCESS)🚀Build All!$(_END)"
-				@./minishell
+				@/usr/libexec/PlistBuddy -c "Add :com.apple.security.get-task-allow bool true" tmp.entitlements > /dev/null 2>&1
+				@codesign -s - --entitlements tmp.entitlements -f ./minishell > /dev/null 2>&1
+				@rm tmp.entitlements
+				@#./minishell
 
 $(NAME): 		$(OBJS)
 				make -C libft

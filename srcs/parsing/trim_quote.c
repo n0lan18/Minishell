@@ -19,14 +19,23 @@
 void	ft_trim_quote(t_env *env)
 {
 	t_token	*current;
+	char	*trimmed;
 
 	current = env->token;
 	while (current)
 	{
 		if (current->quote == E_SINGLE_QUOTE)
-			current->str = ft_strtrim(current->str, "\'");
+		{
+			trimmed = ft_strtrim(current->str, "\'");
+			free(current->str);
+			current->str = trimmed;
+		}
 		else if (current->quote == E_DOUBLE_QUOTE)
-			current->str = ft_strtrim(current->str, "\"");
+		{
+			trimmed = ft_strtrim(current->str, "\"");
+			free(current->str);
+			current->str = trimmed;
+		}
 		current = current->next;
 	}
 }
