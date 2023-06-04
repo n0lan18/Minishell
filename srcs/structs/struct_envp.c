@@ -101,6 +101,9 @@ void	ft_remove_envp(t_envp **lst, char *str)
 				*lst = current->next;
 			else
 				prev->next = current->next;
+			free(current->name);
+			free(current->value);
+			free(current->line);
 			free(current);
 			return ;
 		}

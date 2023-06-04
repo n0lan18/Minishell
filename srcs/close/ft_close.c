@@ -36,7 +36,7 @@ void	ft_exit(int status, char *message)
 int	ft_close(t_env *env)
 {
 	ft_putstr_fd("exit\n", STDOUT_FILENO);
-	ft_free_envp(env);
+	ft_free_envp(env->envp);
 	clear_history();
 	return (g_last_exit_code);
 }

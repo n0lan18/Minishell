@@ -19,16 +19,17 @@
  *
  * @return void
  */
-void	ft_free_envp(t_env *env)
+void	ft_free_envp(t_envp *envp)
 {
 	t_envp	*tmp;
 
-	while (env->envp)
+	while (envp)
 	{
-		tmp = env->envp;
-		env->envp = env->envp->next;
+		tmp = envp;
+		envp = envp->next;
 		free(tmp->name);
 		free(tmp->value);
+		free(tmp->line);
 		free(tmp);
 	}
 }

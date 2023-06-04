@@ -201,7 +201,7 @@ void		ft_print_not_a_valid_identifier(char *str, char *builtin_name);
 void		ft_free_token(t_env *env);
 void		ft_free_liste_token(t_token *token);
 void		ft_free_cmd(t_env *env);
-void		ft_free_envp(t_env *env);
+void		ft_free_envp(t_envp *envp);
 void		ft_free_tab(char **tab);
 
 /** ----- EXIT ----- **/
