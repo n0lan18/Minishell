@@ -13,33 +13,38 @@
 #include "../../minishell.h"
 
 /**
- * TODO
+ * Convert the list of dollar to a string.
  *
  * @param *list
  *
  * @return char*
  */
-//char	*struct_to_char(t_dollar *list)
-//{
-//	t_dollar	*current;
-//	char		*str;
-//
-//	current = list;
-//	while (!current->str)
-//		current = current->next;
-//	str = current->str;
-//	current = current->next;
-//	while (current)
-//	{
-//		if (current->str)
-//			str = ft_strjoin(str, current->str);
-//		current = current->next;
-//	}
-//	return (str);
-//}
+char	*struct_to_char(t_dollar *list)
+{
+	t_dollar	*current;
+	char		*str;
+	char		*tmp;
+
+	current = list;
+	while (!current->str)
+		current = current->next;
+	str = ft_strdup(current->str);
+	current = current->next;
+	while (current)
+	{
+		if (current->str)
+		{
+			tmp = str;
+			str = ft_strjoin(str, current->str);
+			free(tmp);
+		}
+		current = current->next;
+	}
+	return (str);
+}
 
 /**
- * TODO
+ * Replace each element of the list with the correct value.
  *
  * @param envp
  * @param **list
@@ -71,7 +76,11 @@ static void	ft_replace_dollar_correct_value(t_envp *envp, t_dollar **list)
 }
 
 /**
- * TODO
+ * Replace the dollar variables in the given token.
+ * 1. Create a dollar list.
+ * 2. Replace the value of each element of the list.
+ * 3. Convert the list to a string.
+ * 4. Free the list.
  *
  * @param env
  * @param current
@@ -88,11 +97,10 @@ static void	ft_replace_dollar(t_env *env, t_token *current)
 	ft_create_list_dollars(&list_dollars, trimmed);
 	free(trimmed);
 	ft_replace_dollar_correct_value(env->envp, &list_dollars);
-	db_print_dollar(list_dollars);
-//	current->str = struct_to_char(list_dollars);
-//	if (!current->str[0])
-//		current->show = 0;
-	printf("str => [%s]\n", current->str);
+	free(current->str);
+	current->str = struct_to_char(list_dollars);
+	if (!current->str[0])
+		current->show = 0;
 	ft_free_dollar(list_dollars);
 }
 
