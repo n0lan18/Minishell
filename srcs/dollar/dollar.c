@@ -46,21 +46,29 @@
  *
  * @return void
  */
-//static void	ft_replace_dollar_correct_value(t_envp *envp, t_dollar **list)
-//{
-//	t_dollar	*current;
-//
-//	current = *list;
-//	while (current)
-//	{
-//		if (current->str[0] == '$' && current->str[1] == '?')
-//			current->str = ft_itoa(g_last_exit_code);
-//		else if (current->str[0] == '$' && current->str[1])
-//			current->str = ft_get_envp_value_by_name(
-//					envp, ft_strtrim(current->str, "$"));
-//		current = current->next;
-//	}
-//}
+static void	ft_replace_dollar_correct_value(t_envp *envp, t_dollar **list)
+{
+	t_dollar	*current;
+	char		*trimmed;
+
+	current = *list;
+	while (current)
+	{
+		if (current->str[0] == '$' && current->str[1] == '?')
+		{
+			free(current->str);
+			current->str = ft_itoa(g_last_exit_code);
+		}
+		else if (current->str[0] == '$' && current->str[1])
+		{
+			trimmed = ft_strtrim(current->str, "$");
+			free(current->str);
+			current->str = ft_get_envp_value_by_name(envp, trimmed);
+			free(trimmed);
+		}
+		current = current->next;
+	}
+}
 
 /**
  * TODO
@@ -72,17 +80,20 @@
  */
 static void	ft_replace_dollar(t_env *env, t_token *current)
 {
-//	t_dollar	*list_dollars;
-//
-//	list_dollars = NULL;
-//	ft_create_list_dollars(&list_dollars, ft_strtrim(current->str, "\""), 0);
-//	ft_replace_dollar_correct_value(env->envp, &list_dollars);
+	t_dollar	*list_dollars;
+	char		*trimmed;
+
+	list_dollars = NULL;
+	trimmed = ft_strtrim(current->str, "\"");
+	ft_create_list_dollars(&list_dollars, trimmed);
+	free(trimmed);
+	ft_replace_dollar_correct_value(env->envp, &list_dollars);
+	db_print_dollar(list_dollars);
 //	current->str = struct_to_char(list_dollars);
 //	if (!current->str[0])
 //		current->show = 0;
-	(void) env;
-	(void) current;
-	printf("str: %s\n", current->str);
+	printf("str => [%s]\n", current->str);
+	ft_free_dollar(list_dollars);
 }
 
 /**

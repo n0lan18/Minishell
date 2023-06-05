@@ -74,7 +74,7 @@ static void	ft_replace_dollar(t_env *env, t_token *current)
 	t_dollar	*list_dollars;
 
 	list_dollars = NULL;
-	ft_create_list_dollars(&list_dollars, current->str, 0);
+	ft_create_list_dollars(&list_dollars, current->str);
 	ft_replace_dollar_correct_value(env->envp, &list_dollars);
 	current->str = struct_to_char_here_doc(list_dollars);
 }

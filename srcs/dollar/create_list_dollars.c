@@ -15,50 +15,39 @@
 /**
  * TODO
  *
- * @param i
- * @param str
- * @param list
- * @param dollar
- *
- * @return void
- */
-static void	ft_create_list_dollars_ext(int *i, const char *str, t_dollar **list,
-	t_dollar *dollar)
-{
-	int	j;
-
-	j = (*i);
-	while (str[(*i)] && str[(*i)] != '$')
-		(*i)++;
-	if ((*i) > j)
-	{
-		dollar = ft_new_dollar(ft_substr(str, j, (*i) - j));
-		ft_add_dollar_end(list, dollar);
-	}
-}
-
-/**
- * TODO
- *
  * @param list
  * @param str
  * @param i
  *
  * @return void
  */
-void	ft_create_list_dollars(t_dollar **list, const char *str, int i)
+void	ft_create_list_dollars(t_dollar **list, const char *str)
 {
 	t_dollar	*dollar;
 	int			j;
+	int			i;
+	char		*substring;
 
+	i = 0;
 	while (str[i])
 	{
-		ft_create_list_dollars_ext(&i, str, list, dollar);
+		j = i;
+		while (str[i] && str[i] != '$')
+			i++;
+		if (i > j)
+		{
+			substring = ft_substr(str, j, i - j);
+			dollar = ft_new_dollar(substring);
+			free(substring);
+			ft_add_dollar_end(list, dollar);
+		}
 		if (str[i] == '$')
 		{
 			if (str[i + 1] == '?')
 			{
-				dollar = ft_new_dollar(ft_substr(str, i, 2));
+				substring = ft_substr(str, i, 2);
+				dollar = ft_new_dollar(substring);
+				free(substring);
 				ft_add_dollar_end(list, dollar);
 				i += 2;
 				continue ;
@@ -66,7 +55,9 @@ void	ft_create_list_dollars(t_dollar **list, const char *str, int i)
 			j = i + 1;
 			while (str[j] && ft_valid_identifier(str[j]))
 				j++;
-			dollar = ft_new_dollar(ft_substr(str, i, j - i));
+			substring = ft_substr(str, i, j - i);
+			dollar = ft_new_dollar(substring);
+			free(substring);
 			ft_add_dollar_end(list, dollar);
 			i = j;
 		}

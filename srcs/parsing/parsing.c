@@ -28,7 +28,7 @@ void	ft_parsing(t_env *env, char *readline)
 		ft_heredoc(env);
 		if (!env->syntax_error_type)
 		{
-//			ft_dollar(env);
+			ft_dollar(env);
 			ft_trim_quote(env);
 			ft_join_token_not_separate_by_space(env);
 			ft_command(env);
