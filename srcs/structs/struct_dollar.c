@@ -25,7 +25,10 @@ t_dollar	*ft_new_dollar(char *str)
 	new = malloc(sizeof(t_envp));
 	if (!new)
 		return (NULL);
-	new->str = str;
+	if (str)
+		new->str = ft_strdup(str);
+	else
+		new->str = NULL;
 	new->next = NULL;
 	return (new);
 }

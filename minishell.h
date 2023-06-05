@@ -131,12 +131,15 @@ int			ft_is_space(char c);
 int			ft_is_quotes(char c);
 int			ft_is_redirection(const char *str);
 char		*ft_trim_str(const char *str);
-void		ft_dollar(t_env *env);
-int			ft_contains_dollar(const char *str);
-void		ft_create_list_dollars(t_dollar **list, const char *str, int i);
 void		ft_trim_quote(t_env *env);
 void		ft_join_token_not_separate_by_space(t_env *env);
 void		ft_command(t_env *env);
+
+/** ----- DOLLAR ----- **/
+void		ft_dollar(t_env *env);
+int			ft_contains_dollar(const char *str);
+int			ft_count_dollar(const char *str);
+char		**ft_dollar_split(char const *s);
 
 /** ----- HEREDOC ----- **/
 void		ft_heredoc(t_env *env);
@@ -146,7 +149,6 @@ char		*ft_heredoc_strjoin(char *s1, char *s2);
 void		ft_heredoc_error(t_env *env);
 int			ft_heredoc_is_valid_eof(t_env *env, t_token *token);
 char		*ft_replace_dollar_in_line(t_env *env, char *line);
-t_token		*ft_heredoc_to_token(t_token *token, char *line);
 void		ft_heredoc_remove(t_env *env);
 
 /** ----- SYNTAX ----- **/
@@ -203,6 +205,7 @@ void		ft_free_liste_token(t_token *token);
 void		ft_free_cmd(t_env *env);
 void		ft_free_envp(t_envp *envp);
 void		ft_free_tab(char **tab);
+void		ft_free_dollar(t_dollar *dollar);
 
 /** ----- EXIT ----- **/
 void		ft_exit(int status, char *message);

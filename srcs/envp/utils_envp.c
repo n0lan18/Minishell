@@ -65,7 +65,7 @@ char	*ft_get_envp_value_by_name(t_envp *envp, char *name)
 	while (current)
 	{
 		if (ft_strncmp(current->name, name, ft_strlen(name) + 1) == 0)
-			return (current->value);
+			return (ft_strdup(current->value));
 		current = current->next;
 	}
 	return (ft_strdup(""));

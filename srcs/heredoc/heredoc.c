@@ -36,8 +36,8 @@ static void	ft_heredoc_write(t_token *eof, char *name, t_env *env)
 	{
 		if (ft_heredoc_is_eof(eof, line))
 			break ;
-		if (ft_contains_dollar(line))
-			line = ft_replace_dollar_in_line(env, line);
+//		if (ft_contains_dollar(line))
+//			line = ft_replace_dollar_in_line(env, line);
 		new_line = ft_strjoin(line, "\n");
 		line = NULL;
 		all = ft_heredoc_strjoin(all, new_line);

@@ -38,6 +38,7 @@ ENV_DIR			= env
 ENVP_DIR		= envp
 STRUCTS_DIR		= structs
 HEREDOC_DIR		= heredoc
+DOLLAR_DIR		= dollar
 EXECUTION_DIR	= execution
 BUILTINS_DIR	= builtins
 COMMAND_DIR		= command
@@ -53,6 +54,7 @@ SRCS 			= $(wildcard $(SRCS_DIR)/*.c) \
 				  $(wildcard $(SRCS_DIR)/$(ENV_DIR)/*.c) \
 				  $(wildcard $(SRCS_DIR)/$(STRUCTS_DIR)/*.c) \
 				  $(wildcard $(SRCS_DIR)/$(HEREDOC_DIR)/*.c) \
+				  $(wildcard $(SRCS_DIR)/$(DOLLAR_DIR)/*.c) \
 				  $(wildcard $(SRCS_DIR)/$(EXECUTION_DIR)/*.c) \
 				  $(wildcard $(SRCS_DIR)/$(BUILTINS_DIR)/*.c) \
 				  $(wildcard $(SRCS_DIR)/$(COMMAND_DIR)/*.c) \
@@ -88,6 +90,7 @@ $(OBJS_DIR):
 				mkdir -p $(OBJS_DIR)/$(ENV_DIR)
 				mkdir -p $(OBJS_DIR)/$(STRUCTS_DIR)
 				mkdir -p $(OBJS_DIR)/$(HEREDOC_DIR)
+				mkdir -p $(OBJS_DIR)/$(DOLLAR_DIR)
 				mkdir -p $(OBJS_DIR)/$(EXECUTION_DIR)
 				mkdir -p $(OBJS_DIR)/$(BUILTINS_DIR)
 				mkdir -p $(OBJS_DIR)/$(COMMAND_DIR)
