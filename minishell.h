@@ -147,7 +147,7 @@ int			ft_heredoc_is_eof(t_token *eof, char *line);
 char		*ft_heredoc_strjoin(char *s1, char *s2);
 void		ft_heredoc_error(t_env *env);
 int			ft_heredoc_is_valid_eof(t_env *env, t_token *token);
-char		*ft_replace_dollar_in_line(t_env *env, char *line);
+void		ft_heredoc_dollar(t_env *env, char **line);
 t_token		*ft_heredoc_to_token(t_token *token, char *line);
 void		ft_heredoc_remove(t_env *env);
 

@@ -37,9 +37,9 @@ static void	ft_heredoc_write(t_token *eof, char *name, t_env *env)
 		if (ft_heredoc_is_eof(eof, line))
 			break ;
 		if (ft_contains_dollar(line))
-			line = ft_replace_dollar_in_line(env, line);
+			ft_heredoc_dollar(env, &line);
 		new_line = ft_strjoin(line, "\n");
-		line = NULL;
+		free(line);
 		all = ft_heredoc_strjoin(all, new_line);
 		line = readline("> ");
 	}
@@ -51,7 +51,7 @@ static void	ft_heredoc_write(t_token *eof, char *name, t_env *env)
 }
 
 /**
- * TODO
+ * If a EOF is found, write the heredoc in the file and free the EOF token.
  *
  * @param token
  * @param new
@@ -60,14 +60,14 @@ static void	ft_heredoc_write(t_token *eof, char *name, t_env *env)
  *
  * @return void
  */
-static void	ft_eof_found(t_token *token, t_token *new, char *name, t_env *env)
+static void	ft_eof_found(t_token *eof, t_token *new, char *name, t_env *env)
 {
 	t_token	*tmp;
 
-	ft_heredoc_write(token, name, env);
-	tmp = token;
-	if (token->next)
-		ft_add_token_end(&(*new).next, token->next);
+	ft_heredoc_write(eof, name, env);
+	tmp = eof;
+	if (eof->next)
+		ft_add_token_end(&(*new).next, eof->next);
 	free(tmp->str);
 	free(tmp);
 }
@@ -90,13 +90,14 @@ static t_token	*ft_get_heredoc(t_token *token, t_env *env, int version)
 {
 	t_token	*new;
 	char	*name;
+	t_token	*tmp;
 
 	if (!ft_heredoc_is_valid_eof(env, token))
 		return (token);
-	new = ft_new_token(ft_strdup("<"));
+	new = ft_new_token("<");
 	new->previous = token->previous;
 	name = ft_heredoc_getname(version);
-	ft_add_token_end(&new, ft_new_token(ft_strdup(name)));
+	ft_add_token_end(&new, ft_new_token(name));
 	while (token)
 	{
 		if (token->type == E_STRING)
@@ -104,7 +105,10 @@ static t_token	*ft_get_heredoc(t_token *token, t_env *env, int version)
 			ft_eof_found(token, new, name, env);
 			break ;
 		}
+		tmp = token;
 		token = token->next;
+		free(tmp->str);
+		free(tmp);
 	}
 	free(name);
 	return (new);
@@ -130,6 +134,11 @@ static void	ft_heredoc_found(t_token **current, t_env *env, int *version)
 		(*current)->next = ft_get_heredoc((*current)->next, env, (*version));
 	}
 	(*version)++;
+	if ((*current)->next != NULL)
+	{
+		if ((*current)->next->redirection == E_HEREDOC)
+			(*current) = (*current)->next;
+	}
 }
 
 /**

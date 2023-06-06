@@ -107,22 +107,10 @@ static void	ft_dollar_in_here_doc(t_env *env, t_token *token)
  * @param env
  * @param line
  *
- * @return char*
+ * @return void
  */
-char	*ft_replace_dollar_in_line(t_env *env, char *line)
+void	ft_heredoc_dollar(t_env *env, char **line)
 {
-	t_token	*tmp;
-
-	tmp = NULL;
-	tmp = ft_heredoc_to_token(tmp, line);
-	ft_dollar_in_here_doc(env, tmp);
-	line = tmp->str;
-	tmp = tmp->next;
-	while (tmp)
-	{
-		line = ft_strjoin(line, tmp->str);
-		tmp = tmp->next;
-	}
-	ft_free_liste_token(tmp);
-	return (line);
+	(void)env;
+	printf("line: %s\n", *line);
 }
