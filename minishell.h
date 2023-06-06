@@ -170,7 +170,7 @@ int			ft_exec_unset(t_env *env, char **option);
 int			ft_exec_export(t_env *env, char **option);
 int			ft_exec_pwd(void);
 int			ft_exec_cd(t_env *env, char **option);
-void		ft_exec_exit(void);
+int			ft_exec_exit(char **option);
 
 /** ----- EXECUTION ----- **/
 void		ft_execute(t_env *env);

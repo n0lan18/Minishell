@@ -58,6 +58,6 @@ int	ft_execute_builtins(t_env *env, t_cmd *cmd)
 	else if (ft_strncmp(cmd->name, "cd", 3) == 0)
 		return (ft_exec_cd(env, cmd->option));
 	else if (ft_strncmp(cmd->name, "exit", 5) == 0)
-		ft_exec_exit();
+		return (ft_exec_exit(cmd->option));
 	return (EXIT_SUCCESS);
 }
