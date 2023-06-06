@@ -138,6 +138,8 @@ void		ft_command(t_env *env);
 /** ----- DOLLAR ----- **/
 void		ft_dollar(t_env *env);
 void		ft_create_list_dollars(t_dollar **list, const char *str);
+void		ft_replace_dollar_correct_value(t_envp *envp, t_dollar **list);
+char		*ft_struct_dollar_to_char(t_dollar *list);
 int			ft_contains_dollar(const char *str);
 
 /** ----- HEREDOC ----- **/
@@ -148,7 +150,6 @@ char		*ft_heredoc_strjoin(char *s1, char *s2);
 void		ft_heredoc_error(t_env *env);
 int			ft_heredoc_is_valid_eof(t_env *env, t_token *token);
 void		ft_heredoc_dollar(t_env *env, char **line);
-t_token		*ft_heredoc_to_token(t_token *token, char *line);
 void		ft_heredoc_remove(t_env *env);
 
 /** ----- SYNTAX ----- **/

@@ -19,7 +19,7 @@
  *
  * @return char*
  */
-char	*struct_to_char(t_dollar *list)
+char	*ft_struct_dollar_to_char(t_dollar *list)
 {
 	t_dollar	*current;
 	char		*str;
@@ -51,7 +51,7 @@ char	*struct_to_char(t_dollar *list)
  *
  * @return void
  */
-static void	ft_replace_dollar_correct_value(t_envp *envp, t_dollar **list)
+void	ft_replace_dollar_correct_value(t_envp *envp, t_dollar **list)
 {
 	t_dollar	*current;
 	char		*trimmed;
@@ -98,7 +98,7 @@ static void	ft_replace_dollar(t_env *env, t_token *current)
 	free(trimmed);
 	ft_replace_dollar_correct_value(env->envp, &list_dollars);
 	free(current->str);
-	current->str = struct_to_char(list_dollars);
+	current->str = ft_struct_dollar_to_char(list_dollars);
 	if (!current->str[0])
 		current->show = 0;
 	ft_free_dollar(list_dollars);
