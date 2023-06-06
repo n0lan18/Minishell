@@ -25,6 +25,11 @@ void	ft_init_envp(t_env *env, char **envpchar)
 	t_envp	*envp;
 	int		i;
 
+	if (*envpchar == NULL)
+	{
+		env->envp = ft_new_envp("_=/usr/bin/env");
+		return ;
+	}
 	env->envp = ft_new_envp(envpchar[0]);
 	i = 1;
 	while (envpchar[i])
