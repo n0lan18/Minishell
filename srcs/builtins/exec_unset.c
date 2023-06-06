@@ -46,6 +46,8 @@ int	ft_exec_unset(t_env *env, char **option)
 	i = 1;
 	while (option[i])
 	{
+		if (ft_strncmp(option[i], "_", 2) == 0)
+			return (EXIT_SUCCESS);
 		if (!ft_contains_only_valid_identifier(option[i]))
 		{
 			ft_print_not_a_valid_identifier(option[i], "unset");
