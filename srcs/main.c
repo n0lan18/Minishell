@@ -19,26 +19,31 @@ int	g_last_exit_code;
  * @param argv
  * @param env
  */
-static void	ft_for_checker(char **argv, t_env env)
+static int	ft_is_for_checker(int argc, char **argv, t_env env)
 {
 	char	**arg_input;
 	int		i;
 
-	arg_input = ft_split(argv[2], ';');
-	if (!arg_input)
-		ft_exit(EXIT_FAILURE, "invalid input\n");
-	i = 0;
-	while (arg_input[i])
+	if (argc == 3 && ft_strncmp(argv[1], "-c", 3) == 0 && argv[2])
 	{
-		ft_init_signals();
-		if (arg_input[i] && !ft_contains_only_space(arg_input[i]))
+		arg_input = ft_split(argv[2], ';');
+		if (!arg_input)
+			ft_exit(EXIT_FAILURE, "invalid input\n");
+		i = 0;
+		while (arg_input[i])
 		{
-			ft_parsing(&env, arg_input[i]);
-			ft_execute(&env);
+			ft_init_signals();
+			if (arg_input[i] && !ft_contains_only_space(arg_input[i]))
+			{
+				ft_parsing(&env, arg_input[i]);
+				ft_execute(&env);
+			}
+			i++;
 		}
-		i++;
+		exit(g_last_exit_code);
 	}
-	exit(g_last_exit_code);
+	else
+		return (0);
 }
 
 /**
@@ -57,9 +62,7 @@ int	main(int argc, char **argv, char **envp)
 
 	ft_init_env(&env, envp);
 	prompt_output = "";
-	if (argc == 3 && ft_strncmp(argv[1], "-c", 3) == 0 && argv[2])
-		ft_for_checker(argv, env);
-	else
+	if (!ft_is_for_checker(argc, argv, env))
 	{
 		while (prompt_output)
 		{
